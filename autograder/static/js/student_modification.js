@@ -1,5 +1,8 @@
+/* For editing existing students */
+
 window.addEventListener('load', e => {
 
+  console.log("token is ", Cookies.get("csrftoken"))
 
   let saveButton = document.querySelector('#submit-student-changes')
   saveButton.addEventListener('click', e => {
@@ -21,13 +24,25 @@ window.addEventListener('load', e => {
 
       students.push( { pk: student_pk, org_id: student_org_id, name: student_name, star_id: student_star_id, github_id: student_github_id} )
 
+
     })
 
     console.log(students)
 
-    fetch("manage_students", {method: "PUT", data: JSON.stringify(students) })
+    data = { students, 'csrfmiddlwaretoken': Cookies.get("csrftoken") }
+    console.log('data', data)
+
+    fetch("manage_students", {
+      method: "PUT",
+      headers: {
+        "X-CSRFToken": Cookies.get("csrftoken"),
+        "Content-Type": "application/json"
+       },
+      body: JSON.stringify(data),
+      credentials: 'same-origin'
+    })
       .then( response => { alert("saved")})
-      .catch( err => alert('error saving'));
+      .catch( err => alert('error saving'));   // TODO
 
   })
 
