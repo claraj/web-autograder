@@ -20,7 +20,6 @@ window.addEventListener('load', e => {
 
 
   function checkCanStart() {
-    console.log('event!')
 
       // There is at least one student, and at least one student is checked...
 
@@ -45,7 +44,7 @@ window.addEventListener('load', e => {
 
       message.innerHTML = message_text
 
-      return !grade_button.disabled  // return true if can start. 
+      return !grade_button.disabled  // return true if can start.
 
 
   }
