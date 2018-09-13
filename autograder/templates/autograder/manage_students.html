@@ -1,1 +1,67 @@
-manage students here
+{% extends 'autograder/base.html' %}
+{% block content %}
+{% load staticfiles %}
+
+<h1>Student Management</h1>
+
+{% comment %}
+
+Show a list of students, if it exists
+List should be editable
+
+Able to add more students
+
+{% endcomment %}
+
+<div id="current-students">
+<h2>Current students</h2>
+
+{% for student in students %}
+
+<div class="student-data">
+  <input type="hidden" class="student-pk" value="{{student.pk}}">
+  <input class="student-org-id" value="{{ student.org_id }}">
+  <input class="student-name" value="{{ student.name }}">
+  <input class="student-github-id" value="{{ student.github_id }}">
+  <input class="student-star-id" value="{{ student.star_id }}">
+
+</div>
+<br>
+
+{% empty %}
+
+<p>Add students below.</p>
+
+{% endfor %}
+
+<button id="submit-student-changes">Save Changes</button>
+</div>
+
+
+<div id="new-students">
+
+  <h2>Add new students</h2>
+
+  <button id="more-blank-fields">More</button>
+
+  <div id="new-student-container">
+  <div class="new-student-data">
+    <input class="student-org-id">
+    <input class="student-name" required>
+    <input class="student-github-id">
+    <input class="student-star-id">
+  </div>
+</div>
+
+  <button id="submit-new-students">Save New Students</button>
+
+</div>
+
+</div>
+
+
+
+<script type="text/javascript" src="{% static 'js/student_modification.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/add_students.js' %}"></script>
+
+{% endblock %}
