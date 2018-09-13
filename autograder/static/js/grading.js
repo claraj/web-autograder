@@ -23,10 +23,61 @@ grade_button.addEventListener("click", () => {
     headers: {
       "X-CSRFToken": Cookies.get("csrftoken"),
       "Content-Type": "application/json"
-     },
+    },
     body: JSON.stringify(data),
     credentials: 'same-origin'
-  }).then()
-  .catch()  // todo do something
+  })
+  .then( res => {
+    const reader = res.body.getReader();
+    console.log(reader)
+    const decoder = new TextDecoder('utf-8')
+
+//https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
+    const stream = new ReadableStream({
+      start(controller) {
+        function push() {
+          reader.read().then( ({done, value}) => {
+            if (done) {
+              controller.close()
+              return;
+            }
+
+            controller.enqueue(value);
+            console.log(value)
+
+            let valueString = decoder.decode(value)
+            console.log(valueString)
+
+            resultReceived(valueString)
+              // string s = value.map( i => )
+            // turn to String
+            push()
+          });
+        };
+        push()
+      }
+    });
+
+    return new Response(stream, {headers: { 'Content-Type': 'text/html'} })
+    //
+  })
+  .then( result => {
+    console.log('all done', result)
+  })
+  .catch( err => console.log(err))  // todo do something
+
+
+
 
 })
+
+
+function resultReceived(result) {
+
+  let resultsList = document.querySelector('#results-list')
+  let newListElement = document.createElement('li')
+  newListElement.innerHTML = result
+  resultsList.appendChild(newListElement)
+
+ }
