@@ -21,4 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('autograder.urls')),
     path('api/', include(router.urls)),
+    path('student/', include('students.urls')),
+    path('assignment/', include('assignments.urls')) #TemplateView.as_view(template_name='assignment.html')),
+
 ]

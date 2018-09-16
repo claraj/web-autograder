@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('api/student/', views.StudentListCreate.as_view() ),
+    path('', TemplateView.as_view(template_name='students/index.html') ),
 ]
