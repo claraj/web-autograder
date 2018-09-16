@@ -1,0 +1,81 @@
+{
+
+"week_0" : {
+    "lab_base_name" : "assignment-0-variables-and-math",
+    "d2l_url" : "https://minneapolis.learn.minnstate.edu/d2l/lms/grades/admin/enter/grade_item_edit.d2l?objectId=15121739&ou=3915479",
+    "original_repo" : "https://github.com/minneapolis-edu/JAG_0"
+  },
+
+"week_1" : {
+  "lab_base_name" : "assignment-1-variables-and-conditional-statements",
+  "d2l_url" : "https://minneapolis.learn.minnstate.edu/d2l/lms/grades/admin/enter/grade_item_edit.d2l?objectId=15040748&ou=3915479",
+  "original_repo" : "https://github.com/minneapolis-edu/JAG_1"
+},
+
+"week_2" : {
+  "lab_base_name" : "assignment-2-loops-and-arrays",
+  "d2l_url" : "https://minneapolis.learn.minnstate.edu/d2l/lms/grades/admin/enter/grade_item_edit.d2l?objectId=15040749&ou=3915479",
+  "original_repo" : "https://github.com/minneapolis-edu/JAG_2"
+},
+
+"week_3": {
+ "lab_base_name": "assignment-3-methods",
+ "d2l_url" : "https://minneapolis.learn.minnstate.edu/d2l/lms/grades/admin/enter/grade_item_edit.d2l?objectId=15040750&ou=3915479",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_3"
+},
+
+"week_4": {
+ "lab_base_name": "assignment-4-arrays-lists-and-hashmaps",
+ "d2l_url" : "https://minneapolis.learn.minnstate.edu/d2l/lms/grades/admin/enter/grade_item_edit.d2l?objectId=15040751&ou=3915479",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_4"
+},
+
+"week_5": {
+ "lab_base_name": "assignment-5-file-io-and-exception-handling",
+ "d2l_url" : "https://minneapolis.learn.minnstate.edu/d2l/lms/grades/admin/enter/grade_item_edit.d2l?objectId=15040752&ou=3915479",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_5"
+},
+
+"week_6": {
+ "lab_base_name": "assignment-6-introduction-to-classes",
+ "d2l_url" : "",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_6"
+}
+,
+
+"week_7": {
+ "lab_base_name": "assignment-7-classes-objects-and-inheritance",
+ "d2l_url" : "",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_7"
+}
+,
+
+"week_8": {
+ "lab_base_name": "assignment-8-first-gui-programs",
+ "d2l_url" : "",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_8"
+}
+,
+
+"week_9": {
+ "lab_base_name": "assignment-9-more-gui-programs-support-ticket-gui",
+ "d2l_url" : "",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_9"
+}
+,
+
+"week_10": {
+ "lab_base_name": "assignment-10-first-database-program-product-database-cli",
+ "d2l_url" : "",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_10"
+}
+,
+
+"week_11": {
+ "lab_base_name": "assignment-11-databases-and-guis-rubik-cube-records",
+ "d2l_url" : "",
+ "original_repo" : "https://github.com/minneapolis-edu/JAG_11"
+}
+
+
+}

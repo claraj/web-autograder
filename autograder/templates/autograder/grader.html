@@ -1,12 +1,69 @@
 {% extends 'autograder/base.html' %}
 {% block content %}
+{% load staticfiles %}
 
 <h1>This is the grader page with a list of assignments and students.</h1>
 
 <!--list of assignments-->
 <!--list of students-->
 
+<div id="assignment-list">
 
-<button>GRADE!</button>
+<h2>Assignments</h2>
+
+{% if assignments %}
+
+{% for asgt in assignments %}
+
+<input type="radio" name="assigment" class="assignment-radio-button" id="asgt-{{asgt.pk}}"> <span>{{asgt.week}}</span> <span>{{asgt.github_base}}</span></option>
+<br>
+{% endfor %}
+
+{% else %}
+
+<p>No assignments - create some assignments before grading.</p>
+
+{% endif %}
+
+<a href="{% url 'manage_assignments' %}">Create/manage some assignments</a>
+
+
+
+</div>
+
+<div id="student-list">
+<h2>Students</h2>
+
+<input id="select-all-students" type="checkbox">All?
+<br>
+
+{% for student in students %}
+
+<input class="student-checkbox" type="checkbox" id="student-{{student.pk}}"> <span>{{student.name}}</span> <span>{{student.github_id}}</span>
+<br>
+{% endfor %}
+
+<a href="{% url 'manage_students' %}">Create/manage students</a>
+
+</div>
+
+
+<button id="grade-button">GRADE!</button>
+<span id="error-message"></span>
+
+<div>
+  <h2>Results</h2>
+
+<ul id="results-list">
+</ul>
+
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/lib/js.cookie.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/select_all.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/can_start_grading.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/grading.js'%}"></script>
+
 
 {% endblock %}

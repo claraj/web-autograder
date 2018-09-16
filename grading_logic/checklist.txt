@@ -1,0 +1,17 @@
+All tests have @Test(timout=3000) or similar
+All test files end with Q2....Test.java so mvn test runs them and surefire can generate report
+
+grades.json test and code file names match files
+grades.json total adds up to 20
+
+D2L assignment link is correct in .json config file
+My repo name is correct
+Assignment name is correct
+
+pom.xml has correct project name
+idea project name is correct
+
+All in Instructions in instructions.md
+Instructions in individual code files
+
+Review notes from last semester and update lab
