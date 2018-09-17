@@ -4,8 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+
 import $backend from '@/backend'
 Vue.prototype.$backend = $backend
+
+let VueCookie = require('vue-cookie')
+Vue.use(VueCookie)
 
 Vue.config.productionTip = false
 

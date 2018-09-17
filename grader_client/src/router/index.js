@@ -13,9 +13,10 @@ export default new Router({
       component: HelloWorld
     },
 
-    { path: '/students',
-    name: 'Students',
-    component: Students
-  }
+    {
+      path: '/students',
+      name: 'Students',
+      component: Students
+    }
   ]
 })
