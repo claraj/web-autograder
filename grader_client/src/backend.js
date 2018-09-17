@@ -6,7 +6,6 @@ import VueCookie from 'vue-cookie'
 Vue.use(VueCookie)
 
 
-
 let $backend = axios.create({
   baseURL: '/api',
   headers: {
@@ -20,12 +19,13 @@ $backend.$fetchStudents = () => {
 }
 
 $backend.$editStudent = (data) => {
-  return $backend.put('student/', data)
+  console.log(data)
+  return $backend.patch(`student/${data.id}/`, data)
     .then(response => console.log(response))
 }
 
 $backend.$deleteStudent = (id) => {
-  return $backend.delete(`student/${id}`,)
+  return $backend.delete(`student/${id}/`,)
     .then(response => console.log(response))
 
 }
