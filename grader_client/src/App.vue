@@ -7,7 +7,18 @@
     </header>
 
     <div id="content">
+
+      <p class="nav">
+      <router-link to="/students">Student Management</router-link>
+      </p>
+      <p class="nav">
+      <router-link to="/assignments">Assignment Management</router-link>
+      </p>
+      <p class="nav">
+      <router-link to="/grading">Grading</router-link>
+      </p>
     <router-view/>
+
     </div>
 
     <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
@@ -22,13 +33,19 @@ export default {
 </script>
 
 <style>
+
+  .nav {
+    display: inline;
+    padding: 20px;
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   color: #2c3e50;
-  margin-top: 30px;
+  margin: 30px;
+
 }
 
 #content {
