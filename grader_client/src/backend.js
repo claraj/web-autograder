@@ -27,11 +27,34 @@ $backend.$editStudent = (data) => {
 $backend.$deleteStudent = (id) => {
   return $backend.delete(`student/${id}/`,)
     .then(response => console.log(response))
-
 }
 
 $backend.$addStudent = (data) => {
   return $backend.post('student/', data)
+    .then(response => console.log(response))
+}
+
+
+
+$backend.$fetchAssignments = () => {
+  return $backend.get('assignment/')
+    .then(response => response.data)
+}
+
+$backend.$editAssignment = (data) => {
+  console.log(data)
+  return $backend.patch(`assignment/${data.id}/`, data)
+    .then(response => console.log(response))
+}
+
+$backend.$deleteAssignment = (id) => {
+  return $backend.delete(`assignment/${id}/`,)
+    .then(response => console.log(response))
+
+}
+
+$backend.$addAssignment = (data) => {
+  return $backend.post('assignment/', data)
     .then(response => console.log(response))
 }
 

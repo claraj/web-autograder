@@ -1,7 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+
+    <header>
+      <img src="./assets/coding.png">
+      <h1>Autograder</h1>
+    </header>
+
+    <div id="content">
     <router-view/>
+    </div>
+
+    <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
   </div>
 </template>
 
@@ -16,8 +26,37 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
 }
+
+#content {
+    text-align: center;
+    padding: 15px;
+}
+
+header {
+  position: relative;
+  padding: 15px;
+    border: 1px grey solid;
+}
+
+header h1 {
+  display: inline-block;
+  position: absolute;
+  top: -5px;
+  padding: 25px;
+  margin: 0px;
+
+}
+
+header img {
+  height: 63px;
+  width: 63px;
+  padding-left: 15px;
+  /* position: absolute; */
+
+}
+
 </style>
