@@ -51,7 +51,7 @@ def upload_raw(request):
                 print(e)
                 errors += [ 'line %d: %s' % (index, e) ]
 
-    response = { 'created': students_created, 'errors': (', ').join(errors)}
+    response = { 'created': students_created, 'errors': errors}
     return JsonResponse(response)
 
 
@@ -62,12 +62,12 @@ class RawStudentDataException(Exception):
 def makeStudent(row, id):
     if not row:
         raise RawStudentDataException('No data in line')
-    if not row[0:1]:
-        raise RawStudentDataException('Name is required')
+    # if not row[0:1]:
+    #     raise RawStudentDataException('Name is required')
 
     keys = ['name', 'github_id', 'org_id', 'star_id' ]
     vals = row
     args = dict(zip(keys, vals))
     student = Student(**args)
-    student.full_clean()
+    student.full_clean()  # raises exception if validation problem
     return student

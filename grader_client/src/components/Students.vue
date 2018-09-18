@@ -4,7 +4,7 @@
   <div>
     <h1>Students</h1>
 
-    <table>
+    <table id="student-detail-table">
       <tr><th>id</th>
         <th>name</th>
         <th>github</th>
@@ -28,10 +28,19 @@
     </div>
 
     <!--  for dumping a CSV and letting server figure it out -->
-    <div>
+    <div id="bulk-add">
       <h2>Bulk Add</h2>
+      <p>Provide data in CSV format in the order <em>name,github,MCTCid,starID</em></p>
+      <P>Missing fields are ok.</p>
       <textarea rows="6" columns="100" v-model="rawData">bodgdgf dfgdf gdfg dgfdfg</textarea>
-      <button @click="bulkAdd">Submit</button>
+      <br>
+      <button @click="bulkAdd">Upload</button>
+
+      <ul>
+        <li v-for="error in bulkErrors">{{ error }}</li>
+      </ul>
+
+      <p>{{ bulkStudentsAdded}} students added.</p>
     </div>
 
 
@@ -75,6 +84,10 @@
     border: 1px solid black;
   }
 
+  textarea {
+    width: 100%;
+  }
+
   #edit-modal {
     position: fixed;
     z-index: 1;
@@ -114,15 +127,17 @@ export default {
   data () {
     return {
       students: [],
-      name: String,
-      star_id: String,
-      org_id: String,
-      github_id: String,
-      id: Number,
+      name: "",
+      star_id: "",
+      org_id: "",
+      github_id: "",
+      id: 0,
       showEditModal: false,
-      action: String,
+      action: "",
       errors: [],
       rawData: "testing,sdfsdf\ntesting2\ntesting3,gh,qw2323we,12345678",
+      bulkErrors: [],
+      bulkStudentsAdded: 0
     }
   },
   mounted () {
@@ -169,7 +184,9 @@ export default {
       const rawData = this.rawData;
       this.$backend.$bulkAdd(rawData).then( (resp) => {
         console.log('server response', resp)
-        this.rawData = ""
+        // this.rawData = ""
+        this.bulkStudentsAdded = resp.created
+        this.bulkErrors = resp.errors
         this.fetchStudents();
       })
     },
