@@ -29,7 +29,9 @@
 
     <!--  for dumping a CSV and letting server figure it out -->
     <div>
-      <input type="textarea"/>
+      <h2>Bulk Add</h2>
+      <textarea rows="6" columns="100" v-model="rawData">bodgdgf dfgdf gdfg dgfdfg</textarea>
+      <button @click="bulkAdd">Submit</button>
     </div>
 
 
@@ -119,7 +121,8 @@ export default {
       id: Number,
       showEditModal: false,
       action: String,
-      errors: []
+      errors: [],
+      rawData: "testing,sdfsdf\ntesting2\ntesting3,gh,qw2323we,12345678",
     }
   },
   mounted () {
@@ -157,6 +160,17 @@ export default {
         this.org_id = ""
         this.star_id = ""
         this.fetchStudents()
+      })
+    },
+
+    bulkAdd() {
+      console.log('app bulk add')
+      console.log(this.rawData)
+      const rawData = this.rawData;
+      this.$backend.$bulkAdd(rawData).then( (resp) => {
+        console.log('server response', resp)
+        this.rawData = ""
+        this.fetchStudents();
       })
     },
 

@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', views.home),
+    path('spa', TemplateView.as_view(template_name='grader/spa.html'), name='spahome'),
     # path('manage_assignments', views.manage_assignments, name='manage_assignments'),
     # path('manage_students', views.manage_students, name='manage_students'),
     path('grade', views.grade, name="grade"),   # runs the grader.
