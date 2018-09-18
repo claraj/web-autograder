@@ -14,6 +14,19 @@ let $backend = axios.create({
   }
 })
 
+
+// Response interceptor, for doing the same thing with all errors
+$backend.interceptors.response.use(
+  function (response) {
+    return response
+  },
+  function (error) {
+    console.log(error)
+    return Promise.reject(error)
+  }
+)
+
+
 $backend.$fetchStudents = () => {
   return $backend.get('/api/student/')
     .then(response => response.data)
@@ -60,18 +73,18 @@ $backend.$fetchAssignments = () => {
 
 $backend.$editAssignment = (data) => {
   console.log(data)
-  return $backend.patch(`assignment/${data.id}/`, data)
+  return $backend.patch(`/api/assignment/${data.id}/`, data)
     .then(response => console.log(response))
 }
 
 $backend.$deleteAssignment = (id) => {
-  return $backend.delete(`assignment/${id}/`,)
+  return $backend.delete(`/api/assignment/${id}/`,)
     .then(response => console.log(response))
 
 }
 
 $backend.$addAssignment = (data) => {
-  return $backend.post('assignment/', data)
+  return $backend.post('/api/assignment/', data)
     .then(response => console.log(response))
 }
 

@@ -4,9 +4,10 @@ from django.shortcuts import redirect
 from django.http import HttpResponseRedirect, HttpResponse, StreamingHttpResponse
 from django.db.models import F
 import json
-from grading_logic import ag as autograder
+from grading_modules.mock import ag as autograder
 
-from .models import Student, Assignment
+from autograder.models import Student
+from autograder.models import Assignment
 
 def home(request):
     return render(request, 'autograder/index.html')

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from assignments.models import Assignment
+from autograder.models import Assignment
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:

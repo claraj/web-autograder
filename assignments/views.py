@@ -1,4 +1,4 @@
-from assignments.models import Assignment
+from autograder.models import Assignment
 from assignments.serializers import AssignmentSerializer
 from rest_framework import generics
 
