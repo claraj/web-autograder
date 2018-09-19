@@ -4,135 +4,53 @@
   <div>
     <h1>Students</h1>
 
-    <table id="student-detail-table">
-      <tr><th>id</th>
-        <th>name</th>
-        <th>github</th>
-        <th>org id</th>
-        <th>star id</th>
-      </tr>
-      <tr v-for="student in students" v-bind:key="student.id">
-        <td>{{student.id}}</td>
-        <td>{{student.name}}</td>
-        <td>{{student.github_id}}</td>
-        <td>{{student.org_id}}</td>
-        <td>{{student.star_id}}</td>
-        <td><button @click="showEdit(student.id)">Edit</button></td>
-        <td><button @click="deleteStudent(student.id, student.name)">Delete</button></td>
-
-      </tr>
-    </table>
+    <ItemList
+      v-bind:items="students"
+      v-bind:attributes="attributes"
+      @onRequestEdit="onRequestEdit"
+    />
 
     <div>
       <button @click="showAddStudentModal">Add new student</button>
     </div>
 
-    <!--  for dumping a CSV and letting server figure it out -->
-    <div id="bulk-add">
-      <h2>Bulk Add</h2>
-      <p>Provide data in CSV format in the order <em>name,github,MCTCid,starID</em></p>
-      <P>Missing fields are ok.</p>
-      <textarea rows="6" columns="100" v-model="rawData">bodgdgf dfgdf gdfg dgfdfg</textarea>
-      <br>
-      <button @click="bulkAdd">Upload</button>
+    <!-- <BulkAdd/> -->
 
-      <ul>
-        <li v-for="error in bulkErrors">{{ error }}</li>
-      </ul>
-
-      <p>{{ bulkStudentsAdded}} students added.</p>
-    </div>
-
-
-    <div id="edit-modal" v-if="showEditModal">
-      <div id="edit-modal-content">
-        <h2>{{action}}</h2>
-        <p v-if="errors.length"><b>Fix these errors: </b>
-          <ul>
-            <li v-for="error in errors">{{ error }}</li>
-          </ul>
-        </p>
-
-        <label for="name">Name</label>
-        <input id="name" required="true" v-model="name" />
-        <br>
-        <label for="github-id">GitHub ID</label>
-        <input id="github-id" v-model="github_id"/>
-        <br>
-        <label for="org-id">Org ID</label>
-        <input id="org-id" v-model="org_id" type="number"/>
-        <br>
-        <label for="star-id">Star ID</label>
-        <input id="star-id" v-model="star_id"/>
-        <br>
-        <button @click="hideModal">Cancel</button>
-        <button @click="checkForm">Save</button>
-      </div>
-    </div>
+    <AddEditItem
+      v-bind:visible="showAddEditModal"
+      v-bind:item="focusStudent"
+      v-bind:action="action"
+      @onConfirmEdit="onConfirmEdit"
+    />
 
   </div>
 </template>
-
-
-
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  tr,td,th,table {
-    border: 1px solid black;
-  }
-
-  textarea {
-    width: 100%;
-  }
-
-  #edit-modal {
-    position: fixed;
-    z-index: 1;
-    height: 100%;
-    width: 100%;
-
-    top: 0;
-    right: 0;
-  }
-
-  #edit-modal-content {
-    margin: 40% auto;
-    padding: 40;
-    background-color: lightgreen;
-  }
-
-  #edit-modal-content label {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: right;
-    width: 100px;
-  }
-
-  #edit-modal-content input {
-    display: inline-block;
-    vertical-align: middle;
-  }
-</style>
 
 <script>
 
 /* eslint-disable */
 
+import ItemList from './ItemList.vue'
+import BulkAdd from './BulkAdd.vue'
+import AddEditItem from './AddEditItem.vue'
 
 export default {
   name: 'Students',
+  components: { ItemList, BulkAdd, AddEditItem },
   data () {
     return {
       students: [],
-      name: "",
-      star_id: "",
-      org_id: "",
-      github_id: "",
+      attributes: [
+        { attr: 'id', display: 'id' },
+        { attr :'name', display: 'name' },
+        {attr: 'github_id', display: 'github id'},
+        {attr: 'org_id', display: 'MCTC id'},
+        {attr:'star_id', display:'star ID'},
+        { attr: 'programming_class', display: 'class session'}
+      ],
+      focusStudent: {},
       id: 0,
-      showEditModal: false,
+      showAddEditModal: false,
       action: "",
       errors: [],
       rawData: "testing,sdfsdf\ntesting2\ntesting3,gh,qw2323we,12345678",
@@ -144,19 +62,39 @@ export default {
     this.fetchStudents()
   },
   methods: {
+
+    onRequestEdit(id) {
+      console.log('recived request to edit ', id)
+      // populate this student's id etc.
+      this.focusStudent = this.students.filter( student => student.id === id)[0]
+      if (this.focusStudent) {
+        this.showAddEditModal = true
+        this.action = 'Edit Student'
+      }
+    },
+
+    onConfirmEdit(id) {
+      this.$backend.$editStudent(focusStudent).then( () => {
+        this.focusStudent = {}
+        this.fetchStudents()
+      })
+    },
+
     fetchStudents() {
       this.$backend.$fetchStudents().then(data => {
         this.students = data
-        console.log(this.students)
+        console.log('Student component fetched these students', this.students)
       })
     },
+
     addStudent() {
-      const data = { id: this.id, name: this.name, star_id: this.star_id, org_id: this.org_id, github_id:this.github_id }
+      const data = this.focusStudent; // { id: this.id, name: this.name, star_id: this.star_id, org_id: this.org_id, github_id:this.github_id }
       this.$backend.$addStudent(data).then( () => {
-        this.name = ""
-        this.github_id = ""
-        this.org_id = ""
-        this.star_id = ""
+        // this.name = ""
+        // this.github_id = ""
+        // this.org_id = ""
+        // this.star_id = ""
+        this.focusStudent = {}
         this.fetchStudents()
       })
     },
@@ -167,16 +105,16 @@ export default {
         })
       }
     },
-    editStudent() {
-      const data = { id: this.id, name: this.name, star_id: this.star_id, org_id: this.org_id, github_id:this.github_id }
-      this.$backend.$editStudent(data).then( () => {
-        this.name = ""
-        this.github_id = ""
-        this.org_id = ""
-        this.star_id = ""
-        this.fetchStudents()
-      })
-    },
+    //editStudent() {
+      // const data = { id: this.id, name: this.name, star_id: this.star_id, org_id: this.org_id, github_id:this.github_id }
+      // this.$backend.$editStudent(data).then( () => {
+      //   this.name = ""
+      //   this.github_id = ""
+      //   this.org_id = ""
+      //   this.star_id = ""
+      //   this.fetchStudents()
+      // })
+    //},
 
     bulkAdd() {
       console.log('app bulk add')
@@ -282,3 +220,21 @@ export default {
 }
 
 </script>
+
+
+
+<style>
+  /* table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  tr,td,th,table {
+    border: 1px solid black;
+  } */
+
+  /* textarea {
+    width: 100%;
+  }
+
+*/
+</style>
