@@ -46,15 +46,12 @@ export default {
     }
   },
 
-
-
   watch: {
     item: function (newVal, oldVal) {
       this.localItem = Object.assign( {}, this.item)
-      console.log('edit local item changed ', this.item,  this.localItem)
+  //    console.log('edit local item changed ', this.item,  this.localItem)
     }
-  }
-,
+  },
 
   methods: {
 
@@ -73,19 +70,16 @@ export default {
 
         const regex = attr['regex']
         let data = this.localItem[attr.attr]
-        console.log(typeof data)
+        let required = attr['required']
         if (data) { data = data.toString().trim() }
         this.localItem[attr.attr] = data
 
+        if (required && !data) {
+          this.errors.push(attr.display + ' is required.')
+        }
 
-        // console.log('regex=', regex)
-        // console.log('data=', data)
-        // console.log('attr', attr)
-        //
-        // if (regex) {console.log('there\'s a regex')} else { console.log('noregex')}
-        // if (regex && regex.test(data)) {console.log('regex matches')} else { console.log('no regex match validation fails')}
-
-        if (regex && !regex.test(data) ) {
+        // If there is data, and a regex, and the data fails the regex test
+        if (data && regex && !regex.test(data) ) {
             this.errors.push(attr.message)
         }
       })
@@ -94,12 +88,11 @@ export default {
 
       if (!this.errors.length) {
         console.log('no errors')
-        this.$emit('onConfirmEdit', this.localItem)
+        this.$emit('onConfirmSubmit', this.localItem)
       } else {
         console.log('validation errors:', this.errors)
       }
     },
-
 
   }
 }
@@ -114,7 +107,7 @@ export default {
     z-index: 1;
     height: 100%;
     width: 100%;
-    top: 70;
+    top: 0;
     right: 0;
   }
 

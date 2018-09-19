@@ -52,7 +52,7 @@ export default {
 
 #icon-credit {
   padding: 10px;
-  font-size: 8px;
+  font-size: 10px;
 }
 
 #content {

@@ -62,6 +62,7 @@ export default {
     },
     requestDelete(itemId) {
       console.log('emit delete message to parent for id ', itemId)
+      this.$emit('onRequestDelete', itemId)
     }
 
   }
