@@ -3,8 +3,6 @@
   <div id="edit-modal" v-if="visible">
   <div id="edit-modal-content">
 
-    <p>HELLO THIS IS MODAL</p>
-
     <h2>{{action}}</h2>
 
     <p v-if="errors.length"><b>Fix these errors: </b>

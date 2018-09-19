@@ -4,10 +4,8 @@
 
   <div id="bulk-add">
 
-    <p>HELLO THIS IS BULK ADD</p>
-
-
     <h2>Bulk Add {{itemType}}</h2>
+    
     <p>Provide data in CSV format in the order
       <em>{{ instructions }}</em></p>
       <P>Missing fields are ok.</p>

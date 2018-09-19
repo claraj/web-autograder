@@ -2,11 +2,12 @@
 <template>
 
   <div>
-    <h1>Students</h1>
+    <h1>Student Management</h1>
 
     <ItemList
       v-bind:items="students"
       v-bind:attributes="attributes"
+      v-bind:itemType="itemType"
       @onRequestEdit="onRequestEdit"
       @onRequestDelete="onRequestDelete"
     />
@@ -54,11 +55,11 @@ export default {
       students: [],
       attributes: [
         { attr: 'id', display: 'id' },
-        { attr :'name', display: 'name', regex: /^.+$/, required:true, message: 'Name is required' },
-        {attr: 'github_id', display: 'github id', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
-        {attr: 'org_id', display: 'MCTC id', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
-        {attr:'star_id', display:'star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
-        { attr: 'programming_class', display: 'class session'}
+        { attr :'name', display: 'Name', regex: /^.+$/, required:true, message: 'Name is required' },
+        {attr: 'github_id', display: 'Github ID', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
+        {attr: 'org_id', display: 'MCTC ID', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
+        {attr:'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
+        { attr: 'programming_class', display: 'Class Session'}
       ],
       focusStudent: {},
       id: 0,
@@ -142,7 +143,7 @@ export default {
     onSubmitBulk(rawData) {
       console.log('app bulk add')
       console.log(rawData)
-      this.$backend.$bulkAdd(rawData).then( (resp) => {
+      this.$backend.$bulkAddStudent(rawData).then( (resp) => {
         console.log('server response', resp)
         // this.rawData = ""
         this.bulkStudentsAdded = resp.created

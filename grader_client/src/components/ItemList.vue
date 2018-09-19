@@ -2,7 +2,7 @@
 
   <div>
 
-    <p>HELLO THIS IS LIST</p>
+    <h2>{{ itemType }} List</h2>
 
     <table id="item-detail-table">
 
@@ -45,7 +45,8 @@ export default {
   props: {
     items: Array,
     attributes: Array,
-    item: Object
+    item: Object,
+    itemType: String
   },
 
   mounted () {
