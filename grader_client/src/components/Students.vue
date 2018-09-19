@@ -11,11 +11,10 @@
       @onRequestDelete="onRequestDelete"
     />
 
-    <div>
+    <div id="newStudent">
+      <h2>Add New Students</h2>
       <button @click="showAddStudentModal">Add new student</button>
     </div>
-
-    <!-- <BulkAdd/> -->
 
     <AddEditItem
       v-bind:visible="showAddEditModal"
@@ -26,6 +25,15 @@
       @onConfirmSubmit="onConfirmSubmit"
       @onCancel="onCancel"
     />
+
+
+    <BulkAdd
+      v-bind:instructions="bulkCSVOrder"
+      v-bind:errors="bulkErrors"
+      v-bind:countAdded="bulkStudentsAdded"
+      v-bind:itemType="itemType"
+      @onSubmitBulk="onSubmitBulk"
+      />
 
   </div>
 </template>
@@ -57,9 +65,11 @@ export default {
       showAddEditModal: false,
       action: "",
       errors: [],
-      rawData: "testing,sdfsdf\ntesting2\ntesting3,gh,qw2323we,12345678",
       bulkErrors: [],
-      bulkStudentsAdded: 0
+      bulkCSVOrder: "name,GitHubID,OrgID,StarID",
+      bulkStudentsAdded: 0,
+      itemType: 'Students'
+
     }
   },
   mounted () {
@@ -129,10 +139,9 @@ export default {
       })
     },
 
-    bulkAdd() {
+    onSubmitBulk(rawData) {
       console.log('app bulk add')
-      console.log(this.rawData)
-      const rawData = this.rawData;
+      console.log(rawData)
       this.$backend.$bulkAdd(rawData).then( (resp) => {
         console.log('server response', resp)
         // this.rawData = ""
@@ -161,4 +170,8 @@ export default {
 
 
 <style>
+
+  #newStudent {
+    padding: 15px;
+  }
 </style>
