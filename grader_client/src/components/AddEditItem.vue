@@ -6,28 +6,22 @@
     <p>HELLO THIS IS MODAL</p>
 
     <h2>{{action}}</h2>
+
     <p v-if="errors.length"><b>Fix these errors: </b>
       <ul>
         <li v-for="error in errors">{{ error }}</li>
       </ul>
     </p>
 
-    <label for="name">Name</label>
-    <input id="name" required="true" v-model="name" />
-    <br>
-    <label for="github-id">GitHub ID</label>
-    <input id="github-id" v-model="github_id"/>
-    <br>
-    <label for="org-id">Org ID</label>
-    <input id="org-id" v-model="org_id" type="number"/>
-    <br>
-    <label for="star-id">Star ID</label>
-    <input id="star-id" v-model="star_id"/>
-    <br>
-    <button @click="hideModal">Cancel</button>
+    <div v-for="attr in attributes">
+      <label v-bind:for="attr.attr">{{ attr.display }}</label>
+      <input v-bind:id="attr.attr" v-model="localItem[attr.attr]"/>
+    </div>
+
+    <button @click="cancel">Cancel</button>
     <button @click="checkForm">Save</button>
   </div>
-  
+
 </div>
 
 </template>
@@ -41,18 +35,72 @@ export default {
   name: "AddEditItem",
   props: {
       item: Object,
-      attributes: [],
-      errors: [],
-      visible: true,
-      action: ""
+      attributes: Array,
+      visible: Boolean,
+      action: String
   },
-  methods: {
-    hideModal () {
-      console.log('hidemodal')
-    },
-    checkForm() {
-      console.log('checkform')
+  data () {
+    return {
+      localItem: Object.assign( {}, this.item),
+      errors: [],
     }
+  },
+
+
+
+  watch: {
+    item: function (newVal, oldVal) {
+      this.localItem = Object.assign( {}, this.item)
+      console.log('edit local item changed ', this.item,  this.localItem)
+    }
+  }
+,
+
+  methods: {
+
+    cancel () {
+      this.$emit('onCancel')
+    },
+
+    checkForm() {
+
+      this.errors = []
+
+      console.log('local item', this.localItem)
+      console.log('attributes', this.attributes)
+
+      this.attributes.forEach( attr =>  {
+
+        const regex = attr['regex']
+        let data = this.localItem[attr.attr]
+        console.log(typeof data)
+        if (data) { data = data.toString().trim() }
+        this.localItem[attr.attr] = data
+
+
+        // console.log('regex=', regex)
+        // console.log('data=', data)
+        // console.log('attr', attr)
+        //
+        // if (regex) {console.log('there\'s a regex')} else { console.log('noregex')}
+        // if (regex && regex.test(data)) {console.log('regex matches')} else { console.log('no regex match validation fails')}
+
+        if (regex && !regex.test(data) ) {
+            this.errors.push(attr.message)
+        }
+      })
+
+      console.log(this.errors)
+
+      if (!this.errors.length) {
+        console.log('no errors')
+        this.$emit('onConfirmEdit', this.localItem)
+      } else {
+        console.log('validation errors:', this.errors)
+      }
+    },
+
+
   }
 }
 
@@ -61,13 +109,12 @@ export default {
 
 <style>
 
-  /* #edit-modal {
+  #edit-modal {
     position: fixed;
     z-index: 1;
     height: 100%;
     width: 100%;
-
-    top: 0;
+    top: 70;
     right: 0;
   }
 
@@ -87,7 +134,7 @@ export default {
   #edit-modal-content input {
     display: inline-block;
     vertical-align: middle;
-  }  */
+  }
 
 
 </style>

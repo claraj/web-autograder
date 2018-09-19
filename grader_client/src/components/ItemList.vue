@@ -16,9 +16,6 @@
       <tr v-for="item in items" v-bind:key="item.id">
 
         <td v-for="attr in attributes">{{ item[attr.attr] }}</td>
-
-        <!-- want item['attr'] -->
-
         <td><button @click="requestEdit(item.id)">Edit</button></td>
         <td><button @click="requestDelete(item.id)">Delete</button></td>
       </tr>
@@ -59,6 +56,7 @@ export default {
 
   methods: {
     requestEdit(itemId) {
+      // this.item = this.items.filter( item => item.id === itemId)[0]
       console.log('emit edit message to parent for id', itemId)
       this.$emit('onRequestEdit', itemId)
     },

@@ -19,8 +19,11 @@
     <AddEditItem
       v-bind:visible="showAddEditModal"
       v-bind:item="focusStudent"
+      v-bind:attributes="attributes"
       v-bind:action="action"
+      v-bind:errors="errors"
       @onConfirmEdit="onConfirmEdit"
+      @onCancel="onCancel"
     />
 
   </div>
@@ -42,10 +45,10 @@ export default {
       students: [],
       attributes: [
         { attr: 'id', display: 'id' },
-        { attr :'name', display: 'name' },
-        {attr: 'github_id', display: 'github id'},
-        {attr: 'org_id', display: 'MCTC id'},
-        {attr:'star_id', display:'star ID'},
+        { attr :'name', display: 'name', regex: /^.+$/, message: 'Name is required' },
+        {attr: 'github_id', display: 'github id', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
+        {attr: 'org_id', display: 'MCTC id', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
+        {attr:'star_id', display:'star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
         { attr: 'programming_class', display: 'class session'}
       ],
       focusStudent: {},
@@ -63,23 +66,31 @@ export default {
   },
   methods: {
 
+
+    // for example, received from ItemList
     onRequestEdit(id) {
       console.log('recived request to edit ', id)
-      // populate this student's id etc.
       this.focusStudent = this.students.filter( student => student.id === id)[0]
+      console.log('to edit:', this.focusStudent)
       if (this.focusStudent) {
+        // todo remove ID, should not be edited
         this.showAddEditModal = true
         this.action = 'Edit Student'
       }
     },
 
-    onConfirmEdit(id) {
-      this.$backend.$editStudent(focusStudent).then( () => {
+    onConfirmEdit(student) {
+      this.focusStudent = student;
+      this.$backend.$editStudent(this.focusStudent).then( () => {
         this.focusStudent = {}
+        this.showAddEditModal = false;
         this.fetchStudents()
       })
     },
 
+    onCancel() {
+      this.showAddEditModal = false;
+    },
     fetchStudents() {
       this.$backend.$fetchStudents().then(data => {
         this.students = data
@@ -166,56 +177,7 @@ export default {
       this.showEditModal = true;
     },
 
-    cleanForm() {
-      this.name = this.name.trim()
-      this.star_id = this.star_id.trim()
-      this.github_id = this.github_id.trim()
-      this.org_id = this.org_id.trim()
-    },
 
-
-    checkForm() {
-
-      this.cleanForm()
-      this.errors = []
-
-
-      if (!this.name) {
-        this.errors.push('Name required. ')
-      }
-      if (this.github_id && !this.validGitHub(this.github_id)) {
-        this.errors.push('GitHub name should only be letters, numbers, underscores and hyphens. ')
-      }
-
-      if (this.star_id && !this.validStarId(this.star_id)) {
-        this.errors.push('Star ID should be in the form ab1234cd. ')
-      }
-
-      if (this.org_id && !this.validOrgId(this.org_id)) {
-        this.errors.push('Org ID should be 8 digits. ')
-      }
-
-
-      console.log(this.errors)
-
-      if (!this.errors.length) {
-        console.log('no errors')
-        this.saveStudent()
-      } else {
-        console.log('validation errors:', this.errors)
-      }
-    },
-
-    validGitHub(github) {
-      return /^[\S_-]+$/.test(github)
-    },
-    validStarId(starid) {
-      console.log('calidsdfsdg')
-      return /^[a-z]{2}\d{4}[a-z]{2}$/.test(starid)
-    },
-    validOrgId(orgid) {
-      return /^\d{8}$/.test(orgid)
-    }
   }
 }
 
