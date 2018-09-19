@@ -12,8 +12,10 @@
     </p>
 
     <div v-for="attr in attributes">
-      <label v-bind:for="attr.attr">{{ attr.display }}</label>
-      <input v-bind:id="attr.attr" v-model="localItem[attr.attr]"/>
+      <div v-if="!attr.omitFromForms" >
+        <label v-bind:for="attr.attr">{{ attr.display }}</label>
+        <input v-bind:id="attr.attr" v-model="localItem[attr.attr]" :disabled="attr.noEdit" />
+      </div>
     </div>
 
     <button @click="cancel">Cancel</button>

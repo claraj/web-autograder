@@ -54,7 +54,7 @@ export default {
     return {
       students: [],
       attributes: [
-        { attr: 'id', display: 'id' },
+        { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
         { attr :'name', display: 'Name', regex: /^.+$/, required:true, message: 'Name is required' },
         {attr: 'github_id', display: 'Github ID', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
         {attr: 'org_id', display: 'MCTC ID', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },

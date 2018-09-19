@@ -6,11 +6,13 @@ import router from './router'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import $backend from '@/backend'
+import backends from '@/backend'
 
 Vue.use(VueAxios, axios)
 
-Vue.prototype.$backend = $backend
+Vue.prototype.$backend = backends.$backend
+Vue.prototype.$bulk_backend = backends.$bulk_backend
+
 
 let VueCookie = require('vue-cookie')
 Vue.use(VueCookie)

@@ -7,13 +7,20 @@ Vue.use(VueCookie)
 
 
 let $backend = axios.create({
-  // baseURL: '/api',
+   baseURL: '/api',
    headers: {
     'Content-Type': 'application/json',
     "X-CSRFToken": Vue.cookie.get("csrftoken")
   }
 })
 
+
+let $bulk_backend = axios.create({
+   headers: {
+    'Content-Type': 'text/plain',
+    "X-CSRFToken": Vue.cookie.get("csrftoken")
+  }
+})
 
 // Response interceptor, for doing the same thing with all errors
 $backend.interceptors.response.use(
@@ -28,64 +35,70 @@ $backend.interceptors.response.use(
 
 
 $backend.$fetchStudents = () => {
-  return $backend.get('/api/student/')
+  return $backend.get('/student/')
     .then(response => response.data)
 }
 
 $backend.$editStudent = (data) => {
   console.log(data)
-  return $backend.patch(`/api/student/${data.id}/`, data)
+  return $backend.patch(`/student/${data.id}/`, data)
     .then(response => console.log(response))
 }
 
 $backend.$deleteStudent = (id) => {
-  return $backend.delete(`/api/student/${id}/`,)
+  return $backend.delete(`/student/${id}/`,)
     .then(response => console.log(response))
 }
 
 $backend.$addStudent = (data) => {
-  return $backend.post('api/student/', data)
+  return $backend.post('/student/', data)
     .then(response => console.log(response))
 }
 
-$backend.$bulkAdd = (data) => {
+
+$backend.$fetchAssignments = () => {
+  return $backend.get('/assignment/')
+    .then(response => response.data)
+}
+
+$backend.$editAssignment = (data) => {
+  console.log(data)
+  return $backend.patch(`/assignment/${data.id}/`, data)
+    .then(response => console.log(response))
+}
+
+$backend.$deleteAssignment = (id) => {
+  return $backend.delete(`/assignment/${id}/`,)
+    .then(response => console.log(response))
+
+}
+
+$backend.$addAssignment = (data) => {
+  return $backend.post('/assignment/', data)
+    .then(response => console.log(response))
+}
+
+$bulk_backend.$bulkAddStudent = (data) => {
   console.log('backend raw data:', data)
   return $backend.post(
       '/students/raw/',
       data,
-    {  headers:
-      {
-        // baseURL: '/',
-          'Content-Type': 'text/plain',
-        "X-CSRFToken": Vue.cookie.get("csrftoken")
-      }
-    }
+
   )
     .then(response => response.data)
     .catch(err => console.error(err))
 }
 
 
-$backend.$fetchAssignments = () => {
-  return $backend.get('/api/assignment/')
+$bulk_backend.$bulkAddAssignment = (data) => {
+  console.log('backend raw data:', data)
+  return $backend.post(
+      '/assignments/raw/',
+      data
+  )
     .then(response => response.data)
+    .catch(err => console.error(err))
 }
 
-$backend.$editAssignment = (data) => {
-  console.log(data)
-  return $backend.patch(`/api/assignment/${data.id}/`, data)
-    .then(response => console.log(response))
-}
 
-$backend.$deleteAssignment = (id) => {
-  return $backend.delete(`/api/assignment/${id}/`,)
-    .then(response => console.log(response))
-
-}
-
-$backend.$addAssignment = (data) => {
-  return $backend.post('/api/assignment/', data)
-    .then(response => console.log(response))
-}
-
-export default $backend
+export default { $backend, $bulk_backend }
