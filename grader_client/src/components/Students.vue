@@ -28,13 +28,11 @@ export default {
         { attr: 'programming_class', display: 'Class Session'}
       ],
       bulkCSVOrder: "name,GitHubID,OrgID,StarID",
-      // backend: new Backend('students')
     }
   },
   computed: {
     backend: function () { return new Backend('student') }
   },
-
 }
 
 
