@@ -3,7 +3,7 @@
   <div id="edit-modal" v-if="visible">
   <div id="edit-modal-content">
 
-    <h2>{{action}}</h2>
+    <h2>{{action}} {{name}}</h2>
 
     <p v-if="errors.length"><b>Fix these errors: </b>
       <ul>
@@ -37,7 +37,8 @@ export default {
       item: Object,
       attributes: Array,
       visible: Boolean,
-      action: String
+      action: String,
+      name: String
   },
   data () {
     return {
@@ -56,7 +57,7 @@ export default {
   methods: {
 
     cancel () {
-      this.$emit('onCancel')
+      this.$emit('onCancelAddEdit')
     },
 
     checkForm() {
@@ -88,7 +89,7 @@ export default {
 
       if (!this.errors.length) {
         console.log('no errors')
-        this.$emit('onConfirmSubmit', this.localItem)
+        this.$emit('onConfirmAddEditSubmit', this.localItem)
       } else {
         console.log('validation errors:', this.errors)
       }

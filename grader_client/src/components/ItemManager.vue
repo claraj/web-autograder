@@ -24,6 +24,7 @@
       v-bind:attributes="attributes"
       v-bind:action="action"
       v-bind:errors="errors"
+      v-bind:name="name"
       @onConfirmAddEditSubmit="onConfirmAddEditSubmit"
       @onCancelAddEdit="onCancelAddEdit"
     />
@@ -128,7 +129,7 @@ export default {
       if (this.focusItem) {
         // todo remove ID, should not be edited
         this.showAddEditModal = true
-        this.action = 'Edit Item'
+        this.action = 'Edit'
       }
     },
 
@@ -149,7 +150,7 @@ export default {
     /* Adding items */
     showAddItemModal() {
       this.focusItem = {}
-      this.action = "Add Item"
+      this.action = "Add"
       this.showAddEditModal = true;
     },
 
