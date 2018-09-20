@@ -3,7 +3,6 @@
     v-bind:name="name"
     v-bind:attributes="attributes"
     v-bind:backend="backend"
-    v-bind:bulkCSVOrder="bulkCSVOrder"
   />
 </template>
 
@@ -27,7 +26,6 @@ export default {
         { attr:'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
         { attr: 'programming_class', display: 'Class Session'}
       ],
-      bulkCSVOrder: "name,GitHubID,OrgID,StarID",
     }
   },
   computed: {

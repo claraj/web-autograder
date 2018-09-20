@@ -62,17 +62,9 @@ export default {
   name: 'ItemManager',
   components: { ItemList, BulkAdd, AddEditItem },
   props: {
-
-      // focusItem: Object,
-      // showAddEditModal: Boolean,
-      // action: "",
-      // bulkErrors: [],
-      // bulkItemsAdded: 0,
       attributes: Array,
       name: String,
-      bulkCSVOrder: String,
       backend: Object,
-      // errors: Array
   },
   data () {
   return {
@@ -82,17 +74,18 @@ export default {
     action: "",
     bulkErrors: [],
     bulkItemsAdded: 0,
-    // attributes: Array,
-    // name: String,
-    // bulkCSVOrder: String,
-    // backend: Object,
     errors: []
 
   }},
   computed: {
     itemType: function () {
       return pluralize(this.name);
-    }
+    },
+    bulkCSVOrder: function() {
+      return this.attributes
+        .filter(a => a.attr != 'id')   // ignore ID
+        .map(a => a.attr)              // get the attribute code names
+        .reduce( (a, b) => a + "," + b) }  // stick together into a string
   },
 
   mounted () {

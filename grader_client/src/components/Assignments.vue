@@ -3,7 +3,6 @@
     v-bind:name="name"
     v-bind:attributes="attributes"
     v-bind:backend="backend"
-    v-bind:bulkCSVOrder="bulkCSVOrder"
   />
 </template>
 
@@ -27,11 +26,11 @@ export default {
         { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL' },
         { attr: 'programming_class', display: 'Class Session'}
       ],
-    bulkCSVOrder: "Week,GitHub_Base,Instructor_Repo,D2L_Url",
     }
   },
   computed: {
-    backend: function () { return new Backend('assignment') }
+    backend: function () { return new Backend('assignment') },
+    // bulkCSVOrder: function() { return this.attributes.filter(a => a.attr != 'id').map(a => a.attr).reduce( (a, b) => a + "," + b) }
   },
 }
 
