@@ -22,15 +22,14 @@ export default {
         { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
         { attr :'week', display: 'Week', regex: /^.+$/, required:true, message: 'Name is required' },
         { attr: 'github_base', display: 'GitHub Base', regex: /^[a-zA-Z_\d-]+$/, required: true, message: 'GitHub base can only contain letters, numbers _ and -' },
-        { attr: 'instructor_repo', display: 'Instructor Repo', required:true },
-        { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL' },
+        { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
+        { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
         { attr: 'programming_class', display: 'Class Session'}
       ],
     }
   },
   computed: {
     backend: function () { return new Backend('assignment') },
-    // bulkCSVOrder: function() { return this.attributes.filter(a => a.attr != 'id').map(a => a.attr).reduce( (a, b) => a + "," + b) }
   },
 }
 

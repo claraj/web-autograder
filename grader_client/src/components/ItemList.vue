@@ -15,7 +15,13 @@
 
       <tr v-for="item in items" v-bind:key="item.id">
 
-        <td v-for="attr in attributes">{{ item[attr.attr] }}</td>
+        <td v-for="attr in attributes">
+
+          <template v-if="attr.hyperlink"><a v-bind:href="item[attr.attr]"> {{ item[attr.attr] }} </a> </template>
+          <template v-else> {{ item[attr.attr] }} </template>
+
+        </td>
+
         <td><button @click="requestEdit(item.id)">Edit</button></td>
         <td><button @click="requestDelete(item.id)">Delete</button></td>
       </tr>

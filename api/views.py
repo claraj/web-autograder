@@ -1,4 +1,15 @@
-from students.serializers import StudentSerializer
+from .models import Assignment
+from .serializers import AssignmentSerializer
+from rest_framework import generics
+
+
+class AssignmentListCreate(generics.ListCreateAPIView):
+    queryset = Assignment.objects.all()
+    serializer_class = AssignmentSerializer
+
+
+
+from .serializers import StudentSerializer
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
@@ -7,7 +18,7 @@ from rest_framework.exceptions import MethodNotAllowed
 
 from django.views import View
 
-from autograder.models import Student
+from .models import Student
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .parsers import PlainTextParser

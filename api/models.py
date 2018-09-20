@@ -2,6 +2,12 @@ from django.db import models
 from django.core.validators import RegexValidator
 
 
+# todo better name
+class GraderModule(models.Model):
+    language = models.CharField(max_length=100)
+    module = models.CharField(max_length=100)   # A python module that, when given the instructor code and the student's code, runs the unit tests and outputs a report
+
+
 class ProgrammingClass(models.Model):
     name = models.CharField(max_length=100, default='spork appreciation 101')  # e.g. Java Programming, Programming Logic...
     semester_code = models.CharField(max_length=6)  # summer = 201801, fall = 201803, spring 2019 = 201805
@@ -13,7 +19,7 @@ class Assignment(models.Model):
     github_base = models.CharField(max_length=200)      # e.g. week-0-variables
     instructor_repo = models.CharField(max_length=200)  # eg. https://github.com/minneapolis-edu/JAG_0
     d2l_gradebook_url = models.CharField(max_length=200, blank=True, null=False)
-    grader = models.ForeignKey('autograder.GraderModule', on_delete=models.DO_NOTHING, blank=True, null=True)
+    grader = models.ForeignKey(GraderModule, on_delete=models.DO_NOTHING, blank=True, null=True)
 
 
 class Student(models.Model):
@@ -36,7 +42,15 @@ class Grade(models.Model):
     score = models.DecimalField(max_digits=6, decimal_places=3)
     # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.SET_NULL)
 
-# todo better name
-class GraderModule(models.Model):
-    language = models.CharField(max_length=100)
-    module = models.CharField(max_length=100)   # A python module that, when given the instructor code and the student's code, runs the unit tests and outputs a report
+
+class Attributes(models.Model):
+    pass
+
+      #   attributes: [
+      #   { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
+      #   { attr :'week', display: 'Week', regex: /^.+$/, required:true, message: 'Name is required' },
+      #   { attr: 'github_base', display: 'GitHub Base', regex: /^[a-zA-Z_\d-]+$/, required: true, message: 'GitHub base can only contain letters, numbers _ and -' },
+      #   { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
+      #   { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
+      #   { attr: 'programming_class', display: 'Class Session'}
+      # ],

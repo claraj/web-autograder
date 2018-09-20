@@ -32,7 +32,6 @@ Backend.prototype.$fetchItems = function() {
   .then(response => response.data)
 }
 
-
 Backend.prototype.$editItem = function (data)  {
   return this.$crud.patch(`/${this.base}/${data.id}/`, data)
   .then(response => console.log('backend edit', response))
@@ -48,11 +47,10 @@ Backend.prototype.$addItem = function(data)  {
   .then(response => console.log('backend add', response))
 }
 
-
-Backend.prototype.$bulkAdd = (data) => {
+Backend.prototype.$bulkAdd = function(data) {
   console.log('backend raw data:', data)
-  return $bulk.post(
-    `/${this.base}/raw/`,
+  return this.$bulk.post(
+    `/${this.base}s/raw/`,     // YUCK YUCK YUCK FIXME
     data
   )
   .then(response => response.data)

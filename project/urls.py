@@ -21,9 +21,9 @@ from .routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('autograder.urls')),
+    path('', include('api.urls')),
     path('api/', include(router.urls)),
-    path('students/', include('students.urls')),
-    path('assignment/', include('assignments.urls')) #TemplateView.as_view(template_name='assignment.html')),
+    # path('students/', include('students.urls')),
+    # path('assignment/', include('assignments.urls')) #TemplateView.as_view(template_name='assignment.html')),
 
 ]

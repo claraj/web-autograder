@@ -158,7 +158,7 @@ export default {
     onSubmitBulk(rawData) {
       console.log('app bulk add')
       console.log(rawData)
-      this.backend$bulkAddItem(rawData).then( (resp) => {
+      this.backend.$bulkAdd(rawData).then( (resp) => {
         console.log('server response', resp)
         // this.rawData = ""
         this.bulkItemsAdded = resp.created

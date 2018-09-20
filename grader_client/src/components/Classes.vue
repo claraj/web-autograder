@@ -1,5 +1,7 @@
 
 <template>
+
+  
   <ItemManager
     v-bind:name="name"
     v-bind:attributes="attributes"
@@ -25,32 +27,12 @@ export default {
         { attr: 'name', display: 'Name' },
         { attr: 'semester_code', display: 'Semester' },
       ],
-    bulkCSVOrder: "Name,SemesterCode",
     }
   },
   computed: {
     backend: function () { return new Backend('class') },
-    playBulk: {
-      return attributes.map(a => a.attr).reduce( a, b => a + "," + b)
-    }
   },
-  mounted() {
-    console.log(this.playBulk)
-  }
 }
 
 
 </script>
-
-
-<template>
-
-  <div id="class-management">
-  </div>
-
-</template>
-
-<script>
-
-import ItemList from './ItemList.vue'
-import AddEditItem from './AddEditItem.vue'
