@@ -5,7 +5,7 @@
   <div id="bulk-add">
 
     <h2>Bulk Add {{itemType}}</h2>
-    
+
     <p>Provide data in CSV format in the order
       <em>{{ instructions }}</em></p>
       <P>Missing fields are ok.</p>
@@ -17,7 +17,7 @@
           <li v-for="error in errors">{{ error }}</li>
         </ul>
 
-        <p>{{countAdded}} {{ itemType }}(s) added.</p>
+        <p>{{countAdded}} {{ itemType }} added.</p>
       </div>
 
     </template>

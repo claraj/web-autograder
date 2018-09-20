@@ -15,6 +15,10 @@
       <router-link to="/assignments">Assignment Management</router-link>
       </p>
       <p class="nav">
+      <router-link to="/classes">Class Management</router-link>
+      </p>
+
+      <p class="nav">
       <router-link to="/grading">Grading</router-link>
       </p>
     <router-view/>

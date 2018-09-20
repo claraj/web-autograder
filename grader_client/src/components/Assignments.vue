@@ -61,15 +61,13 @@ export default {
         { attr: 'programming_class', display: 'Class Session'}
       ],
       focusAssignment: {},
-      id: 0,
       showAddEditModal: false,
       action: "",
-      errors: [],
+      // errors: [],
       bulkErrors: [],
       bulkCSVOrder: "Week,GitHub_Base,Instructor_Repo,D2L_Url",
       bulkAssignmentsAdded: 0,
       itemType: 'Assignments'
-
     }
   },
   mounted () {

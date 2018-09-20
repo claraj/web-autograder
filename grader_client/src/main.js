@@ -6,12 +6,14 @@ import router from './router'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import backends from '@/backend'
+//import backend from '@/backends/management_backend'
 
 Vue.use(VueAxios, axios)
 
-Vue.prototype.$backend = backends.$backend
-Vue.prototype.$bulk_backend = backends.$bulk_backend
+// All vue objects will have access to these two objects .
+// Vue.prototype.$student_backend = backend('student')
+// Vue.prototype.$assignment_backend = backend('assignment')
+// Vue.prototype.$classes_backend = backend('class')
 
 
 let VueCookie = require('vue-cookie')
