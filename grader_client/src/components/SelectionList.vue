@@ -3,7 +3,7 @@
 
   <!--  List of things that are checkable -->
   <div>
-    <h3>hello here's a checkable list</h3>
+    <h3>Select...</h3>
     <input v-model="selectAll" type="checkbox">Select all</a>
     <ul>
 

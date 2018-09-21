@@ -60,7 +60,7 @@ import AddEditItem from '../components/AddEditItem.vue'
 
 export default {
   name: 'ItemManager',
-  components: { ItemList, BulkAdd, AddEditItem },
+  components: { ItemList, BulkAdd,  AddEditItem },
   props: {
       attributes: Array,
       name: String,

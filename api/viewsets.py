@@ -4,12 +4,12 @@ from .serializers import AssignmentSerializer, StudentSerializer, ProgrammingCla
 from django_filters.rest_framework import DjangoFilterBackend
 
 class AssignmentViewSet(viewsets.ModelViewSet):
-    queryset = Assignment.objects.all().order_by('week')
+    queryset = Assignment.objects.all().order_by('week').order_by('-programming_class__semester_code')
     serializer_class = AssignmentSerializer
     filter_fields = ('week', 'programming_class')
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all().order_by('name')
+    queryset = Student.objects.all().order_by('name').order_by('-programming_class__semester_code')
     serializer_class = StudentSerializer
     filter_fields = ('name', 'programming_class')
 

@@ -47,6 +47,11 @@ Backend.prototype.$addItem = function(data)  {
   .then(response => console.log('backend add', response))
 }
 
+Backend.prototype.$fetchOne = function(id) {
+  return this.$crud.get(`/${this.base}/${id}/`)
+  .then(response => console.log('backend get one', response))
+}
+
 
 Backend.prototype.$query = function(query)  {
   return this.$crud.get(`/${this.base}`, { params: query } )

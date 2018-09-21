@@ -12,10 +12,24 @@
     </p>
 
     <div v-for="attr in attributes">
+
       <div v-if="!attr.omitFromForms" >
-        <label v-bind:for="attr.attr">{{ attr.display }}</label>
-        <input v-bind:id="attr.attr" v-model="localItem[attr.attr]" :disabled="attr.noEdit" />
+
+        <div v-if="attr.dropdown">
+          <label v-bind:for="attr.attr">{{ attr.display }}</label>
+          <select v-model="localItem[attr.attr]">
+            <option v-for="option in dropdownOptions" v-bind:value="option.id">ID: {{option.id}} Class: {{option.name}}, semester code {{option.semester_code}}</option>
+          </select>
+
+        </div>
+
+        <div v-else>
+          <label v-bind:for="attr.attr">{{ attr.display }}</label>
+          <input v-bind:id="attr.attr" v-model="localItem[attr.attr]" :disabled="attr.noEdit" />
+        </div>
+
       </div>
+
     </div>
 
     <button @click="cancel">Cancel</button>
@@ -38,12 +52,15 @@ export default {
       attributes: Array,
       visible: Boolean,
       action: String,
-      name: String
+      name: String,
+
   },
   data () {
     return {
       localItem: Object.assign( {}, this.item),
       errors: [],
+      dropdownSource: {},
+      dropdownOptions: []
     }
   },
 
@@ -52,6 +69,20 @@ export default {
       this.localItem = Object.assign( {}, this.item)
   //    console.log('edit local item changed ', this.item,  this.localItem)
     }
+  },
+
+  mounted() {
+
+    let dropdownAttribute = this.attributes.filter( a => a.dropdown )
+    if (dropdownAttribute) {
+      console.log('dropdown attr', dropdownAttribute)
+      this.$classes_backend.$fetchItems().then( data => {
+      // dropdownAttribute.dropdownSource.$fetchItems().then( data => {   //why?
+        console.log('data for dropdown:', data)
+        this.dropdownOptions = data
+      })
+    }
+
   },
 
   methods: {
@@ -88,7 +119,7 @@ export default {
       console.log(this.errors)
 
       if (!this.errors.length) {
-        console.log('no errors')
+        console.log('no errors, local item is', this.localItem)
         this.$emit('onConfirmAddEditSubmit', this.localItem)
       } else {
         console.log('validation errors:', this.errors)
@@ -98,7 +129,7 @@ export default {
   }
 }
 
-</script>
+ </script>
 
 
 <style>
