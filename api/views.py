@@ -25,11 +25,6 @@ from .parsers import PlainTextParser
 
 import csv
 
-# todo used?
-# class StudentListCreate(ModelViewSet):
-#     queryset = Student.objects.all().order_by('name')
-#     serializer_class = StudentSerializer
-
 from django.views.decorators.http import require_http_methods
 
 @csrf_exempt  # TODO remove

@@ -2,7 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Students from '@/components/Students'
 import Assignments from '@/components/Assignments'
-import Classes from '@/components/Classes'
+import ProgrammingClasses from '@/components/ProgrammingClasses'
+import GraderModules from '@/components/GraderModules'
+import GraderResults from '@/components/GraderResults'
+import GraderLaunch from '@/components/GraderLaunch'
 
 Vue.use(Router)
 
@@ -20,9 +23,24 @@ export default new Router({
     },
     {
       path: '/classes',
-      name: 'Classes',
-      component: Classes
+      name: 'ProgrammingClasses',
+      component: ProgrammingClasses
     },
+    {
+      path: '/gradermodules',
+      name: 'GraderModules',
+      component: GraderModules
+    },
+    {
+      path: '/graderlaunch',
+      name: 'GraderLaunch',
+      component: GraderLaunch
+    },
+    {
+      path: '/graderresults',
+      name: 'GraderResults',
+      component: GraderResults
+    }
 
   ]
 })

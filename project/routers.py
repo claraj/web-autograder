@@ -1,11 +1,15 @@
 from rest_framework import routers
 
-from api.viewsets import AssignmentViewSet, StudentViewSet
+from api import viewsets
 
 from django.urls import path
 
 router = routers.DefaultRouter()
 
-router.register(r'student', StudentViewSet)
-# router.register(r'upload', post_raw)
-router.register(r'assignment', AssignmentViewSet)
+router.register(r'student', viewsets.StudentViewSet)
+router.register(r'assignment', viewsets.AssignmentViewSet)
+router.register(r'attributes', viewsets.AttributesViewSet)
+router.register(r'grade', viewsets.GradeViewSet)
+router.register(r'gradermodule', viewsets.GraderModuleViewSet)
+router.register(r'programmingclass', viewsets.ProgrammingClassViewSet)
+router.register(r'assignment', viewsets.AssignmentViewSet)

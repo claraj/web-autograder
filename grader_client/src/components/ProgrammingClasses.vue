@@ -1,7 +1,7 @@
 
 <template>
 
-  
+
   <ItemManager
     v-bind:name="name"
     v-bind:attributes="attributes"
@@ -17,7 +17,7 @@ import ItemManager from './ItemManager.vue'
 import Backend from '@/backends/management_backend'
 
 export default {
-  name: 'Classes',
+  name: 'ProgrammingClasses',
   components:  { ItemManager },
   data () {
     return {
@@ -30,7 +30,7 @@ export default {
     }
   },
   computed: {
-    backend: function () { return new Backend('class') },
+    backend: function () { return new Backend('programmingclass') },
   },
 }
 

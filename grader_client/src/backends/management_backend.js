@@ -47,6 +47,13 @@ Backend.prototype.$addItem = function(data)  {
   .then(response => console.log('backend add', response))
 }
 
+
+Backend.prototype.$query = function(query)  {
+  return this.$crud.get(`/${this.base}/`, query)
+  .then(response => console.log('backend filter query', response))
+}
+
+
 Backend.prototype.$bulkAdd = function(data) {
   console.log('backend raw data:', data)
   return this.$bulk.post(

@@ -35,8 +35,8 @@ class Student(models.Model):
 
 class Grade(models.Model):
     # for an assignment and student. The assignment knows what programming class it belongs to.
-    assignment = models.ForeignKey(Assignment, on_delete=models.SET_NULL, null=True)
-    student = models.ForeignKey(Student, on_delete=models.SET_NULL, null=True)
+    assignment = models.ForeignKey(Assignment, on_delete=models.DO_NOTHING, blank=True, null=False)
+    student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, blank=True, null=False)
     generated_report = models.TextField()
     instructor_comments = models.TextField()
     score = models.DecimalField(max_digits=6, decimal_places=3)
@@ -44,7 +44,16 @@ class Grade(models.Model):
 
 
 class Attributes(models.Model):
-    pass
+    model = models.CharField(max_length=200, null=False, blank=False)  # required
+    attr = models.CharField(max_length=200, null=False, blank=False)  # required
+    display = models.CharField(max_length=200, null=False, blank=True)  # not required
+    validation_regex = models.CharField(max_length=200, null=False, blank=True)  # not required
+    validation_fail_message = models.CharField(max_length=200, null=False, blank=True)  # not required
+    hyperlink = models.BooleanField(default=False)  # not required
+    required = models.BooleanField(default=False)  # not required
+    no_edit = models.BooleanField(default=False)  # not required
+    omit_from_forms = models.BooleanField(default=False)
+
 
       #   attributes: [
       #   { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
@@ -54,3 +63,14 @@ class Attributes(models.Model):
       #   { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
       #   { attr: 'programming_class', display: 'Class Session'}
       # ],
+
+        # or
+        #
+        #       attributes: [
+        #         { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
+        #         { attr :'name', display: 'Name', regex: /^.+$/, required:true, message: 'Name is required' },
+        #         { attr: 'github_id', display: 'Github ID', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
+        #         { attr: 'org_id', display: 'MCTC ID', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
+        #         { attr:'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
+        #         { attr: 'programming_class', display: 'Class Session'}
+        #       ],

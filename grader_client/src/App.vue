@@ -17,6 +17,9 @@
       <p class="nav">
       <router-link to="/classes">Class Management</router-link>
       </p>
+      <p class="nav">
+      <router-link to="/gradermodules">Grader Module Management</router-link>
+      </p>
 
       <p class="nav">
       <router-link to="/grading">Grading</router-link>
