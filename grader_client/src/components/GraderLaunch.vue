@@ -15,8 +15,8 @@
 
 <p>Select students and assignments to grade.<p>
 
-  <button onClick="startGrading">Start Grading</button>
-
+  <button v-on:click="startGrading">Start Grading</button>
+  <p>{{error}}</p>
 
 <div class="grid-container">
 <div class="row">
@@ -67,6 +67,7 @@ export default {
       students: [],
       assignments: [],
       selectedClass: "",
+      error: ""
     }
   },
   mounted() {
@@ -122,8 +123,24 @@ export default {
       let selectedStudents = this.students.filter( student => student.selected ).map( student => student.id )
       let selectedAssignments = this.assignments.filter( assignment => assignment.selected).map(assignment => assignment.id)
 
-      this.$grader_backend.invokeGrader( {students: selectedStudents, assignments: selectedAssignments}).then(response => {
+      if (!selectedStudents.length || !selectedAssignments.length) {
+        this.error = "Select at least one student and at least one assignment"
+        return;
+      }
+
+      this.error = ""
+
+      let data = { students: selectedStudents, assignments: selectedAssignments}
+
+
+      console.log(data)
+
+      this.$autograder_backend.$invokeGrader( {students: selectedStudents, assignments: selectedAssignments})
+      .then(response => {
         this.$router.push('GraderResults')
+      })
+      .catch( err => {
+        this.$router.push('GraderResults')    
       })
 
     },

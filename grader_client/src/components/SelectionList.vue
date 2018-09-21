@@ -50,6 +50,7 @@ export default {
     itemSelected(id) {
       // emit to parent, id + selected (?)
       // or parent can watch?
+      // or just wait for GRADE button to be selected? 
       console.log('hello, item id', id)
 
     }
