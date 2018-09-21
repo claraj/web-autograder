@@ -49,8 +49,9 @@ Backend.prototype.$addItem = function(data)  {
 
 
 Backend.prototype.$query = function(query)  {
-  return this.$crud.get(`/${this.base}/`, query)
-  .then(response => console.log('backend filter query', response))
+  return this.$crud.get(`/${this.base}`, { params: query } )
+  //.then(response => console.log(`backend filter query reponse for ${query}`, response))
+//.catch(err=>console.log(err))
 }
 
 

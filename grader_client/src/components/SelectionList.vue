@@ -1,15 +1,27 @@
 <template>
 
 
-<!--  List of things that are checkable -->
-<div>
- <ul>
-  <li v-for="item in items">
-    <input v-model="item.selected" type="checkbox" onclick="@itemSelected(item.id)"/>
-    <span>{{item.displayText}}</span>
-  </li>
-</ul>
-</div>
+  <!--  List of things that are checkable -->
+  <div>
+    <h3>hello here's a checkable list</h3>
+    <input v-model="selectAll" type="checkbox">Select all</a>
+    <ul>
+
+      <div v-if="items.length">
+
+        <li v-for="item in items">
+          <input v-model="item.selected" type="checkbox" onclick="@itemSelected(item.id)"/>
+          <span>{{item.displayText}}</span>
+        </li>
+      </div>
+
+      <div v-else>
+        <p>No items</p>
+      </div>
+
+
+    </ul>
+  </div>
 
 </template>
 
@@ -18,12 +30,15 @@
 export default {
   name: "SelectionList",
   props: {
-    items: Array,
+    items: Array
   },
   data() {
     return {
-
+      selectAll: false
     }
+  },
+  mounted() {
+    console.log('list items:', this.items)
   },
   methods: {
     itemSelected() {

@@ -10,7 +10,7 @@
 
 import ItemManager from './ItemManager.vue'
 
-import Backend from '@/backends/management_backend'
+// import Backend from '@/backends/management_backend'
 
 export default {
   name: 'Students',
@@ -26,11 +26,9 @@ export default {
         { attr:'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
         { attr: 'programming_class', display: 'Class Session'}
       ],
+      backend: this.$student_backend
     }
-  },
-  computed: {
-    backend: function () { return new Backend('student') }
-  },
+  }
 }
 
 

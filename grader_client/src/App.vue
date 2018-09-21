@@ -22,8 +22,13 @@
       </p>
 
       <p class="nav">
-      <router-link to="/grading">Grading</router-link>
+      <router-link to="/graderlaunch">Launch Grader</router-link>
       </p>
+
+      <p class="nav">
+      <router-link to="/graderresults">Grader Results</router-link>
+      </p>
+
     <router-view/>
 
     </div>

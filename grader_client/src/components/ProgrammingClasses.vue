@@ -14,7 +14,7 @@
 
 import ItemManager from './ItemManager.vue'
 
-import Backend from '@/backends/management_backend'
+// import Backend from '@/backends/management_backend'
 
 export default {
   name: 'ProgrammingClasses',
@@ -27,11 +27,9 @@ export default {
         { attr: 'name', display: 'Name' },
         { attr: 'semester_code', display: 'Semester' },
       ],
+      backend: this.$classes_backend
     }
-  },
-  computed: {
-    backend: function () { return new Backend('programmingclass') },
-  },
+  }
 }
 
 

@@ -10,7 +10,7 @@
 
 import ItemManager from './ItemManager.vue'
 
-import Backend from '@/backends/management_backend'
+// import Backend from '@/backends/management_backend'
 
 export default {
   name: 'Assignments',
@@ -26,11 +26,10 @@ export default {
         { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
         { attr: 'programming_class', display: 'Class Session'}
       ],
+      backend: this.$assignment_backend
+
     }
-  },
-  computed: {
-    backend: function () { return new Backend('assignment') },
-  },
+  }
 }
 
 

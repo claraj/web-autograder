@@ -10,7 +10,7 @@
 
 import ItemManager from './ItemManager.vue'
 
-import Backend from '@/backends/management_backend'
+// import Backend from '@/backends/management_backend'
 
 export default {
   name: 'Grader Modules',
@@ -23,11 +23,12 @@ export default {
         { attr :'week', display: 'Week' },
         { attr: 'github_base', display: 'GitHub Base'},
       ],
+      backend: this.$gradermodule_backend
     }
   },
-  computed: {
-    backend: function () { return new Backend('gradermodule') },
-  },
+  // computed: {
+  //   backend: function () { return new Backend('gradermodule') },
+//  },
 }
 
 

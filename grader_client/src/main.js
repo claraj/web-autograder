@@ -7,17 +7,21 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-import Backend from '@/backends/management_backend'
+import APIBackend from '@/backends/api_management_backend'
+import AutograderBackend from '@/backends/autograder_backend'
+
+
 
 Vue.use(VueAxios, axios)
 
 // All vue objects will have access to these objects .
-Vue.prototype.$student_backend = new Backend('student')
-Vue.prototype.$assignment_backend = new Backend('assignment')
-Vue.prototype.$classes_backend = new Backend('class')
-Vue.prototype.$grade_backend = new Backend('grade')
-Vue.prototype.$gradermodule_backend = new Backend('gradermodule')
+Vue.prototype.$student_backend = new APIBackend('student')
+Vue.prototype.$assignment_backend = new APIBackend('assignment')
+Vue.prototype.$classes_backend = new APIBackend('programmingclass')
+Vue.prototype.$grade_backend = new APIBackend('grade')
+Vue.prototype.$gradermodule_backend = new APIBackend('gradermodule')
 
+Vue.prototype.$autograder_backend = new AutograderBackend()
 
 
 let VueCookie = require('vue-cookie')
