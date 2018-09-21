@@ -10,7 +10,7 @@
       <div v-if="items.length">
 
         <li v-for="item in items">
-          <input v-model="item.selected" type="checkbox" onclick="@itemSelected(item.id)"/>
+          <input v-model="item.selected" type="checkbox" v-on:click="itemSelected(item.id)"/>
           <span>{{item.displayText}}</span>
         </li>
       </div>
@@ -40,10 +40,17 @@ export default {
   mounted() {
     console.log('list items:', this.items)
   },
+  watch: {
+    selectAll: function() {
+      this.items.forEach(item => item.selected = this.selectAll)
+    }
+  },
   methods: {
-    itemSelected() {
+
+    itemSelected(id) {
       // emit to parent, id + selected (?)
       // or parent can watch?
+      console.log('hello, item id', id)
 
     }
   }
