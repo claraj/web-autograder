@@ -2,14 +2,15 @@ from rest_framework import viewsets
 from .models import Assignment, Student, GraderModule, Grade, Attributes, ProgrammingClass
 from .serializers import AssignmentSerializer, StudentSerializer, ProgrammingClassSerializer, GraderModuleSerializer, GradeSerializer, AttributesSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models.functions import Lower
 
 class AssignmentViewSet(viewsets.ModelViewSet):
-    queryset = Assignment.objects.all().order_by('week').order_by('-programming_class__semester_code')
+    queryset = Assignment.objects.all().order_by('-programming_class__semester_code', Lower('week'))
     serializer_class = AssignmentSerializer
     filter_fields = ('week', 'programming_class')
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all().order_by('name').order_by('-programming_class__semester_code')
+    queryset = Student.objects.all().order_by('-programming_class__semester_code', Lower('name'))
     serializer_class = StudentSerializer
     filter_fields = ('name', 'programming_class')
 
