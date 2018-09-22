@@ -23,9 +23,10 @@ export default {
     return {
       name: 'Class',
       attributes: [
-        { attr: 'id', display: 'ID' },
+        { attr: 'id', display: 'ID', noEdit: true, omitFromForms: true },
         { attr: 'name', display: 'Name' },
         { attr: 'semester_code', display: 'Semester' },
+        { attr: 'semester_human_string', display: 'Semester Name', noEdit: true },
       ],
       backend: this.$classes_backend
     }

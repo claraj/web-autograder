@@ -24,7 +24,7 @@ class GradeViewSet(viewsets.ModelViewSet):
     filter_fields = ('student', 'assignment')
 
 class GraderModuleViewSet(viewsets.ModelViewSet):
-    queryset = GraderModule.objects.all().order_by('name')
+    queryset = GraderModule.objects.all().order_by('language')
     serializer_class = GraderModuleSerializer
 
 class AttributesViewSet(viewsets.ModelViewSet):

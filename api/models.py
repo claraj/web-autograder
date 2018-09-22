@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
-
 # todo better name
 class GraderModule(models.Model):
     language = models.CharField(max_length=100)
@@ -10,8 +9,10 @@ class GraderModule(models.Model):
 
 class ProgrammingClass(models.Model):
     name = models.CharField(max_length=100, default='spork appreciation 101')  # e.g. Java Programming, Programming Logic...
-    semester_code = models.CharField(max_length=6)  # summer = 201801, fall = 201803, spring 2019 = 201805
-
+    semester_code = models.CharField(max_length=6, validators=[RegexValidator('^\d{6}$', message='Must be 6 numbers, year+semester code e.g. Fall 2019 is 201901')])  # summer = 201801, fall = 201803, spring 2019 = 201805
+    semester_human_string = models.CharField(max_length=200, null=True, blank=True)
+    def __str__(self):
+        return '%s, %s, %s' % (self.name, self.semester_human_string, self.semester_code)
 
 class Assignment(models.Model):
     programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.DO_NOTHING, blank=True, null=True)
