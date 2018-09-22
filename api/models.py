@@ -14,6 +14,7 @@ class ProgrammingClass(models.Model):
     def __str__(self):
         return '%s, %s, %s' % (self.name, self.semester_human_string, self.semester_code)
 
+
 class Assignment(models.Model):
     programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.DO_NOTHING, blank=True, null=True)
     week = models.IntegerField()

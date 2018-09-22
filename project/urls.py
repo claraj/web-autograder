@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('api.urls')),
     path('api/', include(router.urls)),
+    path('autograder/', include('autograder.urls'))
 ]

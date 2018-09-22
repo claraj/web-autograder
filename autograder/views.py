@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
+
+
+def grader_placeholder(request):
+    # return JsonResponse(request.data)
+    return HttpResponse('hello')
 
 # Create your views here.
 def grade(request):
