@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'webpack_loader',
-    'django_filters'
+    'django_filters',
+    'channels',
+    'django_eventstream'
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'autograder.middleware.HelloMiddleware'
+    'django_grip.GripMiddleware'
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -74,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
+ASGI_APPLICATION = 'project.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
