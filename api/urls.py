@@ -7,6 +7,8 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('assignments/raw/', views.upload_raw, name="rawData"),
     path('students/raw/', views.upload_raw, name="rawData"),
+
+    # todo is this being used here? cos it shouldn't be
     path('spa/', TemplateView.as_view(template_name='grader/spa.html'), name='spahome'),
 
 

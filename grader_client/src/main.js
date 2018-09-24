@@ -10,9 +10,10 @@ import VueAxios from 'vue-axios'
 import APIBackend from '@/backends/api_management_backend'
 import AutograderBackend from '@/backends/autograder_backend'
 
-
+import VueSSE from 'vue-sse'
 
 Vue.use(VueAxios, axios)
+Vue.use(VueSSE)
 
 // All vue objects will have access to these objects .
 Vue.prototype.$student_backend = new APIBackend('student')

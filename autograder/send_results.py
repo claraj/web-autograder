@@ -1,0 +1,1 @@
+from django_eventstream import send_event

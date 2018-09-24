@@ -14,15 +14,16 @@ function Autograder() {
 }
 
 Autograder.prototype.$invokeGrader = function(data) {
-  return this.$api.post(`/grader`, data)    // what URL?
-  .then(response => console.log('autograder invoke response', response))
+  console.log('sending data:', data)
+  return this.$api.post(`/grader/`, data)    // what URL?
+  .then(response => response.data)
   //expecting webhook response
 }
 
 
-Autograder.prototype.$pollGrader = function(session) {
-  return this.$api.post(`/grader/status`, session)    // what URL?
-  .then(response => console.log('autograder invoke response', response))
+Autograder.prototype.$pollGrader = function(batch) {
+  return this.$api.get(`/progress/`, { batch })    // what URL?
+  .then(response => response.data)
   //expecting webhook response
 }
 

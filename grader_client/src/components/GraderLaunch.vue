@@ -53,7 +53,15 @@
 
 </style>
 
+
 <script>
+
+
+let msgServer
+
+// import ReconnectingEventSource from 'eventstream'
+
+
 
 import SelectionList from './SelectionList'
 
@@ -129,21 +137,23 @@ export default {
       }
 
       this.error = ""
-
       let data = { students: selectedStudents, assignments: selectedAssignments}
 
+      console.log('grader will send', data)
 
-      console.log(data)
+      this.$autograder_backend.$invokeGrader(data)
+        .then(response => {
+          console.log('response from server', response)
+          this.$router.push('GraderResults', { query: { batch: response.data.batch } } )
+        })
+        .catch( err => {
+          console.log('error launching ', err)
+ // /          this.$router.push('GraderResults')
+        })
 
-      this.$autograder_backend.$invokeGrader( {students: selectedStudents, assignments: selectedAssignments})
-      .then(response => {
-        this.$router.push('GraderResults')
-      })
-      .catch( err => {
-        this.$router.push('GraderResults')    
-      })
 
-    },
+
+     },
 
   }
 }

@@ -21,7 +21,7 @@ class ProgrammingClassViewSet(viewsets.ModelViewSet):
 class GradeViewSet(viewsets.ModelViewSet):
     queryset = Grade.objects.all().order_by('student').order_by('assignment.week')
     serializer_class = GradeSerializer
-    filter_fields = ('student', 'assignment')
+    filter_fields = ('student', 'assignment', 'batch', 'id')
 
 class GraderModuleViewSet(viewsets.ModelViewSet):
     queryset = GraderModule.objects.all().order_by('language')

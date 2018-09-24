@@ -1,10 +1,74 @@
 from django.shortcuts import render
-from django.http import JsonResponse, StreamingHttpResponse, HttpResponse
+from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse, StreamingHttpResponse, HttpResponse, HttpResponseBadRequest
+from django_eventstream import send_event
+from api.models import Grade
+import uuid
+import json
+
+from .grading_queue import *
 
 
-def grader_placeholder(request):
-    # return JsonResponse(request.data)
-    return HttpResponse('hello')
+
+@require_http_methods('POST')
+def grader_start(request):
+    # todo only post
+
+    """
+    Make a UUId for all the graded things in this batch
+    make a task for each student & assignment and dump into celery queue
+    return UUID for client to use to query progress
+    """
+
+    body = json.loads(request.body)
+
+    students = body.get('students')
+    assignments = body.get('assignments')
+
+    # if not request.POST:
+    #     # todo make sure at least one student, at least one assignent
+    #     # todo can client get error msg?
+    #     return HttpResponseBadRequest('No student or assignments provided')
+
+    batch_uuid = uuid.uuid4()
+
+    print(body)
+
+    for assignment in assignments:
+        for student in students:
+            print(student, assignment)
+            queue_grading_task(batch_uuid, assignment, student)
+
+    return JsonResponse( { 'batch': str(batch_uuid), 'students': len(students), 'assignments': len(assignments) } )
+
+
+def grader_get_progress(request):
+
+    """
+    Make a UUId for all the graded things in this batch
+    make a task for each student & assignment and dump into celery queue
+    return UUID for client to use to query progress
+
+    Return a list of assignments IDs that are graded in this batch. Client can figure out which ones
+    it doesn't know about yet and query the API to get the full info for each assignment.
+
+    """
+
+    batch = request.GET.get('batch')
+    if not batch:
+        # 404
+        return HttpResponseBadRequest('No grading batch provided')
+
+    grading_batch = Grades.objects().filter(batch=batch)
+
+    graded_ids = [ object.id for object in grading_batch ]
+
+    return JsonResponse( { graded_ids : graded_ids })
+#
+#
+# def grader_placeholder(request):
+#     # return JsonResponse(request.data)
+#     return HttpResponse('hello')
 
 # Create your views here.
 def grade(request):

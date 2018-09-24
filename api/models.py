@@ -39,9 +39,11 @@ class Grade(models.Model):
     # for an assignment and student. The assignment knows what programming class it belongs to.
     assignment = models.ForeignKey(Assignment, on_delete=models.DO_NOTHING, blank=True, null=False)
     student = models.ForeignKey(Student, on_delete=models.DO_NOTHING, blank=True, null=False)
-    generated_report = models.TextField()
-    instructor_comments = models.TextField()
+    generated_report = models.TextField(blank=True, null=True)
+    instructor_comments = models.TextField(blank=True, null=True)
     score = models.DecimalField(max_digits=6, decimal_places=3)
+    batch = models.UUIDField()
+    date = models.DateField(auto_now_add=True)
     # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.SET_NULL)
 
 
