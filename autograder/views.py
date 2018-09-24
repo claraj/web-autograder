@@ -46,7 +46,7 @@ def grader_get_progress(request):
 
     """
     Make a UUId for all the graded things in this batch
-    make a task for each student & assignment and dump into celery queue
+    make a task for each student & assignment and dump into celery/huey/djangoQ queue
     return UUID for client to use to query progress
 
     Return a list of assignments IDs that are graded in this batch. Client can figure out which ones
