@@ -54,23 +54,24 @@ def grader_get_progress(request):
 
     """
 
+    print('body', request.body)
+    print('GET', request.GET)
     batch = request.GET.get('batch')
     if not batch:
         # 404
+        print('no batch')
         return HttpResponseBadRequest('No grading batch provided')
 
-    grading_batch = Grades.objects().filter(batch=batch)
+    grading_batch = Grade.objects.filter(batch=batch)
 
     graded_ids = [ object.id for object in grading_batch ]
 
-    return JsonResponse( { graded_ids : graded_ids })
-#
-#
-# def grader_placeholder(request):
-#     # return JsonResponse(request.data)
-#     return HttpResponse('hello')
+    print(graded_ids)
 
-# Create your views here.
+    return JsonResponse( { 'graded_ids' : graded_ids })
+
+
+
 def grade(request):
     if request.method == 'POST':
         # grade the things

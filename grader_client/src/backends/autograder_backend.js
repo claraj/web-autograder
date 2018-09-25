@@ -22,7 +22,7 @@ Autograder.prototype.$invokeGrader = function(data) {
 
 
 Autograder.prototype.$pollGrader = function(batch) {
-  return this.$api.get(`/progress/`, { batch })    // what URL?
+  return this.$api.get(`/progress/`, { params: { batch: batch } } )    // what URL?
   .then(response => response.data)
   //expecting webhook response
 }

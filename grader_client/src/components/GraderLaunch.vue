@@ -139,16 +139,17 @@ export default {
       this.error = ""
       let data = { students: selectedStudents, assignments: selectedAssignments}
 
+      let expected_results = selectedStudents.length * selectedAssignments.length
+
       console.log('grader will send', data)
 
       this.$autograder_backend.$invokeGrader(data)
         .then(response => {
           console.log('response from server', response)
-          this.$router.push('GraderResults', { query: { batch: response.data.batch } } )
+          this.$router.push({path: 'GraderResults', query: { batch: response.batch, expected_results: expected_results } } )
         })
         .catch( err => {
           console.log('error launching ', err)
- // /          this.$router.push('GraderResults')
         })
 
 

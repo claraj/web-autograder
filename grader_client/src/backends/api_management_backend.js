@@ -39,17 +39,18 @@ Backend.prototype.$editItem = function (data)  {
 
 Backend.prototype.$deleteItem = function (id) {
   return this.$crud.delete(`/${this.base}/${id}/`,)
-  .then(response => console.log('backend delete', response))
+  .then(response => response.data)
 }
 
 Backend.prototype.$addItem = function(data)  {
   return this.$crud.post(`/${this.base}/`, data)
-  .then(response => console.log('backend add', response))
+  .then(response => response.data)
 }
 
 Backend.prototype.$fetchOne = function(id) {
   return this.$crud.get(`/${this.base}/${id}/`)
-  .then(response => console.log('backend get one', response))
+  .then( response => response.data )
+
 }
 
 
