@@ -9,8 +9,15 @@
     -->
 
     <h4>Result ID {{ result.id }}</h4>
-    <P>Assignment id {{ result.assignment}}</P>
-    <P>Student id {{ result.student}}</P>
+
+
+    <P v-if="result.fullAssignmentInfo">Assignment Week: {{ result.fullAssignmentInfo.week }}</P>
+    <P v-else>Assignment internal ID: {{ result.assignment }}</P>
+
+    <p v-if="result.fullStudentInfo">Student Name: {{ result.fullStudentInfo.name }}</p>
+    <P v-else>Student internal ID: {{ result.student }}</P>
+
+
     <p>Grade {{ result.score }}</p>
     <P>Generated Report {{ result.generated_report}}</p>
     <P>Instructor Comments <textarea v-model="result.instructor_comments" v-on:change="updateInstructorComments"></textarea></P>

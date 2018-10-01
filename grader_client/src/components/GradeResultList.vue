@@ -3,7 +3,7 @@
   <div>
     <h3>Results</h3>
     <ul>
-      <div v-if="results.length">
+      <div v-if="readyResults.length">
         <li v-for="result in sortedResults">
           <GradeResultDetail
             v-bind:result="result"
@@ -29,45 +29,81 @@ import GradeResultDetail from './GradeResultDetail'
 export default {
   name: "GradeResultsList",
   components: { GradeResultDetail },
+  // props, or properties - this component expects to get them from it's parent
   props: {
-    results: Array
+    readyResults: Array,
   },
+  // while data is this components own internal state. It can send data to a child component, where it will become that child's prop.
   data() {
     return {
       sortedResults: []
     }
   },
   mounted() {
-    console.log('list items:', this.results)
+    console.log('list items:', this.readyResults)
   },
-
   watch: {
+    readyResults: {
 
-    results: function() {
+        handler: function(newVal, oldVal) {
+      // fetch student info, fetch assignment info
+      // what's the new result?
 
-      this.sortedResults = []
-
-      this.results.forEach( r =>
-        this.sortedResults.push(r)
-      )
-
-    // Sort by assignment and then by student
-      this.sortedResults.sort( (a, b) => {
-      if (a.assignment.week == b.assignment.week) {
-        return a.student.name < b.student.name
-      }
-      else {
-        return a.assignment.week < b.assignment.week
-      }
-    })
+        this.fetchStudentAssignment()
+        this.sortedResults = this.sort()
+      }, deep: true
+    }
   },
-},
 
   methods: {
     onChildUpdatedInstructorComments(id, comments) {
-      console.log('LIST must save comments for ', id, comments)
+    //  console.log('LIST must save comments for ', id, comments)
 // todo emit to parent
       this.$emit('onChangedInstructorComments', id, comments)
+    },
+
+    fetchStudentAssignment() {
+      this.readyResults.forEach( res => {
+        // has student data?
+        if (!res.fullStudentInfo) {
+          this.$student_backend.$fetchOne(res.student).then(data =>{
+            res.fullStudentInfo = data
+          })
+        }
+
+        if (!res.fullAssignmentInfo) {
+          this.$assignment_backend.$fetchOne(res.assignment).then(data => {
+            res.fullAssignmentInfo = data
+          })
+        }
+
+      })
+    },
+
+    sort() {
+
+        console.log('computing sorted results', )
+        let sorted = []
+
+        this.readyResults.forEach( r =>
+          sorted.push(r)
+        )
+
+        //console.log('sortd res', sorted)
+
+      // Sort by assignment and then by student
+        sorted.sort( function(a, b) {
+          if (!a.fullStudentInfo || !a.fullAssignmentInfo || !b.fullStudentInfo || !b.fullAssignmentInfo) {
+            return a.assignment - b.assignment
+          }
+          if (a.fullAssignmentInfo.week == b.fullAssignmentInfo.week) {
+            return a.fullStudentInfo.name.toLowerCase().localeCompare(b.fullStudentInfo.name.toLowerCase())
+          }
+          else {
+            return a.fullAssignmentInfo.week.toLowerCase().localeCompare(b.fullAssignmentInfo.week.toLowerCase())
+          }
+      })
+      return sorted
     }
   }
 }

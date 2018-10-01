@@ -17,7 +17,7 @@
 <!-- Links to student github page. -->
 
   <GradeResultList
-    v-bind:results="Object.values(gradedResults).filter(r=>r!=null)"
+    v-bind:readyResults="Object.values(this.gradedResults).filter(r => r!=null)"
     @onChangedInstructorComments="onChangedInstructorComments">
   </GradeResultList>
 
@@ -27,8 +27,6 @@
   <p>{{gradedResults}}</p>
 
   <p v-if="loading">Loading...</p>
-
-
 
 
 </div>
@@ -51,20 +49,30 @@ export default {
     return {
       batch: "",
     //  gradedResultsIds = [],    // {1, 2, 3 ... }
-      gradedResults: {},       // { 1: reults1, 2: results2 ....}
+      gradedResults: {},       // { 1: results1, 2: results2 ....}
       expectedResults: 0,
       receivedResults: 0,
       loading: true
+    }
+  },
+  computed: {
+    readyResults: function() {
+
+      // TODO why doesn't this work? Works with JS in component prop.
+      console.log(this.gradedResults)
+      let ready = Object.values(this.gradedResults).filter(r => r!=null)
+      console.log('computed ready:', ready)
+      return ready
     }
   },
   mounted() {
     // figure out most recent class and select selectedClass to that
     this.batch = this.$route.query.batch
     this.expectedResults = this.$route.query.expected_results
-    console.log('grade result param is ', this.$route.query)
+  //  console.log('grade result param is ', this.$route.query)
 
-    this.pollGrader()
-    poller = setInterval( this.pollGrader, pollInterval);
+    this.pollGrader()   // first poll
+    poller = setInterval( this.pollGrader, pollInterval);  // keep polling at intervals
 
   },
 
@@ -78,7 +86,7 @@ export default {
 
      onChangedInstructorComments(resultId, newComments) {
        console.log('will now update comments', resultId, newComments)
-       this.$grade_backend.$editField(resultId, { instructor_comments: newComments } )
+       this.$grade_backend.$editItem({id: resultId, instructor_comments: newComments } )
         .then( d=> console.log(d))
         .catch(err => console.log(err))
      },
@@ -90,7 +98,7 @@ export default {
 
     pollGrader() {
 
-      console.log('polling grader, have this many results ', this.receivedResults)
+    //  console.log('polling grader, have this many results ', this.receivedResults)
 
 
       if (this.receivedResults >= this.expectedResults) {
@@ -101,32 +109,32 @@ export default {
         this.$autograder_backend.$pollGrader(this.batch)
           .then( data => {
             // data should be a list of ids that have been graded
-            console.log('polled and got this result', data)
+        //    console.log('polled and got this result', data)
 
             data.graded_ids.forEach( id => {
-              console.log('process', id)
+        //      console.log('process', id)
               if ( !this.gradedResults[String(id)] ) {
                 //add and set to null
                 this.gradedResults[String(id)] = null
               }
 
-              console.log('set gradedResults to', this.gradedResults)
+        //      console.log('set gradedResults to', this.gradedResults)
 
             })
           }).then( () => {
 
 
-            console.log('now to get any missing data from this.gradedResults')
+      //      console.log('now to get any missing data from this.gradedResults')
 
             for (let id in this.gradedResults) {
 
-              console.log('get data for id', id, this.gradedResults[id])
+        //      console.log('get data for id', id, this.gradedResults[id])
               if (this.gradedResults[String(id)] == null)  {
-                console.log('result ready, get details', id)
+        //        console.log('result ready, get details', id)
                 this.receivedResults++ ;
                 this.$grade_backend.$fetchOne(String(id))
                   .then( data => {
-                    console.log('data for one grade', data)
+                //    console.log('data for one grade', data)
                     this.gradedResults[String(id)] = data
                   })
               }

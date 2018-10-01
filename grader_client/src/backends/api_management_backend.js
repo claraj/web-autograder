@@ -32,18 +32,11 @@ Backend.prototype.$fetchItems = function() {
   .then(response => response.data)
 }
 
-// TODO fix these names. 
+// TODO fix these names.
 Backend.prototype.$editItem = function (data)  {
   return this.$crud.patch(`/${this.base}/${data.id}/`, data)
   .then(response => console.log('backend edit', response))
 }
-
-
-Backend.prototype.$editField = function (id, data)  {
-  return this.$crud.put(`/${this.base}/${id}/`, data)
-  .then(response => console.log('backend edit', response))
-}
-
 
 Backend.prototype.$deleteItem = function (id) {
   return this.$crud.delete(`/${this.base}/${id}/`,)
