@@ -11,7 +11,7 @@
 
         <li v-for="item in items">
           <input v-model="item.selected" type="checkbox" v-on:click="itemSelected(item.id)"/>
-          <span>{{item.displayText}}</span>
+          <span>{{prefix}} {{item.displayText}}</span>
         </li>
       </div>
 
@@ -30,7 +30,8 @@
 export default {
   name: "SelectionList",
   props: {
-    items: Array
+    items: Array,
+    prefix: String
   },
   data() {
     return {

@@ -16,10 +16,9 @@
       <tr v-for="item in items" v-bind:key="item.id">
 
         <td v-for="attr in attributes">
-
-          <template v-if="attr.hyperlink"><a v-bind:href="item[attr.attr]"> {{ item[attr.attr] }} </a> </template>
-          <template v-else> {{ item[attr.attr] }} </template>
-
+            <template v-if="attr.hyperlink"><a v-bind:href="item[attr.attr]"> {{ item[attr.attr] }} </a> </template>
+            <template v-else-if="attr.boolean"><input type="checkbox" v-bind:checked="item[attr.attr]" disabled="true"/> </template>
+            <template v-else> {{ item[attr.attr] }} </template>
         </td>
 
         <td><button @click="requestEdit(item.id)">Edit</button></td>

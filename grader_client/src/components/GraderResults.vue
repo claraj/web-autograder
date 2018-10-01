@@ -13,10 +13,16 @@
 
   <p v-if="loading">Loading...</p>
 
-<!-- TODO sort by assignment and then by student -->
+<!-- TODO sort by assignment WEEK and then by student NAME -->
 <!-- Links to student github page. -->
 
-  <ul><li v-for="thing in gradedResults">{{ thing }} </li></ul>
+  <GradeResultList
+    v-bind:results="Object.values(gradedResults).filter(r=>r!=null)"
+    @onChangedInstructorComments="onChangedInstructorComments">
+  </GradeResultList>
+
+
+  <ul><li v-for="result in gradedResults">{{ result }} </li></ul>
 
   <p>{{gradedResults}}</p>
 
@@ -32,12 +38,15 @@
 
 <script>
 
+import GradeResultList from './GradeResultList'
+
 const pollInterval = 3000
 let poller
 
+
 export default {
-  name: 'GraderResults',
-  // components: { SelectionList },   // ?
+  name: 'GradeResult',
+  components: { GradeResultList },
   data () {
     return {
       batch: "",
@@ -54,6 +63,7 @@ export default {
     this.expectedResults = this.$route.query.expected_results
     console.log('grade result param is ', this.$route.query)
 
+    this.pollGrader()
     poller = setInterval( this.pollGrader, pollInterval);
 
   },
@@ -65,6 +75,13 @@ export default {
 
   },
    methods: {
+
+     onChangedInstructorComments(resultId, newComments) {
+       console.log('will now update comments', resultId, newComments)
+       this.$grade_backend.$editField(resultId, { instructor_comments: newComments } )
+        .then( d=> console.log(d))
+        .catch(err => console.log(err))
+     },
 
      cancelPolling() {
        clearInterval(poller)

@@ -1,18 +1,30 @@
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from .models import ProgrammingClass
+from .models import ProgrammingClass, Grade
 import logging
 
 log = logging.getLogger(__name__)
 
-print('SIGNAL HELLO')
+@receiver(pre_save, sender=Grade)
+def generate_github_url(sender, **kwargs):
+    grade_instance = kwargs['instance']
+
+    # github URL is http://
+    # https://github.com/ORG/ASSIGNMENTNAME-STUDENTGITHUBID
+
+    if not grade_instance.assignment or not grade_instance.student:
+        return
+
+    grade_instance.github_url = 'https://github.com/%s/%s-%s' % ( grade_instance.assignment.github_org , grade_instance.assignment.github_base , grade_instance.student.github_id)
+    print('generated student github url = ', grade_instance.github_url)
+
 
 
 @receiver(pre_save, sender=ProgrammingClass)
 def create_human_readable_semester_code(sender, **kwargs):
     print('SIGNAL REC HELLO', kwargs)
-    instance = kwargs['instance']
-    instance.semester_human_string = humanCode(instance.semester_code)
+    class_instance = kwargs['instance']
+    class_instance.semester_human_string = humanCode(instance.semester_code)
 
 pre_save.connect(create_human_readable_semester_code, sender=ProgrammingClass)
 

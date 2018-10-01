@@ -23,14 +23,14 @@
     <!-- Assignments -->
     <h3>Assigments</h3>
     <router-link to="assignments">Add or edit assignments?</router-link>
-    <SelectionList v-bind:items="assignments"/>
+    <SelectionList v-bind:items="assignments" v-bind:prefix="assignmentPrefix"/>
 </div>
 
 <div class="row">
   <h3>Student</h3>
   <!-- Students -->
     <router-link to="students">Add or Edit Students?</router-link>
-    <SelectionList  v-bind:items="students"/>
+    <SelectionList  v-bind:items="students" v-bind:prefix="studentPrefix"/>
 
 </div>
 </div>
@@ -72,10 +72,12 @@ export default {
     return {
       programmingClasses: [],
       selectedClass: {},
-      students: [],
-      assignments: [],
+      students: [],       // alll the students
+      assignments: [],    // alll the assignments
       selectedClass: "",
-      error: ""
+      error: "",
+      studentPrefix: "Name: ",
+      assignmentPrefix: "Week: "
     }
   },
   mounted() {
@@ -107,7 +109,7 @@ export default {
 
       console.log('seec class if', this.selectedClass.id)
 
-      this.$student_backend.$query( { programming_class: this.selectedClass } )
+      this.$student_backend.$query( { programming_class: this.selectedClass, active: true } )
         .then( response => {
           console.log('student response', response)
           this.students = response.data

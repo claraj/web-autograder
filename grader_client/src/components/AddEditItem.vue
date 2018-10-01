@@ -20,7 +20,11 @@
           <select v-model="localItem[attr.attr]">
             <option v-for="option in dropdownOptions" v-bind:value="option.id">ID: {{option.id}} Class: {{option.name}}, semester code {{option.semester_code}}</option>
           </select>
+        </div>
 
+        <div v-else-if="attr.boolean">
+          <label v-bind:for="attr.attr">{{ attr.display }}</label>
+          <input type="checkbox" v-model:checked="localItem[attr.attr]"/>
         </div>
 
         <div v-else>
