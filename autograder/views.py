@@ -6,7 +6,7 @@ from api.models import Grade
 import uuid
 import json
 
-from .grading_queue import *
+from .grading_queue import queue_grading_task
 
 
 
@@ -16,7 +16,7 @@ def grader_start(request):
 
     """
     Make a UUId for all the graded things in this batch
-    make a task for each student & assignment and dump into celery queue
+    make a task for each student & assignment and dump into queue
     return UUID for client to use to query progress
     """
 
@@ -38,6 +38,7 @@ def grader_start(request):
         for student in students:
             print(student, assignment)
             queue_grading_task(batch_uuid, assignment, student)
+            # todo reject non-existent students, assignments
 
     return JsonResponse( { 'batch': str(batch_uuid), 'students': len(students), 'assignments': len(assignments) } )
 
@@ -71,7 +72,7 @@ def grader_get_progress(request):
     return JsonResponse( { 'graded_ids' : graded_ids })
 
 
-
+# this is not used ATM, replaced with code above.
 def grade(request):
     if request.method == 'POST':
         # grade the things

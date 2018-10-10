@@ -36,7 +36,9 @@ export default {
   // while data is this components own internal state. It can send data to a child component, where it will become that child's prop.
   data() {
     return {
-      sortedResults: []
+      sortedResults: [],
+      studentCache: [],
+      assignmentCache: []
     }
   },
   mounted() {
@@ -44,13 +46,11 @@ export default {
   },
   watch: {
     readyResults: {
-
         handler: function(newVal, oldVal) {
-      // fetch student info, fetch assignment info
-      // what's the new result?
-
-        this.fetchStudentAssignment()
-        this.sortedResults = this.sort()
+          // fetch student info, fetch assignment info
+          // what's the new result?
+          this.fetchStudentAssignment()
+          this.sortedResults = this.sort()
       }, deep: true
     }
   },
@@ -66,16 +66,32 @@ export default {
       this.readyResults.forEach( res => {
         // has student data?
         if (!res.fullStudentInfo) {
+
+          // in cache?
+          let cachedStudent = this.studentCache.filter( s => s.id === res.student)[0]
+          if (cachedStudent) {
+            res.fullStudentInfo = cachedStudent
+          }
+          else {
           this.$student_backend.$fetchOne(res.student).then(data =>{
             res.fullStudentInfo = data
+            this.studentCache.push(data)
           })
         }
+      }
 
-        if (!res.fullAssignmentInfo) {
+      if (!res.fullAssignmentInfo) {
+
+
+        let cachedAssignment = this.assignmentCache.filter( a => a.id === res.assignment )[0]
+        if (cachedAssignment) { res.fullAssignmentInfo = cachedAssignment }
+        else {
+
           this.$assignment_backend.$fetchOne(res.assignment).then(data => {
             res.fullAssignmentInfo = data
           })
         }
+      }
 
       })
     },

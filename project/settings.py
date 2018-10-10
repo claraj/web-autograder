@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'webpack_loader',
     'django_filters',
+    'django_q'
 ]
 
 MIDDLEWARE = [
@@ -142,4 +143,18 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': '',
         'STATS_FILE': os.path.join(BASE_DIR, 'grader_client/', 'webpack-stats.json')
     }
+}
+
+# Django Q settings
+Q_CLUSTER = {
+    'name': 'grader',
+    'workers': 8,
+    'recycle': 500,
+    'timeout': 3000,   # 5 minutes. May need longer for complicated tasks, e2e in web...
+    'compress': True,
+    'save_limit': 0,  # unlimited
+    'queue_limit': 500,
+    'cpu_affinity': 1,
+    'label': 'grader queue',
+    'orm': 'default'   # django ORM. 
 }
