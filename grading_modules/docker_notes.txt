@@ -1,0 +1,56 @@
+DOCKER
+
+docker build -t USERNAME/name-container-here  # Create container from Dockerfile. -t tags container with a name you provide.
+
+docker run -p 40000:8080 -d USERNAME/name-container-name
+# start and run container in detached mode, running in the background (otherwise it will run at the command prompt)
+-p maps public port to private port in container
+-m 400k  limit memory to 400kb (m or g also options)
+
+docker container ls   # list running containers
+docker container stop CONT_ID   # stop
+
+docker ps  # list running processes for containers
+docker ps -f "status=exited"  # list stopped containers
+
+docker logs CONT_ID  # logs
+
+docker exec -it <container name> <command>  # run command
+docker exec -it <container name> /bin/bash/  # run bash
+
+docker run <IMAGE_ID>  # run an image again - like make the container from the image and run it.   IMAGE_ID can be the number for a container generated locally OR a name like busybox or maven from dockerhub.
+
+
+docker run -it <IMAGE_ID>
+docker run -it <IMAGE_ID> sh  # # run image and open interactive terminal to run given command in. -i interactive -t terminal . sh for shell.  Does not run the Dockerfile command(s) if given(?).
+
+
+docker run -it  # interactive terminal (needed to run commands in docker cont from cmd)
+--rm    # remove when container finished
+--name my-maven-project
+-v "$(pwd)":/usr/src/mymaven   # mount a volume. Syntax is source_vol_on_host:target_dir_in_container.   pwd = present working dir
+-w /usr/src/mymaven    # working directory inside the container. Where to execute the command from.
+maven:3.3-jdk-8     # image name:tag
+mvn clean install   # command
+
+-v -w combo mounts the current host directory, and executes the command using the container, on the mounted host dir.  So this runs a container created from the maven image, on the code in the current directory.
+
+docker volume create --name maven-repo
+docker run -it -v maven-repo:/root/.m2 maven mvn archetype:generate # will download artifacts
+
+# for my project
+docker run -it -v maven-repo:/root/.m2 maven:3.5.4-jdk-10 mvn clean test
+
+
+
+docker run -it  # interactive terminal (needed to run commands in docker cont from cmd)
+--rm    # remove when container finished
+--name my-maven-project
+-v maven-repo:/root/.m2  # mount a volume for maven artifacts
+-v "$(pwd)":/usr/src/mymaven   # mount a volume. Syntax is source_vol_on_host:target_dir_in_container.   pwd = present working dir
+-w /usr/src/mymaven    # working directory inside the container. Where to execute the command from.
+maven:3.3-jdk-8     # image name:tag
+mvn clean install   # command
+
+
+docker run -it --rm --name my-maven-project -v maven-repo:/root/.m2 -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.5.4-jdk-10 mvn clean test
