@@ -61,8 +61,11 @@ def run_image(image, config):
 
     print('config will be', config, 'image is ', image)
 
-    container = client.containers.run(image, stderr=True,  **config)
-
+    try:
+        container = client.containers.run(image, stderr=True,  **config)
+    except docker.errors.ContainerError as err:
+        print('container error', err)  # if the java code won't compile, the mvn test command will error. 
+        return None
     # container = client.containers.run(\
     # image, \
     # mem_limit='512M', \
