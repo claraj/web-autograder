@@ -1,0 +1,49 @@
+For parsing Junit report files.
+
+
+
+Examples:
+
+testsuite root element, contains list of testcase elements.
+
+testsuite has name, faailures, errors
+
+testcase has name.
+  - If test fails, contains a failure element with message="test fail message" attribute
+  - if test passes, testcase has no children 
+
+testsuites root element with list of testsuite elements.
+(These map to describe blocks in Mocha).
+A testsuite can contain a list of testcase elements (testcase maps to it() in Mocha)
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.9610000000000001" tests="5" failures="1">
+  <testsuite name="Root Suite" timestamp="2018-10-10T16:23:20" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="api crud tests" timestamp="2018-10-10T16:23:20" tests="0" file="/Users/admin/Development/node/AllOfTheWebLabs/Server_Week_1/test/api_test.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="api crud tests with no data in DB" timestamp="2018-10-10T16:23:21" tests="2" file="/Users/admin/Development/node/AllOfTheWebLabs/Server_Week_1/test/api_test.js" failures="0" time="0.5900000000000001">
+    <testcase name="api crud tests api crud tests with no data in DB can add a new coffee shop" time="0.459" classname="can add a new coffee shop">
+    </testcase>
+    <testcase name="api crud tests api crud tests with no data in DB will not a new coffee shop without a name" time="0.131" classname="will not a new coffee shop without a name">
+    </testcase>
+  </testsuite>
+  <testsuite name="api crud tests with test data in DB" timestamp="2018-10-10T16:23:21" tests="3" file="/Users/admin/Development/node/AllOfTheWebLabs/Server_Week_1/test/api_test.js" failures="1" time="0.371">
+    <testcase name="api crud tests api crud tests with test data in DB can return a list of coffee shops, sorted in name order" time="0" classname="can return a list of coffee shops, sorted in name order">
+      <failure message="expected [ Array(3) ] to have a length of 30000 but got 3" type="AssertionError"><![CDATA[AssertionError: expected [ Array(3) ] to have a length of 30000 but got 3
+    at chai_server.get.end (test/api_test.js:108:32)
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:716:12)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1055:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)]]></failure>
+    </testcase>
+    <testcase name="api crud tests api crud tests with test data in DB can change the rating of a coffee shop" time="0.129" classname="can change the rating of a coffee shop">
+    </testcase>
+    <testcase name="api crud tests api crud tests with test data in DB can add a new coffee shop" time="0.242" classname="can add a new coffee shop">
+    </testcase>
+  </testsuite>
+</testsuites>
+```

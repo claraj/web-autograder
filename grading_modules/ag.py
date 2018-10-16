@@ -51,7 +51,7 @@ def grade_question(question, package):
             testname = testcase.get('name')
             failure = testcase.find('failure')  # find returns first matching child
             # print(failure)
-            if failure is not None:
+            if failure is not None:  # elements with no children are considered false, so have to explicitly test if None
                 # print(failure.text)  # The stack trace
                 failmessage = failure.get('message')
             else:

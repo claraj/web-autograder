@@ -1,0 +1,3 @@
+class JUnitParseException(Exception):
+    pass
+    
