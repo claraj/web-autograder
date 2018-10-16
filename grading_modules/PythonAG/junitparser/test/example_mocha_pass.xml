@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="0.9610000000000001" tests="5" failures="0">
+  <testsuite name="Root Suite" timestamp="2018-10-10T16:23:20" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="api crud tests" timestamp="2018-10-10T16:23:20" tests="0" file="/Users/admin/Development/node/AllOfTheWebLabs/Server_Week_1/test/api_test.js" failures="0" time="0">
+  </testsuite>
+  <testsuite name="api crud tests with no data in DB" timestamp="2018-10-10T16:23:21" tests="2" file="/Users/admin/Development/node/AllOfTheWebLabs/Server_Week_1/test/api_test.js" failures="0" time="0.5900000000000001">
+    <testcase name="api crud tests api crud tests with no data in DB can add a new coffee shop" time="0.459" classname="can add a new coffee shop">
+    </testcase>
+    <testcase name="api crud tests api crud tests with no data in DB will not a new coffee shop without a name" time="0.131" classname="will not a new coffee shop without a name">
+    </testcase>
+  </testsuite>
+  <testsuite name="api crud tests with test data in DB" timestamp="2018-10-10T16:23:21" tests="3" file="/Users/admin/Development/node/AllOfTheWebLabs/Server_Week_1/test/api_test.js" failures="1" time="0.371">
+    <testcase name="api crud tests api crud tests with test data in DB can return a list of coffee shops, sorted in name order" time="0" classname="can return a list of coffee shops, sorted in name order">
+    </testcase>
+    <testcase name="api crud tests api crud tests with test data in DB can change the rating of a coffee shop" time="0.129" classname="can change the rating of a coffee shop">
+    </testcase>
+    <testcase name="api crud tests api crud tests with test data in DB can add a new coffee shop" time="0.242" classname="can add a new coffee shop">
+    </testcase>
+  </testsuite>
+</testsuites>

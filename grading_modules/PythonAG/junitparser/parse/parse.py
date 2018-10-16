@@ -1,43 +1,57 @@
 import xml.etree.ElementTree as ET
-from .models import TestCase, TestSuite, Failure
+from .models import TestSuites, TestCase, TestSuite, Failure
 
 def parse(filepath):
     """ returns a list of testsuites from the file """
     xml = ET.parse(filepath)
-    testobj = xml.getroot()  # May be a testsuite or a testsuites
-    testsuites = []
+    root = xml.getroot()  # May be a testsuite or a testsuites
 
-    print(testobj.tag)
+    testsuites = make_testsuites(root)
+    return testsuites
 
-    if testobj.tag == 'testsuites':
-        for testsuite in testobj:
+
+def make_testsuites(root_xml):
+
+    if root_xml.tag == 'testsuites':
+
+        name = root_xml.get('name')
+        tests = int(root_xml.get('tests'))
+        failures = int(root_xml.get('failures'))
+
+        testsuites = TestSuites(name, tests, failures)
+
+        for testsuite in root_xml:
             ts = parse_testsuite(testsuite)
-            testsuites.append(ts)
+            testsuites.add_testsuite(ts)
 
-    elif testobj.tag == 'testsuite':
-        ts = parse_testsuite(testobj)
-        testsuites.append(ts)
+    elif root_xml.tag == 'testsuite':
+
+        testsuites = TestSuites()
+
+        ts = parse_testsuite(root_xml)
+        testsuites.add_testsuite(ts)
 
     else:
-        raise JUnitParseException(f'The root element of the file {filepath} is expected to be either testsuite or testsuites')
+        raise JUnitParseException(f'The root element of the file {filepath} is expected to be either "testsuite" or "testsuites"')
 
     return testsuites
+
 
 
 def parse_testsuite(xml_testsuite):
     """ Extract testcases """
     name = xml_testsuite.get('name')
-    tests = int(xml_testsuite.get('tests'), 0)
+    tests = int(xml_testsuite.get('tests', 0))
     failures = int(xml_testsuite.get('failures'))
-    errors = int(xml_testsuite.get('errors'), 0)
-    skipped = int(xml_testsuite.get('skipped'), 0)
+    errors = int(xml_testsuite.get('errors', 0))
+    skipped = int(xml_testsuite.get('skipped', 0))
+    filename = xml_testsuite.get('file', None)
 
-    testsuite = TestSuite(name, tests, failures, errors, skipped)
+    testsuite = TestSuite(name, tests, failures, errors=errors, skipped=skipped, filename=filename)
 
     for testcase in xml_testsuite:
         if testcase.tag == 'testcase':
             tc = make_testcase(testcase)
-            print('making testcase', testcase, tc)
             testsuite.add_testcase(tc)
 
     return testsuite

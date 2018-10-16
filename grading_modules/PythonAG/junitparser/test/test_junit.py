@@ -9,7 +9,7 @@ class TestJUnitParser(TestCase):
         filename = os.path.join('test', 'example_junit_pass.xml')
         testsuites = parse.parse(filename)
         self.assertEqual(1, len(testsuites))
-        ts = testsuites[0]
+        ts = testsuites.testsuites[0]
         self.assertEqual('week_3.Question_1_MPGTest', ts.name)
         self.assertEqual(1, ts.tests)
         self.assertEqual(0, ts.errors)
