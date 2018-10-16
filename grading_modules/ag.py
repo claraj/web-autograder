@@ -3,15 +3,74 @@ from docker.types import Mount
 
 import os
 import json
+import xml.etree.ElementTree as ET
 '''
+
 Need dockerfile location, from instructor repo
 
 '''
 
-def run_code_in_container():
+instructor_code = '/Users/admin/Development/python/django_autograder/grader/grading_modules/example_java_assignment/JavaAutoGraderWeek3INSTRUCTOR'
+student_code = '/Users/admin/Development/python/django_autograder/grader/grading_modules/example_java_assignment_docker/JAG_3_mock_student_code'
 
-    instructor_code = '/Users/admin/Development/python/django_autograder/grader/grading_modules/example_java_assignment/JavaAutoGraderWeek3'
-    student_code = '/Users/admin/Development/python/django_autograder/grader/grading_modules/example_java_assignment_docker/JAG_3_mock_student_code'
+def grade():
+
+    # student code should have target/surefire-reports/stuff.xml with names like
+    #/Users/admin/Development/python/django_autograder/grader/grading_modules/example_java_assignment_docker/JAG_3_mock_student_code/target/surefire-reports/TEST-week_3.Question_2_Wear_A_HatTest.xml
+    # File names are TEST-package.testfilename.xml
+
+    # Parse some JSON, Parse some XML. How about some CSV and some YAML for fun?
+
+    package, questions = grade_schema(instructor_code)
+
+    points = 0
+
+    for question in questions:
+        points, messages = grade_question(question, package)
+        print(points, messages)
+
+
+def grade_question(question, package):
+    test_files = question['test_file']
+
+    messages = []
+    # todo close file
+    for test_file in test_files:
+        # test_file is the filename of the Java junit tests
+        xml_report = f'TEST-{package}.{test_file}.xml'
+        xml = ET.parse(os.path.join(student_code, 'target', 'surefire-reports', xml_report))
+        testsuite = xml.getroot()  # testsuite
+        tests = int(testsuite.get('tests'))      # get gets attributes
+        fails = int(testsuite.get('failures'))
+        errors = int(testsuite.get('errors'))
+        skipped = int(testsuite.get('skipped'))
+        passes = tests - (fails+errors+skipped)
+
+        for testcase in testsuite:   # iterate over children
+            classname = testcase.get('classname')
+            testname = testcase.get('name')
+            failure = testcase.find('failure')  # find returns first matching child
+            # print(failure)
+            if failure is not None:
+                # print(failure.text)  # The stack trace
+                failmessage = failure.get('message')
+            else:
+                failmessage = 'Passed!'
+            report = f'In the test class {classname}, for the test with name = {testname}, pass/fail/error {failmessage}'
+            messages.append(report)
+
+        return 0, messages
+
+
+
+
+
+def grade_schema(location):
+    data = json.load(open(os.path.join(location,'grades', 'week_3.json'), 'r'))
+    return data['package'], data['questions']
+
+
+def run_code_in_container():
 
     config = from_config_file(os.path.join(instructor_code, 'grades', 'config.json'), student_code)
     dockerfile_location = os.path.join(instructor_code, 'grades')
@@ -64,7 +123,7 @@ def run_image(image, config):
     try:
         container = client.containers.run(image, stderr=True,  **config)
     except docker.errors.ContainerError as err:
-        print('container error', err)  # if the java code won't compile, the mvn test command will error. 
+        print('container error', err)  # if the java code won't compile, the mvn test command will error.
         return None
     # container = client.containers.run(\
     # image, \
@@ -78,7 +137,9 @@ def run_image(image, config):
     return container
 
 if __name__ == '__main__':
-    run_code_in_container()
+    # run_code_in_container()
+    grade()
+
 
 # container = client.containers.run('maven:3.5.4-jdk-10', \
 # 'mvn clean test', \
