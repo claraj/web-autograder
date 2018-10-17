@@ -9,29 +9,16 @@ def combine(base, include, paths_to_overwrite, output_directory):
 
     print('OUT', output_directory)
 
-    # paths_to_overwrite = ['src/main', '.idea', '.git/logs/refs']  # Overwrite for testing
-
     ignore_paths = [ os.path.join(base, p) for p in paths_to_overwrite ]
-    print('ignore paths', ignore_paths)
     splits = [ os.path.split(p) for p in ignore_paths ]  # heads and tails
-    print('splits', splits)
-    splits_dict = { p[0]:p[1] for p in splits }
-
-    print('splits dict', splits_dict)
-
+    splits_dict = { p[0]:p[1] for p in splits }    # TODO cleanup
 
     # This function will be called with the current directory and a list of it's contents
     # Return a list of things to ignore
     def ignore_paths(directory, contents):
-
-        print('should', directory, 'be ignored?')
-
-        # head, tail = os.path.split(full_path)
-
         for head, tail in splits_dict.items():
             if directory == head:
                 return [tail]
-
         return []
 
     copytree(base, output_directory, ignore=ignore_paths)

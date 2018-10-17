@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from .models import TestSuites, TestCase, TestSuite, Failure
+from autograder.models.test_artifacts import TestSuites, TestCase, TestSuite, Failure
 
 def parse(filepath):
     """ returns a list of testsuites from the file """

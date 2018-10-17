@@ -2,26 +2,34 @@ class TestSuites:
 
     def __init__(self, name='', tests=0, failures=0):
         self.name = name
-        self._tests = tests
-        self._failures = failures
+        self.tests = tests
+        self.failures = failures
         self.testsuites = []
+        self.passes = self.tests - self.failures
 
-    def set_tests(self):
+    def _set_tests(self):
         self.tests = sum(ts.tests for ts in self.testsuites)
 
-    def set_failures(self):
+    def _set_failures(self):
         self.failures = sum(ts.failures for ts in self.testsuites)
+
+    def _set_passes(self):
+        self.passes = self.tests - self.failures
 
     def add_testsuite(self, ts):
         self.testsuites.append(ts)
-        self.set_tests()
-        self.set_failures()
+        self._set_tests()
+        self._set_failures()
+        self._set_passes()
 
     def __len__(self):
         return len(self.testsuites)
 
     def __getitem__(self, index):
         return self.testsuites[index]
+
+    def fail_messages(self):
+        return [ ts.fail_messages() for ts in self.testsuites ]
 
 
 class TestSuite:
@@ -56,6 +64,10 @@ class TestSuite:
 
     def __getitem__(self, index):
         return self.testcases[index]
+
+
+    def fail_messages(self):
+        return [t.failure.message for t in self.testcases if t.failure]
 
 
 class TestCase:

@@ -40,12 +40,17 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
 
             if origin.url == repo_url:
                 # this is the repo and it's already downloaded. Pull any changes
-                origin.pull()
-                return repo_target_dir, 'pull'
+                try:
+                    origin.pull()
+                    return repo_target_dir, 'pull'
+                except GitCommandError as e:
+                    #Error pulling code - e.g. the remote history doesn't match the local history.
+                    raise CloneError(f'Error pulling code. The remote history may be different to local? Error: {e.stderr}')
 
             else:
-                #this is another repo
-                raise CloneError(f'This directory {repo_target_dir} was cloned from a different repo URL from {repo_url}.')
+                raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')
+                # something else went wrong
+
         else:
             # Some other error
             raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')

@@ -1,6 +1,7 @@
 import docker
 from docker.types import Mount
 
+# TODO error handling
 
 def run_in_container(dockerfile_location, config):
 
@@ -25,6 +26,7 @@ def run_in_container(dockerfile_location, config):
         return container_output
     except Exception as e:
         input('error ' +  str(e) + ' press a key')
+        raise
 
 def from_config_file(config_json, pwd):
     # config_data = json.load(open(path, 'r'))
@@ -32,7 +34,6 @@ def from_config_file(config_json, pwd):
 
     print('WORKING DIR', pwd)
 
-    input('press any key to continue')
     docker_config = config_json['docker']
     mounts = docker_config['mounts']
     mounts_list = []

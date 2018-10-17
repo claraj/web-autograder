@@ -29,7 +29,7 @@ GRADE_CONFIG_LOCATION = 'grades'
 CONFIG_FILENAME = 'config.json'
 
 # Filename with grade schema.
-GRADE_SCHEME_FILENAME = 'grades.json'
+GRADE_SCHEME_FILENAME = 'grade_scheme.json'
 
 # Container configuration file location in an assignment repository
 CONTAINER_CONFIGURATION_LOCATION = '/'

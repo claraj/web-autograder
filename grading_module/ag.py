@@ -57,16 +57,17 @@ def example():
     print(r, s)
 
 
-
 def grade(assignment, student):
     instructor_code = fetch_instructor_code(assignment.instructor_repo)
     student_code = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
     project_config = get_config(instructor_code)
+    grade_scheme = get_grade_scheme(instructor_code)
 
     with TemporaryDirectory(dir=settings.COMBINED_CODE_LOCATION) as temp_student_code_dir:
         combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
         run_code_in_container(combined, project_config)
-        report, score = generate_grade_report(combined)
+        report, score = generate_grade_report(combined, project_config, grade_scheme)
+        input('done. press a key')
 
     return report, score
 
@@ -87,8 +88,13 @@ def fetch_instructor_code(repo_url):
 
 
 def get_config(path):
-    print('GET CONFIG', path,settings.GRADE_CONFIG_LOCATION, settings.CONFIG_FILENAME )
     config_dir = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.CONFIG_FILENAME)
+    config = parser.parse(config_dir)
+    return config
+
+
+def get_grade_scheme(path):
+    config_dir = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.GRADE_SCHEME_FILENAME)
     config = parser.parse(config_dir)
     return config
 
@@ -105,8 +111,8 @@ def run_code_in_container(path, config):
     runner.run_in_container(path, config)
 
 
-def generate_grade_report(location):
-    grade_report, score = report.create_report(location)  # report is CSV (probably) or some other organized text format.
+def generate_grade_report(location, config, scheme):
+    grade_report, score = report.grade(location, config, scheme)  # report is CSV (probably) or some other organized text format.
     return grade_report, score
 
 
