@@ -11,13 +11,15 @@ INSTRUCTOR_DIR = 'instructor_code'
 # Where student code is cloned to
 STUDENT_DIR = 'student_code'
 
+STUDENT_INSTRUCTOR_COMBINED = 'temp_combined'
+
 CODE_STORE_LOCATION = os.path.join(BASE_DIR, CODE_STORE)
 
 INSTRUCTOR_CODE_LOCATION = os.path.join(CODE_STORE_LOCATION, INSTRUCTOR_DIR)
 STUDENT_CODE_LOCATION = os.path.join(CODE_STORE_LOCATION, STUDENT_DIR)
 
 # Directory suffix for combined code
-STUDENT_COMBINED_SUFFIX = '_combined'
+COMBINED_CODE_LOCATION = os.path.join(CODE_STORE_LOCATION, STUDENT_INSTRUCTOR_COMBINED)
 
 
 # Location of config.json and grades.json files in a assignment repository

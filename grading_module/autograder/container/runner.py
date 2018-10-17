@@ -4,29 +4,35 @@ from docker.types import Mount
 
 def run_in_container(dockerfile_location, config):
 
-    print('hello docker', dockerfile_location, config)
-    # Expects directory to contain a Dockerfile with instructions.
+    try:
+        print('hello docker', dockerfile_location, config)
+        # Expects directory to contain a Dockerfile with instructions.
 
-    docker_config = from_config_file(config, dockerfile_location)
-    # dockerfile_location = os.path.join(instructor_code, 'grades')
+        docker_config = from_config_file(config, dockerfile_location)
+        # dockerfile_location = os.path.join(instructor_code, 'grades')
 
-    tag = docker_config['tag']
-    docker_config.pop('tag', None)
+        tag = docker_config['tag']
+        docker_config.pop('tag', None)
 
-    image, logs = build_image(dockerfile_location, tag)
-    print('the image is:' , image)
-    print(type(image))
-    print(image.id)
-    print(image.tags)
-    container_output = run_image(image.tags[0], config)
+        image, logs = build_image(dockerfile_location, tag)
+        print('the image is:' , image)
+        print(type(image))
+        print(image.id)
+        print(image.tags)
+        container_output = run_image(image.tags[0], docker_config)
 
-    print(container_output)
-    return container_output
-
+        print(container_output)
+        return container_output
+    except Exception as e:
+        input('error ' +  str(e) + ' press a key')
 
 def from_config_file(config_json, pwd):
     # config_data = json.load(open(path, 'r'))
     # print(config_data)
+
+    print('WORKING DIR', pwd)
+
+    input('press any key to continue')
     docker_config = config_json['docker']
     mounts = docker_config['mounts']
     mounts_list = []
@@ -38,7 +44,7 @@ def from_config_file(config_json, pwd):
             mounts_list.append(Mount(target, src, type=mount['type']))
     docker_config['mounts'] = mounts_list
     # docker_config.pop('tag', None)
-    print(docker_config)
+    print('DOCKER CONFIG', docker_config)
     return docker_config
 
 

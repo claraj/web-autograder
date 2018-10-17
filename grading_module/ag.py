@@ -36,6 +36,9 @@ Let them, ensure exceptions have useful error message,
 and caller can deal with problem.
 '''
 
+
+#tempfile.tempdir =
+
 # temp for testing
 class A:
     def __init__(self, in_repo, base, org):
@@ -60,10 +63,10 @@ def grade(assignment, student):
     student_code = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
     project_config = get_config(instructor_code)
 
-    with TemporaryDirectory() as temp_student_code_dir:
-        combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
-        run_code_in_container(temp_student_code_dir, project_config)
-        report, score = generate_grade_report(temp_student_code_dir)
+    with TemporaryDirectory(dir=settings.COMBINED_CODE_LOCATION) as temp_student_code_dir:
+        combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
+        run_code_in_container(combined, project_config)
+        report, score = generate_grade_report(combined)
 
     return report, score
 
@@ -93,7 +96,9 @@ def get_config(path):
 def combine_code(instructor_code, student_code, config, combined_location):
     # combined_location = student_code + settings.STUDENT_COMBINED_SUFFIX
     # paths to overwrite are in config.student_code_locations
-    combine.combine(instructor_code, student_code, config['student_code_locations'], combined_location+'COMB')
+    code = os.path.join(combined_location, 'code')
+    combine.combine(instructor_code, student_code, config['student_code_locations'], code)
+    return code
 
 
 def run_code_in_container(path, config):
