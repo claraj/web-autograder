@@ -1,8 +1,7 @@
-import os.path
+import os
 
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(BASE_DIR)
+# The directory that contains this settings.py file
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 CODE_STORE = 'code_store'
 
@@ -18,10 +17,17 @@ INSTRUCTOR_CODE_LOCATION = os.path.join(CODE_STORE_LOCATION, INSTRUCTOR_DIR)
 STUDENT_CODE_LOCATION = os.path.join(CODE_STORE_LOCATION, STUDENT_DIR)
 
 # Directory suffix for combined code
-COMBINED_SUFFIX = '_combined'
+STUDENT_COMBINED_SUFFIX = '_combined'
 
-# Location of config and grades.json files in a assignment repository
-ASSIGNMENT_GRADE_CONFIG_LOCATION = 'grades'
+
+# Location of config.json and grades.json files in a assignment repository
+GRADE_CONFIG_LOCATION = 'grades'
+
+# Assignment configuration filename
+CONFIG_FILENAME = 'config.json'
+
+# Filename with grade schema.
+GRADE_SCHEME_FILENAME = 'grades.json'
 
 # Container configuration file location in an assignment repository
 CONTAINER_CONFIGURATION_LOCATION = '/'
