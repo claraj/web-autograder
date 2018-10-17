@@ -20,7 +20,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
 
     try:
         repo = Repo.clone_from(repo_url, os.path.join(target_dir, repo_dir))
-        return repo_target_dir
+        return repo_target_dir, 'clone'
 
     except GitCommandError as e:
         if 'remote: Repository not found.' in e.stderr:
@@ -41,7 +41,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
             if origin.url == repo_url:
                 # this is the repo and it's already downloaded. Pull any changes
                 origin.pull()
-                return repo_target_dir
+                return repo_target_dir, 'pull'
 
             else:
                 #this is another repo

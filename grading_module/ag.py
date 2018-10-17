@@ -71,13 +71,15 @@ def grade(assignment, student):
 def fetch_student_code(base, org, student_id):
     url = f'https://github.com/{org}/{base}-{student_id}'
     repo_name = f'{base}-{student_id}'
-    student_code_location = clone.clone_or_pull_latest(url, os.path.join(settings.CODE_STORE, settings.STUDENT_CODE_LOCATION), repo_name)
+    student_code_location, mode = clone.clone_or_pull_latest(url, os.path.join(settings.CODE_STORE, settings.STUDENT_CODE_LOCATION), repo_name)
+    print('got student code by: ', mode)
     return student_code_location
 
 
 def fetch_instructor_code(repo_url):
     repo_name = repo_url.split('/').pop()
-    instructor_code_location = clone.clone_or_pull_latest(repo_url, os.path.join(settings.CODE_STORE, settings.INSTRUCTOR_CODE_LOCATION), repo_name)
+    instructor_code_location, mode = clone.clone_or_pull_latest(repo_url, os.path.join(settings.CODE_STORE, settings.INSTRUCTOR_CODE_LOCATION), repo_name)
+    print('got code by: ', mode)
     return instructor_code_location
 
 
