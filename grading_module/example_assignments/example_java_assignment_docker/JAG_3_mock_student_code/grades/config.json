@@ -1,0 +1,8 @@
+{
+  "student_code_locations": [
+    "src/main",
+  ],
+  "report_locations": [
+    "target/surefire-reports/"
+  ]
+}

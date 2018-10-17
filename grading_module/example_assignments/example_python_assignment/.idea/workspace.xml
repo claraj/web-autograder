@@ -1,0 +1,1055 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="51267c72-36ff-4756-8cf6-578fa9b8e917" name="Default" comment="fix comment" />
+    <ignored path="1150_Programming_Logic_Labs.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_valid_input.coverage" NAME="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input Coverage Results" MODIFIED="1538753491060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_Q4Test_test_answer_printed_from_main.coverage" NAME="Unittest Q4Test.test_answer_printed_from_main Coverage Results" MODIFIED="1538512813201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_Q1Test_test_which_number_larger_second_larger.coverage" NAME="Unittest Q1Test.test_which_number_larger_second_larger Coverage Results" MODIFIED="1513635600141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/tests" />
+    <SUITE FILE_PATH="coverage/PAG_3$grade_calculator.coverage" NAME="grade_calculator Coverage Results" MODIFIED="1538528486695" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/grade_calculator" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_tests_test_loop_2_specific_function_names_PrintNumbersLoopFunTest.coverage" NAME="Unittests for tests.test_loop_2_specific_function_names.PrintNumbersLoopFunTest Coverage Results" MODIFIED="1538752250468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$q1.coverage" NAME="q1 Coverage Results" MODIFIED="1513632518335" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/lab" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_Q2LengthTest_test_check_length_of_name_longer_than_6.coverage" NAME="Unittest Q2LengthTest.test_check_length_of_name_longer_than_6 Coverage Results" MODIFIED="1538508824373" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest.coverage" NAME="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest Coverage Results" MODIFIED="1538753346262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Lab_Chapter_3$q1_length_of_name.coverage" NAME="q1_length_of_name Coverage Results" MODIFIED="1538515768414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Lab_Chapter_3$q3_which_number_is_larger.coverage" NAME="q3_which_number_is_larger Coverage Results" MODIFIED="1538515772667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$q3.coverage" NAME="q3 Coverage Results" MODIFIED="1538507314836" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior.coverage" NAME="Unittests for test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior Coverage Results" MODIFIED="1538748942784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$grade_calculator.coverage" NAME="grade_calculator Coverage Results" MODIFIED="1538514589739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/grade_calculator" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittests_in_q1_test.coverage" NAME="Unittests in q1_test Coverage Results" MODIFIED="1519776883728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_Q4Test_test_rectangle_area_calculations.coverage" NAME="Unittest Q4Test.test_rectangle_area_calculations Coverage Results" MODIFIED="1538512953266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_test_loop_2_fun_behavior_PrintNumbersLoopFunTest.coverage" NAME="Unittests for test_loop_2_fun_behavior.PrintNumbersLoopFunTest Coverage Results" MODIFIED="1538751189066" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Lab_Chapter_3$q2_shout_out.coverage" NAME="q2_shout_out Coverage Results" MODIFIED="1538515770619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input.coverage" NAME="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input Coverage Results" MODIFIED="1538753398163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_in_q1_how_long_is_name_test_py.coverage" NAME="Unittests in q1_how_long_is_name_test.py Coverage Results" MODIFIED="1538525459634" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Lab_Chapter_3$grade_calculator.coverage" NAME="grade_calculator Coverage Results" MODIFIED="1538515765058" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/grade_calculator" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1538527814445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittests_in_q2_test.coverage" NAME="Unittests in q2_test Coverage Results" MODIFIED="1519777009402" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_q1_test_test_which_number_larger.coverage" NAME="Unittest q1_test.test_which_number_larger Coverage Results" MODIFIED="1513632491796" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1519776754623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/tests" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_in_q2_shout_out_test_py.coverage" NAME="Unittests in q2_shout_out_test.py Coverage Results" MODIFIED="1538525222524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_Q4Test_test_function_with_correct_params_created.coverage" NAME="Unittest Q4Test.test_function_with_correct_params_created Coverage Results" MODIFIED="1538510976490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/PAG_3$Loop2fun.coverage" NAME="Loop2fun Coverage Results" MODIFIED="1538746832751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_in_test_loop_2_specific_function_names_py.coverage" NAME="Unittests in test_loop_2_specific_function_names.py Coverage Results" MODIFIED="1538752244854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittests_in_Q1Test.coverage" NAME="Unittests in Q1Test Coverage Results" MODIFIED="1513635886203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$q4_calculate_rectangle_area.coverage" NAME="q4_calculate_rectangle_area Coverage Results" MODIFIED="1538512694791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$q2.coverage" NAME="q2 Coverage Results" MODIFIED="1519777022196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/lab" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittest_Q1Test_test_which_number_larger_first_larger.coverage" NAME="Unittest Q1Test.test_which_number_larger_first_larger Coverage Results" MODIFIED="1513635804362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Lab_1/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittests_in_q4_rectangle_area_test.coverage" NAME="Unittests in q4_rectangle_area_test Coverage Results" MODIFIED="1538512861310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$calcscore.coverage" NAME="calcscore Coverage Results" MODIFIED="1538513830481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/grade_calculator" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_function_with_correct_params_created.coverage" NAME="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_function_with_correct_params_created Coverage Results" MODIFIED="1538752599313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_function_with_correct_params_created.coverage" NAME="Unittests for test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_function_with_correct_params_created Coverage Results" MODIFIED="1538749336494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Labs$Unittests_in_Q4Test.coverage" NAME="Unittests in Q4Test Coverage Results" MODIFIED="1538513022563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/1150_Programming_Logic_Lab_Chapter_3$q4_calculate_rectangle_area.coverage" NAME="q4_calculate_rectangle_area Coverage Results" MODIFIED="1538515775067" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lab_questions" />
+    <SUITE FILE_PATH="coverage/PAG_3$Unittests_for_tests_test_loop_2_specific_function_names_PrintNumbersLoopFunTest_test_outputAnswer.coverage" NAME="Unittests for tests.test_loop_2_specific_function_names.PrintNumbersLoopFunTest.test_outputAnswer Coverage Results" MODIFIED="1538752338724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="44426922">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="2" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.opened" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="75" />
+          <entry key="gitignore" value="30" />
+          <entry key="json" value="20" />
+          <entry key="md" value="243" />
+          <entry key="py" value="7776" />
+          <entry key="txt" value="423" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JSON" value="20" />
+          <entry key="Markdown" value="243" />
+          <entry key="PLAIN_TEXT" value="528" />
+          <entry key="Python" value="7776" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="json" value="1" />
+          <entry key="md" value="2" />
+          <entry key="py" value="22" />
+          <entry key="txt" value="36" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JSON" value="1" />
+          <entry key="Markdown" value="2" />
+          <entry key="PLAIN_TEXT" value="36" />
+          <entry key="Python" value="22" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="1150_Programming_Logic_Labs" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.55845183">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/test_q4_rectangle_area.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="214">
+                  <caret line="65" selection-start-line="65" selection-end-line="65" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/test_loop_2_specific_function_names.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="466">
+                  <caret line="42" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="42" />
+                  <folding>
+                    <element signature="e#30#59#0" expanded="true" />
+                    <marker date="1538752345000" expanded="true" signature="354:359" ph="..." />
+                    <marker date="1538752345000" expanded="true" signature="354:463" ph="..." />
+                    <marker date="1538752345000" expanded="true" signature="513:746" ph="..." />
+                    <marker date="1538752345000" expanded="true" signature="772:912" ph="..." />
+                    <marker date="1538752345000" expanded="true" signature="772:918" ph="..." />
+                    <marker date="1538752345000" expanded="true" signature="772:947" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/tests/print_util.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="18" selection-start-line="18" selection-end-line="18" />
+                  <folding>
+                    <marker date="1538752325000" expanded="true" signature="62:266" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/tests/test_loop_2_fun_behavior.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="390">
+                  <caret line="65" column="72" selection-start-line="65" selection-start-column="72" selection-end-line="65" selection-end-column="72" />
+                  <folding>
+                    <element signature="e#30#59#0" expanded="true" />
+                    <marker date="1538754082000" expanded="true" signature="2313:2322" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/suite.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="15">
+                  <caret line="121" selection-start-line="121" selection-end-line="121" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lab_questions/q2_shout_out.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="105">
+                  <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/grade_calculator/grade_calculator.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1950">
+                  <caret line="135" column="15" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/lab_questions/Loop2fun.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="280">
+                  <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+                  <folding>
+                    <marker date="1538753512000" expanded="true" signature="945:1384" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1408:1413" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1408:1502" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1500:1501" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1534:1648" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1534:1681" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1534:1994" ph="..." />
+                    <marker date="1538753512000" expanded="true" signature="1692:1967" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>runner</find>
+      <find>unable</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Lab_1/Instructions.md.py" />
+        <option value="$PROJECT_DIR$/Lab_1/__init__.py" />
+        <option value="$PROJECT_DIR$/Lab_1/q1_test.py" />
+        <option value="$PROJECT_DIR$/Lab_1/q1.py" />
+        <option value="$PROJECT_DIR$/grade_calculator/file" />
+        <option value="$PROJECT_DIR$/Lab_1/grades.json" />
+        <option value="$PROJECT_DIR$/Lab_1/calcscore.py" />
+        <option value="$PROJECT_DIR$/Lab_1/tests/q1_test.py" />
+        <option value="$PROJECT_DIR$/Lab_1/tests/q2_test.py" />
+        <option value="$PROJECT_DIR$/Lab_1/Instructions.md" />
+        <option value="$PROJECT_DIR$/Lab_1/lab/q1.py" />
+        <option value="$PROJECT_DIR$/Lab_2/lab/q1.py" />
+        <option value="$PROJECT_DIR$/Lab_1/lab/q2.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q1.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q2.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q4.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q3.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q3_calculate_rectangle_area.py" />
+        <option value="$PROJECT_DIR$/Instructions.md" />
+        <option value="$PROJECT_DIR$/tests/q3_which_number_is_larger_test.py" />
+        <option value="$PROJECT_DIR$/tests/q4_rectangle_area_test.py" />
+        <option value="$PROJECT_DIR$/tests/q2_shout_out_test.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q4_calculate_rectangle_area.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q3_which_number_is_larger.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q1_length_of_name.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q2_shout_out.py" />
+        <option value="$PROJECT_DIR$/tests/q1_how_long_is_name_test.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/grades.json" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/grade_calculator/grade_calculator.py" />
+        <option value="$PROJECT_DIR$/lab_questions/q5_calculate_average_bill.py" />
+        <option value="$PROJECT_DIR$/lab_questions/Loop-2fun.py" />
+        <option value="$PROJECT_DIR$/tests/test_loop-2-fun.py" />
+        <option value="$PROJECT_DIR$/tests/test_loop_2_fun.py" />
+        <option value="$PROJECT_DIR$/tests/print_util.py" />
+        <option value="$PROJECT_DIR$/tests/test_loop_2_specific_function_names.py" />
+        <option value="$PROJECT_DIR$/lab_questions/Loop2fun.py" />
+        <option value="$PROJECT_DIR$/tests/test_loop_2_fun_behavior.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="197" />
+    <option name="y" value="360" />
+    <option name="width" value="1492" />
+    <option name="height" value="847" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="PAG_3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAG_3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAG_3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAG_3" type="462c0819:PsiDirectoryNode" />
+              <item name="grade_calculator" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAG_3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAG_3" type="462c0819:PsiDirectoryNode" />
+              <item name="grade_calculator" type="462c0819:PsiDirectoryNode" />
+              <item name="reports" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAG_3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAG_3" type="462c0819:PsiDirectoryNode" />
+              <item name="lab_questions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PAG_3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PAG_3" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/grade_calculator" />
+      <recent name="$PROJECT_DIR$/lab" />
+      <recent name="$PROJECT_DIR$/Lab_1" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Lab_1/lab" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/lab_questions" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input">
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="1150_Programming_Logic_Labs" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="PAG_3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="PAG_3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="PAG_3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_function_with_correct_params_created" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="PAG_3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_function_with_correct_params_created&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for tests.test_loop_2_specific_function_names.PrintNumbersLoopFunTest.test_outputAnswer" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="PAG_3" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.test_loop_2_specific_function_names.PrintNumbersLoopFunTest.test_outputAnswer&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <module name="1150_Programming_Logic_Labs" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python tests.Unittests for tests.test_loop_2_specific_function_names.PrintNumbersLoopFunTest.test_outputAnswer" />
+      <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest" />
+      <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_function_with_correct_params_created" />
+      <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" />
+      <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input" />
+        <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" />
+        <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest" />
+        <item itemvalue="Python tests.Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_function_with_correct_params_created" />
+        <item itemvalue="Python tests.Unittests for tests.test_loop_2_specific_function_names.PrintNumbersLoopFunTest.test_outputAnswer" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="51267c72-36ff-4756-8cf6-578fa9b8e917" name="Default" comment="" />
+      <created>1513631846449</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1513631846449</updated>
+    </task>
+    <task id="LOCAL-00001" summary="tidying input statements, string format output">
+      <created>1538515891970</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1538515891970</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Don't modify the grade_calculator file message">
+      <created>1538516083395</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1538516083395</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Draft grader for ch 3 of ATBSWPython">
+      <created>1538525918375</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1538525918375</updated>
+    </task>
+    <task id="LOCAL-00004" summary="More detail in instructions">
+      <created>1538526025900</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1538526025900</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix python path in grade_calculator script">
+      <created>1538527533539</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1538527533539</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Two versions of tests for Week 3 actual lab question">
+      <created>1538752433009</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1538752433010</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Specific exception handling, fix assert for print contains output">
+      <created>1538753540561</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1538753540563</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix comment">
+      <created>1538754098307</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1538754098307</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input - 2018.10.05 at 10h 25m 42s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input - 2018.10.05 at 10h 25m 57s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input - 2018.10.05 at 10h 26m 03s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input - 2018.10.05 at 10h 26m 24s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input - 2018.10.05 at 10h 26m 42s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest - 2018.10.05 at 10h 28m 23s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest - 2018.10.05 at 10h 29m 11s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_invalid_input - 2018.10.05 at 10h 30m 03s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_invalid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_valid_input - 2018.10.05 at 10h 31m 27s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_for_tests_test_loop_2_fun_behavior_PrintNumbersLoopFunTest_test_behavior_valid_input - 2018.10.05 at 10h 31m 31s.xml">
+      <configuration name="Unittests for tests.test_loop_2_fun_behavior.PrintNumbersLoopFunTest.test_behavior_valid_input" configurationId="tests" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="197" y="360" width="1492" height="847" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" id="Project" order="0" visible="true" weight="0.12689655" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49925372" weight="0.28741723" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.34966886" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" weight="0.32896462" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.25695366" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50074625" side_tool="true" weight="0.36304063" />
+      <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="SciView" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="tidying input statements, string format output" />
+    <MESSAGE value="Don't modify the grade_calculator file message" />
+    <MESSAGE value="Draft grader for ch 3 of ATBSWPython" />
+    <MESSAGE value="More detail in instructions" />
+    <MESSAGE value="fix python path in grade_calculator script" />
+    <MESSAGE value="Two versions of tests for Week 3 actual lab question" />
+    <MESSAGE value="Specific exception handling, fix assert for print contains output" />
+    <MESSAGE value="fix comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix comment" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/test_q3_which_number_is_larger.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/tests/print_util.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/grade_calculator/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/importlib/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="108" selection-start-line="108" selection-end-line="108" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/unittest/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="373" selection-start-line="373" selection-end-line="373" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab_questions/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/utrunner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="155" selection-start-line="155" selection-end-line="155" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/tcunittest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="252" selection-start-line="252" selection-end-line="252" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_q2_shout_out.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab_questions/q4_calculate_rectangle_area.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/test_report.txt" />
+    <entry file="file://$PROJECT_DIR$/lab_questions/q1_length_of_name.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_q1_how_long_is_name.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.q3_which_number_is_larger_test_report.txt" />
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.q4_rectangle_area_test_report.txt" />
+    <entry file="file://$PROJECT_DIR$/tests/test_q3_which_number_is_larger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#30#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.q2_shout_out_test_report.txt" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="24" lean-forward="true" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="508" selection-start-line="508" selection-end-line="508" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab_questions/q3_which_number_is_larger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.q1_how_long_is_name_test_report.txt" />
+    <entry file="file://$PROJECT_DIR$/grades.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="150">
+            <caret line="10" column="90" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state>
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Instructions.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="90">
+            <caret line="6" selection-start-line="6" selection-end-line="6" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state>
+          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.test_q3_which_number_is_larger_report.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_q4_rectangle_area.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab_questions/q2_shout_out.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.test_q1_how_long_is_name_report.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.test_q2_shout_out_report.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/reports/tests.test_q4_rectangle_area_report.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grade_calculator/grade_calculator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1950">
+          <caret line="135" column="15" selection-start-line="135" selection-start-column="15" selection-end-line="135" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_quiz_avg_fun.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab_questions/QuizAvgFun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="84" selection-start-line="10" selection-start-column="84" selection-end-line="10" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/suite.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="121" selection-start-line="121" selection-end-line="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/mock.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="1190" selection-start-line="1190" selection-end-line="1190" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/teamcity/diff_tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_loop_2_specific_function_names.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="42" lean-forward="true" selection-start-line="41" selection-start-column="5" selection-end-line="42" />
+          <folding>
+            <element signature="e#30#59#0" expanded="true" />
+            <marker date="1538752345000" expanded="true" signature="354:359" ph="..." />
+            <marker date="1538752345000" expanded="true" signature="354:463" ph="..." />
+            <marker date="1538752345000" expanded="true" signature="513:746" ph="..." />
+            <marker date="1538752345000" expanded="true" signature="772:912" ph="..." />
+            <marker date="1538752345000" expanded="true" signature="772:918" ph="..." />
+            <marker date="1538752345000" expanded="true" signature="772:947" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="679" selection-start-line="679" selection-end-line="679" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/print_util.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <marker date="1538752325000" expanded="true" signature="62:266" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_loop_2_fun_behavior.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="65" column="72" selection-start-line="65" selection-start-column="72" selection-end-line="65" selection-end-column="72" />
+          <folding>
+            <element signature="e#30#59#0" expanded="true" />
+            <marker date="1538754082000" expanded="true" signature="2313:2322" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lab_questions/Loop2fun.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="36" column="15" selection-start-line="36" selection-start-column="15" selection-end-line="36" selection-end-column="15" />
+          <folding>
+            <marker date="1538753512000" expanded="true" signature="945:1384" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1408:1413" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1408:1502" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1500:1501" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1534:1648" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1534:1681" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1534:1994" ph="..." />
+            <marker date="1538753512000" expanded="true" signature="1692:1967" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

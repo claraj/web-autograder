@@ -1,0 +1,1799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="fc81e9bc-ffde-4ffe-95d7-9eaad6ecc5db" name="Default" comment="Update points for new questions" />
+    <ignored path="Java Auto Grader - Wk 2 etc.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-647155683">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="class" value="1" />
+          <entry key="html" value="2" />
+          <entry key="java" value="40" />
+          <entry key="json" value="3" />
+          <entry key="md" value="4" />
+          <entry key="txt" value="1" />
+          <entry key="xml" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="1" />
+          <entry key="HTML" value="2" />
+          <entry key="JAVA" value="40" />
+          <entry key="JSON" value="3" />
+          <entry key="Markdown" value="4" />
+          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="XML" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="28" />
+          <entry key="java" value="5857" />
+          <entry key="json" value="32" />
+          <entry key="md" value="683" />
+          <entry key="txt" value="354" />
+          <entry key="xml" value="98" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="5857" />
+          <entry key="JSON" value="32" />
+          <entry key="Markdown" value="683" />
+          <entry key="PLAIN_TEXT" value="382" />
+          <entry key="XML" value="98" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Java Auto Grader - Wk 2 etc" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_4_Reduce_RepetitionTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="477">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/test_utils/PrintUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="43">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_3_Agile_Or_Waterfall.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="66" column="68" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_2_Wear_A_Hat.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_2_Wear_A_HatTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#487#488#0" expanded="true" />
+                <element signature="e#538#539#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="113">
+              <caret line="22" selection-start-line="22" selection-end-line="41" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grades/week_3.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_4_Reduce_Repetition.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_5_Count_Uppercase_Letters.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="36" column="57" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_6_Marathon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="945">
+              <caret line="65" column="27" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JUnit4 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>@Test</find>
+      <find>surefire</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>@Test(timeout=3000)</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/test/java/week_2/Question_9_Parcel_DeliveryTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_2/Question_9_cellphone_storage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test_utils/FindMethod.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_6_Go_FishTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test_utils/PrintUtils.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test_utils/MethodUtil.java" />
+        <option value="$PROJECT_DIR$/src/test/java/go_fish_project/Go_FishTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/go_fish_project/Go_Fish.java" />
+        <option value="$PROJECT_DIR$/src/test/java/go_fish_project/Question_6_Go_FishTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_2_ArrayList_QuestionTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_2_Dice_Rolls_ArrayList_Test.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_2_Dice_Rolls_ArrayListTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/Question_2_Dice_Rolls_ArrayList.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_1_Cereals_ArrayListTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/Question_1_Cereals_ArrayList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/all_wk4_questions.md" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_3_Recycling_Truck_ArraysTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/Question_3_Recycling_Truck_Arrays.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_5_Lake_RunningTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/Question_5_Lake_Running.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_4/Question_4_Snowfall_HashmapTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/Question_4_Snowfall_Hashmap.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_4/Question_4_Snowfall_HashMap.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_2_Marathon.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_5_String_To_Int_Array.java" />
+        <option value="$PROJECT_DIR$/src/main/java/grade/model/GradeScheme.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_6_Credit_Card_Validation.java" />
+        <option value="$PROJECT_DIR$/target/site/index.html" />
+        <option value="$PROJECT_DIR$/target/surefire-reports/week_3.Question_4_Reduce_RepetitionTest.txt" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_2_MarathonTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_1_MPGTest.java" />
+        <option value="$PROJECT_DIR$/grades/How lab grading works.md" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_4_Reduce_Repetition.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_5_String_To_Int_ArrayTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_6_Credit_Card_ValidationTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_1_MPG.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_3_Agile_Or_WaterfallTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_3_Agile_Or_Waterfall.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_1_b_Animal_Sounds.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_5_CountUppercaseLettersTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_2_Wear_A_HatTest.java" />
+        <option value="$PROJECT_DIR$/grades/Lab 3 Questions.md" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_5_Count_Uppercase_Letters.java" />
+        <option value="$PROJECT_DIR$/src/main/java/week_3/Question_2_Wear_A_Hat.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/week_3/Question_4_Reduce_RepetitionTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test_utils/MockInput.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test_utils/ArrayUtils.java" />
+        <option value="$PROJECT_DIR$/src/test/java/test_utils/ArrayListUtils.java" />
+        <option value="$PROJECT_DIR$/grades/week_3.json" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Java_Auto_Grader" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Java_Auto_Grader" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="15" />
+    <option name="y" value="24" />
+    <option name="width" value="754" />
+    <option name="height" value="841" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+          <State>
+            <id>Android Lint</id>
+          </State>
+          <State>
+            <id>Class structure</id>
+          </State>
+          <State>
+            <id>Code style issues</id>
+          </State>
+          <State>
+            <id>Cucumber Java</id>
+          </State>
+          <State>
+            <id>Declaration redundancy</id>
+          </State>
+          <State>
+            <id>Encapsulation issues</id>
+          </State>
+          <State>
+            <id>FlexUnit inspections</id>
+          </State>
+          <State>
+            <id>GeneralJavaScript</id>
+          </State>
+          <State>
+            <id>Google Web Toolkit issues</id>
+          </State>
+          <State>
+            <id>Inheritance issues</id>
+          </State>
+          <State>
+            <id>JPA issues</id>
+          </State>
+          <State>
+            <id>JUnit issues</id>
+          </State>
+          <State>
+            <id>Java EE issues</id>
+          </State>
+          <State>
+            <id>Java language level migration aids</id>
+          </State>
+          <State>
+            <id>JavaScript</id>
+          </State>
+          <State>
+            <id>Logging issues</id>
+          </State>
+          <State>
+            <id>Naming conventions</id>
+          </State>
+          <State>
+            <id>Plugin DevKit</id>
+          </State>
+          <State>
+            <id>Security issues</id>
+          </State>
+          <State>
+            <id>Serialization issues</id>
+          </State>
+          <State>
+            <id>Spring</id>
+          </State>
+          <State>
+            <id>Spring CoreSpring</id>
+          </State>
+          <State>
+            <id>Struts</id>
+          </State>
+          <State>
+            <id>Struts 2Struts</id>
+          </State>
+          <State>
+            <id>Visibility issues</id>
+          </State>
+          <State>
+            <id>XMLSpring CoreSpring</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="grades" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="week_3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="test_utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="week_3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Java Auto Grader - Wk 3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java Auto Grader Week 3" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="GradeScheme&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537108805058" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
+    <property name="last.edited.regexp" value="start wk = 1 dist 3.0 wk = 2 dist 3.600 wk = 3 dist 4.320 wk = 4 dist 5.184 " />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="options.lastSelected" value="preferences.intentionPowerPack" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="recentsLimit" value="5" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="week_3" />
+      <recent name="week_4" />
+      <recent name="go_fish_project" />
+      <recent name="week_2" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="go_fish_project" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="week_4" />
+      <recent name="week_3" />
+      <recent name="input" />
+      <recent name="week_2" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+      <recent name="junit.framework.TestCase" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/grades" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/java/week_4" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.week_3 in Java Auto Grader - Week 3">
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="EXTRA_OPTIONS" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="DEBUGGER_TYPE" value="Java" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <Java />
+      <Profilers>
+        <option name="GAPID_DISABLE_PCS" value="false" />
+      </Profilers>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="executeSpecs" factoryName="Gauge Execution">
+      <setting name="environment" value="" />
+      <setting name="specsToExecute" value="" />
+      <setting name="tags" value="" />
+      <setting name="parallelNodes" value="" />
+      <setting name="execInParallel" value="false" />
+      <setting name="programParameters" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="moduleName" value="" />
+      <envMap />
+      <setting name="rowsRange" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="passParentEnv" value="true" />
+      <setting name="launchBrowser" value="false" />
+      <setting name="launchBrowserUrl" value="" />
+      <setting name="depsClasspath" value="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Question_2_Wear_A_HatTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java Auto Grader - Week 3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="week_3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="week_3" />
+      <option name="MAIN_CLASS_NAME" value="week_3.Question_2_Wear_A_HatTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Question_3_Agile_Or_WaterfallTest.testAgileOrWaterfallMethodology_Agile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java Auto Grader - Week 3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="week_3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="week_3" />
+      <option name="MAIN_CLASS_NAME" value="week_3.Question_3_Agile_Or_WaterfallTest" />
+      <option name="METHOD_NAME" value="testAgileOrWaterfallMethodology_Agile" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Question_4_Reduce_RepetitionTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java Auto Grader - Week 3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="week_3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="week_3" />
+      <option name="MAIN_CLASS_NAME" value="week_3.Question_4_Reduce_RepetitionTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Question_5_CountUppercaseLettersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java Auto Grader - Week 3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="week_3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="week_3" />
+      <option name="MAIN_CLASS_NAME" value="week_3.Question_5_CountUppercaseLettersTest" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="week_3 in Java Auto Grader - Week 3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Java Auto Grader - Week 3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="week_3.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="week_3" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <module name="Java Auto Grader - Wk 2 3 4 go fishetc" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <module name="" />
+      <option name="filePath" />
+      <option name="vmParameters" />
+      <option name="alternativeJrePath" />
+      <option name="programParameters" />
+      <option name="passParentEnvs" value="true" />
+      <option name="workingDirectory" />
+      <option name="isAlternativeJrePathEnabled" value="false" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.Question_4_Reduce_RepetitionTest" />
+      <item itemvalue="JUnit.week_3 in Java Auto Grader - Week 3" />
+      <item itemvalue="JUnit.Question_3_Agile_Or_WaterfallTest.testAgileOrWaterfallMethodology_Agile" />
+      <item itemvalue="JUnit.Question_5_CountUppercaseLettersTest" />
+      <item itemvalue="JUnit.Question_2_Wear_A_HatTest" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.week_3 in Java Auto Grader - Week 3" />
+        <item itemvalue="JUnit.Question_2_Wear_A_HatTest" />
+        <item itemvalue="JUnit.Question_5_CountUppercaseLettersTest" />
+        <item itemvalue="JUnit.Question_3_Agile_Or_WaterfallTest.testAgileOrWaterfallMethodology_Agile" />
+        <item itemvalue="JUnit.Question_4_Reduce_RepetitionTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fc81e9bc-ffde-4ffe-95d7-9eaad6ecc5db" name="Default" comment="" />
+      <created>1496165225017</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1496165225017</updated>
+      <workItem from="1496165230245" duration="42696000" />
+      <workItem from="1496292748330" duration="22524000" />
+      <workItem from="1501632807572" duration="2741000" />
+      <workItem from="1502388452218" duration="137000" />
+      <workItem from="1504196505312" duration="5058000" />
+      <workItem from="1504631678970" duration="8051000" />
+      <workItem from="1504815081701" duration="750000" />
+      <workItem from="1505744249627" duration="827000" />
+      <workItem from="1507734547273" duration="70000" />
+      <workItem from="1509983399249" duration="267000" />
+      <workItem from="1516808566444" duration="6328000" />
+      <workItem from="1516887612009" duration="995000" />
+      <workItem from="1516911795336" duration="28000" />
+      <workItem from="1516989184285" duration="5867000" />
+      <workItem from="1517518278001" duration="1799000" />
+      <workItem from="1523380227594" duration="184000" />
+      <workItem from="1536532626310" duration="22248000" />
+    </task>
+    <task id="LOCAL-00027" summary=" Wk 4 snow ❄️❄️❄️❄️">
+      <created>1496344848397</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1496344848397</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Week 3 assignment and tests">
+      <created>1501633320507</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1501633320507</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Week 3 assignment and tests">
+      <created>1501633535705</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1501633535705</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Week 3 assignment and tests">
+      <created>1501634946323</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1501634946323</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Week 3 assignment and tests">
+      <created>1501635541782</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1501635541782</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add InputUtils">
+      <created>1502388597359</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1502388597359</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Comments for Q1">
+      <created>1504196719782</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1504196719782</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Comments and better test fail messages for Q2">
+      <created>1504197826604</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1504197826604</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Comments and better test fail messages for Q3">
+      <created>1504201464562</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1504201464562</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Comments and better test fail messages for Q4">
+      <created>1504205014789</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1504205014789</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Q5 tidied test and clarified question text">
+      <created>1504206101220</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1504206101220</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Q5 tidied test and clarified question text">
+      <created>1504206187946</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1504206187946</updated>
+    </task>
+    <task id="LOCAL-00039" summary="README">
+      <created>1504210107507</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1504210107507</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Comments">
+      <created>1504631744046</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1504631744046</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Comments">
+      <created>1504633841413</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1504633841413</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Better error message Q5">
+      <created>1504655964630</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1504655964630</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Readme markdown typo">
+      <created>1504708564369</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1504708564369</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Update link for credit card validation">
+      <created>1504710423722</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1504710423722</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Cryptic commit message. Definitely don't look at the code that was changed for this one.">
+      <created>1504711781937</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1504711781937</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Credit card tests">
+      <created>1504714331954</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1504714331954</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Credit card tests">
+      <created>1504714409598</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1504714409598</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Comments, fixed some typos">
+      <created>1504788741102</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1504788741102</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Comments, fixed some typos">
+      <created>1504803237128</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1504803237128</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Comments, fixed some typos">
+      <created>1504815246052</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1504815246055</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Test fail messages">
+      <created>1505748845058</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1505748845078</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Fix project name">
+      <created>1507734570026</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1507734570027</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Fix grade totals">
+      <created>1509983573284</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1509983573284</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Tidying, improve error messages, clarify some descriptions">
+      <created>1516811297715</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1516811297716</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Separate one test into two">
+      <created>1516812802873</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1516812802874</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Note that tests expect methods created to be public">
+      <created>1516813095946</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1516813095946</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Couple of comments">
+      <created>1516814908676</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1516814908676</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Test timeouts">
+      <created>1516891433099</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1516891433099</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Separate tests for agileOrWaterfall">
+      <created>1516990801703</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1516990801703</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Separate tests for agileOrWaterfall">
+      <created>1516994789526</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1516994789526</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Separate tests for agileOrWaterfall">
+      <created>1516994882660</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1516994882660</updated>
+    </task>
+    <task id="LOCAL-00062" summary="how grades work, screenshots">
+      <created>1516995001429</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1516995001429</updated>
+    </task>
+    <task id="LOCAL-00063" summary="update powermock version">
+      <created>1516996016660</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1516996016660</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Include positive versions of input utils">
+      <created>1516996538086</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1516996538086</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Instructions : how to decide on Agile or Waterfall">
+      <created>1517518516786</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1517518516787</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Fix assert statements Q1">
+      <created>1517527096041</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1517527096045</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Fix assert statements Q1">
+      <created>1517527415608</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1517527415608</updated>
+    </task>
+    <task id="LOCAL-00068" summary="tidy delta values Q1">
+      <created>1523380389123</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1523380389125</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Update to Java 10, and latest versions of Powermock and Easymock">
+      <created>1536598456705</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1536598456712</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Replace Powermock with System Rules&#10;Include plugin for grade calculating, and instructions&#10;Some tidying">
+      <created>1536613471712</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1536613471720</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Clear up instuctions for Q1">
+      <created>1536670937233</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1536670937239</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Clear up instuctions for Q3, fix a couple of typos">
+      <created>1536671204592</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1536671204593</updated>
+    </task>
+    <task id="LOCAL-00073" summary="New questions">
+      <created>1536686909720</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1536686909721</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Remove unused imports and files">
+      <created>1536692986692</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1536692986694</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Update points for new questions">
+      <created>1536699068408</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1536699068413</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Question_5_CountUppercaseLettersTest - 2018.09.11 at 11h 32m 15s.xml">
+      <configuration name="Question_5_CountUppercaseLettersTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_5_CountUppercaseLettersTest - 2018.09.11 at 11h 34m 01s.xml">
+      <configuration name="Question_5_CountUppercaseLettersTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_5_CountUppercaseLettersTest - 2018.09.11 at 11h 34m 34s.xml">
+      <configuration name="Question_5_CountUppercaseLettersTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_5_CountUppercaseLettersTest - 2018.09.11 at 11h 34m 56s.xml">
+      <configuration name="Question_5_CountUppercaseLettersTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="week_3_in_Java_Auto_Grader_-_Week_3 - 2018.09.11 at 11h 37m 31s.xml">
+      <configuration name="week_3 in Java Auto Grader - Week 3" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_2_Wear_A_HatTest - 2018.09.11 at 12h 07m 10s.xml">
+      <configuration name="Question_2_Wear_A_HatTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_2_Wear_A_HatTest - 2018.09.11 at 12h 09m 17s.xml">
+      <configuration name="Question_2_Wear_A_HatTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_2_Wear_A_HatTest - 2018.09.11 at 12h 09m 44s.xml">
+      <configuration name="Question_2_Wear_A_HatTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Question_2_Wear_A_HatTest - 2018.09.11 at 12h 10m 38s.xml">
+      <configuration name="Question_2_Wear_A_HatTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="week_3_in_Java_Auto_Grader_-_Week_3 - 2018.09.11 at 14h 03m 00s.xml">
+      <configuration name="week_3 in Java Auto Grader - Week 3" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="120570000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="15" y="24" width="754" height="841" extended-state="0" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26544943" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Palette&#9;" order="4" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32977304" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.06542056" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39715394" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32977304" />
+      <window_info anchor="bottom" id="Thumbnails" order="7" weight="0.32992327" />
+      <window_info anchor="bottom" id="Application Servers" order="8" />
+      <window_info anchor="bottom" id="Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.21628839" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="12" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32176235" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.32991013" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.067424245" />
+      <window_info anchor="right" id="IDEtalk" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Capture Analysis" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29323843" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Palette&#9;" order="4" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" weight="0.32977304" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.3965287" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.39715394" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.32977304" />
+      <window_info anchor="bottom" id="Thumbnails" order="8" weight="0.32992327" />
+      <window_info anchor="bottom" id="Application Servers" order="9" />
+      <window_info anchor="bottom" id="Changes" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.21628839" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
+      <window_info anchor="bottom" id="IDEtalk Messages" order="13" />
+      <window_info anchor="bottom" id="Messages" order="14" weight="0.32176235" />
+      <window_info anchor="bottom" id="Version Control" order="15" weight="0.32991013" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Designer" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.067424245" />
+      <window_info anchor="right" id="IDEtalk" order="6" />
+      <window_info anchor="right" id="Database" order="7" />
+      <window_info anchor="right" id="Capture Analysis" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="Cryptic commit message. Definitely don't look at the code that was changed for this one." />
+    <MESSAGE value="Credit card tests" />
+    <MESSAGE value="Comments, fixed some typos" />
+    <MESSAGE value="Test fail messages" />
+    <MESSAGE value="Fix project name" />
+    <MESSAGE value="Fix grade totals" />
+    <MESSAGE value="Tidying, improve error messages, clarify some descriptions" />
+    <MESSAGE value="Separate one test into two" />
+    <MESSAGE value="Note that tests expect methods created to be public" />
+    <MESSAGE value="Couple of comments" />
+    <MESSAGE value="Test timeouts" />
+    <MESSAGE value="Separate tests for agileOrWaterfall" />
+    <MESSAGE value="how grades work, screenshots" />
+    <MESSAGE value="update powermock version" />
+    <MESSAGE value="Include positive versions of input utils" />
+    <MESSAGE value="Instructions : how to decide on Agile or Waterfall" />
+    <MESSAGE value="Fix assert statements Q1" />
+    <MESSAGE value="tidy delta values Q1" />
+    <MESSAGE value="Update to Java 10, and latest versions of Powermock and Easymock" />
+    <MESSAGE value="Replace Powermock with System Rules&#10;Include plugin for grade calculating, and instructions&#10;Some tidying" />
+    <MESSAGE value="Clear up instuctions for Q1" />
+    <MESSAGE value="Clear up instuctions for Q3, fix a couple of typos" />
+    <MESSAGE value="New questions" />
+    <MESSAGE value="Remove unused imports and files" />
+    <MESSAGE value="Update points for new questions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update points for new questions" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/go_fish_project/Go_Fish.java</url>
+          <line>252</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_4/Question_2_Dice_Rolls_ArrayList.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_4/Question_2_Dice_Rolls_ArrayListTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_4/Question_1_Cereals_ArrayListTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_4/Question_1_Cereals_ArrayList.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_4/Question_3_Recycling_Truck_ArraysTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_4/Question_3_Recycling_Truck_Arrays.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_4/Question_5_Lake_RunningTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_4/Question_5_Lake_Running.java" />
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_4/Question_4_Snowfall_HashmapTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_4/Question_4_Snowfall_HashMap.java" />
+    <entry file="file://$PROJECT_DIR$/Java Auto Grader - Week 3.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="62" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/grade/model/TestFileResults.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/grade/model/Question.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/grade/model/GradeScheme.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/surefire-reports/week_3.Question_1_MPGTest.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/surefire-reports/week_3.Question_5_String_To_Int_ArrayTest.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/site/project-info.html" />
+    <entry file="file://$PROJECT_DIR$/target/site/index.html" />
+    <entry file="file://$PROJECT_DIR$/target/surefire-reports/week_3.Question_4_Reduce_RepetitionTest.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/surefire-reports/TEST-week_3.Question_4_Reduce_RepetitionTest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1365">
+          <caret line="91" column="72" selection-start-line="91" selection-end-line="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/surefire-reports/week_3.Question_3_Agile_Or_WaterfallTest.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/site/project-summary.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="53" selection-start-line="5" selection-start-column="53" selection-end-line="5" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/site/surefire-report.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/surefire-reports/TEST-week_3.Question_1_MPGTest.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_6_MarathonTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/grade/Grade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grades/How lab grading works.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="187">
+            <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_1_MPGTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="641">
+          <caret line="50" column="151" selection-start-line="50" selection-start-column="151" selection-end-line="50" selection-end-column="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_6_Credit_Card_ValidationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="15" column="80" selection-start-line="15" selection-start-column="80" selection-end-line="15" selection-end-column="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_3_Agile_Or_WaterfallTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="22" column="23" lean-forward="true" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_1_b_Animal_Sounds.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="27" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/junit/framework/TestCase.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test_utils/MethodUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_6_Credit_Card_Validation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_5_CountUppercaseLettersTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="59" column="5" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="59" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grades/Lab 3 Questions.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="2595">
+          <caret line="173" column="40" selection-start-line="173" selection-start-column="40" selection-end-line="173" selection-end-column="40" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="308">
+            <caret line="93" column="78" selection-start-line="93" selection-start-column="78" selection-end-line="93" selection-end-column="78" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_1_MPG.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_6_Marathon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="65" column="27" selection-start-line="65" selection-start-column="27" selection-end-line="65" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_5_Count_Uppercase_Letters.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="57" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_4_Reduce_Repetition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_3_Agile_Or_Waterfall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="66" column="68" selection-start-line="66" selection-start-column="68" selection-end-line="66" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/week_3/Question_2_Wear_A_Hat.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_2_Wear_A_HatTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="34" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#538#539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test_utils/MockInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test_utils/ArrayUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test_utils/ArrayListUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/test_utils/PrintUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/week_3/Question_4_Reduce_RepetitionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="22" selection-start-line="22" selection-end-line="41" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grades/week_3.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="2" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>10</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Java Auto Grader - Week 3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: com.google.code.findbugs:jsr305:1.3.9</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

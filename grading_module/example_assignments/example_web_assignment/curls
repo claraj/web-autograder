@@ -1,0 +1,1 @@
+url  -X POST --data '{"name":"beans"}' http://127.0.0.1:3000/api/v1/coffeeshop -H "content-type: application/json"

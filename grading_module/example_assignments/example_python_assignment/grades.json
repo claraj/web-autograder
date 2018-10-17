@@ -1,0 +1,31 @@
+{ "name": "Lab 3",
+  "total_points" : 20,
+
+  "questions": [
+
+    {
+      "name" : "q1_length_of_name",
+      "points" : 5,
+      "test_file": "test_q1_how_long_is_name"
+    },
+
+    {
+      "name" : "q2_shout_out",
+      "points" : 5,
+      "test_file": "test_q2_shout_out"
+    },
+
+    {
+      "name" : "q3_which_number_is_larger",
+      "points" : 5,
+      "test_file": "test_q3_which_number_is_larger"
+    },
+
+    {
+      "name" : "q4_calculate_rectangle_area",
+      "points" : 5,
+      "test_file": "test_q4_rectangle_area"
+    }
+
+  ]
+}

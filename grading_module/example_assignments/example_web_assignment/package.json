@@ -1,0 +1,31 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "mocha --exit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-restify-mongoose": "^5.0.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.3.1",
+    "mongoose-unique-validator": "^2.0.2",
+    "serve-static": "^1.13.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-html": "^1.2.1",
+    "chai-http": "^4.2.0",
+    "karma": "^3.0.0",
+    "karma-junit-reporter": "^1.2.0",
+    "mocha": "^5.2.0",
+    "mocha-junit-reporter": "^1.18.0"
+  }
+}

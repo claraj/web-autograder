@@ -150,11 +150,11 @@ Q_CLUSTER = {
     'name': 'grader',
     'workers': 8,
     'recycle': 500,
-    'timeout': 3000,   # 5 minutes. May need longer for complicated tasks, e2e in web...
+    'timeout': 3000,   # 5 minutes. May need longer for complicated tasks, e2e in web... but can override when tasks are launched
     'compress': True,
     'save_limit': 0,  # unlimited
     'queue_limit': 500,
     'cpu_affinity': 1,
-    'label': 'grader queue',
-    'orm': 'default'   # django ORM. 
+    'label': 'grader_queue',
+    'orm': 'default'   # django ORM.
 }

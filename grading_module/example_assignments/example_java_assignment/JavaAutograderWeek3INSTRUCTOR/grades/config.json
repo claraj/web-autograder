@@ -1,0 +1,26 @@
+{
+  "student_code_locations": [
+    "src/main"
+  ],
+  "report_locations": [
+    "target/surefire-reports/"
+  ],
+  "docker_config": {
+    "mem_limit": "512M",
+    "mounts":
+    [
+      {
+        "source": "maven-repo",
+        "target": "/root/.m2",
+        "type": "volume"
+      },
+      {
+        "source": "$PWD",
+        "target": "/usr/src/mymaven",
+        "type": "bind"
+      }
+    ],
+
+    "tag": "jag3"
+  }
+}

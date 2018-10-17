@@ -1,8 +1,0 @@
-geckodriver
-__pycache__
-student_code/
-geckodriver.log
-venv
-extra_credit/secret.py
-*.pyc
-token.txt

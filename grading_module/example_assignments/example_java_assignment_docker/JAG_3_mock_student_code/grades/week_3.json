@@ -1,0 +1,41 @@
+{ "week" : 3 ,
+  "package": "week_3",
+  "questions" : [
+    {
+      "question" : 1,
+      "java_file": "Question_1_MPG",
+      "test_file": ["Question_1_MPGTest"],
+      "points": 2.5
+    },
+    {
+      "question" : 2,
+      "java_file": "Question_2_Wear_A_Hat",
+      "test_file": ["Question_2_Wear_A_HatTest"],
+      "points": 2.5
+    },
+    {
+      "question" : 3,
+      "java_file": "Question_3_Agile_Or_Waterfall",
+      "test_file": ["Question_3_Agile_Or_WaterfallTest"],
+      "points": 3.5
+    },
+    {
+      "question" : 4,
+      "java_file": "Question_4_Reduce_Repetition",
+      "test_file": ["Question_4_Reduce_RepetitionTest"],
+      "points": 3.5
+    },
+    {
+      "question" : 5,
+      "java_file": "Question_5_Count_Uppercase_Letters",
+      "test_file": ["Question_5_CountUppercaseLettersTest"],
+      "points": 3.5
+    },
+    {
+      "question" : 6,
+      "java_file": "Question_6_Marathon",
+      "test_file": ["Question_6_MarathonTest"],
+      "points": 4.5
+    }
+  ]
+}

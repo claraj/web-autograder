@@ -1,0 +1,27 @@
+#FROM maven
+
+#VOLUME ["/target/surefire-reports"]
+
+>> docker run -it --rm --name my-maven-project -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.4.5-jdk-10 mvn clean install
+
+
+docker run
+-it
+--rm    // remove when container exits
+--name my-maven-project    // name project whatever you like
+-v "$(pwd)":/usr/src/mymaven    // bind-mount a volume
+-w /usr/src/mymaven   // working directory
+maven:3.5.4-jdk-10   // name of image, pulled from dockerhub, in IMAGE:TAG format.
+mvn clean install  // command to run
+
+
+{
+  "test_command": "mvn -q -f %s install",
+  "setup_command": "mvn -q -f %s test",
+  "student_code_locations": [
+    "src/main",
+  ],
+  "report_locations": [
+    "target/surefire-reports/"
+  ]
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Java Auto Grader - Week 3" />
+        <module name="Java Auto Grader - Wk 2 3 4 go fishetc" />
+        <module name="Java Auto Grader - Wk 2 etc" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="Java Auto Grader - Week 3" target="10" />
+      <module name="Java Auto Grader - Wk 2 3 4 go fishetc" target="1.8" />
+      <module name="Java Auto Grader - Wk 2 etc" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
