@@ -1,3 +1,4 @@
 db.sqlite3
 *.pyc
 __pycache__
+grading_module/code_store/

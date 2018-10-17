@@ -7,19 +7,9 @@ def combine(base, include, paths_to_overwrite, output_directory):
     List of paths given by paths_to_overwrite will contain files from include
     """
 
-    print('BASE', base)
-    print('INCL', include)
     print('OUT', output_directory)
 
-    # patterns = *paths_to_overwrite,
-    # print(patterns)
-
-    paths_to_overwrite = ['src/main', '.idea', '.git/logs/refs']  # Overwrite for testing
-
-    # one pattern hack
-    # Should ignore copy /src/main but keep /src/test /src/somethingelse etc.
-    # pattern = 'src/main'
-    # full_path = os.path.join(base, pattern)
+    # paths_to_overwrite = ['src/main', '.idea', '.git/logs/refs']  # Overwrite for testing
 
     ignore_paths = [ os.path.join(base, p) for p in paths_to_overwrite ]
     print('ignore paths', ignore_paths)
@@ -28,8 +18,6 @@ def combine(base, include, paths_to_overwrite, output_directory):
     splits_dict = { p[0]:p[1] for p in splits }
 
     print('splits dict', splits_dict)
-
-    # print('fullpath', os.path.split(full_path))
 
 
     # This function will be called with the current directory and a list of it's contents
@@ -46,30 +34,10 @@ def combine(base, include, paths_to_overwrite, output_directory):
 
         return []
 
-
-        #
-        # if directory == head:
-        #     print('ignoring', head, tail)
-        #     return [tail]
-        # return []
-
-
     copytree(base, output_directory, ignore=ignore_paths)
-
-    input('copy of instructor code happened')
 
     for path in paths_to_overwrite:
         source = os.path.join(include, path)
         destination = os.path.join(output_directory, path)
         print('copying', source, destination)
         copytree(source, destination)
-
-
-    # source = os.path.join(include, pattern)
-    # destination = os.path.join(output_directory, pattern)
-    # print('copying', source, destination)
-    # copytree(source, destination)
-
-
-
-    input('copy happened, go check, and then press ok to continue')
