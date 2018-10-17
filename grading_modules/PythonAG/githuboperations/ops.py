@@ -3,6 +3,8 @@ import os
 
 # token = os.environ['GITHUB_AUTOGRADER_ACCESS_TOKEN']
 
+# This just works if you are authenticated to GitHub, like have a token saved. 
+
 def clone_or_pull_latest(repo_url, target_dir, repo_dir):
 
     """ Clone the given repo to location target_dir/repo_dir.
