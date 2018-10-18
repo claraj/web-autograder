@@ -2,9 +2,10 @@ from shutil import copytree
 import os
 
 def combine(base, include, paths_to_overwrite, output_directory):
-    """ Combine two directories into a new directory given by output_directory
-    The new directory will contain all the files from base,
-    List of paths given by paths_to_overwrite will contain files from include
+    """
+    Combine two directories into a new directory given by output_directory
+    The new directory will contain all the files from base, except for the paths specified by paths_to_overwrite
+    List of paths given by paths_to_overwrite will contain files from these directories in include
     """
 
     print('OUT', output_directory)

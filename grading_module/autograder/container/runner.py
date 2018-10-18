@@ -16,10 +16,6 @@ def run_in_container(dockerfile_location, config):
         docker_config.pop('tag', None)
 
         image, logs = build_image(dockerfile_location, tag)
-        print('the image is:' , image)
-        print(type(image))
-        print(image.id)
-        print(image.tags)
         container_output = run_image(image.tags[0], docker_config)
 
         print(container_output)
@@ -29,10 +25,6 @@ def run_in_container(dockerfile_location, config):
         raise
 
 def from_config_file(config_json, pwd):
-    # config_data = json.load(open(path, 'r'))
-    # print(config_data)
-
-    print('WORKING DIR', pwd)
 
     docker_config = config_json['docker']
     mounts = docker_config['mounts']
@@ -70,40 +62,8 @@ def run_image(image, config):
     except docker.errors.ContainerError as err:
         print('container error', err)  # if the java code won't compile, the mvn test command will error.
         return None
-    # container = client.containers.run(\
-    # image, \
-    # mem_limit='512M', \
-    # mounts=[maven_cache_mount, the_filesystem_mount], \
-    # name='replace-with-better-name-maybe', \
-    # remove=True, \
-    # )
-
 
     return container
-
-
-
-
-
-
-
-
-# container = client.containers.run('maven:3.5.4-jdk-10', \
-# 'mvn clean test', \
-# mem_limit='512M', \
-# mounts=[maven_cache_mount, the_filesystem_mount], \
-# name='replace-with-better-name-maybe', \
-# remove=True, \
-# tty=True, \
-# working_dir='/usr/src/mymaven' \
-# )
-
-# docker build from instructor dockerfile will give the name of the image
-
-# Using config from dockerfile
-
-# The surefire reports are in the local code dir
-
 
 # Example
 '''
