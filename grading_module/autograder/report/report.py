@@ -51,8 +51,8 @@ def grade(report_path, scheme):
         for report_file in question_report.report_files:
             report_file_path = os.path.join(report_path, f'TEST-{report_file}.xml')
             messages, points_earned = grade_report_file(report_file_path, question_report.points_available)
+            print('points:', report_file, question_report.points_earned, points_earned)
             question_report.points_earned += points_earned
-            print('points now', report_file, question_report.points_earned, points_earned)
             question_report.messages.append(messages)
 
         reports.append(question_report)
@@ -84,6 +84,7 @@ def grade_report_file(report_file, points_available):
         messages, fraction = extract_data(testsuite)
         points_earned = fraction * points_available
         points += points_earned
+        print(f'maths: fraction {fraction}, points earned {points_earned}, available {points_available}')
         messages.append(messages)
 
     return messages, points
@@ -94,7 +95,9 @@ def extract_data(testsuite):
     no_fails = testsuite.failures
     no_passes = no_tests - testsuite.failures
 
-    fraction_passed = 0 if no_passes == 0 else (no_tests/no_passes)
+    fraction_passed = 0 if no_passes == 0 else (no_passes/no_tests)
+
+    print('fraction passed', fraction_passed, no_tests, no_fails, no_passes)
     messages = testsuite.fail_messages()
 
     return messages, fraction_passed
