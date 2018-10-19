@@ -51,8 +51,15 @@ class S:
         self.github_id = gh_id
 
 def example():
-    assignment = A('https://github.com/minneapolis-edu/JAG_3', 'assignment-3-methods', 'mctc-itec')
+
+    # Java example
+    # assignment = A('https://github.com/minneapolis-edu/JAG_3', 'assignment-3-methods', 'mctc-itec')
+    # student = S('minneapolis-edu')
+
+     # Python example
+    assignment = A('https://github.com/minneapolis-edu/PAG_5', 'python-week-5-dictionaries', 'mctc-itec')
     student = S('minneapolis-edu')
+
     r, s = grade(assignment, student)
     print(r, s)
 

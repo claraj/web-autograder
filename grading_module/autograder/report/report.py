@@ -92,12 +92,11 @@ def grade_report_file(report_file, points_available):
 
 def extract_data(testsuite):
     no_tests = testsuite.tests
-    no_fails = testsuite.failures
-    no_passes = no_tests - testsuite.failures
+    no_passes = testsuite.passes
 
     fraction_passed = 0 if no_passes == 0 else (no_passes/no_tests)
 
-    print('fraction passed', fraction_passed, no_tests, no_fails, no_passes)
-    messages = testsuite.fail_messages()
+    print('fraction passed', fraction_passed, no_tests, no_passes)
+    messages = testsuite.fail_error_messages()
 
     return messages, fraction_passed

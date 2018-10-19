@@ -1,35 +1,49 @@
 class TestSuites:
 
-    def __init__(self, name='', tests=0, failures=0):
+    def __init__(self, name='', tests=0, failures=0, errors=0, skipped=0):
         self.name = name
         self.tests = tests
         self.failures = failures
+        self.errors = errors
+        self.skipped = 0
         self.testsuites = []
         self.passes = self.tests - self.failures
 
-    def _set_tests(self):
-        self.tests = sum(ts.tests for ts in self.testsuites)
 
-    def _set_failures(self):
-        self.failures = sum(ts.failures for ts in self.testsuites)
+    # def _set_tests(self):
+    #     self.tests = sum(ts.tests for ts in self.testsuites)
+    #
+    #
+    # def _set_failures(self):
+    #     self.failures = sum(ts.failures for ts in self.testsuites)
+    #
+    #
+    # def _set_errors(self):
+    #     self.errors = sum(ts.errors for ts in self.testsuites)
+    #
+    #
+    # def _set_passes(self):
+    #     self.passes = self.tests - ( self.failures + self.errors + self.skipped )
 
-    def _set_passes(self):
-        self.passes = self.tests - self.failures
 
     def add_testsuite(self, ts):
         self.testsuites.append(ts)
-        self._set_tests()
-        self._set_failures()
-        self._set_passes()
+        # self._set_tests()
+        # self._set_failures()
+        # self._set_errors()
+        # self._set_passes()
+
 
     def __len__(self):
         return len(self.testsuites)
 
+
     def __getitem__(self, index):
         return self.testsuites[index]
 
-    def fail_messages(self):
-        return [ ts.fail_messages() for ts in self.testsuites ]
+
+    def fail_error_messages(self):
+        return [ ts.fail_error_messages() for ts in self.testsuites ]
 
 
 class TestSuite:
@@ -66,8 +80,8 @@ class TestSuite:
         return self.testcases[index]
 
 
-    def fail_messages(self):
-        return [t.failure.message for t in self.testcases if t.failure]
+    def fail_error_messages(self):
+        return [t.failure.message for t in self.testcases if t.failure] + [t.error.message for t in self.testcases if t.error]
 
 
 class TestCase:
@@ -76,18 +90,27 @@ class TestCase:
     Has a name - the method name in JUnit, the message in it('sdfsf') in Karma
     A classname - the class in Junit, the describe('sdfsf') in Karma
     A failure, if the test failed, None if it passed
+    An error if the test errored, None otherwise
+    A test is considered to be a pass if it did not fail or error.
     """
 
-    def __init__(self, name, classname, failure=None):
+    def __init__(self, name, classname, failure=None, error=None):
         self.name = name;
         self.classname = classname
         self.failure = failure
-        self.passed = (failure == None)
-
+        self.error = error
+        self.passed = (failure == None and error == None)
 
     def __repr__(self):
-        passfail = 'Passed' if self.failure is None else ('Failed because ' + self.failure.message)
-        return f'{self.name} for class {self.classname}. {passfail}'
+
+        if self.error:
+            passfailerror = str(self.error)
+        elif self.failure:
+            passfailerror = str(self.failure)
+        else:
+            passfailerror = 'Passed'
+
+        return f'{self.name} for class {self.classname}. {passfailerror}'
 
 
 class Failure:
@@ -95,5 +118,14 @@ class Failure:
         self.message = message
         self.fulltext = text
 
-    def __repr__(self):
+    def __str__(self):
         return f'Failed with message {self.message}, text starts with {self.fulltext[:50]}'
+
+
+class TestError:
+    def __init__(self, message, text):
+        self.message = message
+        self.fulltext = text
+
+    def __str__(self):
+        return f'Errored with message {self.message}, text starts with {self.fulltext[:50]}'

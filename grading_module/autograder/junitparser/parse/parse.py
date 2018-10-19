@@ -17,8 +17,10 @@ def make_testsuites(root_xml):
         name = root_xml.get('name')
         tests = int(root_xml.get('tests'))
         failures = int(root_xml.get('failures'))
+        errors = int(root_xml.get('errors'), 0)
+        skipped = int(root_xml.get('skipped'), 0)
 
-        testsuites = TestSuites(name, tests, failures)
+        testsuites = TestSuites(name, tests, failures, errors=errors, skipped=skipped)
 
         for testsuite in root_xml:
             ts = parse_testsuite(testsuite)
@@ -48,6 +50,8 @@ def parse_testsuite(xml_testsuite):
     filename = xml_testsuite.get('file', None)
 
     testsuite = TestSuite(name, tests, failures, errors=errors, skipped=skipped, filename=filename)
+
+    print(testsuite)
 
     for testcase in xml_testsuite:
         if testcase.tag == 'testcase':

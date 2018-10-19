@@ -54,3 +54,41 @@ mvn clean install   # command
 
 
 docker run -it --rm --name my-maven-project -v maven-repo:/root/.m2 -v "$(pwd)":/usr/src/mymaven -w /usr/src/mymaven maven:3.5.4-jdk-10 mvn clean test
+
+
+********** PYTHON ***********
+
+Example Dockerfile
+
+FROM python:3.7.0-alpine
+# For generating JUnit-style reports
+RUN pip install unittest-xml-reporting==2.2.0
+WORKDIR /usr/src/myapp
+CMD ["python", "./test_runner.py"]
+
+And then run with
+
+
+docker build -t pag5
+docker run -it --rm -v "$PWD":/usr/src/myapp pag5
+
+Config file:
+
+{
+  "student_code_locations": [
+    "lab_questions"
+  ],
+  "report_location": "test_reports",
+  "docker": {
+    "mem_limit": "512M",
+    "mounts":
+    [
+      {
+        "source": "$PWD",
+        "target": "/usr/src/myapp",
+        "type": "bind"
+      }
+    ],
+    "tag": "pag5"
+  }
+}

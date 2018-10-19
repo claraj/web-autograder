@@ -79,7 +79,6 @@ run
 -it
 --rm
 --name my-maven-project
---network none   // boo, have to get dependencies from mvn central
 --memory 512M
 -v maven-repo:/root/.m2
 -v "$(pwd)":/usr/src/mymaven
