@@ -24,7 +24,7 @@ def generate_github_url(sender, **kwargs):
 def create_human_readable_semester_code(sender, **kwargs):
     print('SIGNAL REC HELLO', kwargs)
     class_instance = kwargs['instance']
-    class_instance.semester_human_string = humanCode(instance.semester_code)
+    class_instance.semester_human_string = humanCode(class_instance.semester_code)
 
 pre_save.connect(create_human_readable_semester_code, sender=ProgrammingClass)
 
