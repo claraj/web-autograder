@@ -32,13 +32,13 @@ def grader_start(request):
 
     batch_uuid = uuid.uuid4()
 
-    print(body)
-
     for assignment in assignments:
         for student in students:
-            print(student, assignment)
+            print('student and assignment ids to queue: ', student, assignment)
             queue_grading_task(batch_uuid, assignment, student)
             # todo reject non-existent students, assignments
+
+    # the response should have the number of existent assignments and students
 
     return JsonResponse( { 'batch': str(batch_uuid), 'students': len(students), 'assignments': len(assignments) } )
 
@@ -55,8 +55,6 @@ def grader_get_progress(request):
 
     """
 
-    print('body', request.body)
-    print('GET', request.GET)
     batch = request.GET.get('batch')
     if not batch:
         # 404
@@ -73,35 +71,35 @@ def grader_get_progress(request):
 
 
 # this is not used ATM, replaced with code above.
-def grade(request):
-    if request.method == 'POST':
-        # grade the things
-        json_data = json.loads(request.body)
-        print('the data recd', json_data)
-
-        class GradedAssignments:
-            def __init__(self, assignment, students):
-                self.student_count = 0
-                self.students = students
-                self.asgt = assignment
-            def __iter__(self):
-                return self
-            def __next__(self):
-                print('iterator sz next')
-                if self.student_count >= len(self.students):
-                    raise StopIteration
-
-                res = autograder.grade(self.asgt, self.students[self.student_count])
-                self.student_count += 1
-                return res
-
-
-        # stream response, cuz it's slow
-        streaming_content = GradedAssignments(json_data['assignment'], json_data['students'])
-
-        return StreamingHttpResponse(streaming_content)
-
-    else:
-        assignments = Assignment.objects.order_by('week')
-        students = Student.objects.order_by('name')
-        return render(request, 'autograder/grader.html', { 'students': students, 'assignments': assignments })
+# def grade(request):
+#     if request.method == 'POST':
+#         # grade the things
+#         json_data = json.loads(request.body)
+#         print('the data recd', json_data)
+#
+#         class GradedAssignments:
+#             def __init__(self, assignment, students):
+#                 self.student_count = 0
+#                 self.students = students
+#                 self.asgt = assignment
+#             def __iter__(self):
+#                 return self
+#             def __next__(self):
+#                 print('iterator sz next')
+#                 if self.student_count >= len(self.students):
+#                     raise StopIteration
+#
+#                 res = autograder.grade(self.asgt, self.students[self.student_count])
+#                 self.student_count += 1
+#                 return res
+#
+#
+#         # stream response, cuz it's slow
+#         streaming_content = GradedAssignments(json_data['assignment'], json_data['students'])
+#
+#         return StreamingHttpResponse(streaming_content)
+#
+#     else:
+#         assignments = Assignment.objects.order_by('week')
+#         students = Student.objects.order_by('name')
+#         return render(request, 'autograder/grader.html', { 'students': students, 'assignments': assignments })

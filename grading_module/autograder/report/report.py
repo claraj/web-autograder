@@ -1,8 +1,9 @@
-# from .. import junitparser
-from autograder.junitparser.parse import parse as juparse
+from ..junitparser.parse import parse as juparse
+from ..models.reports import TestSuiteReport as Report
+
+# from .autograder.junitparser.parse import parse as juparse
 import os
 from collections import namedtuple
-from autograder.models.reports import TestSuiteReport as Report
 
 
 """

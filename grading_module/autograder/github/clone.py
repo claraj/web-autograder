@@ -45,7 +45,11 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
                     return repo_target_dir, 'pull'
                 except GitCommandError as e:
                     #Error pulling code - e.g. the remote history doesn't match the local history.
-                    raise CloneError(f'Error pulling code. The remote history may be different to local? Error: {e.stderr}')
+                    # raise CloneError(f'Error pulling code. The remote history may be different to local? Error: {e.stderr}')
+
+                    # TODO warn instead of crash.
+                    pass
+                    print(f'error pulling code because {e.stderr}, continuing anyway')
 
             else:
                 raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')

@@ -14,30 +14,25 @@ This module will be given a student, an assignment, and then:
 - return text of reports and score
 """
 
+## To run this file by itself.... python -m grading_module.ag  from dir above grading_module
 
-import settings
+import sys
+import os
 
-# from autograder import container, directory, github, report, jsonparser
-# from github import clone
-
-from autograder.github import clone
-from autograder.container import runner
-from autograder.jsonparser import parser
-from autograder.directory import combine
-from autograder.report import report
+from . import settings
+from .autograder.github import clone
+from .autograder.container import runner
+from .autograder.jsonparser import parser
+from .autograder.directory import combine
+from .autograder.report import report
 
 from tempfile import TemporaryDirectory
-
-import os
 
 '''
 All of these steps can error.
 Let them, ensure exceptions have useful error message,
 and caller can deal with problem.
 '''
-
-
-#tempfile.tempdir =
 
 # temp for testing
 class A:
@@ -74,7 +69,7 @@ def grade(assignment, student):
         combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
         run_code_in_container(combined, project_config)
         report, score = generate_grade_report(combined, project_config, grade_scheme)
-        input('done. press a key')
+        # input('done. press a key')
 
     return report, score
 

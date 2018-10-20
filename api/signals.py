@@ -9,14 +9,14 @@ log = logging.getLogger(__name__)
 def generate_github_url(sender, **kwargs):
     grade_instance = kwargs['instance']
 
-    # github URL is http://
+    # github URL is
     # https://github.com/ORG/ASSIGNMENTNAME-STUDENTGITHUBID
 
     if not grade_instance.assignment or not grade_instance.student:
         return
 
     grade_instance.github_url = 'https://github.com/%s/%s-%s' % ( grade_instance.assignment.github_org , grade_instance.assignment.github_base , grade_instance.student.github_id)
-    print('generated student github url = ', grade_instance.github_url)
+    print('generated student github url = ', grade_instance.github_url, grade_instance)
 
 
 
@@ -26,6 +26,7 @@ def create_human_readable_semester_code(sender, **kwargs):
     class_instance = kwargs['instance']
     class_instance.semester_human_string = humanCode(class_instance.semester_code)
 
+# this duplicates the receiver decorator on the function (?)
 pre_save.connect(create_human_readable_semester_code, sender=ProgrammingClass)
 
 

@@ -1,40 +1,37 @@
-# mock queue_grading_task for now, replace with celery or huey or djangoq
-
-import time
-import random
-from threading import Thread
 from api.models import Student, Assignment, Grade
+from grading_module import ag
 
 from django_q.tasks import async_task, result
 
-
 def queue_grading_task(batch, assignment_id, student_id):
-    task_id = async_task(invoke_grader, batch, assignment_id, student_id, hook=save_result)
-    print(f'the task id is {task_id}')
+    print(f'hello from queue launcher! batch {batch}')
+    task_id = async_task(start_grader, batch, assignment_id, student_id, hook=save_result)
 
-def invoke_grader(batch, assignment, student):
 
-    # TODO actually grade thing
-    timer = random.randint(2, 4)
-    print(f'this will take {timer} seconds. thing to grade: {batch} assignment {assignment} student {student}')
-    time.sleep(random.randint(2, 4))
-    grade = random.choice([3.2, 7.4, 9.0, 10.12])
-    report = random.choice(['eh', 'huh', 'wow!!!!', 'meh'])
+def start_grader(batch, assignment_id, student_id):
 
-    print('USE GRADER MODULE TO GRADE THING')
+    print('INVOKE GRADER GO hello this is real grader')
 
+    student = Student.objects.get(pk=student_id)
+    assignment = Assignment.objects.get(pk=assignment_id)
+    report, score = ag.grade(assignment, student)
 
     return {
         'batch': batch,
-        'assignment_id': assignment,
-        'student_id': student,
-        'score': grade,
-        'generated_report': report
+        'assignment_id': assignment_id,
+        'student_id': student_id,
+        'score': score,
+        'generated_report': str(report)  # TODO
     }
 
 
+
 def save_result(task):
-    print(f'this task result is {task.result}')
-    result = task.result
-    grade = Grade(**result)
-    grade.save()
+    if task.success:
+        result = task.result
+        print(f'HELLO FROM HOOK this task result is {task.result}')
+        grade = Grade(**result)
+        grade.save()
+    else:
+        # get error message and report in some way.
+        print('oops, ', task.error)

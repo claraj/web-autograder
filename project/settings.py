@@ -151,6 +151,7 @@ Q_CLUSTER = {
     'workers': 8,
     'recycle': 500,
     'timeout': 3000,   # 5 minutes. May need longer for complicated tasks, e2e in web... but can override when tasks are launched
+    'ack_failure': True,  # Acknowlege failures and don't retry. 
     'compress': True,
     'save_limit': 0,  # unlimited
     'queue_limit': 500,
