@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Assignment, Student, ProgrammingClass, GraderModule, Grade, Attributes
+from .models import Assignment, Student, ProgrammingClass, GradingBatch, Grade, Attributes
 
 class AssignmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,9 +13,9 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class GraderModuleSerializer(serializers.ModelSerializer):
+class GradingBatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GraderModule
+        model = GradingBatch
         fields = '__all__'
 
 class ProgrammingClassSerializer(serializers.ModelSerializer):

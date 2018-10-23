@@ -20,8 +20,7 @@ Vue.prototype.$student_backend = new APIBackend('student')
 Vue.prototype.$assignment_backend = new APIBackend('assignment')
 Vue.prototype.$classes_backend = new APIBackend('programmingclass')
 Vue.prototype.$grade_backend = new APIBackend('grade')
-Vue.prototype.$gradermodule_backend = new APIBackend('gradermodule')
-
+Vue.prototype.$gradertask_backend = new APIBackend('gradingbatch')
 Vue.prototype.$autograder_backend = new AutograderBackend()
 
 

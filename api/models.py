@@ -1,11 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
-# todo better name
-class GraderModule(models.Model):
-    language = models.CharField(max_length=100)
-    module = models.CharField(max_length=100)   # A python module that, when given the instructor code and the student's code, runs the unit tests and outputs a report
-
 
 class ProgrammingClass(models.Model):
     name = models.CharField(max_length=100, default='spork appreciation 101')  # e.g. Java Programming, Programming Logic...
@@ -22,7 +17,6 @@ class Assignment(models.Model):
     github_org = models.CharField(max_length=200)
     instructor_repo = models.CharField(max_length=200)  # eg. https://github.com/minneapolis-edu/JAG_0
     d2l_gradebook_url = models.CharField(max_length=200, blank=True, null=False)
-    grader = models.ForeignKey(GraderModule, on_delete=models.PROTECT, blank=True, null=True)
 
     class Meta:
         unique_together = ( ('week', 'programming_class'), )
@@ -37,7 +31,7 @@ class Student(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)   # Student real name, as used in D2L
     github_id = models.CharField(max_length=200, blank=True, null=False, validators=[RegexValidator('^[\S_-]+$', message='Only letters, numbers, underscores and hyphens.')] )
     star_id = models.CharField(max_length=8, validators=[RegexValidator('^[a-z]{2}\d{4}[a-z]{2}$', message='Star ID must be in the pattern ab1234cd')], null=False, blank=True)
-    active = models.BooleanField(default=True)   # becomes False if student drops, withdraws, is abducted by aliens etc. 
+    active = models.BooleanField(default=True)   # becomes False if student drops, withdraws, is abducted by aliens etc.
 
     def __str__(self):
         return 'Name: %s, GitHub ID: %s ' % (self.name, self.github_id)
@@ -57,6 +51,11 @@ class Grade(models.Model):
 
     def __str__(self):
         return 'assignment %s student %s batch %s date %s, score %f'  % (self.assignment.id, self.student.id, self.batch, self.date, self.score)
+
+
+class GradingBatch(models.Model):
+    batch = models.CharField(max_length=36, primary_key=True)
+    date = models.DateField(auto_now_add=True)
 
 
 class Attributes(models.Model):

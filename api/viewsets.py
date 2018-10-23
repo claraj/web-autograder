@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Assignment, Student, GraderModule, Grade, Attributes, ProgrammingClass
-from .serializers import AssignmentSerializer, StudentSerializer, ProgrammingClassSerializer, GraderModuleSerializer, GradeSerializer, AttributesSerializer
+from .models import Assignment, Student, GradingBatch, Grade, Attributes, ProgrammingClass
+from .serializers import AssignmentSerializer, StudentSerializer, ProgrammingClassSerializer, GradingBatchSerializer, GradeSerializer, AttributesSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models.functions import Lower
 
@@ -23,9 +23,9 @@ class GradeViewSet(viewsets.ModelViewSet):
     serializer_class = GradeSerializer
     filter_fields = ('student', 'assignment', 'batch', 'id')
 
-class GraderModuleViewSet(viewsets.ModelViewSet):
-    queryset = GraderModule.objects.all().order_by('language')
-    serializer_class = GraderModuleSerializer
+class GradingBatchViewSet(viewsets.ModelViewSet):
+    queryset = GradingBatch.objects.all().order_by('-date')
+    serializer_class = GradingBatchSerializer
 
 class AttributesViewSet(viewsets.ModelViewSet):
     queryset = Attributes.objects.all()

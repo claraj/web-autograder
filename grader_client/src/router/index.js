@@ -6,6 +6,7 @@ import ProgrammingClasses from '@/components/ProgrammingClasses'
 import GraderModules from '@/components/GraderModules'
 import GraderResults from '@/components/GraderResults'
 import GraderLaunch from '@/components/GraderLaunch'
+import GraderTasks from '@/components/GraderTasks'
 
 Vue.use(Router)
 
@@ -40,7 +41,14 @@ export default new Router({
       path: '/graderresults',
       name: 'GraderResults',
       component: GraderResults
+    },
+    {
+      path: '/gradertasks',
+      name: 'GraderTasks',
+      component: GraderTasks
     }
+
+
 
   ]
 })

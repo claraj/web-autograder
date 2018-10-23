@@ -9,3 +9,14 @@ class TestSuiteReport:
 
     def __str__(self):
         return f'Q: {self.question}, file {self.source_file}, reports {self.report_files}, pts {self.points_available}, earned {self.points_earned}, messages {self.messages}'
+
+
+    def JSONRepr(self):
+        return {
+            "question": self.question,
+            "source_file": self.source_file,
+            "points_available": self.points_available,
+            "points_earned": self.points_earned,
+            "messages": self.messages,
+            "report_files": self.report_files
+        }

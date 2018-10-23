@@ -7,32 +7,10 @@ class TestSuites:
         self.errors = errors
         self.skipped = 0
         self.testsuites = []
-        self.passes = self.tests - self.failures
-
-
-    # def _set_tests(self):
-    #     self.tests = sum(ts.tests for ts in self.testsuites)
-    #
-    #
-    # def _set_failures(self):
-    #     self.failures = sum(ts.failures for ts in self.testsuites)
-    #
-    #
-    # def _set_errors(self):
-    #     self.errors = sum(ts.errors for ts in self.testsuites)
-    #
-    #
-    # def _set_passes(self):
-    #     self.passes = self.tests - ( self.failures + self.errors + self.skipped )
-
+        self.passes = self.tests - ( self.failures + self.errors + self.skipped)
 
     def add_testsuite(self, ts):
         self.testsuites.append(ts)
-        # self._set_tests()
-        # self._set_failures()
-        # self._set_errors()
-        # self._set_passes()
-
 
     def __len__(self):
         return len(self.testsuites)
@@ -44,6 +22,18 @@ class TestSuites:
 
     def fail_error_messages(self):
         return [ ts.fail_error_messages() for ts in self.testsuites ]
+
+
+    def JSONRepr(self):
+        return {
+            'name': self.name,
+            'tests': self.tests,
+            'failures': self.failures,
+            'errors': self.errors,
+            'skipped': self.skipped,
+            'passes': self.passes,
+            'testsuites': self.testsuites
+        }
 
 
 class TestSuite:
@@ -84,6 +74,19 @@ class TestSuite:
         return [t.failure.message for t in self.testcases if t.failure] + [t.error.message for t in self.testcases if t.error]
 
 
+    def JSONRepr(self):
+        return {
+            'name': self.name,
+            'tests': self.tests,
+            'failures': self.failures,
+            'errors': self.errors,
+            'skipped': self.skipped,
+            'filename': self.filename,
+            'passes': self.passes,
+            'testcases': self.testcases
+        }
+
+
 class TestCase:
     """
     One test - it passes or fails. ( or errors or is skipped. )
@@ -112,6 +115,15 @@ class TestCase:
 
         return f'{self.name} for class {self.classname}. {passfailerror}'
 
+    def JSONRepr(self):
+        return {
+            'name': self.name,
+            'classname': self.classname,
+            'passed': self.passed,
+            'failure': self.failure,
+            'error': self.error
+        }
+
 
 class Failure:
     def __init__(self, message, text):
@@ -121,6 +133,11 @@ class Failure:
     def __str__(self):
         return f'Failed with message {self.message}, text starts with {self.fulltext[:50]}'
 
+    def JSONRepr(self):
+        return {
+            'message': self.message,
+            'fulltext': self.fulltext
+        }
 
 class TestError:
     def __init__(self, message, text):
@@ -129,3 +146,9 @@ class TestError:
 
     def __str__(self):
         return f'Errored with message {self.message}, text starts with {self.fulltext[:50]}'
+
+    def JSONRepr(self):
+        return {
+            'message': self.message,
+            'fulltext': self.fulltext
+        }

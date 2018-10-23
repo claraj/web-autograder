@@ -18,6 +18,8 @@ This module will be given a student, an assignment, and then:
 
 import sys
 import os
+import json
+from tempfile import TemporaryDirectory
 
 from . import settings
 from .autograder.github import clone
@@ -25,8 +27,8 @@ from .autograder.container import runner
 from .autograder.jsonparser import parser
 from .autograder.directory import combine
 from .autograder.report import report
+from .autograder.models.json_encoders import TestItemEncoder
 
-from tempfile import TemporaryDirectory
 
 '''
 All of these steps can error.
@@ -60,18 +62,24 @@ def example():
 
 
 def grade(assignment, student):
-    instructor_code = fetch_instructor_code(assignment.instructor_repo)
-    student_code = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
-    project_config = get_config(instructor_code)
-    grade_scheme = get_grade_scheme(instructor_code)
 
-    with TemporaryDirectory(dir=settings.COMBINED_CODE_LOCATION) as temp_student_code_dir:
-        combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
-        run_code_in_container(combined, project_config)
-        report, score = generate_grade_report(combined, project_config, grade_scheme)
-        # input('done. press a key')
+    try:
+        instructor_code = fetch_instructor_code(assignment.instructor_repo)
+        student_code = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
+        project_config = get_config(instructor_code)
+        grade_scheme = get_grade_scheme(instructor_code)
 
-    return report, score
+        with TemporaryDirectory(dir=settings.COMBINED_CODE_LOCATION) as temp_student_code_dir:
+            combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
+            run_code_in_container(combined, project_config)
+            report, score = generate_grade_report(combined, project_config, grade_scheme)
+            # input('done. press a key')
+
+        return { 'success': True, 'report': (report, score) }
+
+    except Exception as e:
+
+        return { 'success': False, error: e }
 
 
 def fetch_student_code(base, org, student_id):
