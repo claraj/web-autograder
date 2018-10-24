@@ -15,12 +15,13 @@ import VueSSE from 'vue-sse'
 Vue.use(VueAxios, axios)
 Vue.use(VueSSE)
 
-// All vue objects will have access to these objects .
+// All vue objects will have access to these objects.
 Vue.prototype.$student_backend = new APIBackend('student')
 Vue.prototype.$assignment_backend = new APIBackend('assignment')
 Vue.prototype.$classes_backend = new APIBackend('programmingclass')
 Vue.prototype.$grade_backend = new APIBackend('grade')
 Vue.prototype.$gradertask_backend = new APIBackend('gradingbatch')
+
 Vue.prototype.$autograder_backend = new AutograderBackend()
 
 

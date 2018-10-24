@@ -18,10 +18,12 @@ class GradingBatchSerializer(serializers.ModelSerializer):
         model = GradingBatch
         fields = '__all__'
 
+
 class ProgrammingClassSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProgrammingClass
         fields = '__all__'
+
 
 class GradeSerializer(serializers.ModelSerializer):
     class Meta:

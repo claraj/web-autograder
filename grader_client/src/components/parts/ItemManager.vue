@@ -54,9 +54,9 @@
 
 var pluralize = require('pluralize')
 
-import ItemList from '../components/ItemList.vue'
-import BulkAdd from '../components//BulkAdd.vue'
-import AddEditItem from '../components/AddEditItem.vue'
+import ItemList from './ItemList.vue'
+import BulkAdd from './BulkAdd.vue'
+import AddEditItem from './AddEditItem.vue'
 
 export default {
   name: 'ItemManager',

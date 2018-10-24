@@ -54,7 +54,7 @@ class Grade(models.Model):
 
 
 class GradingBatch(models.Model):
-    batch = models.CharField(max_length=36, primary_key=True)
+    id = models.CharField(max_length=36, primary_key=True)
     date = models.DateField(auto_now_add=True)
 
 

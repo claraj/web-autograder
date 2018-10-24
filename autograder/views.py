@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponse, HttpResponseBadRequest
 from django_eventstream import send_event
-from api.models import Grade
+from api.models import Grade, GradingBatch
 import uuid
 import json
 
@@ -30,7 +30,11 @@ def grader_start(request):
     #     # todo can client get error msg?
     #     return HttpResponseBadRequest('No student or assignments provided')
 
+
     batch_uuid = uuid.uuid4()
+
+    batch = GradingBatch(id = batch_uuid)
+    batch.save()
 
     for assignment in assignments:
         for student in students:

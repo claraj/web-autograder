@@ -53,11 +53,14 @@ Backend.prototype.$fetchOne = function(id) {
   .then( response => response.data )
 }
 
-
 Backend.prototype.$query = function(query)  {
   return this.$crud.get(`/${this.base}`, { params: query } )
   //.then(response => console.log(`backend filter query reponse for ${query}`, response))
 //.catch(err=>console.log(err))
+}
+
+Backend.prototype.$deleteMany = function(ids) {
+    return this.$crud.delete(`/${this.base}`, ids)
 }
 
 

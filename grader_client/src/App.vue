@@ -18,16 +18,15 @@
       <router-link to="/classes">Class Management</router-link>
       </p>
       <p class="nav">
-      <router-link to="/gradermodules">Grader Module Management</router-link>
-      </p>
-
-      <p class="nav">
       <router-link to="/graderlaunch">Launch Grader</router-link>
       </p>
-
-      <p class="nav">
+      <!-- <p class="nav">
       <router-link to="/graderresults">Grader Results</router-link>
+      </p> -->
+      <p class="nav">
+      <router-link to="/gradingbatches">Grading Batches</router-link>
       </p>
+
 
     <router-view/>
 

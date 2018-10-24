@@ -1,3 +1,6 @@
+<!-- Results of one grading batch.  -->
+
+
 <template>
 
   <div>

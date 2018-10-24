@@ -1,6 +1,4 @@
 <template>
-
-
   <!--  List of things that are checkable -->
   <div>
     <h3>Select...</h3>
@@ -10,8 +8,12 @@
       <div v-if="items.length">
 
         <li v-for="item in items">
-          <input v-model="item.selected" type="checkbox" v-on:click="itemSelected(item.id)"/>
+          <input v-model="item.selected" type="checkbox" v-on:click="itemSelected(item.id, item.selected)"/>
           <span>{{prefix}} {{item.displayText}}</span>
+          <!-- <slot v-bind:item="item">
+            {{ item }}
+          </slot> -->
+
         </li>
       </div>
 
@@ -52,7 +54,8 @@ export default {
       // emit to parent, id + selected (?)
       // or parent can watch?
       // or just wait for GRADE button to be selected?
-      console.log('hello, item id', id)
+      console.log('hello, item id', id, selected)
+      this.$emit('onItemSelected', id, selected)
 
     }
   }

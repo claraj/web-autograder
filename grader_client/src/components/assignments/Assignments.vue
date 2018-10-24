@@ -8,7 +8,7 @@
 
 <script>
 
-import ItemManager from './ItemManager.vue'
+import ItemManager from '@/components/parts/ItemManager.vue'
 
 // import Backend from '@/backends/management_backend'
 

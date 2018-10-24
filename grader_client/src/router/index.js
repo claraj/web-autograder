@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Students from '@/components/Students'
-import Assignments from '@/components/Assignments'
-import ProgrammingClasses from '@/components/ProgrammingClasses'
-import GraderModules from '@/components/GraderModules'
-import GraderResults from '@/components/GraderResults'
-import GraderLaunch from '@/components/GraderLaunch'
-import GraderTasks from '@/components/GraderTasks'
+import Students from '@/components/students/Students'
+import Assignments from '@/components/assignments/Assignments'
+import ProgrammingClasses from '@/components/classes/ProgrammingClasses'
+import GraderResults from '@/components/grades/GraderResults'
+import GraderLaunch from '@/components/grades/GraderLaunch'
+import GradingBatches from '@/components/grades/GradingBatches'
+import StudentDetail from '@/components/students/StudentDetail'
+import AssignmentDetail from '@/components/assignments/AssignmentDetail'
+
 
 Vue.use(Router)
 
@@ -28,24 +30,36 @@ export default new Router({
       component: ProgrammingClasses
     },
     {
-      path: '/gradermodules',
-      name: 'GraderModules',
-      component: GraderModules
-    },
-    {
       path: '/graderlaunch',
       name: 'GraderLaunch',
       component: GraderLaunch
     },
     {
+      // All the results from one grading batch
       path: '/graderresults',
       name: 'GraderResults',
       component: GraderResults
     },
     {
-      path: '/gradertasks',
-      name: 'GraderTasks',
-      component: GraderTasks
+      // List of grading batches
+      path: '/gradingbatches',
+      name: 'GraderBatches',
+      component: GradingBatches
+    },
+    {
+      path: '/grader-results/:id',
+      name: 'GraderResults',
+      component: GraderResults
+    },
+    {
+      path: '/student-detail/:id',
+      name: 'StudentDetail',
+      component: StudentDetail
+    },
+    {
+      path: '/assignment-detail/:id',
+      name: 'AssigmentDetail',
+      component: AssignmentDetail
     }
 
 

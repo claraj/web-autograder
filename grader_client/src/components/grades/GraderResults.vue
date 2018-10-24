@@ -1,3 +1,5 @@
+<!-- All of the results for one grading batch. -->
+
 <template>
 
 <div>
@@ -66,6 +68,11 @@ export default {
     }
   },
   mounted() {
+
+    // Is this a completed batch?
+
+    // Or is it newly launched and waiting on results?
+
     // figure out most recent class and select selectedClass to that
     this.batch = this.$route.query.batch
     this.expectedResults = this.$route.query.expected_results

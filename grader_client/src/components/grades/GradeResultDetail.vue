@@ -1,3 +1,6 @@
+
+<!-- Detail for one graded assignment for one student.  -->
+
 <template>
 
   <div>

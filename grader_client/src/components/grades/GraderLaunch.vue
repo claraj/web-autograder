@@ -1,3 +1,5 @@
+<!-- Dropdown of classes, ability to select assignments, students for that class, and start grading process. -->
+
 <template>
 
 <div>
@@ -63,7 +65,7 @@ let msgServer
 
 
 
-import SelectionList from './SelectionList'
+import SelectionList from '@/components/parts/SelectionList'
 
 export default {
   name: 'GraderLaunch',
@@ -148,7 +150,7 @@ export default {
       this.$autograder_backend.$invokeGrader(data)
         .then(response => {
           console.log('response from server', response)
-          this.$router.push({path: 'GraderResults', query: { batch: response.batch, expected_results: expected_results } } )
+          this.$router.push({path: 'graderresults', query: { id: response.batch, expected_results: expected_results } } )
         })
         .catch( err => {
           console.log('error launching ', err)
