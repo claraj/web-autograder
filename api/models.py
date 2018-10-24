@@ -48,6 +48,7 @@ class Grade(models.Model):
     batch = models.UUIDField()
     date = models.DateField(auto_now_add=True)
     # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.SET_NULL)
+    error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
 
     def __str__(self):
         return 'assignment %s student %s batch %s date %s, score %f'  % (self.assignment.id, self.student.id, self.batch, self.date, self.score)
@@ -55,9 +56,12 @@ class Grade(models.Model):
 
 class GradingBatch(models.Model):
     id = models.CharField(max_length=36, primary_key=True)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
+    things_to_grade = models.IntegerField()
+    processed = models.IntegerField(default=0)  # this includes things that are graded, that errored during grading...
 
 
+# Not used....
 class Attributes(models.Model):
     model = models.CharField(max_length=200, null=False, blank=False)  # required
     attr = models.CharField(max_length=200, null=False, blank=False)  # required

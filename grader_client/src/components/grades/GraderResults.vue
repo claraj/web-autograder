@@ -5,7 +5,8 @@
 <div>
   <h2>Grader Results</h2>
 
-  <p>Batch: {{ batch }}</p>
+  <p>Batch: {{ id }}</p>
+  <P>Started at: GO GET DATE {{ batch.data}}</p>
   <p>Expect {{expectedResults}} results</p>
   <p>Received {{receivedResults}} results</p>
 
@@ -49,7 +50,8 @@ export default {
   components: { GradeResultList },
   data () {
     return {
-      batch: "",
+      id: "",
+      batch: {},
     //  gradedResultsIds = [],    // {1, 2, 3 ... }
       gradedResults: {},       // { 1: results1, 2: results2 ....}
       expectedResults: 0,
@@ -57,8 +59,11 @@ export default {
       loading: true
     }
   },
+
   computed: {
     readyResults: function() {
+
+      // is param?
 
       // TODO why doesn't this work? Works with JS in component prop.
       console.log(this.gradedResults)
@@ -74,9 +79,21 @@ export default {
     // Or is it newly launched and waiting on results?
 
     // figure out most recent class and select selectedClass to that
-    this.batch = this.$route.query.batch
+
+    console.log(this.$route.query)
+
+    this.batch = this.$route.query.id
     this.expectedResults = this.$route.query.expected_results
   //  console.log('grade result param is ', this.$route.query)
+
+    // get grade batch info
+
+    this.$gradertask_backend.$fetchOne(this.batch).then( data => {
+
+
+
+    }).then()
+
 
     this.pollGrader()   // first poll
     poller = setInterval( this.pollGrader, pollInterval);  // keep polling at intervals

@@ -20,11 +20,8 @@
       <p class="nav">
       <router-link to="/graderlaunch">Launch Grader</router-link>
       </p>
-      <!-- <p class="nav">
-      <router-link to="/graderresults">Grader Results</router-link>
-      </p> -->
       <p class="nav">
-      <router-link to="/gradingbatches">Grading Batches</router-link>
+      <router-link to="/gradingbatches">Grading Batches and Results</router-link>
       </p>
 
 

@@ -3,8 +3,8 @@ from dataclasses import dataclass, field
 @dataclass
 class TestSuites:
 
-    name: str
-    tests: int
+    name: str = 'Unnamed Test Suite'
+    tests: int = 0
     failures: int = 0
     errors: int = 0
     skipped: int = 0
@@ -18,9 +18,15 @@ class TestSuites:
 
     def add_testsuite(self, ts):
         self.testsuites.append(ts)
+        self.tests = sum( [ts.tests for test in self.testsuites] )
+        self.failures = sum( [ts.failures for test in self.testsuites] )
+        self.errors = sum( [ts.errors for test in self.testsuites] )
+        self.skipped = sum( [ts.skipped for test in self.testsuites] )
+
 
     def __len__(self):
         return len(self.testsuites)
+
 
     def __getitem__(self, index):
         return self.testsuites[index]
@@ -82,7 +88,6 @@ class TestError:
 
     message: str
     fulltext: str
-
 
 
 @dataclass

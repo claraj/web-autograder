@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grading_module/code_store/instructor_code/JAG_3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grading_module/code_store/instructor_code/PAG_3" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grading_module/code_store/instructor_code/PAG_5" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grading_module/code_store/student_code/assignment-3-methods-minneapolis-edu" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grading_module/code_store/student_code/python-week-5-dictionaries-achrastek" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grading_module/code_store/student_code/python-week-5-dictionaries-minneapolis-edu" vcs="Git" />
+  </component>
+</project>

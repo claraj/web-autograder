@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-from ...models.test_artifacts import TestSuites, TestCase, TestSuite, Failure
+from ...models.test_artifacts import TestSuites, TestCase, TestSuite, Failure, TestError
 
 def parse(filepath):
     """ returns a list of testsuites from the file """
@@ -67,7 +67,11 @@ def make_testcase(xml_testcase):
     xml_failure = xml_testcase.find('failure')
     failure = make_failure(xml_failure)
 
-    testcase = TestCase(name, classname, failure)
+    xml_error = xml_testcase.find('error')
+    error = make_error(xml_error)
+
+
+    testcase = TestCase(name, classname, failure, error)
     return testcase
 
 
@@ -77,6 +81,16 @@ def make_failure(xml_failure):
     message = xml_failure.get('message')
     text = xml_failure.text
     return Failure(message, text)
+
+
+def make_error(xml_error):
+    if xml_error is None:
+        return None
+    message = xml_error.get('message')
+    text = xml_error.text
+    return TestError(message, text)
+
+
 
 
 def parsedir(dirpath):

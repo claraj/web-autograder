@@ -59,6 +59,8 @@ def grade(report_path, scheme):
         reports.append(question_report)
         total_points += question_report.points_earned
 
+        print('One report messages', question_report.messages)
+
     return reports, total_points
 
 
@@ -82,13 +84,14 @@ def grade_report_file(report_file, points_available):
         return [f'error file {report_file} not found'], 0  # Ignore.
 
     for testsuite in testsuites:
-        messages, fraction = extract_data(testsuite)
+        suite_messages, fraction = extract_data(testsuite)
         points_earned = fraction * points_available
         points += points_earned
         print(f'maths: fraction {fraction}, points earned {points_earned}, available {points_available}')
-        messages.append(messages)
+        messages.append(suite_messages)
 
-    return messages, points
+    print('MESSAGES FROM FILE ARE', messages)
+    return '\n\n'.join(messages), points
 
 
 def extract_data(testsuite):
@@ -98,6 +101,7 @@ def extract_data(testsuite):
     fraction_passed = 0 if no_passes == 0 else (no_passes/no_tests)
 
     print('fraction passed', fraction_passed, no_tests, no_passes)
-    messages = testsuite.fail_error_messages()
+    messages = '\n'.join(testsuite.fail_error_messages())
 
+    print('EXTRACT DATA MESSAGES ', messages)
     return messages, fraction_passed

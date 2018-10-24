@@ -6,14 +6,14 @@ import router from './router'
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueMoment from 'vue-moment'
 
 import APIBackend from '@/backends/api_management_backend'
 import AutograderBackend from '@/backends/autograder_backend'
 
-import VueSSE from 'vue-sse'
-
 Vue.use(VueAxios, axios)
-Vue.use(VueSSE)
+Vue.use(VueMoment);
+
 
 // All vue objects will have access to these objects.
 Vue.prototype.$student_backend = new APIBackend('student')

@@ -20,6 +20,7 @@
     <p v-if="result.fullStudentInfo">Student Name: {{ result.fullStudentInfo.name }}</p>
     <P v-else>Student internal ID: {{ result.student }}</P>
 
+    <P>date: TODO </p>
 
     <p>Grade {{ result.score }}</p>
     <P>Generated Report {{ result.generated_report}}</p>

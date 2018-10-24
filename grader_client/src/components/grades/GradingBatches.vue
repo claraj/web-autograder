@@ -14,9 +14,11 @@ Can view results in a GraderResults component, and delete old grading batches.  
 
   <p v-for="batch in batches">
 
-    <router-link :to="{ name: 'GraderResults', params: {id: batch.id} }">
-      {{ batch }}
+    <router-link :to="{ name: 'grader-results', query: {id: batch.id} }">
+      {{ batch.id }}
     </router-link>
+
+    started at {{ batch.date | moment("dddd, MMMM Do YYYY hh:mm")}}.
   </p>
 
   <button v-on="delete_selected">delete selected</button>

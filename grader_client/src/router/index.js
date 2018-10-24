@@ -16,53 +16,50 @@ export default new Router({
   routes: [
     {
       path: '/students',
-      name: 'Students',
+      name: 'students',
       component: Students
     },
     {
       path: '/assignments',
-      name: 'Assignments',
+      name: 'assignments',
       component: Assignments
     },
     {
       path: '/classes',
-      name: 'ProgrammingClasses',
+      name: 'programming-classes',
       component: ProgrammingClasses
     },
     {
       path: '/graderlaunch',
-      name: 'GraderLaunch',
+      name: 'grader-launch',
       component: GraderLaunch
     },
     {
       // All the results from one grading batch
       path: '/graderresults',
-      name: 'GraderResults',
+      name: 'grader-results',
       component: GraderResults
     },
     {
       // List of grading batches
       path: '/gradingbatches',
-      name: 'GraderBatches',
+      name: 'grading-batches',
       component: GradingBatches
     },
     {
-      path: '/grader-results/:id',
-      name: 'GraderResults',
+      path: '/grader-results/',
+      name: 'grader-results',
       component: GraderResults
     },
     {
       path: '/student-detail/:id',
-      name: 'StudentDetail',
+      name: 'student-detail',
       component: StudentDetail
     },
     {
       path: '/assignment-detail/:id',
-      name: 'AssigmentDetail',
+      name: 'assigment-detail',
       component: AssignmentDetail
     }
-
-
-
   ]
 })

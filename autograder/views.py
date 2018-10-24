@@ -33,7 +33,10 @@ def grader_start(request):
 
     batch_uuid = uuid.uuid4()
 
-    batch = GradingBatch(id = batch_uuid)
+    no_students = len(students)
+    no_assignments = len(assignments)
+
+    batch = GradingBatch(id = batch_uuid, things_to_grade=(no_students * no_assignments))
     batch.save()
 
     for assignment in assignments:
@@ -44,7 +47,7 @@ def grader_start(request):
 
     # the response should have the number of existent assignments and students
 
-    return JsonResponse( { 'batch': str(batch_uuid), 'students': len(students), 'assignments': len(assignments) } )
+    return JsonResponse( { 'batch': str(batch_uuid), 'students': no_students, 'assignments': no_assignments } )
 
 
 def grader_get_progress(request):
@@ -72,38 +75,3 @@ def grader_get_progress(request):
     print(graded_ids)
 
     return JsonResponse( { 'graded_ids' : graded_ids })
-
-
-# this is not used ATM, replaced with code above.
-# def grade(request):
-#     if request.method == 'POST':
-#         # grade the things
-#         json_data = json.loads(request.body)
-#         print('the data recd', json_data)
-#
-#         class GradedAssignments:
-#             def __init__(self, assignment, students):
-#                 self.student_count = 0
-#                 self.students = students
-#                 self.asgt = assignment
-#             def __iter__(self):
-#                 return self
-#             def __next__(self):
-#                 print('iterator sz next')
-#                 if self.student_count >= len(self.students):
-#                     raise StopIteration
-#
-#                 res = autograder.grade(self.asgt, self.students[self.student_count])
-#                 self.student_count += 1
-#                 return res
-#
-#
-#         # stream response, cuz it's slow
-#         streaming_content = GradedAssignments(json_data['assignment'], json_data['students'])
-#
-#         return StreamingHttpResponse(streaming_content)
-#
-#     else:
-#         assignments = Assignment.objects.order_by('week')
-#         students = Student.objects.order_by('name')
-#         return render(request, 'autograder/grader.html', { 'students': students, 'assignments': assignments })

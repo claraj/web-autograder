@@ -150,7 +150,7 @@ export default {
       this.$autograder_backend.$invokeGrader(data)
         .then(response => {
           console.log('response from server', response)
-          this.$router.push({path: 'graderresults', query: { id: response.batch, expected_results: expected_results } } )
+          this.$router.push({to: 'grader-results', query: { id: response.batch, expected_results: expected_results } } )
         })
         .catch( err => {
           console.log('error launching ', err)

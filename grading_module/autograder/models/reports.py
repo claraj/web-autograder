@@ -8,7 +8,10 @@ class TestSuiteReport:
         self.report_files = report_files
 
     def __str__(self):
-        return f'Q: {self.question}, file {self.source_file}, reports {self.report_files}, pts {self.points_available}, earned {self.points_earned}, messages {self.messages}'
+
+        msg_sep = '\n'
+
+        return f'Q: {self.question}, file {self.source_file}, reports {self.report_files}, pts {self.points_available}, earned {self.points_earned}, \nMessages: { msg_sep.join(self.messages)}'
 
 
     def JSONRepr(self):

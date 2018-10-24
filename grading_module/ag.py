@@ -17,11 +17,13 @@ This module will be given a student, an assignment, and then:
 ## To run this file by itself.... python -m grading_module.ag  from dir above grading_module
 
 import sys
+import traceback
 import os
 import json
 from tempfile import TemporaryDirectory
 
 from . import settings
+
 from .autograder.github import clone
 from .autograder.container import runner
 from .autograder.jsonparser import parser
@@ -29,6 +31,14 @@ from .autograder.directory import combine
 from .autograder.report import report
 from .autograder.models.json_encoders import TestItemEncoder
 
+# import settings
+#
+# from autograder.github import clone
+# from autograder.container import runner
+# from autograder.jsonparser import parser
+# from autograder.directory import combine
+# from autograder.report import report
+# from autograder.models.json_encoders import TestItemEncoder
 
 '''
 All of these steps can error.
@@ -50,44 +60,71 @@ class S:
 def example():
 
     # Java example
-    assignment = A('https://github.com/minneapolis-edu/JAG_3', 'assignment-3-methods', 'mctc-itec')
-    student = S('minneapolis-edu')
-
-     # Python example
-    # assignment = A('https://github.com/minneapolis-edu/PAG_5', 'python-week-5-dictionaries', 'mctc-itec')
+    # assignment = A('https://github.com/minneapolis-edu/JAG_3', 'assignment-3-methods', 'mctc-itec')
     # student = S('minneapolis-edu')
 
-    r, s = grade(assignment, student)
-    print(r, s)
+     # Python example
+    assignment = A('https://github.com/minneapolis-edu/PAG_5', 'python-week-5-dictionaries', 'mctc-itec')
+    student = S('minneapolis-edu')
+
+    result = grade(assignment, student)
+    print(result)
 
 
 def grade(assignment, student):
 
     try:
+
         instructor_code = fetch_instructor_code(assignment.instructor_repo)
-        student_code = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
+
+        try:
+            student_code, err = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
+        except Exception as e:
+            return { 'success': True, 'result': (f'Error fetching student code, {e}', 0) }
+
         project_config = get_config(instructor_code)
         grade_scheme = get_grade_scheme(instructor_code)
 
         with TemporaryDirectory(dir=settings.COMBINED_CODE_LOCATION) as temp_student_code_dir:
             combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
-            run_code_in_container(combined, project_config)
-            report, score = generate_grade_report(combined, project_config, grade_scheme)
+            try:
+                run_code_in_container(combined, project_config)
+            except Exception as e:
+                # Could be compile errors, code crashed etc.
+                t, e, tb = sys.exc_info()
+                print(traceback.print_tb(tb))
+
+                return { 'success': True, 'result': (f'Error running tests on student code, {e}', 0) }
+
+            try:
+                report, score = generate_grade_report(combined, project_config, grade_scheme)
+            except Exception as e:
+                t, e, tb = sys.exc_info()
+                print(traceback.print_tb(tb))
+                
+                return { 'success': True, 'result': (f'Error reading test report files from student code, {e}', 0) }
+
             # input('done. press a key')
 
-        return { 'success': True, 'report': (report, score) }
+        return { 'success': True, 'result': (report, score) }
 
     except Exception as e:
 
-        return { 'success': False, error: e }
+        # These are most likely errors that I have caused, or from modifications of the project structure between student and instructor.
+        t, e, tb = sys.exc_info()
+        print(traceback.print_tb(tb))
+        return { 'success': False, 'error': e }
 
 
 def fetch_student_code(base, org, student_id):
+
     url = f'https://github.com/{org}/{base}-{student_id}'
     repo_name = f'{base}-{student_id}'
+
     student_code_location, mode = clone.clone_or_pull_latest(url, os.path.join(settings.CODE_STORE, settings.STUDENT_CODE_LOCATION), repo_name)
     print('got student code by: ', mode)
-    return student_code_location
+    return student_code_location, None
+
 
 
 def fetch_instructor_code(repo_url):
@@ -125,10 +162,14 @@ def generate_grade_report(location, config, scheme):
     reports_dir = config['report_location']
     test_report_location = os.path.join(location, reports_dir)
     print(test_report_location)
-    grade_report, score = report.grade(test_report_location, scheme)  # report could be CSV (probably) or some other organized text format.
-    for r in grade_report:
-        print(r)
-    return grade_report, score
+    grade_report_list, score = report.grade(test_report_location, scheme)  # report could be CSV (probably) or some other organized text format.
+    for r in grade_report_list:
+        print('REPORT IS', r)
+
+    strr = [str(r) for r in grade_report_list]
+    print('STRR', strr)
+
+    return '\n'.join( [str(r) for r in grade_report_list] ), score
 
 
 if __name__ == '__main__':
