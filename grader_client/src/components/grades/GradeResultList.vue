@@ -45,13 +45,14 @@ export default {
     }
   },
   mounted() {
-    console.log('list items:', this.readyResults)
+    console.log('RESULT list items:', this.readyResults)
   },
   watch: {
     readyResults: {
         handler: function(newVal, oldVal) {
           // fetch student info, fetch assignment info
           // what's the new result?
+          console.log('ready results changed')
           this.fetchStudentAssignment()
           this.sortedResults = this.sort()
       }, deep: true
@@ -66,6 +67,8 @@ export default {
     },
 
     fetchStudentAssignment() {
+
+      console.log('fetch more data')
       this.readyResults.forEach( res => {
         // has student data?
         if (!res.fullStudentInfo) {

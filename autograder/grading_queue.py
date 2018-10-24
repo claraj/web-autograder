@@ -21,14 +21,18 @@ def start_grader(batch, assignment_id, student_id):
     if 'error' in result:
         # These are programatic errors - like the docker config is wrong or some other coding error
         # Probably my problem
-        print('ERROR grading:', result['error'])
+        print('ERROR grading:', result['error'] )
+        err = result['error']
         return {
             'error': result['error'],
             'batch': batch,
-            'result': None
+            'assignment_id': assignment_id,
+            'student_id': student_id,
+            'score': 0,
+            'generated_report': f'Error running grader because {err}'  # TODO format?
         }
 
-    # Errors like - code doesn't compile, repo not found... save in the Grade object
+    # Errors like - code doesn't compile, repo not found... save in the Grade object anyway so client
 
     report, score = result['result']
 
@@ -46,7 +50,7 @@ def start_grader(batch, assignment_id, student_id):
 def save_result(task):
 
     if task.success:
-        
+
         result = task.result
 
         if result:

@@ -17,14 +17,14 @@ Autograder.prototype.$invokeGrader = function(data) {
   console.log('sending data:', data)
   return this.$api.post(`/grader/`, data)    // what URL?
   .then(response => response.data)
-  //expecting webhook response
+
 }
 
 
-Autograder.prototype.$pollGrader = function(batch) {
+Autograder.prototype.$graderProgress = function(batch) {
   return this.$api.get(`/progress/`, { params: { batch: batch } } )    // what URL?
   .then(response => response.data)
-  //expecting webhook response
+
 }
 
 
