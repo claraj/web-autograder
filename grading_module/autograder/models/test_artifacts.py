@@ -1,20 +1,26 @@
+from dataclasses import dataclass, field
+
+@dataclass
 class TestSuites:
 
-    def __init__(self, name='', tests=0, failures=0, errors=0, skipped=0):
-        self.name = name
-        self.tests = tests
-        self.failures = failures
-        self.errors = errors
-        self.skipped = 0
-        self.testsuites = []
-        self.passes = self.tests - ( self.failures + self.errors + self.skipped)
+    name: str
+    tests: int
+    failures: int = 0
+    errors: int = 0
+    skipped: int = 0
+    testsuites: list = field(init=False, default_factory=list)
+    passes: int = field(init=False, default=0)
+
+
+    def __post_init__(self):
+        self.passes = self.tests - (self.failures + self.errors + self.skipped)
+
 
     def add_testsuite(self, ts):
         self.testsuites.append(ts)
 
     def __len__(self):
         return len(self.testsuites)
-
 
     def __getitem__(self, index):
         return self.testsuites[index]
@@ -24,18 +30,8 @@ class TestSuites:
         return [ ts.fail_error_messages() for ts in self.testsuites ]
 
 
-    def JSONRepr(self):
-        return {
-            'name': self.name,
-            'tests': self.tests,
-            'failures': self.failures,
-            'errors': self.errors,
-            'skipped': self.skipped,
-            'passes': self.passes,
-            'testsuites': self.testsuites
-        }
 
-
+@dataclass
 class TestSuite:
     """
     Has a name,
@@ -43,14 +39,18 @@ class TestSuite:
     Contains a list of TestCase objects
     """
 
-    def __init__(self, name, tests, failures, errors=0, skipped=0, filename=None):
-        self.name = name
-        self.tests = tests
-        self.failures = failures
-        self.errors = errors
-        self.skipped = skipped
-        self.filename = filename
-        self.testcases = []
+
+    name: str
+    tests: int
+    failures: int = 0
+    errors: int = 0
+    skipped: int = 0
+    filename: str = None
+    testcases: list = field(init=False, default_factory=list)
+    passes: int = field(init=False)
+
+
+    def __post_init__(self):
         self.passes = self.tests - (self.failures + self.errors + self.skipped)
 
 
@@ -62,10 +62,6 @@ class TestSuite:
         return len(self.testcases)
 
 
-    def __repr__(self):
-        return f'{self.name}, {self.tests} tests, {self.failures} failures, {self.errors} errors, {self.skipped} skipped, {self.passes} passed.'
-
-
     def __getitem__(self, index):
         return self.testcases[index]
 
@@ -74,19 +70,22 @@ class TestSuite:
         return [t.failure.message for t in self.testcases if t.failure] + [t.error.message for t in self.testcases if t.error]
 
 
-    def JSONRepr(self):
-        return {
-            'name': self.name,
-            'tests': self.tests,
-            'failures': self.failures,
-            'errors': self.errors,
-            'skipped': self.skipped,
-            'filename': self.filename,
-            'passes': self.passes,
-            'testcases': self.testcases
-        }
+@dataclass
+class Failure:
+
+    message: str
+    fulltext: str
 
 
+@dataclass
+class TestError:
+
+    message: str
+    fulltext: str
+
+
+
+@dataclass
 class TestCase:
     """
     One test - it passes or fails. ( or errors or is skipped. )
@@ -97,58 +96,11 @@ class TestCase:
     A test is considered to be a pass if it did not fail or error.
     """
 
-    def __init__(self, name, classname, failure=None, error=None):
-        self.name = name;
-        self.classname = classname
-        self.failure = failure
-        self.error = error
-        self.passed = (failure == None and error == None)
+    name: str
+    classname: str
+    failure: Failure = None
+    error: TestError = None
+    passed: bool = field(init=False)
 
-    def __repr__(self):
-
-        if self.error:
-            passfailerror = str(self.error)
-        elif self.failure:
-            passfailerror = str(self.failure)
-        else:
-            passfailerror = 'Passed'
-
-        return f'{self.name} for class {self.classname}. {passfailerror}'
-
-    def JSONRepr(self):
-        return {
-            'name': self.name,
-            'classname': self.classname,
-            'passed': self.passed,
-            'failure': self.failure,
-            'error': self.error
-        }
-
-
-class Failure:
-    def __init__(self, message, text):
-        self.message = message
-        self.fulltext = text
-
-    def __str__(self):
-        return f'Failed with message {self.message}, text starts with {self.fulltext[:50]}'
-
-    def JSONRepr(self):
-        return {
-            'message': self.message,
-            'fulltext': self.fulltext
-        }
-
-class TestError:
-    def __init__(self, message, text):
-        self.message = message
-        self.fulltext = text
-
-    def __str__(self):
-        return f'Errored with message {self.message}, text starts with {self.fulltext[:50]}'
-
-    def JSONRepr(self):
-        return {
-            'message': self.message,
-            'fulltext': self.fulltext
-        }
+    def __post_init__(self):
+        self.passed = self.failure == None and self.error == None
