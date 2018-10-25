@@ -46,10 +46,10 @@ export default {
   },
   methods: {
 
-    itemSelected(id) {
+    itemSelected(id, selected) {
       // emit to parent, id + selected (?)
       // or parent can watch?
-      // or just wait for GRADE button to be selected?
+      // atm, just wait for GRADE button to be selected?
       console.log('hello, item id', id, selected)
       this.$emit('onItemSelected', id, selected)
 
