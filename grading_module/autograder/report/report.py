@@ -40,8 +40,6 @@ For each question:
 def grade(report_path, scheme):
 
     questions = scheme['questions']
-
-    total_points = 0
     assignment_report = AssignmentReport()
 
     for question in questions:
@@ -68,6 +66,10 @@ def grade(report_path, scheme):
 
         # print('One report messages', question_report.messages)
 
+    total_points_available = sum( [ q.points_available for q in assignment_report.question_reports ])
+    assignment_report.total_points_available = total_points_available
+
+    print('assignment report points:', assignment_report.total_points_earned)
     return assignment_report  # Has a list of questionreports, which have a list of testsuites, and total points earned
 
 

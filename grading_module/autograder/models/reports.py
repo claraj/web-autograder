@@ -38,7 +38,6 @@ class TestFileReport:
     testsuites: list = field(init=False, default_factory=list)
 
 
-
 @dataclass
 class QuestionReport:
     question: str
@@ -53,17 +52,19 @@ class QuestionReport:
     fraction_passed: float = 0
 
     def calc_grade(self):
-        self.fraction_passed = self.passes / self.tests
+
+        # sum tests, and passes from all testsuites
+        self.tests = sum( [tss.tests for tss in self.testsuites ] )
+        self.passes = sum( [tss.passes for tss in self.testsuites] )
+
+        if self.tests == 0:
+            self.fraction_passed = 0
+        else:
+            self.fraction_passed = self.passes / self.tests
+
         points = self.fraction_passed * self.points_available
         self.points_earned = points
         return self.points_earned
-
-    # def __init__(self, question, source_file, report_files, points_available, points_earned, messages=[]):
-    #     self.question = question
-    #     self.source_file = source_file
-    #     self.points_available = points_available
-    #     self.points_earned = points_earned
-    #     self.report_files = report_files
 
 
     def __str__(self):
@@ -75,11 +76,12 @@ class QuestionReport:
 @dataclass
 class AssignmentReport:
     question_reports: list = field(init=False, default_factory=list)
+    total_points_available: int = 0
     total_points_earned: int = 0
 
     def add_question_report(self, question_report):
         self.question_reports.append(question_report)
-        self.total_points = sum( [ qr.points_earned for qr in self.question_reports] )
+        self.total_points_earned = sum( [ qr.points_earned for qr in self.question_reports] )
 
 
 # test

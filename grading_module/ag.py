@@ -95,7 +95,7 @@ def grade(assignment, student):
                 t, e, tb = sys.exc_info()
                 print(traceback.print_tb(tb))
 
-                return { 'success': True, 'result': f'Error running tests on student code, {e}', 'score': 0 }
+                return { 'success': True, 'report': f'Error running tests on student code, {e}', 'score': 0 }
 
             try:
                 report = generate_grade_report(combined, project_config, grade_scheme)
@@ -103,7 +103,7 @@ def grade(assignment, student):
                 t, e, tb = sys.exc_info()
                 print(t, e, traceback.print_tb(tb))
 
-                return { 'success': True, 'result': f'Error reading test report files from student code, {e}', 'score': 0 }
+                return { 'success': True, 'report': f'Error reading test report files from student code, {e}', 'score': 0 }
 
             # input('done. press a key')
 

@@ -14,6 +14,7 @@ class TestSuites:
 
     def __post_init__(self):
         self.passes = self.tests - (self.failures + self.errors + self.skipped)
+        print("HELLO! this is tss post init ")
 
 
     def add_testsuite(self, ts):
@@ -22,6 +23,7 @@ class TestSuites:
         self.failures = sum( [ts.failures for test in self.testsuites] )
         self.errors = sum( [ts.errors for test in self.testsuites] )
         self.skipped = sum( [ts.skipped for test in self.testsuites] )
+        self.passes = sum( [ts.passes for test in self.testsuites] )
 
 
     def __len__(self):
@@ -56,6 +58,7 @@ class TestSuite:
 
     def __post_init__(self):
         self.passes = self.tests - (self.failures + self.errors + self.skipped)
+        print("HELLO! this is ts post init ", self.passes)
 
 
     def add_testcase(self, testcase):
