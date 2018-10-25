@@ -46,7 +46,8 @@ export default {
 
   .nav {
     display: inline;
-    padding: 20px;
+    margin: 20px;
+    white-space: nowrap;
   }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
