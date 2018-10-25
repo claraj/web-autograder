@@ -15,8 +15,8 @@ def generate_github_url(sender, **kwargs):
     if not grade_instance.assignment or not grade_instance.student:
         return
 
-    grade_instance.github_url = 'https://github.com/%s/%s-%s' % ( grade_instance.assignment.github_org , grade_instance.assignment.github_base , grade_instance.student.github_id)
-    print('generated student github url = ', grade_instance.github_url, grade_instance)
+    grade_instance.student_github_url = 'https://github.com/%s/%s-%s' % ( grade_instance.assignment.github_org , grade_instance.assignment.github_base , grade_instance.student.github_id)
+    print('generated student github url = ', grade_instance.student_github_url, grade_instance)
 
 
 
