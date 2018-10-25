@@ -6,6 +6,7 @@ import ProgrammingClasses from '@/components/classes/ProgrammingClasses'
 import GraderResults from '@/components/grades/GraderResults'
 import GraderLaunch from '@/components/grades/GraderLaunch'
 import GradingBatches from '@/components/grades/GradingBatches'
+import GradeResultDetail from '@/components/grades/GradeResultDetail'
 import StudentDetail from '@/components/students/StudentDetail'
 import AssignmentDetail from '@/components/assignments/AssignmentDetail'
 
@@ -45,6 +46,11 @@ export default new Router({
       path: '/gradingbatches',
       name: 'grading-batches',
       component: GradingBatches
+    },
+    {
+      path: '/gradereportdetail',
+      name: 'grade-detail',
+      component: GradeResultDetail
     },
     {
       path: '/grader-results/',

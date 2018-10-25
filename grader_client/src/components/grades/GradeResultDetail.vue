@@ -1,11 +1,11 @@
-
-<!-- Detail for one graded assignment for one student.  -->
+<!-- Detail for one graded assignment for one student.  Instructor will be able to add comments on
+individual questions, and for the whole assignment  -->
 
 <template>
 
   <div>
 
-    <!-- todo look up student name; assignment name, probably in container component
+    <!--
     Make these clickable to student or assigmment page
     Student page should have all student's assignments and scores
     Assignment page should have all student's results
@@ -19,12 +19,20 @@
     <p v-if="result.fullStudentInfo">Student Name: {{ result.fullStudentInfo.name }}</p>
     <P v-else>Student internal ID: {{ result.student }}</P>
 
-    <P>date: TODO </p>
+    <P>Date graded: {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
 
-    <p>Grade {{ result.score }}</p>
+    <p>Grade: {{ result.score }}</p>
     <!-- <P>Generated Report {{result.generated_report}}</p> -->
-    <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport>
-    <P>Instructor Comments <textarea v-model="result.instructor_comments" v-on:change="updateInstructorComments"></textarea></P>
+    <!-- <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport> -->
+
+
+    <!-- List of questions here
+
+    question number; code file; list of tests; points avail;  tests passed/failed; points earned; instructor comments; instructor adjust grade
+    -->
+
+
+    <P>Overall Instructor Comments <textarea v-model="result.instructor_comments" v-on:change="updateInstructorComments"></textarea></P>
     <P>Student GitHub <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
   </div>
 
@@ -37,32 +45,42 @@ import GeneratedGradeReport from './GeneratedGradeReport'
 export default {
   name: "GradeResultDetail",
   components: { GeneratedGradeReport },
-  props: {
-    result: Object,
-    // assignmentLookup: Object,
-    // studentLookup: Object
-  },
   data() {
     return {
-
+      result: {},
+      report: {}
     }
   },
   mounted() {
+
     console.log('my object is', this.result)
 
-    // Sort by assignment and then by student
-    // TODO get student names and assignment weeks
+    let id = this.$route.query.id
+    this.$grade_backend.$fetchOne(id).then(data => {
+      this.result = data
+      return this.$assignment_backend.$fetchOne(this.result.assignment)
+    }).then( (asgt) => {
+      //fetch student info, fetch assignment info
+      this.result.fullAssignmentInfo = asgt
+      return this.$student_backend.$fetchOne(this.result.student)
+    }).then(student => {
+      this.result.fullStudentInfo = student
 
+      console.log('all data fetched', this.result)
 
-  },
+      this.report = JSON.parse(this.result.generated_report)
+      console.log(this.report)
 
-  methods: {
-      updateInstructorComments() {
-        console.log('must save comments for ', this.result.id, this.result.instructor_comments)
- // todo emit to parent
-        this.$emit('onUpdatedInstructorComments', this.result.id, this.result.instructor_comments)
-      }
+    }).catch( err => {
+      console.log('errrrr', err)
+    })
+},
+
+methods: {
+  updateInstructorComments() {
+    // TODO
   }
+}
 }
 
 </script>

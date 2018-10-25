@@ -66,25 +66,25 @@ export default {
   computed: {
     readyResults: function() {
       // TODO why doesn't this work? Works with JS in component prop.
-      console.log('computing ready results', this.gradedResults)
+      // console.log('computing ready results', this.gradedResults)
       let ready = Object.values(this.gradedResults).filter(r => r!=null)
-      console.log('computed ready:', ready)
+      // console.log('computed ready:', ready)
       return ready
     }
   },
   mounted() {
 
-    console.log('The route query', this.$route.query)
+    // console.log('The route query', this.$route.query)
 
     this.id = this.$route.query.id
 
     this.$gradertask_backend.$fetchOne(this.id).then( data => {
-      console.log('batch info', data)
+      // console.log('batch info', data)
       this.batch = data
       this.expectedResults = this.batch.things_to_grade
 
       if (this.expectedResults == this.batch.processed) {
-        console.log('this batch is complete, no polling')
+        // console.log('this batch is complete, no polling')
         this.getLatestResults()   // this batch is completed
       }
 
@@ -120,23 +120,22 @@ export default {
 
     //  console.log('polling grader, have this many results ', this.receivedResults)
 
-      console.log('GET LATEST before polling')
-      console.log(this.gradedResults)
+      // console.log('GET LATEST before polling')
+      // console.log(this.gradedResults)
 
       // If the server is reporting that everything is graded, stop future polls
       if (this.batch.processed >= this.batch.things_to_grade) {
         this.cancelPolling()
         console.log('clearing interval, server knows all the results')
-
       }
 
       this.$autograder_backend.$graderProgress(this.batch.id)
           .then( data => {
             // data should be a list of ids that have been graded
-            console.log('polled and got this result', data)
+            // console.log('polled and got this result', data)
 
             data.graded_ids.forEach( id => {
-              console.log('process', id)
+              // console.log('process', id)
               if ( !this.gradedResults[String(id)] ) {
                 //add this ID and set value to null
                 this.gradedResults[String(id)] = null
@@ -145,31 +144,31 @@ export default {
             })
           }).then( () => {
 
-            console.log('now to get any missing data from this.gradedResults')
-
-            console.log('graded valies', Object.values(this.gradedResults))
-            console.log('graded values are null?', Object.values(this.gradedResults).find(r => r!=null))
+            // console.log('now to get any missing data from this.gradedResults')
+            //
+            // console.log('graded valies', Object.values(this.gradedResults))
+            // console.log('graded values are null?', Object.values(this.gradedResults).find(r => r!=null))
 
             // if all done, stop.
             if (Object.values(this.gradedResults).find( r => r != null)) {
-              console.log('there are no missing results.')
+              // console.log('there are no missing results.')
               this.cancelPolling()
             }
 
 
             for (let id in this.gradedResults) {
 
-             console.log('get data for id', id, this.gradedResults[id])
+          //   console.log('get data for id', id, this.gradedResults[id])
               if (this.gradedResults[String(id)] == null)  {
-                console.log('result ready, get details', id)
+          //      console.log('result ready, get details', id)
 
 
                 this.$grade_backend.$fetchOne(String(id))
                   .then( data => {
                     this.receivedResults++ ;
-                    console.log('data for one grade', data)
+            //        console.log('data for one grade', data)
                     this.gradedResults[String(id)] = data
-                    console.log('now graded results are', this.gradedResults)
+            //        console.log('now graded results are', this.gradedResults)
                   })
               }
             }
