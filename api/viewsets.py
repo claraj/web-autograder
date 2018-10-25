@@ -3,6 +3,7 @@ from .models import Assignment, Student, GradingBatch, Grade, Attributes, Progra
 from .serializers import AssignmentSerializer, StudentSerializer, ProgrammingClassSerializer, GradingBatchSerializer, GradeSerializer, AttributesSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
+from rest_framework.response import Response
 from django.db.models.functions import Lower
 
 
@@ -33,11 +34,14 @@ class GradingBatchViewSet(viewsets.ModelViewSet):
     queryset = GradingBatch.objects.all().order_by('-date')
     serializer_class = GradingBatchSerializer
 
-    @action(methods=['delete'], detail=False, url_path='deleteMany')
+    @action(methods=['patch'], detail=False, url_path='deleteMany')
     def deleteMany(self, request):
-        print(request)
-        for id in request.data:
+        # print('delete many req', request.data, request.stream)
+        if not 'ids' in request.data:
+            return Response('no ids to delete', status=status.HTTP_400_BAD_REQUEST)
+        for id in request.data['ids']:
             GradingBatch.objects.get(id=id).delete()
+        return Response('ok')  # ok,
 
 
 

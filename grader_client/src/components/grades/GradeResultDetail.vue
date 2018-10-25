@@ -77,7 +77,7 @@ individual questions, and for the whole assignment  -->
 
         <p><span class="title">Points earned for question:</span> {{qr.points_earned | toFixed(2) }}</p>
 
-        <p><span class="title">Instructor comments for question: </span> <textarea class="question-comments" v-model="qr.instructor_comments" v-on:change="updateQuestionComments()"></textarea></p>
+        <p><span class="title">Instructor comments for question <span>{{qr.question.question}}</span>: </span> <textarea class="question-comments" v-model="qr.instructor_comments" v-on:change="updateQuestionComments()"></textarea></p>
         <p><span class="title">Adjusted points: </span> <input v-on:change="updateAdjustedPoints(qr.adjusted_points)" v-model="qr.adjusted_points" />
           <span class="warning" v-if="qr.adjusted_points < 0 || qr.adjusted_points > report.total_points_available">
             Adjusted points not valid
@@ -104,7 +104,7 @@ individual questions, and for the whole assignment  -->
       <textarea id="overall-comments" v-model="report.overall_instructor_comments" v-on:change="updateOverallInstructorComments">
       </textarea></P>
 
-      <p>All looks good?</p> <input type="checkbox" v-model="lgtm" v-on:click="allGood()"/>
+      <p>All looks good? <input type="checkbox" v-model="lgtm" v-on:click="allGood()"/></p>
 
     </div>
     </div>
@@ -247,7 +247,7 @@ methods: {
 
 </script>
 
-<style>  /* otherwise all the other components will get these styles . */
+<style scoped>  /* otherwise all the other components will get these styles . */
 
 #why {
   padding-left: 0px;

@@ -60,7 +60,8 @@ Backend.prototype.$query = function(query)  {
 }
 
 Backend.prototype.$deleteMany = function(ids) {
-    return this.$crud.delete(`/${this.base}`, ids)
+  // patching because delete can't carry a paylod/body
+    return this.$crud.patch(`/${this.base}/deleteMany/`, ids)
 }
 
 
