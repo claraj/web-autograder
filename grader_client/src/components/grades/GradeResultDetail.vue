@@ -13,7 +13,6 @@
 
     <h4>Result ID {{ result.id }}</h4>
 
-
     <P v-if="result.fullAssignmentInfo">Assignment Week: {{ result.fullAssignmentInfo.week }}</P>
     <P v-else>Assignment internal ID: {{ result.assignment }}</P>
 
@@ -61,7 +60,7 @@ export default {
       updateInstructorComments() {
         console.log('must save comments for ', this.result.id, this.result.instructor_comments)
  // todo emit to parent
-        this.$emit('onChildUpdatedInstructorComments', this.result.id, this.result.instructor_comments)
+        this.$emit('onUpdatedInstructorComments', this.result.id, this.result.instructor_comments)
       }
   }
 }

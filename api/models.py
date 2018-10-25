@@ -49,6 +49,7 @@ class Grade(models.Model):
     date = models.DateField(auto_now_add=True)
     # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.SET_NULL)
     error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
+    reviewed = models.BooleanField(default=False, blank=True, null=False)
 
     def __str__(self):
         return 'assignment %s student %s batch %s date %s, score %f'  % (self.assignment.id, self.student.id, self.batch, self.date, self.score)

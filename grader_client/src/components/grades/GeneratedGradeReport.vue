@@ -20,14 +20,14 @@
         <td>Adjusted Points</td>
         <td>Comments</td>
       </th>
-      <tr v-for:"question in reports">
+      <!-- <tr v-for:"question in reports">
         <td>{{question.number}}</td>
         <td>{{question.testfiles}}</td>
         <td>{{question.messages}}</td>
         <td>{{question.points}}</td>
         <td><input v-model:"question.adjustedPoints" v-on:"adjustPoints(question.id)"></td>
         <td><input v-model:"question.comments" v-on:"editComments(question.id)"</td>
-      </tr>
+      </tr> -->
     </table>
 
   </div>

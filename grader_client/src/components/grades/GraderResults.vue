@@ -5,13 +5,17 @@
 <div>
   <h2>Grader Results</h2>
 
-<P>TODO show list of assignments and names</p>
+<div>
+<P>TODO show list of assignments and names for this batch</p>
 
-  <p>Batch: {{ id }}</p>
-  <P>Started at: {{ batch.date | moment('dddd MMMM YYYY, HH:ss a')}}</p>
-  <p>Expect {{expectedResults}} results</p>
-  <p>Received {{receivedResults}} results</p>
+</div>
 
+
+  <span>Batch {{ id }}</span>
+  <span>Started at {{ batch.date | moment('ddd MMMM YYYY, HH:ss a')}}</span>
+  <P><span>Expect {{expectedResults}} results,</span>
+  <span>Received {{receivedResults}} results</span>
+</p>
   <h3>Results</h3>
 
   <button v-if="loading" v-on:click="cancelPolling">Cancel</button>
@@ -23,7 +27,7 @@
 
   <GradeResultList
     v-bind:readyResults="Object.values(this.gradedResults).filter(r => r!=null)"
-    @onChangedInstructorComments="onChangedInstructorComments">
+    @onUpdatedInstructorComments="onUpdatedInstructorComments">
   </GradeResultList>
 
 
@@ -100,10 +104,10 @@ export default {
 
   methods: {
 
-     onChangedInstructorComments(resultId, newComments) {
+     onUpdatedInstructorComments(resultId, newComments) {
        console.log('will now update comments', resultId, newComments)
        this.$grade_backend.$editItem({id: resultId, instructor_comments: newComments } )
-        .then( d=> console.log(d))
+        .then( d => console.log(d))
         .catch(err => console.log(err))
      },
 
