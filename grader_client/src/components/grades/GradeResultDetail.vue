@@ -26,7 +26,6 @@ individual questions, and for the whole assignment  -->
 
   <p><span class="title">Date graded:</span> {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
   <p><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
-  <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
     <!-- <P>Generated Report {{result.generated_report}}</p> -->
     <!-- <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport> -->
 
@@ -35,6 +34,16 @@ individual questions, and for the whole assignment  -->
 
     question number; code file; list of tests; points avail;  tests passed/failed; points earned; instructor comments; instructor adjust grade
   -->
+
+  <div v-if="report.error">
+
+    <p><span class="section-title">Errors</span></P>
+    <p><span class="warning"><span class="title">Error fetching or running code:</span> {{report.error }}</span></p>
+  </div>
+
+  <div v-else>
+
+  <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
 
   <p v-for="qr in report.question_reports">
     <ul id="why">
@@ -76,6 +85,10 @@ individual questions, and for the whole assignment  -->
         </p>
       </ul>
     </p>
+
+
+  </div>
+
 
     <div>
     <p class="section-title">Summary</p>
@@ -119,7 +132,7 @@ export default {
       report: {},
       lgtm: false,
       backupOverall: '',
-      totalAdjustedPoints: 400
+      totalAdjustedPoints: 0
     }
   },
   filters: {
@@ -234,7 +247,7 @@ methods: {
 
 </script>
 
-<style>
+<style>  /* otherwise all the other components will get these styles . */
 
 #why {
   padding-left: 0px;

@@ -47,16 +47,24 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
                     #Error pulling code - e.g. the remote history doesn't match the local history.
                     # raise CloneError(f'Error pulling code. The remote history may be different to local? Error: {e.stderr}')
 
+                    # Or, aonther process is trying to clone this repo e.g. more than one task
+                    # trying to clone the instructor repo.
+
+                    # " Another git process seems to be running in this repository, e.g.
+                    # an editor opened by 'git commit'. Please make sure all processes
+                    # are terminated then try again. If it still fails, a git process
+                    # may have crashed in this repository earlier: "
+
                     # TODO warn instead of crash.
-                    pass
                     print(f'error pulling code because {e.stderr}, continuing anyway')
+                    return repo_target_dir, 'pull'
 
             else:
                 raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')
-                # something else went wrong
+                # something else went wrong, throw the error
 
         else:
-            # Some other error
+            # Some other error, throw
             raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')
 
 
