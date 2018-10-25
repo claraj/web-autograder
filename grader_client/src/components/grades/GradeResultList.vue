@@ -115,14 +115,19 @@ export default {
 
       // Sort by assignment and then by student
         sorted.sort( function(a, b) {
+
+          // If the full info is not available, temporarilty sort by assignment
           if (!a.fullStudentInfo || !a.fullAssignmentInfo || !b.fullStudentInfo || !b.fullAssignmentInfo) {
             return a.assignment - b.assignment
           }
+
+          // If same assignment week, sort by student
           if (a.fullAssignmentInfo.week == b.fullAssignmentInfo.week) {
             return a.fullStudentInfo.name.toLowerCase().localeCompare(b.fullStudentInfo.name.toLowerCase())
           }
+          // Otherwise, sort by assignment 
           else {
-            return a.fullAssignmentInfo.week.toLowerCase().localeCompare(b.fullAssignmentInfo.week.toLowerCase())
+            return a.fullAssignmentInfo.week - b.fullAssignmentInfo.week
           }
       })
       return sorted

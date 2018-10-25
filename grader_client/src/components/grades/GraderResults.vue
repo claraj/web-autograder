@@ -5,6 +5,8 @@
 <div>
   <h2>Grader Results</h2>
 
+<P>TODO show list of assignments and names</p>
+
   <p>Batch: {{ id }}</p>
   <P>Started at: {{ batch.date | moment('dddd MMMM YYYY, HH:ss a')}}</p>
   <p>Expect {{expectedResults}} results</p>
@@ -12,7 +14,7 @@
 
   <h3>Results</h3>
 
-  <button v-on:click="cancelPolling">Cancel</button>
+  <button v-if="loading" v-on:click="cancelPolling">Cancel</button>
 
   <p v-if="loading">Loading...</p>
 

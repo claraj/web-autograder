@@ -44,8 +44,6 @@ class TestSuite:
     number of tests, number of failures, number of errors, number of skipped
     Contains a list of TestCase objects
     """
-
-
     name: str
     tests: int
     failures: int = 0
@@ -73,7 +71,7 @@ class TestSuite:
 
 
     def fail_error_messages(self):
-        return [t.failure.message for t in self.testcases if t.failure] + [t.error.message for t in self.testcases if t.error]
+        return [t.failure.message + ', ' + t.failure.fulltext for t in self.testcases if t.failure] + [t.error.message + ', ' + t.error.fulltext for t in self.testcases if t.error]
 
 
 @dataclass

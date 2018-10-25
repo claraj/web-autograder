@@ -23,7 +23,8 @@
     <P>date: TODO </p>
 
     <p>Grade {{ result.score }}</p>
-    <P>Generated Report {{ result.generated_report}}</p>
+    <!-- <P>Generated Report {{result.generated_report}}</p> -->
+    <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport>
     <P>Instructor Comments <textarea v-model="result.instructor_comments" v-on:change="updateInstructorComments"></textarea></P>
     <P>Student GitHub <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
   </div>
@@ -32,8 +33,11 @@
 
 <script>
 
+import GeneratedGradeReport from './GeneratedGradeReport'
+
 export default {
   name: "GradeResultDetail",
+  components: { GeneratedGradeReport },
   props: {
     result: Object,
     // assignmentLookup: Object,

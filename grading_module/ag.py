@@ -31,6 +31,7 @@ from .autograder.directory import combine
 from .autograder.report import report
 from .autograder.models.json_encoders import TestItemEncoder
 
+
 # import settings
 #
 # from autograder.github import clone
@@ -80,7 +81,7 @@ def grade(assignment, student):
         try:
             student_code, err = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
         except Exception as e:
-            return { 'success': True, 'result': (f'Error fetching student code, {e}', 0) }
+            return { 'success': True, 'result': f'Error fetching student code, {e}', score: 0 }
 
         project_config = get_config(instructor_code)
         grade_scheme = get_grade_scheme(instructor_code)
@@ -94,26 +95,27 @@ def grade(assignment, student):
                 t, e, tb = sys.exc_info()
                 print(traceback.print_tb(tb))
 
-                return { 'success': True, 'result': (f'Error running tests on student code, {e}', 0) }
+                return { 'success': True, 'result': f'Error running tests on student code, {e}', 'score': 0 }
 
             try:
-                report, score = generate_grade_report(combined, project_config, grade_scheme)
+                report = generate_grade_report(combined, project_config, grade_scheme)
             except Exception as e:
                 t, e, tb = sys.exc_info()
-                print(traceback.print_tb(tb))
-                
-                return { 'success': True, 'result': (f'Error reading test report files from student code, {e}', 0) }
+                print(t, e, traceback.print_tb(tb))
+
+                return { 'success': True, 'result': f'Error reading test report files from student code, {e}', 'score': 0 }
 
             # input('done. press a key')
 
-        return { 'success': True, 'result': (report, score) }
+        json_report = json.dumps(report, cls=TestItemEncoder)
+        return { 'success': True, 'report': json_report, 'score' : report.total_points_earned  }
 
     except Exception as e:
 
         # These are most likely errors that I have caused, or from modifications of the project structure between student and instructor.
         t, e, tb = sys.exc_info()
         print(traceback.print_tb(tb))
-        return { 'success': False, 'error': e }
+        return { 'success': False, 'error': e, 'score': 0 }
 
 
 def fetch_student_code(base, org, student_id):
@@ -162,14 +164,20 @@ def generate_grade_report(location, config, scheme):
     reports_dir = config['report_location']
     test_report_location = os.path.join(location, reports_dir)
     print(test_report_location)
-    grade_report_list, score = report.grade(test_report_location, scheme)  # report could be CSV (probably) or some other organized text format.
-    for r in grade_report_list:
-        print('REPORT IS', r)
 
-    strr = [str(r) for r in grade_report_list]
-    print('STRR', strr)
+    assignment_report = report.grade(test_report_location, scheme)
+    return assignment_report
 
-    return '\n'.join( [str(r) for r in grade_report_list] ), score
+    # grade_report_list, score = report.grade(test_report_location, scheme)  # report could be CSV (probably) or some other organized text format.
+    # for r in grade_report_list:
+    #     print('REPORT IS', r)
+    #
+    # strr = [str(r) for r in grade_report_list]
+    # print('STRR', strr)
+    #
+    # return '\n'.join( [str(r) for r in grade_report_list] ), score
+
+
 
 
 if __name__ == '__main__':

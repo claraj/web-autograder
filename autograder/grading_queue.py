@@ -1,6 +1,7 @@
 from api.models import Student, Assignment, Grade, GradingBatch
 from grading_module import ag
 from django.db.models import F
+import json
 
 from django_q.tasks import async_task, result
 
@@ -18,7 +19,9 @@ def start_grader(batch, assignment_id, student_id):
     assignment = Assignment.objects.get(pk=assignment_id)
     result = ag.grade(assignment, student)
 
-    if 'error' in result:
+    print('grader results are', result)
+
+    if not result['success']:
         # These are programatic errors - like the docker config is wrong or some other coding error
         # Probably my problem
         print('ERROR grading:', result['error'] )
@@ -29,12 +32,13 @@ def start_grader(batch, assignment_id, student_id):
             'assignment_id': assignment_id,
             'student_id': student_id,
             'score': 0,
-            'generated_report': f'Error running grader because {err}'  # TODO format?
+            'generated_report': json.dumps({ 'error': f'Error running grader because {err}' }) # TODO format?
         }
 
     # Errors like - code doesn't compile, repo not found... save in the Grade object anyway so client
 
-    report, score = result['result']
+    report_result = result['report']
+    score = result['score']
 
     return {
         'error': None,
@@ -42,7 +46,7 @@ def start_grader(batch, assignment_id, student_id):
         'assignment_id': assignment_id,
         'student_id': student_id,
         'score': score,
-        'generated_report': report  # TODO format?
+        'generated_report': report_result # Formatted as JSON string, although this module doesn't need to care.
     }
 
 
