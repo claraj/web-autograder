@@ -3,7 +3,7 @@ individual questions, and for the whole assignment  -->
 
 <template>
 
-  <div>
+  <div id="content">
 
     <!--
     Make these clickable to student or assigmment page
@@ -11,17 +11,22 @@ individual questions, and for the whole assignment  -->
     Assignment page should have all student's results
   -->
 
-  <h4>Result ID {{ result.id }}</h4>
+  <div id="header">
+    Grade for
+    <span v-if="result.fullAssignmentInfo">Assignment Week {{ result.fullAssignmentInfo.week }}</span>
+    <span v-else>(Assignment internal ID: {{ result.assignment }})</span>,
 
-  <P v-if="result.fullAssignmentInfo">Assignment Week: {{ result.fullAssignmentInfo.week }}</P>
-  <P v-else>Assignment internal ID: {{ result.assignment }}</P>
+    <span v-if="result.fullStudentInfo">student {{ result.fullStudentInfo.name }}</span>
+    <span v-else>(Student internal ID: {{ result.student }})</span>.
 
-  <p v-if="result.fullStudentInfo">Student Name: {{ result.fullStudentInfo.name }}</p>
-  <P v-else>Student internal ID: {{ result.student }}</P>
+    (Grade result ID {{ result.id }})
+  </div>
 
-  <P>Date graded: {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
+  <div id="report">
 
-    <p>Grade: {{ report.total_points_earned }} out of {{ report.total_points_available }}</p>
+  <p><span class="title">Date graded:</span> {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
+  <p><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
+  <p><span class="title">Grade:</span> {{ report.total_points_earned }} out of {{ report.total_points_available }}</p>
     <!-- <P>Generated Report {{result.generated_report}}</p> -->
     <!-- <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport> -->
 
@@ -32,60 +37,57 @@ individual questions, and for the whole assignment  -->
   -->
 
   <p v-for="qr in report.question_reports">
-
-    <!-- <P>question report: {{qr}}</p> -->
-      <ul>
-        <p>question: {{qr.question.question}}</p>
-
-        <p>points avail: {{qr.points_available}}</p>
-        <p>source file: {{qr.source_file}}</p>
-        <p>test files:
+    <ul>
+        <p class="question-header"><span class="title">Question:</span> {{qr.question.question}}</p>
+        <p><span class="title">Points avail:</span>  {{qr.points_available}}</p>
+        <p><span class="title">Source file:</span>  {{qr.source_file}}</p>
+        <p><span class="title">Test files:</span>
           <ul><li v-for="f in qr.question.test_files"> {{f}} </li></ul>
         </p>
 
-        <!-- <p>report files: {{qr.report_files}}</p> -->
+        <P><span class="title">Total tests:</span>  {{qr.tests}} </p>
+        <P><span class="title">Total test passes:</span> {{qr.passes}}
+          <span class="passed" v-if="qr.tests === qr.passes">All passed</span>
+          <span class="not-passed" v-else>Fails and/or Errors</span>
+         </p>
 
-        <p>No. tests {{qr.tests}}</p>
-        <p>No. passes {{qr.passes}}</p>
-
-        <p>test suites<p>
+        <p><span class="title">Test Suites:</span></p>
           <ul><li v-for="tss in qr.testsuites">
-             {{tss.name}} Tests {{tss.tests}} Fails {{tss.failures}} Errors {{tss.errors}} Passes {{tss.passes}}
+             Name: {{tss.name}}, Tests: {{tss.tests}}, Fails: {{tss.failures}}, Errors: {{tss.errors}}, Passes: {{tss.passes}}
 
             <ul><li v-for="ts in tss.testsuites">
-               {{ts.name}} Tests {{ts.tests}} Fails {{ts.failures}} Errors {{ts.errors}} Passes {{ts.passes}}
+               Name: {{ts.name}}, Tests: {{ts.tests}}, Fails: {{ts.failures}}, Errors: {{ts.errors}}, Passes: {{ts.passes}}
 
               <ul><li v-for="tc in ts.testcases">
-                {{tc.name}} Passed? {{tc.passed}}
-                  <p v-if="tc.error">Errored {{tc.error.message}} {{tc.error.fulltext}}</p>
-                  <p v-if="tc.failure">Failed {{tc.failure.message}} {{tc.failure.fulltext}}</p>
-
-                {{tc.message}} {{tc.fulltext}}
+                <span class="testcase-name">{{tc.name}}</span> <span v-if="tc.passed" class="passed">Passed</span>
+                  <p v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> {{tc.error.fulltext}}</p>
+                  <p v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> {{tc.failure.fulltext}}</p>
               </li></ul>
-
-
             </li></ul>
-
-
           </li></ul>
 
-        <p>Points earned {{qr.points_earned}}</p>
+        <p><span class="title">Points earned for question:</span> {{qr.points_earned}}</p>
 
-
-
-
-
-
-        <p>Instructor comments<input /></p>
-        <p>Adjusted points<input /></p>
+        <p><span class="title">Instructor comments for question: </span> <textarea v-model="qr.instructor_comments"></textarea></p>
+        <p><span class="title">Adjusted points: </span> <input v-model="qr.adjusted_points" /></p>
       </ul>
     </p>
 
+    <P><span class="title">Overall Instructor Comments:</span>
+      <textarea id="overall-comments" v-model="report.overall_instructor_comments" v-on:change="updateInstructorComments">
+      </textarea></P>
 
+      <p>All looks good?</p> <input type="checkbox" v-model="lgtm" v-on:click="allGood()"/>
 
-    <P>Overall Instructor Comments <textarea v-model="result.instructor_comments" v-on:change="updateInstructorComments"></textarea></P>
-    <P>Student GitHub <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
     </div>
+
+    <div id="buttons">
+    <button id="save">SAVE</button>
+    <br>
+    <button id="d2l-report">D2L Report</button>
+    </div>
+
+  </div>
 
 </template>
 
@@ -99,7 +101,9 @@ export default {
   data() {
     return {
       result: {},
-      report: {}
+      report: {},
+      lgtm: false,
+      backupOverall: ''
     }
   },
   mounted() {
@@ -129,9 +133,99 @@ export default {
 
 methods: {
   updateInstructorComments() {
-    // TODO
+    // Stringify the whole report and send it back to server
+    let stringReport = JSON.Stringify(this.report)
+    this.result.report = stringReport
+    this.$grade_backend.$editItem(result.id, this.result).then( () => {
+      console.log('saved, hopefully. ')
+    }
+  )
+
+  },
+  allGood() {
+    console.log(this.lgtm)
+
+    if (!this.lgtm) {
+      this.backupOverall = this.result.overall_instructor_comments
+      this.report.overall_instructor_comments = "Everything looks good. Thanks!"
+    }
+
+    else {
+      console.log('backed up:', this.backupOverall)
+      this.report.overall_instructor_comments = this.backupOverall  || ''
+    }
   }
 }
 }
 
 </script>
+
+<style>
+
+#content {
+  text-align: left;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+#header {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.passed {
+  color: green;
+  font-weight: bold;
+}
+
+.not-passed {
+  color: red;
+  font-weight: bold;
+}
+
+
+#report {
+  padding-top: 5px;
+}
+
+p {
+  margin: 2px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+#overall-comments {
+  width: 100%;
+}
+
+.testcase-name {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.question-header {
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+#buttons {
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin: 100px;
+  /* width: 100; */
+  height: 50px;
+  background-color: orange;
+  font-size: 20px;
+  padding: 20px;
+}
+
+button {
+  width: 100px;
+
+}
+
+</style>
