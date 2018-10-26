@@ -11,57 +11,63 @@
     Assignment page should have all student's results
     -->
 
-    <h4>Result ID {{ result.id }}</h4>
+    <h4>
+      <span class="report-id">{{result.id}}</span>
+      <span v-if="result.fullAssignmentInfo">Assignment Week {{ result.fullAssignmentInfo.week }}</span>
+      <span v-else>Assignment internal ID: {{ result.assignment }}</span>
 
-    <P v-if="result.fullAssignmentInfo">Assignment Week: {{ result.fullAssignmentInfo.week }}</P>
-    <P v-else>Assignment internal ID: {{ result.assignment }}</P>
+      <span v-if="result.fullStudentInfo">for {{ result.fullStudentInfo.name }}</span>
+      <span v-else>Student internal ID: {{ result.student }}</span>
 
-    <p v-if="result.fullStudentInfo">Student Name: {{ result.fullStudentInfo.name }}</p>
-    <P v-else>Student internal ID: {{ result.student }}</P>
+  <router-link :to="{name: 'grade-detail', query: {id: result.id} }">Full Report</router-link>
+    </h4>
 
-    <p>Grade: {{ result.score }}</p>
-    <!-- <P>Generated Report {{result.generated_report}}</p> -->
-    <!-- <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport> -->
+    <!-- <p>Result ID {{ result.id }}</p> -->
+    <p><span class="title">Grade:</span> {{ result.score }}</p>
 
-    <P>Instructor Comments <textarea v-model="result.instructor_comments" v-on:change="updateInstructorComments"></textarea></P>
-    <P>Student GitHub <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
+    <P><span class="title">Overall Instructor Comments:</span></p>
+      <textarea v-model="report.overall_instructor_comments" v-on:change="updateInstructorComments"></textarea>
+    <P><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
   </div>
 
 </template>
 
 <script>
 
-// import GeneratedGradeReport from './GeneratedGradeReport'
-
 export default {
   name: "GradeResultDetail",
-  // components: { GeneratedGradeReport },
   props: {
     result: Object,
-    // assignmentLookup: Object,
-    // studentLookup: Object
   },
   data() {
     return {
-
     }
   },
   mounted() {
     console.log('my object is', this.result)
-
-    // Sort by assignment and then by student
-    // TODO get student names and assignment weeks
-
-
   },
-
+  computed: {
+    report: function() {
+      return JSON.parse(this.result.generated_report)
+    }
+  },
   methods: {
-      updateInstructorComments() {
-        console.log('must save comments for ', this.result.id, this.result.instructor_comments)
- // todo emit to parent
-        this.$emit('onUpdatedInstructorComments', this.result.id, this.result.instructor_comments)
-      }
+    updateInstructorComments() {
+      console.log('must save comments for ', this.result.id, this.report)
+      this.$emit('onUpdatedInstructorComments', this.result.id, JSON.stringify(this.report))
+    }
   }
 }
 
 </script>
+
+<style>
+  textarea {
+    width: 100%;
+  }
+
+  .report-id {
+    font-weight: lighter;
+
+  }
+</style>

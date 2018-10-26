@@ -2,28 +2,26 @@
 
 <template>
 
+<div id="content">
 <div>
   <h2>Grader Results</h2>
 
 <div>
-<P>TODO show list of assignments and names for this batch</p>
 
 </div>
-
 
   <span>Batch {{ id }}</span>
   <span>Started at {{ batch.date | moment('ddd MMMM YYYY, HH:ss a')}}</span>
   <P><span>Expect {{expectedResults}} results,</span>
   <span>Received {{receivedResults}} results</span>
 </p>
-  <h3>Results</h3>
 
   <button v-if="loading" v-on:click="cancelPolling">Cancel</button>
 
   <p v-if="loading">Loading...</p>
+  <p class="error" v-if="timedOut">Timed out</p>
 
-<!-- TODO sort by assignment WEEK and then by student NAME -->
-<!-- Links to student github page. -->
+  <!-- <h3>Results</h3> -->
 
   <GradeResultList
     v-bind:readyResults="Object.values(this.gradedResults).filter(r => r!=null)"
@@ -31,12 +29,9 @@
   </GradeResultList>
 
 
-  <ul><li v-for="result in gradedResults">{{ result }} </li></ul>
-
-  <p>{{gradedResults}}</p>
-
   <p v-if="loading">Loading...</p>
 
+</div>
 </div>
 
 </template>
@@ -49,6 +44,10 @@ import GradeResultList from './GradeResultList'
 const pollInterval = 3000
 let poller
 
+let timeout =  5 * 60 * 1000 // 5 minutes
+let maxPollCount = timeout / pollInterval
+let pollCount = 0
+
 export default {
   name: 'GradeResult',
   components: { GradeResultList },
@@ -59,7 +58,8 @@ export default {
       gradedResults: {},       // { 1: results1, 2: results2 ....}
       expectedResults: 0,
       receivedResults: 0,   // Received by the client, not processed on the back end
-      loading: true
+      loading: true,
+      timedOut: false
     }
   },
 
@@ -74,39 +74,32 @@ export default {
   },
   mounted() {
 
-    // console.log('The route query', this.$route.query)
-
     this.id = this.$route.query.id
-
     this.$gradertask_backend.$fetchOne(this.id).then( data => {
-      // console.log('batch info', data)
       this.batch = data
       this.expectedResults = this.batch.things_to_grade
-
       if (this.expectedResults == this.batch.processed) {
-        // console.log('this batch is complete, no polling')
         this.getLatestResults()   // this batch is completed
       }
 
       else {
         this.getLatestResults()
         poller = setInterval( this.getLatestResults, pollInterval);  // keep polling at intervals
-        // TODO stop at some point
       }
     })
   },
 
   beforeRouteLeave(to, from, next) {
     console.log('leaving page and cancelling interval')
-    clearInterval(poller)
+    this.cancelPolling()
     next()   /// todo this does not always work
   },
 
   methods: {
 
-     onUpdatedInstructorComments(resultId, newComments) {
-       console.log('will now update comments', resultId, newComments)
-       this.$grade_backend.$editItem({id: resultId, instructor_comments: newComments } )
+     onUpdatedInstructorComments(resultId, report) {
+       console.log('will now update comments', resultId, report)
+       this.$grade_backend.$editItem({id: resultId, generated_report: report } )
         .then( d => console.log(d))
         .catch(err => console.log(err))
      },
@@ -118,57 +111,43 @@ export default {
 
     getLatestResults() {
 
-    //  console.log('polling grader, have this many results ', this.receivedResults)
+      pollCount++
+      console.log('poll count', pollCount)
 
-      // console.log('GET LATEST before polling')
-      // console.log(this.gradedResults)
+      if (pollCount > maxPollCount) {
+        console.log('stop polling')
+        this.timedOut = true
+        this.cancelPolling()
+      }
 
-      // If the server is reporting that everything is graded, stop future polls
       if (this.batch.processed >= this.batch.things_to_grade) {
         this.cancelPolling()
-        console.log('clearing interval, server knows all the results')
       }
 
       this.$autograder_backend.$graderProgress(this.batch.id)
           .then( data => {
             // data should be a list of ids that have been graded
-            // console.log('polled and got this result', data)
 
             data.graded_ids.forEach( id => {
-              // console.log('process', id)
               if ( !this.gradedResults[String(id)] ) {
-                //add this ID and set value to null
-                this.gradedResults[String(id)] = null
+                this.gradedResults[String(id)] = null  //add this ID and set value to null, will fetch full data later
               }
 
             })
           }).then( () => {
 
-            // console.log('now to get any missing data from this.gradedResults')
-            //
-            // console.log('graded valies', Object.values(this.gradedResults))
-            // console.log('graded values are null?', Object.values(this.gradedResults).find(r => r!=null))
-
             // if all done, stop.
             if (Object.values(this.gradedResults).find( r => r != null)) {
-              // console.log('there are no missing results.')
               this.cancelPolling()
             }
 
-
             for (let id in this.gradedResults) {
 
-          //   console.log('get data for id', id, this.gradedResults[id])
               if (this.gradedResults[String(id)] == null)  {
-          //      console.log('result ready, get details', id)
-
-
                 this.$grade_backend.$fetchOne(String(id))
                   .then( data => {
                     this.receivedResults++ ;
-            //        console.log('data for one grade', data)
                     this.gradedResults[String(id)] = data
-            //        console.log('now graded results are', this.gradedResults)
                   })
               }
             }
@@ -176,13 +155,23 @@ export default {
           }).catch( err => {
             console.log('error, cancelling poller', err);
             this.cancelPolling() })
-
-
     },
-
-
 
   }
 }
 
 </script>
+
+<style>
+
+.error {
+  color: red;
+}
+
+#content {
+  text-align: left;
+}
+
+
+
+</style>

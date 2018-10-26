@@ -1,7 +1,6 @@
 <!-- Results of one grading batch.  -->
 <template>
   <div>
-    <ul>
 
       <ThingsGradedList
         v-bind:students="uniqueStudents"
@@ -9,21 +8,23 @@
         >
       </ThingsGradedList>
 
+      <h3>Results</h3>
+
       <div v-if="readyResults.length">
-        <li v-for="result in sortedResults">
-          <router-link :to="{name: 'grade-detail', query: {id: result.id} }">Details</router-link>
+
+        <div v-for="result in sortedResults">
           <GradeResultSummary
             v-bind:result="result"
             @onUpdatedInstructorComments="onUpdatedInstructorComments">
           </GradeResultSummary>
+          <hr>
+        </div>
 
-        </li>
       </div>
 
       <div v-else>
         <p>No results</p>
       </div>
-    </ul>
   </div>
 </template>
 
@@ -70,8 +71,8 @@ export default {
   },
 
   methods: {
-    onUpdatedInstructorComments (id, comments) {
-      this.$emit('onUpdatedInstructorComments', id, comments)
+    onUpdatedInstructorComments (id, report) {
+      this.$emit('onUpdatedInstructorComments', id, report)
     },
 
     fillFromCache(data, cache) {
@@ -92,13 +93,10 @@ export default {
         }
       })
 
-      console.log('after filling from cache', this.readyResults )
-
     },
 
     fetchDetails (dataArray, cache, type, fullInfoField, backend) {
       // Cache contains Student objects, or a placeholder { id: 4, fetching: true } if the data has been requested
-      // console.log('fetch details starting data')
 
       if (!this.readyResults) { console.log('no ready results...'); return }
 
@@ -106,10 +104,8 @@ export default {
         if (!res[fullInfoField]) {   // Has fill info?
 
           let resId = res[type]
-
           let cachedItem = cache.find( s => s.id === resId)
           if (cachedItem) {
-            // console.log(`{type} info is cached or being fetched `)
             if (!cachedItem.fetching) { res.fullInfo = cachedItem }
           }
 
