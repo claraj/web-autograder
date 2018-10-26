@@ -12,6 +12,7 @@
     -->
 
     <h4>
+      <img src="@/assets/list.png">
       <span class="report-id">{{result.id}}</span>
       <span v-if="result.fullAssignmentInfo">Assignment Week {{ result.fullAssignmentInfo.week }}</span>
       <span v-else>Assignment internal ID: {{ result.assignment }}</span>

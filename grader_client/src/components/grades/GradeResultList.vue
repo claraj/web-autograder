@@ -52,7 +52,6 @@ export default {
     this.fetchDetails()     // For any ready results, fetch the full student and assignment info.
     this.sortedResults = this.sortResults()
   },
-
   watch: {
     readyResults: {
       handler: function () {

@@ -26,14 +26,6 @@ individual questions, and for the whole assignment  -->
 
   <p><span class="title">Date graded:</span> {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
   <p><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
-    <!-- <P>Generated Report {{result.generated_report}}</p> -->
-    <!-- <GeneratedGradeReport v-bind:report="result.generated_report"></GeneratedGradeReport> -->
-
-
-    <!-- List of questions here
-
-    question number; code file; list of tests; points avail;  tests passed/failed; points earned; instructor comments; instructor adjust grade
-  -->
 
   <div v-if="report.error">
 
@@ -85,8 +77,6 @@ individual questions, and for the whole assignment  -->
         </p>
       </ul>
     </p>
-
-
   </div>
 
 

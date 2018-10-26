@@ -58,13 +58,13 @@ export default new Router({
       component: GraderResults
     },
     {
-      path: '/student-detail/:id',
-      name: 'student-detail',
+      path: '/student',
+      name: 'Student',
       component: StudentDetail
     },
     {
-      path: '/assignment-detail/:id',
-      name: 'assigment-detail',
+      path: '/assignment',
+      name: 'Assignment',
       component: AssignmentDetail
     }
   ]

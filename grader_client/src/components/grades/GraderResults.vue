@@ -4,15 +4,15 @@
 
 <div id="content">
 <div>
-  <h2>Grader Results</h2>
+  <h2>Grader Results for batch {{ id }}</span> <br>
+    <span><span class="title">Started at</span> {{ batch.date | moment('ddd MMMM YYYY, HH:ss a')}}</span></h2>
 
 <div>
 
 </div>
 
-  <span>Batch {{ id }}</span>
-  <span>Started at {{ batch.date | moment('ddd MMMM YYYY, HH:ss a')}}</span>
-  <P><span>Expect {{expectedResults}} results,</span>
+
+  <P><span class="title">Stats: </span><span>Expect {{expectedResults}} results,</span>
   <span>Received {{receivedResults}} results</span>
 </p>
 

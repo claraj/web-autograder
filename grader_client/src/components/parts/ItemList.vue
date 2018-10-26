@@ -17,7 +17,7 @@
 
         <td v-for="attr in attributes">
             <template v-if="attr.hyperlink"><a v-bind:href="item[attr.attr]">{{ item[attr.attr] }}</a> </template>
-            <!-- <template v-if="attr.clickForDetails"><router-link :to="{ name: name, params: { item[attr.attr] } }"></router-link> >{{ item[attr.attr] }} (click for details)</a> </template> -->
+            <template v-if="attr.linkToDetails"><router-link :to="{ name: itemType.slice(0,-1), query: { id: item[attr.attr] }}"> {{ item[attr.attr] }} (click for details)  </router-link></template>
             <template v-else-if="attr.boolean"><input type="checkbox" v-bind:checked="item[attr.attr]" disabled="true"/> </template>
             <template v-else> {{ item[attr.attr] }} </template>
         </td>
@@ -30,21 +30,7 @@
   </div>
 </template>
 
-
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  tr,td,th,table {
-    border: 1px solid black;
-  }
-</style>
-
 <script>
-
-/* eslint-disable */
-
 
 export default {
   name: 'ItemList',
@@ -54,13 +40,8 @@ export default {
     item: Object,
     itemType: String
   },
-
   mounted () {
-    // this.fetchItems()
-    console.log('item list mounted', this.items)
-    console.log('student attrs', this.attributes)
   },
-
   methods: {
     requestEdit(itemId) {
       // this.item = this.items.filter( item => item.id === itemId)[0]
@@ -71,8 +52,17 @@ export default {
       console.log('emit delete message to parent for id ', itemId)
       this.$emit('onRequestDelete', itemId)
     }
-
   }
 }
 
 </script>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  tr,td,th,table {
+    border: 1px solid black;
+  }
+</style>
