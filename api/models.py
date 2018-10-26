@@ -46,6 +46,7 @@ class Grade(models.Model):
     score = models.DecimalField(max_digits=6, decimal_places=3)
     student_github_url = models.CharField(max_length=400, blank=True)
     batch = models.UUIDField()
+    github_commit_hash = models.CharField(max_length=40, blank=False, null=True)
     date = models.DateTimeField(auto_now_add=True)
     # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.SET_NULL)
     error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
