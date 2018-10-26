@@ -20,7 +20,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
 
     try:
         repo = Repo.clone_from(repo_url, os.path.join(target_dir, repo_dir))
-        return repo_target_dir, 'clone'
+        return repo_target_dir, 'clone', get_latest_commit_sha(repo)
 
     except GitCommandError as e:
         if 'remote: Repository not found.' in e.stderr:
@@ -42,7 +42,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
                 # this is the repo and it's already downloaded. Pull any changes
                 try:
                     origin.pull()
-                    return repo_target_dir, 'pull'
+                    return repo_target_dir, 'pull', get_latest_commit_sha(repo)
                 except GitCommandError as e:
                     #Error pulling code - e.g. the remote history doesn't match the local history.
                     # raise CloneError(f'Error pulling code. The remote history may be different to local? Error: {e.stderr}')
@@ -57,7 +57,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
 
                     # TODO warn instead of crash.
                     print(f'error pulling code because {e.stderr}, continuing anyway')
-                    return repo_target_dir, 'pull'
+                    return repo_target_dir, 'pull', get_latest_commit_sha(repo)
 
             else:
                 raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')
@@ -68,6 +68,11 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
             raise CloneError(f'error cloning {repo_url} into {repo_target_dir} because {e.stderr}')
 
 
+
+def get_latest_commit_sha(repo):
+    head = repo.commit('HEAD')
+    sha = head.hexsha
+    return sha
 
 
 if __name__ == '__main__':

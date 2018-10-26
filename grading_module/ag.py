@@ -79,7 +79,7 @@ def grade(assignment, student):
         instructor_code = fetch_instructor_code(assignment.instructor_repo)
 
         try:
-            student_code, err = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
+            student_code, err, sha = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
         except Exception as e:
             return { 'success': True, 'result': f'Error fetching student code, {e}', score: 0 }
 
@@ -95,7 +95,7 @@ def grade(assignment, student):
                 t, e, tb = sys.exc_info()
                 print(traceback.print_tb(tb))
 
-                return { 'success': True, 'report': f'Error running tests on student code, {e}', 'score': 0 }
+                return { 'success': True, 'report': f'Error running tests on student code, {e}', 'score': 0, 'sha': sha }
 
             try:
                 report = generate_grade_report(combined, project_config, grade_scheme)
@@ -103,12 +103,12 @@ def grade(assignment, student):
                 t, e, tb = sys.exc_info()
                 print(t, e, traceback.print_tb(tb))
 
-                return { 'success': True, 'report': f'Error reading test report files from student code, {e}', 'score': 0 }
+                return { 'success': True, 'report': f'Error reading test report files from student code, {e}', 'score': 0, 'sha': sha }
 
             # input('done. press a key')
 
         json_report = json.dumps(report, cls=TestItemEncoder)
-        return { 'success': True, 'report': json_report, 'score' : report.total_points_earned  }
+        return { 'success': True, 'report': json_report, 'score' : report.total_points_earned, 'sha': sha  }
 
     except Exception as e:
 
@@ -123,16 +123,16 @@ def fetch_student_code(base, org, student_id):
     url = f'https://github.com/{org}/{base}-{student_id}'
     repo_name = f'{base}-{student_id}'
 
-    student_code_location, mode = clone.clone_or_pull_latest(url, os.path.join(settings.CODE_STORE, settings.STUDENT_CODE_LOCATION), repo_name)
+    student_code_location, mode, sha = clone.clone_or_pull_latest(url, os.path.join(settings.CODE_STORE, settings.STUDENT_CODE_LOCATION), repo_name)
     print('got student code by: ', mode)
-    return student_code_location, None
+    return student_code_location, None, sha
 
 
 
 def fetch_instructor_code(repo_url):
     repo_name = repo_url.split('/').pop()
-    instructor_code_location, mode = clone.clone_or_pull_latest(repo_url, os.path.join(settings.CODE_STORE, settings.INSTRUCTOR_CODE_LOCATION), repo_name)
-    print('got code by: ', mode)
+    instructor_code_location, mode, sha = clone.clone_or_pull_latest(repo_url, os.path.join(settings.CODE_STORE, settings.INSTRUCTOR_CODE_LOCATION), repo_name)
+    print('got instructor code by: ', mode)
     return instructor_code_location
 
 
