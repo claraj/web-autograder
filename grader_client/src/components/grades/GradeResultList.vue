@@ -95,21 +95,12 @@ export default {
   updateUnique() {
     console.log('find unique names/asgnts ', this.results)
 
-    let studentNames = this.sortedResults.map( res => {
-      if (res.fullStudentInfo) { return res.fullStudentInfo.name }
-      else { return `Student id ${res.student}` }
-    })
-
+    let studentNames = this.sortedResults.map( res => res.student.name )
     this.uniqueStudents = []
     studentNames.forEach( n => { if (!this.uniqueStudents.includes(n)) {this.uniqueStudents.push(n)}  })
     this.uniqueStudents.sort()
 
-
-    let assignmentNames = this.sortedResults.map( res => {
-      console.log(res)
-      if (res.fullAssignmentInfo) { return `Week ${res.fullAssignmentInfo.week}` }
-      else { return `Assignment id ${res.assignment}` }
-    })
+    let assignmentNames = this.sortedResults.map( res => res.assignment.week )
 
     console.log(assignmentNames)
 

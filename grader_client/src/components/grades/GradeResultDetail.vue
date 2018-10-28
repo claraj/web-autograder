@@ -153,7 +153,8 @@ methods: {
     console.log('save', this.result.id)
     let stringReport = JSON.stringify(this.report)
     this.result.generated_report = stringReport
-    this.$grade_backend.$editItem(this.result).then( () => {
+    //this.result has
+    this.$grade_backend.$editItem({id: this.result.id, generated_report: stringReport}).then( () => {
       console.log('saved, hopefully. ')
     })
   },
