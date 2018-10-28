@@ -47,6 +47,18 @@ class AssignmentProgrammingClass(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, null=False, blank=False)
 
 
+class GradeManager(models.Manager):
+    def most_recent(self, student, assignment):
+        try:
+            print('HELLOO GRADE MANAGER')
+            latest = self.filter(student_id=student, assignment_id=assignment).order_by('-date').all()[1:2].get()
+            print(latest)
+            return latest
+        except Exception as e:
+            print(e)
+            return None
+
+
 class Grade(models.Model):
     # for an assignment and student. The assignment knows what programming class it belongs to.
     assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, blank=False, null=False)
@@ -62,8 +74,13 @@ class Grade(models.Model):
     error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
     reviewed = models.BooleanField(default=False, blank=True, null=False)
 
+    objects = GradeManager()
+
     def __str__(self):
         return 'assignment %s student %s batch %s date %s, score %f'  % (self.assignment.id, self.student.id, self.batch, self.date, self.score)
+
+
+
 
 
 class GradingBatch(models.Model):
