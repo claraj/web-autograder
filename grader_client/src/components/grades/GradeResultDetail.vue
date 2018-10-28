@@ -13,12 +13,8 @@ individual questions, and for the whole assignment  -->
 
   <div id="header">
     Grade for
-    <span v-if="result.fullAssignmentInfo">Assignment Week {{ result.fullAssignmentInfo.week }}</span>
-    <span v-else>(Assignment internal ID: {{ result.assignment }})</span>,
-
-    <span v-if="result.fullStudentInfo">student {{ result.fullStudentInfo.name }}</span>
-    <span v-else>(Student internal ID: {{ result.student }})</span>.
-
+    <span>Assignment Week {{ result.assignment.week }},</span>
+    <span>student {{ result.student.name }}</span>
     (Grade result ID {{ result.id }})
   </div>
 

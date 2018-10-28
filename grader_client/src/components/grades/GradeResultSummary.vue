@@ -14,11 +14,9 @@
     <h4>
       <img src="@/assets/list.png">
       <span class="report-id">{{result.id}}</span>
-      <span v-if="result.fullAssignmentInfo">Assignment Week {{ result.fullAssignmentInfo.week }}</span>
-      <span v-else>Assignment internal ID: {{ result.assignment }}</span>
+      <span>Assignment Week {{ result.assignment.week }}</span>
 
-      <span v-if="result.fullStudentInfo">for {{ result.fullStudentInfo.name }}</span>
-      <span v-else>Student internal ID: {{ result.student }}</span>
+      <span>for {{ result.student.name }}</span>
 
   <router-link :to="{name: 'grade-detail', query: {id: result.id} }">Full Report</router-link>
     </h4>

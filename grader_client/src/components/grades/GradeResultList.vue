@@ -42,27 +42,19 @@ export default {
   data() {
     return {
       sortedResults: [],
-      studentCache: [],   // readyResults only has the student's ID, this is for full student info objects
-      assignmentCache: [],  // as above, for assignments
       uniqueStudents: [], // Unique student names
       uniqueAssignments: []
     }
   },
   mounted() {
-    this.fetchDetails()     // For any ready results, fetch the full student and assignment info.
+    console.log('READY=', this.readyResults)
     this.sortedResults = this.sortResults()
   },
   watch: {
     readyResults: {
       handler: function () {
-        // fetch student info, fetch assignment info
-        // what's the new result?
-        console.log('READY RESULTS CHANGED')
-        this.fetchDetails(this.readyResults, this.studentCache, 'student', 'fullStudentInfo', this.$student_backend)
-        this.fetchDetails(this.readyResults, this.assignmentCache, 'assignment', 'fullAssignmentInfo', this.$assignment_backend)
 
-        this.sortedResults = this.sortResults()  // TODO wait until details fetched since it affects sort order
-
+        this.sortedResults = this.sortResults()
         this.updateUnique()
 
       }, deep: true  // Watch nested objects for changes.
@@ -74,65 +66,6 @@ export default {
       this.$emit('onUpdatedInstructorComments', id, report)
     },
 
-    fillFromCache(data, cache) {
-
-      console.log('before filling from cache', this.readyResults )
-
-      this.readyResults.forEach( res => {
-        if (!res.fullStudentInfo) {
-          // in cache?
-          let cachedStudent = this.studentCache.find(s => s.id === res.student)
-          if (cachedStudent && !cachedStudent.fetching) { res.fullStudentInfo = cachedStudent }
-        }
-
-        if (!res.fullAssignmentInfo) {
-          // in cache?
-          let cachedAssignment = this.assignmentCache.find(s => s.id === res.assignment)
-          if (cachedAssignment && !cachedAssignment.fetching) { res.fullAssignmentInfo = cachedAssignment }
-        }
-      })
-
-    },
-
-    fetchDetails (dataArray, cache, type, fullInfoField, backend) {
-      // Cache contains Student objects, or a placeholder { id: 4, fetching: true } if the data has been requested
-
-      if (!this.readyResults) { console.log('no ready results...'); return }
-
-      this.readyResults.forEach( res => {
-        if (!res[fullInfoField]) {   // Has fill info?
-
-          let resId = res[type]
-          let cachedItem = cache.find( s => s.id === resId)
-          if (cachedItem) {
-            if (!cachedItem.fetching) { res.fullInfo = cachedItem }
-          }
-
-          else {
-            let placeholder = { id: resId, fetching: true }
-            cache.push(placeholder)
-
-            backend.$fetchOne(resId).then(data => {
-              res[fullInfoField] = data
-              // console.log('have fetched has full info for', res)
-              let cacheIndex = cache.findIndex(s => s.id === resId)
-              if (cacheIndex != -1) {
-                // either a fetching, or the full details
-                if (cache[cacheIndex].fetching) {
-                  cache[cacheIndex] = data
-                }
-              }
-              else {
-                cache.push(data)
-              }
-
-              this.fillFromCache(dataArray, cache)  // Update any other results for this student
-              this.updateUnique()
-          })
-        }
-      }
-    })
-  },
 
   sortResults() {
 
@@ -146,18 +79,14 @@ export default {
     // Sort by assignment and then by student
     sorted.sort( function(a, b) {
 
-      // If the full info is not available, temporarily sort by assignment
-      if (!a.fullStudentInfo || !a.fullAssignmentInfo || !b.fullStudentInfo || !b.fullAssignmentInfo) {
-        return a.assignment - b.assignment
-      }
 
       // If same assignment week, sort by student
-      if (a.fullAssignmentInfo.week == b.fullAssignmentInfo.week) {
-        return a.fullStudentInfo.name.toLowerCase().localeCompare(b.fullStudentInfo.name.toLowerCase())
+      if (a.assignment.week == b.assignment.week) {
+        return a.student.name.toLowerCase().localeCompare(b.student.name.toLowerCase())
       }
       // Otherwise, sort by assignment
       else {
-        return a.fullAssignmentInfo.week - b.fullAssignmentInfo.week
+        return a.student.week - b.assignment.week
       }
     })
     return sorted
