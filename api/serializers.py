@@ -26,6 +26,10 @@ class ProgrammingClassSerializer(serializers.ModelSerializer):
 
 
 class GradeSerializer(serializers.ModelSerializer):
+
+    assignment = AssignmentSerializer()
+    student = StudentSerializer()
+
     class Meta:
         model = Grade
         fields = '__all__'
