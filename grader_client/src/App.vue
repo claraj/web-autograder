@@ -18,6 +18,9 @@
       <router-link to="/classes">Class Management</router-link>
       </p>
       <p class="nav">
+      <router-link to="/enrollment">Add Students/Assignments to Classes</router-link>
+      </p>
+      <p class="nav">
       <router-link to="/graderlaunch">Launch Grader</router-link>
       </p>
       <p class="nav">

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Students from '@/components/students/Students'
 import Assignments from '@/components/assignments/Assignments'
 import ProgrammingClasses from '@/components/classes/ProgrammingClasses'
+import Enrollment from '@/components/classes/Enrollment'
 import GraderResults from '@/components/grades/GraderResults'
 import GraderLaunch from '@/components/grades/GraderLaunch'
 import GradingBatches from '@/components/grades/GradingBatches'
@@ -29,6 +30,11 @@ export default new Router({
       path: '/classes',
       name: 'programming-classes',
       component: ProgrammingClasses
+    },
+    {
+      path: '/enrollment',
+      name: 'enrollment',
+      component: Enrollment
     },
     {
       path: '/graderlaunch',
