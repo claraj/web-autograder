@@ -11,7 +11,6 @@
       <h3>Results</h3>
 
       <div v-if="readyResults.length">
-
         <div v-for="result in sortedResults">
           <GradeResultSummary
             v-bind:result="result"
@@ -19,7 +18,6 @@
           </GradeResultSummary>
           <hr>
         </div>
-
       </div>
 
       <div v-else>
@@ -57,59 +55,52 @@ export default {
         this.sortedResults = this.sortResults()
         this.updateUnique()
 
-      }, deep: true  // Watch nested objects for changes.
+      }, deep: true // Watch nested objects for changes.
     }
   },
-
   methods: {
     onUpdatedInstructorComments (id, report) {
       this.$emit('onUpdatedInstructorComments', id, report)
     },
+    sortResults () {
+      let sorted = [...this.readyResults]
+      // Sort by assignment and then by student
+      sorted.sort( (a, b) => {
+        // If same assignment week, sort by student
+        if (a.assignment.week === b.assignment.week) {
+          return a.student.name.toLowerCase().localeCompare(b.student.name.toLowerCase())
+        }
+        else {
+          // Otherwise, sort by assignment
+          return a.student.week - b.assignment.week
+        }
+      })
+      return sorted
+    },
+    updateUnique () {
+      console.log('find unique names/asgnts ', this.results)
 
+      let studentNames = this.sortedResults.map(res => res.student.name)
+      this.uniqueStudents = []
+      studentNames.forEach( n => {
+        if (!this.uniqueStudents.includes(n)) {
+          this.uniqueStudents.push(n) }
+        })
+      this.uniqueStudents.sort()
 
-  sortResults() {
+      let assignmentNames = this.sortedResults.map(res => res.assignment.week)
 
-    // console.log('computing sorted results', )
-    let sorted = []
+      console.log(assignmentNames)
 
-    this.readyResults.forEach( r =>
-      sorted.push(r)
-    )
-
-    // Sort by assignment and then by student
-    sorted.sort( function(a, b) {
-
-
-      // If same assignment week, sort by student
-      if (a.assignment.week == b.assignment.week) {
-        return a.student.name.toLowerCase().localeCompare(b.student.name.toLowerCase())
-      }
-      // Otherwise, sort by assignment
-      else {
-        return a.student.week - b.assignment.week
-      }
-    })
-    return sorted
-  },
-
-  updateUnique() {
-    console.log('find unique names/asgnts ', this.results)
-
-    let studentNames = this.sortedResults.map( res => res.student.name )
-    this.uniqueStudents = []
-    studentNames.forEach( n => { if (!this.uniqueStudents.includes(n)) {this.uniqueStudents.push(n)}  })
-    this.uniqueStudents.sort()
-
-    let assignmentNames = this.sortedResults.map( res => res.assignment.week )
-
-    console.log(assignmentNames)
-
-    this.uniqueAssignments = []
-    assignmentNames.forEach( n => { if (!this.uniqueAssignments.includes(n)) {this.uniqueAssignments.push(n)}  })
-    this.uniqueAssignments.sort()
+      this.uniqueAssignments = []
+      assignmentNames.forEach( n => {
+        if (!this.uniqueAssignments.includes(n)) {
+          this.uniqueAssignments.push(n)
+        }
+      })
+      this.uniqueAssignments.sort()
+    }
   }
-
-}
 }
 
 </script>

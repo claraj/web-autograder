@@ -71,10 +71,7 @@ export default {
       })
     },
     classSelectionChanged () {
-      console.log('selection changed, selected class', this.selectedClass)
       if (!this.selectedClass) { return }
-
-      console.log('seec class if', this.selectedClass.id)
 
       this.$classes_backend.$itemsInCollection(this.selectedClass, 'students')
         .then(data => {

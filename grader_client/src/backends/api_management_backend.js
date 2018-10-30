@@ -70,6 +70,7 @@ Backend.prototype.$itemsInCollection = function(id, collection) {
   .then( response => response.data )
 }
 
+
 Backend.prototype.$bulkAdd = function(data) {
   console.log('backend raw data:', data)
   return this.$bulk.post(

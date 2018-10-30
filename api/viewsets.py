@@ -20,21 +20,20 @@ class StudentViewSet(viewsets.ModelViewSet):
     filter_fields = ('name', 'active')
 
 
-
 class ProgrammingClassViewSet(viewsets.ModelViewSet):
     queryset = ProgrammingClass.objects.all().order_by('-semester_code')
     serializer_class = ProgrammingClassSerializer
 
     @action(methods=['get'], detail=True, url_path='students')
     def students_for_class(self, request, pk=None):
-        students = Student.objects.filter(programming_classes__id=pk)
+        students = Student.objects.filter(programming_classes__id=pk).order_by('name')
         serializer = StudentSerializer(students, many=True)
         return Response(serializer.data)
 
 
     @action(methods=['get'], detail=True, url_path='assignments')
     def assignments_for_class(self, request, pk=None):
-        assignments = Assignment.objects.filter(programming_classes__id=pk)
+        assignments = Assignment.objects.filter(programming_classes__id=pk).order_by('week')
         serializer = AssignmentSerializer(assignments, many=True)
         return Response(serializer.data)
 

@@ -67,16 +67,6 @@ class Student(models.Model):
         return 'Name: %s, GitHub ID: %s ' % (self.name, self.github_id)
 
 
-# class StudentProgrammingClass(models.Model):
-#     programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=False, blank=False)
-#     student = models.ForeignKey(Student, on_delete=models.PROTECT, null=False, blank=False)
-#
-#
-# class AssignmentProgrammingClass(models.Model):
-#     programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=False, blank=False)
-#     assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, null=False, blank=False)
-
-
 class GradeManager(models.Manager):
     def previous_grade_for_student_assignment(self, student, assignment):
         try:
