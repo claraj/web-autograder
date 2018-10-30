@@ -41,7 +41,6 @@ class ProgrammingClass(models.Model):
 
 
 class Assignment(models.Model):
-    # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, blank=True, null=True)
     programming_classes = models.ManyToManyField(ProgrammingClass)
     week = models.IntegerField()
     github_base = models.CharField(max_length=200)      # e.g. week-0-variables
@@ -51,7 +50,7 @@ class Assignment(models.Model):
 
 
     def __str__(self):
-        return 'Class: [%s] Week: [%d] GitHub Base: [%s] Intructor Repo: [%s] D2L URL [%s] ' % (self.programming_class, self.week, self.github_base, self.instructor_repo, self.d2l_gradebook_url)
+        return 'Week: [%d] GitHub Base: [%s] Intructor Repo: [%s] D2L URL [%s] ' % (self.week, self.github_base, self.instructor_repo, self.d2l_gradebook_url)
 
 
 class Student(models.Model):
@@ -76,10 +75,13 @@ class GradeManager(models.Manager):
         except IndexError as e:
             return None
 
+
 class Grade(models.Model):
-    # for an assignment and student. The assignment knows what programming class it belongs to.
+    # for an assignment and student and programming class. The assignment knows what programming class it belongs to.
+
     assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, blank=False, null=False)
     student = models.ForeignKey(Student, on_delete=models.PROTECT, blank=False, null=False)
+    programming_class = models.ForeignKey(ProgrammingClass, blank=False, null=False, on_delete=models.PROTECT)
     generated_report = models.TextField(blank=True, null=True)
     instructor_comments = models.TextField(blank=True, null=True)
     score = models.DecimalField(max_digits=6, decimal_places=3)
@@ -87,12 +89,10 @@ class Grade(models.Model):
     batch = models.UUIDField()
     github_commit_hash = models.CharField(max_length=40, blank=False, null=True)
     date = models.DateTimeField(auto_now_add=True)
-    # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.SET_NULL)
     error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
     reviewed = models.BooleanField(default=False, blank=True, null=False)
 
     objects = GradeManager()
-
 
     def __str__(self):
         return 'assignment %s student %s batch %s date %s, score %f'  % (self.assignment.id, self.student.id, self.batch, self.date, self.score)

@@ -24,6 +24,7 @@ def grader_start(request):
 
     students = body.get('students')
     assignments = body.get('assignments')
+    programming_class = body.get('programming_class')
 
     # if not request.POST:
     #     # todo make sure at least one student, at least one assignent
@@ -42,12 +43,12 @@ def grader_start(request):
     for assignment in assignments:
         for student in students:
             print('student and assignment ids to queue: ', student, assignment)
-            queue_grading_task(batch_uuid, assignment, student)
+            queue_grading_task(batch_uuid, assignment, student, programming_class)
             # todo reject non-existent students, assignments
 
     # the response should have the number of existent assignments and students
 
-    return JsonResponse( { 'batch': str(batch_uuid), 'students': no_students, 'assignments': no_assignments } )
+    return JsonResponse( { 'batch': str(batch_uuid), 'students': no_students, 'assignments': no_assignments, 'programming_class': programming_class } )
 
 
 def grader_get_progress(request):

@@ -8,17 +8,18 @@ import re
 from django_q.tasks import async_task, result
 
 
-def queue_grading_task(batch, assignment_id, student_id):
+def queue_grading_task(batch, assignment_id, student_id, class_id):
     print(f'hello from queue launcher! batch {batch}')
-    task_id = async_task(start_grader, batch, assignment_id, student_id, hook=save_result)
+    task_id = async_task(start_grader, batch, assignment_id, student_id, class_id, hook=save_result)
 
 
-def start_grader(batch, assignment_id, student_id):
+def start_grader(batch, assignment_id, student_id, class_id):
 
     print('INVOKE GRADER GO hello this is real grader')
 
     student = Student.objects.get(pk=student_id)
     assignment = Assignment.objects.get(pk=assignment_id)
+    programming_class = ProgrammingClass.get(pk=class_id)
     result = ag.grade(assignment, student)
 
     print('grader results are', result)
@@ -33,6 +34,7 @@ def start_grader(batch, assignment_id, student_id):
             'batch': batch,
             'assignment_id': assignment_id,
             'student_id': student_id,
+            'programming_class_id': class_id,
             'score': 0,
             'generated_report': json.dumps({ 'error': f'Error running grader because {err}' }), # TODO format?
             'github_commit_hash': None
@@ -50,6 +52,7 @@ def start_grader(batch, assignment_id, student_id):
         'batch': batch,
         'assignment_id': assignment_id,
         'student_id': student_id,
+        'programming_class_id': class_id,
         'score': score,
         'generated_report': report_result, # Formatted as JSON string, although this module doesn't need to care.
         'github_commit_hash': github_commit_hash

@@ -2,7 +2,7 @@
 <template>
 
   <div>
-    
+
      <h2>{{student.name}}</h2>
 
      <p>Name: {{ student.name}} </p>
@@ -13,6 +13,18 @@
      <h2>Grades</h2>
 
       <p>TODO fetch the lastest grades for this student. </p>
+
+<P>
+
+Class Java
+Week 1: grade 4/5 link to full report detail http://127.0.0.1:8000/spa/#/gradereportdetail?id=604   [REGRADE BUTTON]
+Week 2: grade 6/100 link to full report detail  "       "       "             "         "           [REGRADE BUTTON]
+
+Class Spork Appreciation
+Week 4: grade 3/3 link to full report [REGRADE]
+
+</p>
+
   </div>
 
 </template>
@@ -28,11 +40,23 @@ export default {
     }
   },
   mounted() {
-    console.log('STUDENT ID', this.$route.params.id)
     this.id = this.$route.params.id
-    this.$student_backend.$fetchOne(this.id).then( data => {
-      this.student = data
-    })
+    this.fetchData()
+  },
+  methods: {
+    fetchData () {
+
+      let vue = this
+      async function getStudent() {
+        this.student = await vue.$student_backend.$fetchOne(this.id)
+        //get student's grades
+        // GET /api/grade?student=1  
+
+      }
+
+      getStudent()
+
+  }
   }
 }
 

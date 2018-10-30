@@ -20,6 +20,7 @@ class StudentViewSet(viewsets.ModelViewSet):
     filter_fields = ('name', 'active')
 
 
+
 class ProgrammingClassViewSet(viewsets.ModelViewSet):
     queryset = ProgrammingClass.objects.all().order_by('-semester_code')
     serializer_class = ProgrammingClassSerializer
@@ -40,7 +41,7 @@ class ProgrammingClassViewSet(viewsets.ModelViewSet):
 
 
 class GradeViewSet(viewsets.ModelViewSet):
-    queryset = Grade.objects.all().order_by('student').order_by('assignment.week')
+    queryset = Grade.objects.all().order_by('student.name').order_by('assignment')
     serializer_class = GradeSerializer
     filter_fields = ('student', 'assignment', 'batch', 'id')
 

@@ -82,9 +82,3 @@ class AssignmentReport:
     def add_question_report(self, question_report):
         self.question_reports.append(question_report)
         self.total_points_earned = sum( [ qr.points_earned for qr in self.question_reports] )
-
-
-# test
-
-a = AssignmentReport()
-print(a)

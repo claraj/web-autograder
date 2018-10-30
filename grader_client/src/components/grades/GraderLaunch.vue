@@ -99,7 +99,7 @@ export default {
       }
 
       this.error = ''
-      let data = {students: selectedStudents, assignments: selectedAssignments}
+      let data = {students: selectedStudents, assignments: selectedAssignments, programming_class: selectedClass.id}
 
       let expectedResults = selectedStudents.length * selectedAssignments.length
 
