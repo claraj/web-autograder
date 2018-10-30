@@ -17,6 +17,7 @@ class ProgrammingClass(models.Model):
     def __str__(self):
         return '%s, %s, %s' % (self.name, self.semester_human_string, self.semester_code)
 
+
     def save(self, *args, **kwargs):
         class_instance.semester_human_string = humanCode(class_instance.semester_code)
         super(*args, **kwargs)
@@ -41,39 +42,39 @@ class ProgrammingClass(models.Model):
 
 class Assignment(models.Model):
     # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, blank=True, null=True)
+    programming_classes = models.ManyToManyField(ProgrammingClass)
     week = models.IntegerField()
     github_base = models.CharField(max_length=200)      # e.g. week-0-variables
     github_org = models.CharField(max_length=200)
     instructor_repo = models.CharField(max_length=200)  # eg. https://github.com/minneapolis-edu/JAG_0
     d2l_gradebook_url = models.CharField(max_length=200, blank=True, null=False)
 
-    # class Meta:
-    #     unique_together = ( ('week', 'programming_class'), )
 
     def __str__(self):
         return 'Class: [%s] Week: [%d] GitHub Base: [%s] Intructor Repo: [%s] D2L URL [%s] ' % (self.programming_class, self.week, self.github_base, self.instructor_repo, self.d2l_gradebook_url)
 
 
 class Student(models.Model):
-    # programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=True, blank=True)
+    programming_classes = models.ManyToManyField(ProgrammingClass)
     org_id = models.CharField(max_length=8, validators=[RegexValidator('^\d{8}$', message='MCTC Student ID must be 8 numbers')], null=False, blank=True)
     name = models.CharField(max_length=200, null=False, blank=False)   # Student real name, as used in D2L
     github_id = models.CharField(max_length=200, blank=True, null=False, validators=[RegexValidator('^[\S_-]+$', message='Only letters, numbers, underscores and hyphens.')] )
     star_id = models.CharField(max_length=8, validators=[RegexValidator('^[a-z]{2}\d{4}[a-z]{2}$', message='Star ID must be in the pattern ab1234cd')], null=False, blank=True)
     active = models.BooleanField(default=True)   # becomes False if student drops, withdraws, is abducted by aliens etc.
 
+
     def __str__(self):
         return 'Name: %s, GitHub ID: %s ' % (self.name, self.github_id)
 
 
-class StudentProgrammingClass(models.Model):
-    programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=False, blank=False)
-    student = models.ForeignKey(Student, on_delete=models.PROTECT, null=False, blank=False)
-
-
-class AssignmentProgrammingClass(models.Model):
-    programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=False, blank=False)
-    assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, null=False, blank=False)
+# class StudentProgrammingClass(models.Model):
+#     programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=False, blank=False)
+#     student = models.ForeignKey(Student, on_delete=models.PROTECT, null=False, blank=False)
+#
+#
+# class AssignmentProgrammingClass(models.Model):
+#     programming_class = models.ForeignKey(ProgrammingClass, on_delete=models.PROTECT, null=False, blank=False)
+#     assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, null=False, blank=False)
 
 
 class GradeManager(models.Manager):

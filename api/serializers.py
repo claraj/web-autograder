@@ -1,13 +1,18 @@
 from rest_framework import serializers
+from rest_framework.serializers import PrimaryKeyRelatedField
 from .models import Assignment, Student, ProgrammingClass, GradingBatch, Grade, Attributes
 
 class AssignmentSerializer(serializers.ModelSerializer):
+
+    programming_classes = PrimaryKeyRelatedField(many=True, queryset=ProgrammingClass.objects.all())
     class Meta:
         model = Assignment
         fields = '__all__'
 
 
 class StudentSerializer(serializers.ModelSerializer):
+
+    programming_classes = PrimaryKeyRelatedField(many=True, queryset=ProgrammingClass.objects.all())
     class Meta:
         model = Student
         fields = '__all__'

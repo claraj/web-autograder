@@ -8,15 +8,24 @@ from django.db.models.functions import Lower
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
-    queryset = Assignment.objects.all().order_by('-programming_class__semester_code', Lower('week'))
+    # queryset = Assignment.objects.all().order_by('-programming_class__semester_code', Lower('week'))
+    # serializer_class = AssignmentSerializer
+    # filter_fields = ('week', 'programming_class')
+
+    queryset = Assignment.objects.all().order_by(Lower('week'))
     serializer_class = AssignmentSerializer
-    filter_fields = ('week', 'programming_class')
+    filter_fields = ('week',)
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-    queryset = Student.objects.all().order_by('-programming_class__semester_code', Lower('name'))
+    # queryset = Student.objects.all().order_by('-programming_class__semester_code', Lower('name'))
+    # serializer_class = StudentSerializer
+    # filter_fields = ('name', 'programming_class', 'active')
+
+    queryset = Student.objects.all().order_by(Lower('name'))
     serializer_class = StudentSerializer
-    filter_fields = ('name', 'programming_class', 'active')
+    filter_fields = ('name', 'active')
+
 
 
 class ProgrammingClassViewSet(viewsets.ModelViewSet):
