@@ -2,20 +2,20 @@
 
 <template>
 
-<div>
-  <p>See links above for adding classes, students and assignments</p>
+  <div>
+    <p>See links above for adding classes, students and assignments</p>
 
-  <p>Select a class:</p>
+    <p>Select a class:</p>
 
-  <select v-on:change="changeClass" v-model="classSelected">
-    <option disabled value="">Select a class</option>
-    <option v-for="programmingClass in programmingClasses" v-bind:value="programmingClass">
-      {{programmingClass.name}} {{programmingClass.humanCode}}
-    </option>
-  </select>
+    <select v-on:change="changeClass" v-model="classSelected">
+      <option disabled value="">Select a class</option>
+      <option v-for="programmingClass in programmingClasses" v-bind:value="programmingClass">
+        {{programmingClass.name}} {{programmingClass.humanCode}}
+      </option>
+    </select>
 
-  <h3>Current Assignments</h3>
-  <ul><li v-for="assignment in assignmentsInClass">Week {{assignment.week}} <a :href="assignment.instructor_repo">{{assignment.instructor_repo}}</a></li></ul>
+    <h3>Current Assignments</h3>
+    <ul><li v-for="assignment in assignmentsInClass">{{assignment}} Week {{assignment.week}} <a :href="assignment.instructor_repo">{{assignment.instructor_repo}}</a></li></ul>
     <h3>Current Students</h3>
     <ul><li v-for="student in studentsInClass">{{student.name}} {{student.github_id}}  {{student.star_id}}</li></ul>
 
@@ -26,10 +26,10 @@
 
     <!-- <p v-if="!filteredStudents">No matches<p> -->
     <!-- <p v-else> -->
-      <ul>
-        <li v-for="student in filteredStudents">{{student.name}} {{student.github_id}}  {{student.star_id}}
-        </li>
-      </ul>
+    <ul>
+      <li v-for="student in filteredStudents">{{student.name}} {{student.github_id}}  {{student.star_id}}
+      </li>
+    </ul>
     <!-- </p>  -->
 
     <input v-model="assignmentFilter"/>
@@ -38,7 +38,7 @@
     <ul><li v-for="assignment in filteredAssignments">Week {{assignment.week}} {{assignment.instructor_repo}}</li></ul>
 
 
-</div>
+  </div>
 
 </template>
 <script>
@@ -79,10 +79,22 @@ export default {
       this.$assignment_backend.$fetchItems().then(data => { this.allAssignments = data})
       this.$student_backend.$fetchItems().then(data => { this.allStudents = data })
     },
-    changeClass(ev) {
+    changeClass() {
       //Load assignments, students for this class
-      console.log('selection', ev, this.classSelected)
+      this.loadItemsForClass()
+    },
+    loadItemsForClass() {
+      console.log('selection', this.classSelected)
 
+      if (!this.classSelected) return
+
+      this.$classes_backend.$itemsInCollection(this.classSelected.id, 'students').then(data => {
+        this.studentsInClass = data
+      })
+
+      this.$classes_backend.$itemsInCollection(this.classSelected.id, 'assignments').then(data => {
+        this.assignmentsInClass = data
+      })
     }
   }
 }

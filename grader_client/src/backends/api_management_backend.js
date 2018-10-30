@@ -55,15 +55,19 @@ Backend.prototype.$fetchOne = function(id) {
 
 Backend.prototype.$query = function(query)  {
   return this.$crud.get(`/${this.base}`, { params: query } )
-  //.then(response => console.log(`backend filter query reponse for ${query}`, response))
-//.catch(err=>console.log(err))
 }
 
 Backend.prototype.$deleteMany = function(ids) {
-  // patching because delete can't carry a payload/body
+  // patching because delete can't carry a payload/body TODO revisit this
     return this.$crud.patch(`/${this.base}/deleteMany/`, ids)
 }
 
+Backend.prototype.$itemsInCollection = function(id, collection) {
+  // For example, get all students in programming class 3 with
+  // GET programmingclass/3/students
+  return this.$crud.get(`/${this.base}/${id}/${collection}`)
+  .then( response => response.data )
+}
 
 Backend.prototype.$bulkAdd = function(data) {
   console.log('backend raw data:', data)
