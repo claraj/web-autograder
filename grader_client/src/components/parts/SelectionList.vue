@@ -1,20 +1,19 @@
 <template>
   <!--  List of things that are checkable -->
-  <div>
-    <h3>Select...</h3>
-    <input v-model="selectAll" type="checkbox">Select all</a>
+  <div id="content">
+    <!-- <h3>Select...</h3> -->
+    <input v-model="selectAll" type="checkbox"/><span id="select-all">Select all</span>
     <ul>
 
-      <div v-if="items.length">
-
-        <li v-for="item in items">
+      <div v-if="items && items.length > 0 ">
+        <li v-for="item in items" :key="item.id">
           <input v-model="item.selected" type="checkbox" v-on:click="itemSelected(item.id, item.selected)"/>
           <span>{{prefix}} {{item.displayText}}</span>
         </li>
       </div>
 
       <div v-else>
-        <p>No items</p>
+        <p class="empty">No items</p>
       </div>
 
 
@@ -41,20 +40,40 @@ export default {
   },
   watch: {
     selectAll: function() {
-      this.items.forEach(item => item.selected = this.selectAll)
-    }
+        this.items.forEach(item => item.selected = this.selectAll) }
+
   },
   methods: {
-
     itemSelected(id, selected) {
-      // emit to parent, id + selected (?)
-      // or parent can watch?
-      // atm, just wait for GRADE button to be selected?
+      this.$nextTick().then(() => {
       console.log('hello, item id', id, selected)
-      this.$emit('onItemSelected', id, selected)
-
+      this.$emit('itemsSelected', this.items.filter(i => i.selected))
+      })
     }
   }
 }
 
 </script>
+
+<style>
+
+div#content {
+  text-align: left;
+  padding: 5px;
+}
+ul {
+  padding: 0px;
+}
+li {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+.empty {
+  font-style: italic;
+}
+
+#select-all {
+  font-weight: 500;
+}
+</style>

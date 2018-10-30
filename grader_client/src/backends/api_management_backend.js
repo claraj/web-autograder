@@ -35,7 +35,7 @@ Backend.prototype.$fetchItems = function() {
 // TODO fix these names.
 Backend.prototype.$editItem = function (data)  {
   return this.$crud.patch(`/${this.base}/${data.id}/`, data)
-  .then(response => console.log('backend edit', response))
+  .then(response => response)
 }
 
 Backend.prototype.$deleteItem = function (id) {
@@ -55,6 +55,7 @@ Backend.prototype.$fetchOne = function(id) {
 
 Backend.prototype.$query = function(query)  {
   return this.$crud.get(`/${this.base}`, { params: query } )
+  .then( response => response.data)
 }
 
 Backend.prototype.$deleteMany = function(ids) {

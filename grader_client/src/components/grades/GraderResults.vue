@@ -94,6 +94,9 @@ export default {
     this.cancelPolling()
     next()   /// todo this does not always work
   },
+  beforeDestroy () {
+    this.cancelPolling()
+  },
 
   methods: {
 
