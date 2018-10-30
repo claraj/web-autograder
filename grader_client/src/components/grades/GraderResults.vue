@@ -42,11 +42,10 @@
 import GradeResultList from './GradeResultList'
 
 const pollInterval = 3000
-let poller
+const timeout =  5 * 60 * 1000 // 5 minutes
+const maxPollCount = timeout / pollInterval
 
-let timeout =  5 * 60 * 1000 // 5 minutes
-let maxPollCount = timeout / pollInterval
-let pollCount = 0
+// let this.poller
 
 export default {
   name: 'GradeResult',
@@ -59,7 +58,9 @@ export default {
       expectedResults: 0,
       receivedResults: 0,   // Received by the client, not processed on the back end
       loading: true,
-      timedOut: false
+      timedOut: false,
+      pollCount: 0,
+      poller: {}
     }
   },
 
@@ -84,7 +85,7 @@ export default {
 
       else {
         this.getLatestResults()
-        poller = setInterval( this.getLatestResults, pollInterval);  // keep polling at intervals
+        this.poller = setInterval( this.getLatestResults, pollInterval);  // keep polling at intervals
       }
     })
   },
@@ -109,15 +110,15 @@ export default {
 
      cancelPolling() {
        this.loading = false
-       clearInterval(poller)
+       clearInterval(this.poller)
      },
 
     getLatestResults() {
 
-      pollCount++
-      console.log('poll count', pollCount)
+      this.pollCount++
+      console.log('poll count', this.pollCount)
 
-      if (pollCount > maxPollCount) {
+      if (this.pollCount > maxPollCount) {
         console.log('stop polling')
         this.timedOut = true
         this.cancelPolling()
@@ -156,7 +157,7 @@ export default {
             }
 
           }).catch( err => {
-            console.log('error, cancelling poller', err);
+            console.log('error, cancelling this.poller', err);
             this.cancelPolling() })
     },
 
