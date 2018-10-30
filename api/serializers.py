@@ -38,9 +38,3 @@ class GradeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Grade
         fields = '__all__'
-
-
-class AttributesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Attributes
-        fields = '__all__'
