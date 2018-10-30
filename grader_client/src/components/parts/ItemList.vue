@@ -17,7 +17,7 @@
 
         <td v-for="attr in attributes">
             <template v-if="attr.hyperlink"><a v-bind:href="item[attr.attr]">{{ item[attr.attr] }}</a> </template>
-            <template v-if="attr.linkToDetails"><router-link :to="{ name: itemType.slice(0,-1), query: { id: item[attr.attr] }}"> {{ item[attr.attr] }} (click for details)  </router-link></template>
+            <template v-else-if="attr.linkToDetails"><router-link :to="{ name: detailUrl, params: { id: item[attr.attr] }}"> {{ item[attr.attr] }} (click for details)  </router-link></template>
             <template v-else-if="attr.boolean"><input type="checkbox" v-bind:checked="item[attr.attr]" disabled="true"/> </template>
             <template v-else> {{ item[attr.attr] }} </template>
         </td>
@@ -38,7 +38,8 @@ export default {
     items: Array,
     attributes: Array,
     item: Object,
-    itemType: String
+    itemType: String,
+    detailUrl: String
   },
   mounted () {
   },

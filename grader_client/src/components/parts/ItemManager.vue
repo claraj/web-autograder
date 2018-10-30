@@ -9,6 +9,7 @@
       v-bind:items="items"
       v-bind:attributes="attributes"
       v-bind:itemType="itemType"
+      v-bind:detailUrl="detailUrl"
       @onRequestEdit="onRequestEdit"
       @onRequestDelete="onRequestDelete"
     />
@@ -65,6 +66,7 @@ export default {
       attributes: Array,
       name: String,
       backend: Object,
+      detailUrl: String
   },
   data () {
   return {

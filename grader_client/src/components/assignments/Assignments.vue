@@ -1,6 +1,7 @@
 <template>
   <ItemManager
     v-bind:name="name"
+    v-bind:detailUrl="detailUrl"
     v-bind:attributes="attributes"
     v-bind:backend="backend"
   />
@@ -18,6 +19,7 @@ export default {
   data () {
     return {
       name: 'Assignment',
+      detailUrl: 'assignment',
       attributes: [
         { attr: 'id', display: 'id', noEdit: true, omitFromForms: true, linkToDetails: true},
         { attr :'week', display: 'Week', regex: /^.+$/, required:true, message: 'Name is required' },

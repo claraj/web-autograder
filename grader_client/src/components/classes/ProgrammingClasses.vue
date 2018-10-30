@@ -3,6 +3,7 @@
 
   <ItemManager
     v-bind:name="name"
+    v-bind:detailUrl="detailUrl"
     v-bind:attributes="attributes"
     v-bind:backend="backend"
     v-bind:bulkCSVOrder="bulkCSVOrder"
@@ -20,9 +21,10 @@ export default {
   components:  { ItemManager },
   data () {
     return {
-      name: 'Class',
+      name: 'Programming Class',
+      detailUrl: 'programmingclass',
       attributes: [
-        { attr: 'id', display: 'ID', noEdit: true, omitFromForms: true },
+        { attr: 'id', display: 'ID', noEdit: true, omitFromForms: true, linkToDetails: true },
         { attr: 'name', display: 'Name' },
         { attr: 'semester_code', display: 'Semester' },
         { attr: 'semester_human_string', display: 'Semester Name', noEdit: true },

@@ -10,7 +10,7 @@ import GradingBatches from '@/components/grades/GradingBatches'
 import GradeResultDetail from '@/components/grades/GradeResultDetail'
 import StudentDetail from '@/components/students/StudentDetail'
 import AssignmentDetail from '@/components/assignments/AssignmentDetail'
-
+import ProgrammingClassDetail from '@/components/classes/ProgrammingClassDetail'
 
 Vue.use(Router)
 
@@ -64,14 +64,19 @@ export default new Router({
       component: GraderResults
     },
     {
-      path: '/student',
-      name: 'Student',
+      path: '/student/:id',
+      name: 'student',
       component: StudentDetail
     },
     {
-      path: '/assignment',
-      name: 'Assignment',
+      path: '/assignment/:id',
+      name: 'assignment',
       component: AssignmentDetail
+    },
+    {
+      path: '/programmingclass/:id',
+      name: 'programmingclass',
+      component: ProgrammingClassDetail
     }
   ]
 })
