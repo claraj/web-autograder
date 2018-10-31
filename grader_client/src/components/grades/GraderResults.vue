@@ -19,7 +19,7 @@
   <button v-if="loading" v-on:click="cancelPolling">Cancel</button>
 
   <p v-if="loading">Loading...</p>
-  <p class="error" v-if="timedOut">Timed out</p>
+  <p class="error-message" v-if="timedOut">Timed out</p>
 
   <!-- <h3>Results</h3> -->
 
@@ -128,7 +128,7 @@ export default {
         this.cancelPolling()
       }
 
-      this.$autograder_backend.$graderProgress(this.batch.id)
+      this.$autograder_backend.$progress(this.batch.id)
           .then( data => {
             // data should be a list of ids that have been graded
 
@@ -167,10 +167,6 @@ export default {
 </script>
 
 <style>
-
-.error {
-  color: red;
-}
 
 #content {
   text-align: left;

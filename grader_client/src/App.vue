@@ -1,70 +1,41 @@
 <template>
   <div id="app">
 
-    <header>
-      <img src="./assets/coding.png">
-      <h1>Autograder</h1>
-    </header>
+    <Header></Header>
 
     <div id="content">
 
-      <p class="nav">
-      <router-link to="/students">Student Management</router-link>
-      </p>
-      <p class="nav">
-      <router-link to="/assignments">Assignment Management</router-link>
-      </p>
-      <p class="nav">
-      <router-link to="/classes">Class Management</router-link>
-      </p>
-      <p class="nav">
-      <router-link to="/enrollment">Add Students/Assignments to Classes</router-link>
-      </p>
-      <p class="nav">
-      <router-link to="/graderlaunch">Launch Grader</router-link>
-      </p>
-      <p class="nav">
-      <router-link to="/gradingbatches">Grading Batches and Results</router-link>
-      </p>
-
-
-    <router-view/>
+      <Navigation></Navigation>
+      <router-view/>
 
     </div>
 
-    <div id='icon-credit'>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+    <Footer></Footer>
 
   </div>
 </template>
 
 <script>
 
+import Header from '@/components/Header.vue'
+import Navigation from '@/components/Navigation.vue'
+import Footer from '@/components/Footer.vue'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { Navigation, Header, Footer }
 }
 
 </script>
 
 <style>
 
-  .nav {
-    display: inline;
-    margin: 20px;
-    white-space: nowrap;
-  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   color: #2c3e50;
   margin: 30px;
-
-}
-
-#icon-credit {
-  padding: 10px;
-  font-size: 10px;
 }
 
 #content {
@@ -72,27 +43,40 @@ export default {
     padding: 15px;
 }
 
-header {
-  position: relative;
-  padding: 15px;
-    border: 1px grey solid;
+.error-message {
+  font-weight: bold;
+  color: darkred;
 }
 
-header h1 {
-  display: inline-block;
-  position: absolute;
-  top: -5px;
-  padding: 25px;
-  margin: 0px;
-
+.warning-message {
+  font-weight: bold;
+  font-style: italic;
+  color: #600826;
 }
 
-header img {
-  height: 63px;
-  width: 63px;
-  padding-left: 15px;
-  /* position: absolute; */
-
+button {
+  padding-bottom: 3px;
+  border-radius: 5px;
+  margin: 3px;
+  box-shadow: 1px 2px 5px 0 rgba(0,0,0,0.2)
 }
+
+.danger-button {
+  background-color: #cc3300; /* Orange-red */
+  color: white;
+}
+
+.action-button {
+  background-color: #DAF7A6;  /* Light green */
+}
+
+.important-button {
+  background-color: orange;
+}
+
+.neutral-button {
+  background-color: lightblue;
+}
+
 
 </style>

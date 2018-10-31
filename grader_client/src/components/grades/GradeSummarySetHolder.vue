@@ -1,16 +1,18 @@
 <template>
 
-<div>
-  <p v-for="grade in grades">
-    <GradeResultSummary
-      v-bind:result="grade"
-      v-on:onUpdateInstructorComments="onUpdateInstructorComments">
-    </GradeResultSummary>
+  <div>
+    <div v-if="grades.length > 0">
+    <p v-for="grade in grades">
+      <GradeResultSummary
+        v-bind:result="grade"
+        v-on:onUpdateInstructorComments="onUpdateInstructorComments">
+      </GradeResultSummary>
 
-    <button v-on:click="onRegrade(grade.id)">REGRADE {{grade.id}}</button>
-  </p>
-
-</div>
+      <button class="important-button" v-on:click="onRegrade(grade.id)">REGRADE {{grade.id}}</button>
+    </p>
+  </div>
+    <div v-else>No grades</div>
+  </div>
 
 </template>
 

@@ -42,13 +42,7 @@ export default {
     return {
       student: {},
       id: Number,
-      latestGrades: [
-
-      ],
-      dogs: [
-          {dog : { borks: [1, 2, 3] }} ,
-          {dog: { borks: [5,62, 7]}} ,
-      ]
+      latestGrades: []
     }
   },
   mounted() {

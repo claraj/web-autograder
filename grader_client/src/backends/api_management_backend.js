@@ -7,7 +7,6 @@ Vue.use(VueCookie)
 
 function Backend(base_url) {
 
-  // constructor(base_url) {
   this.base = base_url
 
   this.$crud = axios.create({
@@ -80,7 +79,7 @@ Backend.prototype.$temp_latest_asgt_for_student = function (student, programming
 Backend.prototype.$bulkAdd = function(data) {
   console.log('backend raw data:', data)
   return this.$bulk.post(
-    `/${this.base}s/raw/`,     // YUCK YUCK YUCK FIXME
+    `/${this.base}/raw/`,     // YUCK YUCK YUCK FIXME
     data
   )
   .then(response => response.data)

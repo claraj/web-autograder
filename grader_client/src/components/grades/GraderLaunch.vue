@@ -107,7 +107,7 @@ export default {
 
       console.log('grader will send', data)
 
-      this.$autograder_backend.$invokeGrader(data)
+      this.$autograder_backend.$invoke(data)
         .then(response => {
           console.log('response from server', response)
           this.$router.push({name: 'grader-results', query: {id: response.batch, expectedResults: expectedResults}})

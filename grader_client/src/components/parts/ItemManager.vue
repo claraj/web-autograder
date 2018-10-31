@@ -5,7 +5,7 @@
   <div>
     <h1>{{name}} Management</h1>
 
-    <ItemList
+    <ItemTable
       v-bind:items="items"
       v-bind:attributes="attributes"
       v-bind:itemType="itemType"
@@ -41,27 +41,17 @@
   </div>
 </template>
 
-
-<style>
-  #newItem {
-    padding: 15px;
-  }
-</style>
-
-
 <script>
-
-/* eslint-disable */
 
 var pluralize = require('pluralize')
 
-import ItemList from './ItemList.vue'
+import ItemTable from './ItemTable.vue'
 import BulkAdd from './BulkAdd.vue'
 import AddEditItem from './AddEditItem.vue'
 
 export default {
   name: 'ItemManager',
-  components: { ItemList, BulkAdd,  AddEditItem },
+  components: { ItemTable, BulkAdd,  AddEditItem },
   props: {
       attributes: Array,
       name: String,
@@ -185,3 +175,9 @@ export default {
 }
 
 </script>
+
+<style>
+  #newItem {
+    padding: 15px;
+  }
+</style>

@@ -12,15 +12,17 @@
 
       <span>for {{ result.student.name }}</span>
 
-  <router-link :to="{name: 'grade-detail', query: {id: result.id} }">Full Report</router-link>
+      <router-link :to="{name: 'grade-detail', query: {id: result.id} }">Full Report</router-link>
     </h4>
 
-    <!-- <p>Result ID {{ result.id }}</p> -->
     <p><span class="title">Grade:</span> {{ result.score }}</p>
-
     <P><span class="title">Overall Instructor Comments:</span></p>
-      <textarea v-model="report.overall_instructor_comments" v-on:change="updateInstructorComments"></textarea>
+    <textarea v-model="report.overall_instructor_comments" v-on:change="updateInstructorComments"></textarea>
     <P><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
+  </div>
+  
+  <div v-else>
+    <p>No report</p>
   </div>
 
 </template>

@@ -24,6 +24,8 @@ Can view results in a GraderResults component, and delete old grading batches.  
       </router-link>
 
       started at {{ batch.date | moment("dddd, MMMM Do YYYY hh:mm")}}.
+
+
     </p>
 
     <button v-on:click="delete_selected">delete selected</button>
@@ -33,11 +35,8 @@ Can view results in a GraderResults component, and delete old grading batches.  
 
 <script>
 
-import SelectionList from '@/components/parts/SelectionList.vue'
-
 export default {
   name: 'GraderModules',
-  components:  { SelectionList },
   data () {
     return {
       batches: [],
