@@ -26,7 +26,7 @@ export default {
         { attr: 'github_base', display: 'GitHub Base', regex: /^[a-zA-Z_\d-]+$/, required: true, message: 'GitHub base can only contain letters, numbers _ and -' },
         { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
         { attr: 'd2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
-        { attr: 'programming_class', display: 'Class Session', dropdown: true, dropdownSource: this.$classes_backend}
+        // { attr: 'programming_class', display: 'Class Session', dropdown: true, dropdownSource: this.$classes_backend}
       ],
       backend: this.$assignment_backend
 

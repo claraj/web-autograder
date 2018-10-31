@@ -25,7 +25,7 @@ export default {
         { attr: 'org_id', display: 'MCTC ID', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
         { attr: 'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
         { attr: 'active', display: 'Active?', boolean: true, },
-        { attr: 'programming_class', display: 'Class Session', dropdown: true, dropdownSource: this.$classes_backend }
+        // { attr: 'programming_class', display: 'Class Session', dropdown: true, dropdownSource: this.$classes_backend }
       ],
       backend: this.$student_backend,
     }
