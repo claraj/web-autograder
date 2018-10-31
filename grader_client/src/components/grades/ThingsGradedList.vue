@@ -30,7 +30,7 @@ export default {
     },
     assignmentNames: function() {
       if (this.assignments) {
-        return this.assignments.sort().join(', ')
+        return this.assignments.map(a => `Week ${a}`).sort().join(', ')
       }
       return 'None yet...'
     }

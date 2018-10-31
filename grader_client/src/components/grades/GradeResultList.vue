@@ -14,7 +14,7 @@
         <div v-for="result in sortedResults">
           <GradeResultSummary
             v-bind:result="result"
-            @onUpdatedInstructorComments="onUpdatedInstructorComments">
+            @onUpdateInstructorComments="onUpdateInstructorComments">
           </GradeResultSummary>
           <hr>
         </div>
@@ -59,8 +59,8 @@ export default {
     }
   },
   methods: {
-    onUpdatedInstructorComments (id, report) {
-      this.$emit('onUpdatedInstructorComments', id, report)
+    onUpdateInstructorComments (id, report) {
+      this.$emit('onUpdateInstructorComments', id, report)
     },
     sortResults () {
       let sorted = [...this.readyResults]

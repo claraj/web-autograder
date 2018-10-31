@@ -25,7 +25,7 @@
 
   <GradeResultList
     v-bind:readyResults="Object.values(this.gradedResults).filter(r => r!=null)"
-    @onUpdatedInstructorComments="onUpdatedInstructorComments">
+    @onUpdateInstructorComments="onUpdateInstructorComments">
   </GradeResultList>
 
 
@@ -101,7 +101,7 @@ export default {
 
   methods: {
 
-     onUpdatedInstructorComments(resultId, report) {
+     onUpdateInstructorComments(resultId, report) {
        console.log('will now update comments', resultId, report)
        this.$grade_backend.$editItem({id: resultId, generated_report: report } )
         .then( d => console.log(d))
