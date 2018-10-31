@@ -57,9 +57,7 @@ class GradeViewSet(viewsets.ModelViewSet):
 
         print(student, programmingClass)
 
-        # Dict of assignment_id, Grade_id, date
         # latest_by_assignment = Grade.objects.filter(programming_class=programmingClass).filter(student__id=student).values('id').values('assignment_id').annotate(max=Max('date'))
-
 
         latest_by_assignment = Grade.objects.raw("""select *
         from api_grade g1
@@ -68,7 +66,7 @@ class GradeViewSet(viewsets.ModelViewSet):
             from api_grade g2
             where student_id = %s
             and programming_class_id = %s
-            and  g1.assignment_id = g2.assignment_id
+            and g1.assignment_id = g2.assignment_id
             )""", [student, programmingClass])
 
         print(latest_by_assignment)

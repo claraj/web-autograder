@@ -10,5 +10,6 @@ urlpatterns = [
     url('^grader/', views.grader_start),
     # path('students/raw/', views.upload_raw, name="rawData"),
     # url('^testing/(?P<channel>\w+)', views.testing_sse),
-    url('^progress/', views.grader_get_progress)
+    url('^progress/', views.grader_get_progress),
+    url('^regrade/', views.regrade)
 ]

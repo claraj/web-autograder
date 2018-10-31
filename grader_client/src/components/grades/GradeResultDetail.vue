@@ -12,8 +12,8 @@ individual questions, and for the whole assignment  -->
 
   <div id="header" v-if="result.assignment && result.student">
     Grade for
-    <span>Assignment Week {{ result.assignment.week }},</span>
-    <span>student {{ result.student.name }}</span>
+    <span>Assignment <router-link :to="{ name: 'assignment', params: {id: result.assignment.id } }">Week {{ result.assignment.week }}</router-link>,</span>
+    <span>student <router-link :to="{ name: 'student', params:  {id: result.student.id} }">{{ result.student.name }}</router-link></span>
     (Grade result ID {{ result.id }})
   </div>
 

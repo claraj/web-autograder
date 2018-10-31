@@ -3,13 +3,7 @@
 
 <template>
 
-  <div>
-
-    <!-- todo look up student name; assignment name, probably in container component
-    Make these clickable to student or assigmment page
-    Student page should have all student's assignments and scores
-    Assignment page should have all student's results
-    -->
+  <div v-if="result">
 
     <h4>
       <img src="@/assets/list.png">
@@ -34,7 +28,7 @@
 <script>
 
 export default {
-  name: "GradeResultDetail",
+  name: "GradeResultSummary",
   props: {
     result: Object,
   },
@@ -53,7 +47,7 @@ export default {
   methods: {
     updateInstructorComments() {
       console.log('must save comments for ', this.result.id, this.report)
-      this.$emit('onUpdatedInstructorComments', this.result.id, JSON.stringify(this.report))
+      this.$emit('onUpdateInstructorComments', this.result.id, JSON.stringify(this.report))
     }
   }
 }

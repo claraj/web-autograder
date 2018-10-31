@@ -5,6 +5,7 @@ from django_eventstream import send_event
 from api.models import Grade, GradingBatch
 import uuid
 import json
+from django.shortcuts import get_object_or_404
 
 from .grading_queue import queue_grading_task
 
@@ -76,3 +77,20 @@ def grader_get_progress(request):
     print(graded_ids)
 
     return JsonResponse( { 'graded_ids' : graded_ids })
+
+
+@require_http_methods('POST')
+def regrade(request):
+
+    body = json.loads(request.body)
+    print(body)
+    id = body.get('id')
+    print('regrade', request.POST)
+    if not id:
+        return HttpResponseBadRequest('No id provided')
+    batch_uuid = uuid.uuid4()
+    grade = get_object_or_404(Grade, id=id)
+    batch = GradingBatch(batch_uuid, things_to_grade=1)
+    batch.save()
+    queue_grading_task(batch_uuid, grade.assignment.id, grade.student.id, grade.programming_class.id)
+    return JsonResponse( {'batch': str(batch_uuid), 'no_students': 1, 'no_assignments': 1, 'programming_class': grade.programming_class.id})

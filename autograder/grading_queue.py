@@ -1,4 +1,4 @@
-from api.models import Student, Assignment, Grade, GradingBatch
+from api.models import Student, Assignment, Grade, GradingBatch, ProgrammingClass
 from grading_module import ag
 from django.db.models import F
 import json
@@ -19,7 +19,9 @@ def start_grader(batch, assignment_id, student_id, class_id):
 
     student = Student.objects.get(pk=student_id)
     assignment = Assignment.objects.get(pk=assignment_id)
-    programming_class = ProgrammingClass.get(pk=class_id)
+
+    print('class', class_id)
+    programming_class = ProgrammingClass.objects.get(pk=class_id)
     result = ag.grade(assignment, student)
 
     print('grader results are', result)

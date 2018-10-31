@@ -70,6 +70,12 @@ Backend.prototype.$itemsInCollection = function(id, collection) {
   .then( response => response.data )
 }
 
+//TEMP must structure this better
+
+Backend.prototype.$temp_latest_asgt_for_student = function (student, programming_class) {
+  return this.$crud.get('/grade/latestGrades/', { params: {student, programming_class}} )
+  .then(response => response.data)
+}
 
 Backend.prototype.$bulkAdd = function(data) {
   console.log('backend raw data:', data)

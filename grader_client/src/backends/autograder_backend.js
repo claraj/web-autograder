@@ -28,4 +28,10 @@ Autograder.prototype.$graderProgress = function(batch) {
 }
 
 
+Autograder.prototype.$regrade = function(id) {
+  return this.$api.post(`/regrade/`, {id: id} )
+  .then(response => response.data)
+}
+
+
 export default Autograder
