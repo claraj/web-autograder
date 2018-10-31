@@ -95,7 +95,7 @@ class Grade(models.Model):
     objects = GradeManager()
 
     def __str__(self):
-        return 'assignment %s student %s batch %s date %s, score %f'  % (self.assignment.id, self.student.id, self.batch, self.date, self.score)
+        return f'{self.id} assignment {self.assignment.id} student {self.student.id} batch {self.batch} date {self.date}, score {self.score}'
 
 
     def save(self, *args, **kwargs):
@@ -191,37 +191,3 @@ class GradingBatch(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     things_to_grade = models.IntegerField()
     processed = models.IntegerField(default=0)  # this includes things that are graded, that errored during grading...
-
-
-# Not used....
-class Attributes(models.Model):
-    model = models.CharField(max_length=200, null=False, blank=False)  # required
-    attr = models.CharField(max_length=200, null=False, blank=False)  # required
-    display = models.CharField(max_length=200, null=False, blank=True)  # not required
-    validation_regex = models.CharField(max_length=200, null=False, blank=True)  # not required
-    validation_fail_message = models.CharField(max_length=200, null=False, blank=True)  # not required
-    hyperlink = models.BooleanField(default=False)  # not required
-    required = models.BooleanField(default=False)  # not required
-    no_edit = models.BooleanField(default=False)  # not required
-    omit_from_forms = models.BooleanField(default=False)
-
-
-      #   attributes: [
-      #   { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
-      #   { attr :'week', display: 'Week', regex: /^.+$/, required:true, message: 'Name is required' },
-      #   { attr: 'github_base', display: 'GitHub Base', regex: /^[a-zA-Z_\d-]+$/, required: true, message: 'GitHub base can only contain letters, numbers _ and -' },
-      #   { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
-      #   { attr:'d2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
-      #   { attr: 'programming_class', display: 'Class Session'}
-      # ],
-
-        # or
-        #
-        #       attributes: [
-        #         { attr: 'id', display: 'id', noEdit: true, omitFromForms: true},
-        #         { attr :'name', display: 'Name', regex: /^.+$/, required:true, message: 'Name is required' },
-        #         { attr: 'github_id', display: 'Github ID', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
-        #         { attr: 'org_id', display: 'MCTC ID', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
-        #         { attr:'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
-        #         { attr: 'programming_class', display: 'Class Session'}
-        #       ],

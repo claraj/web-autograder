@@ -1,10 +1,11 @@
 from rest_framework import viewsets
-from .models import Assignment, Student, GradingBatch, Grade, Attributes, ProgrammingClass
+from .models import Assignment, Student, GradingBatch, Grade, ProgrammingClass
 from .serializers import AssignmentSerializer, StudentSerializer, ProgrammingClassSerializer, GradingBatchSerializer, GradeSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models.functions import Lower
+from django.db.models import Max
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
@@ -44,6 +45,36 @@ class GradeViewSet(viewsets.ModelViewSet):
     queryset = Grade.objects.all().order_by('student.name').order_by('assignment')
     serializer_class = GradeSerializer
     filter_fields = ('student', 'assignment', 'batch', 'id')
+
+    @action(methods=['get'], detail=False, url_path='latestGrades')
+    def latestGradesForStudent(self, request):
+        """ Get latest grade objects for a student, for each individual assignment on record.
+        http://127.0.0.1:8000/api/grade/latestGrades/?student=10&programming_class=3
+         """
+        print('request', request.data, request.query_params)
+        student = request.query_params['student']
+        programmingClass = request.query_params['programming_class']
+
+        print(student, programmingClass)
+
+        # Dict of assignment_id, Grade_id, date
+        # latest_by_assignment = Grade.objects.filter(programming_class=programmingClass).filter(student__id=student).values('id').values('assignment_id').annotate(max=Max('date'))
+
+
+        latest_by_assignment = Grade.objects.raw("""select *
+        from api_grade g1
+        where date = (
+            select max(g2.date)
+            from api_grade g2
+            where student_id = %s
+            and programming_class_id = %s
+            and  g1.assignment_id = g2.assignment_id
+            )""", [student, programmingClass])
+
+        print(latest_by_assignment)
+
+        serializer = GradeSerializer(latest_by_assignment, many=True)
+        return Response(serializer.data)
 
 
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import PrimaryKeyRelatedField
-from .models import Assignment, Student, ProgrammingClass, GradingBatch, Grade, Attributes
+from .models import Assignment, Student, ProgrammingClass, GradingBatch, Grade
 
 class AssignmentSerializer(serializers.ModelSerializer):
 
