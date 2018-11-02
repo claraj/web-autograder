@@ -62,30 +62,4 @@ Backend.prototype.$deleteMany = function(ids) {
     return this.$crud.patch(`/${this.base}/deleteMany/`, ids)
 }
 
-Backend.prototype.$itemsInCollection = function(id, collection) {
-  // For example, get all students in programming class 3 with
-  // GET programmingclass/3/students
-  return this.$crud.get(`/${this.base}/${id}/${collection}`)
-  .then( response => response.data )
-}
-
-//TEMP must structure this better
-
-Backend.prototype.$temp_latest_asgt_for_student = function (student, programming_class) {
-  return this.$crud.get('/grade/latestGrades/', { params: {student, programming_class}} )
-  .then(response => response.data)
-}
-
-Backend.prototype.$bulkAdd = function(data) {
-  console.log('backend raw data:', data)
-  return this.$bulk.post(
-    `/${this.base}/raw/`,     // YUCK YUCK YUCK FIXME
-    data
-  )
-  .then(response => response.data)
-  .catch(err => console.error(err))
-}
-
-
-
 export default Backend

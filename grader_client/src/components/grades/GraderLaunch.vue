@@ -73,7 +73,7 @@ export default {
     classSelectionChanged () {
       if (!this.selectedClass) { return }
 
-      this.$classes_backend.$itemsInCollection(this.selectedClass, 'students')
+      this.$util_backend.$fetchProgrammingClassStudents(this.selectedClass)
         .then(data => {
           this.students = data
           if (this.students) {
@@ -81,7 +81,7 @@ export default {
           }
         })
 
-      this.$classes_backend.$itemsInCollection(this.selectedClass, 'assignments')
+      this.$util_backend.$fetchProgrammingClassAssignments(this.selectedClass)
         .then(data => {
           this.assignments = data
           if (this.assignments) {
@@ -97,8 +97,6 @@ export default {
         this.error = 'Select at least one student and at least one assignment'
         return
       }
-
-
       console.log(this.selectedClass)
       this.error = ''
       let data = {students: selectedStudents, assignments: selectedAssignments, programming_class: this.selectedClass}

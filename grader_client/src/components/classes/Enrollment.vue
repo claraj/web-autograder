@@ -10,36 +10,37 @@
       </option>
     </select>
 
-    <p v-if="error" class="error">{{error}}</p>
+    <p v-if="error" class="error-message">{{error}}</p>
 
     <div class="grid-container">
       <div class="row">
         <h3>Assignments <span v-if="selectedClass.name"> in {{selectedClass.name}}</span></h3>
-        <button class="remove-button" v-on:click="removeSelectedAssignments">Remove selected assignments</button>
+        <button class="danger-button" v-on:click="removeSelectedAssignments">Remove selected assignments</button>
         <SelectionList v-bind:items="assignmentsInClass"></SelectionList>
 
       </div>
 
       <div class="row">
         <h3>Students<span v-if="selectedClass.name"> in {{selectedClass.name}}</span></h3>
-        <button class="remove-button" v-on:click="removeSelectedStudents">Remove selected students</button>
+        <button class="danger-button" v-on:click="removeSelectedStudents">Remove selected students</button>
         <SelectionList v-bind:items="studentsInClass"></SelectionList>
       </div>
     </div>
+
     <hr>
+    <p v-if="error" class="error-message">{{error}}</p>
 
     <div class="grid-container">
-
       <div class="row">
         <h3>All Assignments</h3>
-        <button class="add-button" v-on:click="addSelectedAssignments">Add Selected Assignments to Class</button>
+        <button class="action-button" v-on:click="addSelectedAssignments">Add selected assignments to class</button>
         <div class="filter"><span>Search</span> <input v-model="assignmentFilter"/></div>
         <SelectionList v-bind:items="filteredAssignments"></SelectionList>
       </div>
 
       <div class="row">
         <h3>All Students</h3>
-        <button class="add-button" v-on:click="addSelectedStudents">Add Selected Students to Class</button>
+        <button class="action-button" v-on:click="addSelectedStudents">Add selected students to class</button>
         <div class="filter"><span>Search</span> <input v-model="studentFilter"/></div>
         <SelectionList v-bind:items="filteredStudents"></SelectionList>
       </div>
@@ -114,13 +115,13 @@ export default {
         else { return }
       }
       // Create display text for each list item
-      this.$classes_backend.$itemsInCollection(this.selectedClass.id, 'students').then(data => {
+      this.$enrollment_backend.$fetchProgrammingClassStudents(this.selectedClass.id).then(data => {
         this.studentsInClass = data
         this.studentsInClass.forEach(st => { st.displayText = `${st.name}, GitHub ${st.github_id}`
         })
       })
 
-      this.$classes_backend.$itemsInCollection(this.selectedClass.id, 'assignments').then(data => {
+      this.$enrollment_backend.$fetchProgrammingClassAssignments(this.selectedClass.id).then(data => {
         this.assignmentsInClass = data
         this.assignmentsInClass.forEach(as => {
           as.displayText = `Week ${as.week}, ${as.instructor_repo}`
@@ -131,56 +132,53 @@ export default {
     addSelectedStudents () {
 
       if (!this.selectedClass) { this.error = 'select a class'; return }
-      let studentsToAdd = this.allStudents.filter(s => s.selected)
-      if (studentsToAdd.length == 0)  { this.error = 'Select at least one student'; return }
+      let studentsToAdd = this.allStudents.filter(s => s.selected).map(s => s.id)
+      if (studentsToAdd.length == 0)  {
+        this.error = 'Select at least one student'
+        return
+      }
       this.error = ''
-
-      let addPromises = studentsToAdd.map(s => this.$student_backend.$editItem({id: s.id, programming_classes: [this.selectedClass.id, ...s.programming_classes]}))
-      Promise.all(addPromises).then(()=>{
-          this.loadAll()
+      this.$enrollment_backend.$addStudentsToProgrammingClass(this.selectedClass.id, studentsToAdd).then( () => {
+        this.loadAll()
       })
-    },
 
+    },
     addSelectedAssignments () {
       if (!this.selectedClass) { this.error = 'select a class'; return}
-      let assignmentsToAdd = this.allAssignments.filter(a => a.selected)
-      if (assignmentsToAdd.length == 0) { this.error = 'Select at least one assignment'; return}
+      let assignmentsToAdd = this.allAssignments.filter(a => a.selected).map(a => a.id)
+      if (assignmentsToAdd.length == 0) {
+        this.error = 'Select at least one assignment';
+        return}
       this.error = ''
-      let addPromises = assignmentsToAdd.map(a => this.$assignment_backend.$editItem({id: a.id, programming_classes: [this.selectedClass.id, ...a.programming_classes]}))
-      Promise.all(addPromises).then(()=>{
-          this.loadAll()
+      this.$enrollment_backend.$addAssignmentsToProgrammingClass(this.selectedClass.id, assignmentsToAdd).then( () => {
+        this.loadAll()
       })
     },
 
     removeSelectedStudents () {
 
       if (!this.selectedClass) { this.error = 'select a class'; return }
-      let selectedStudents = this.studentsInClass.filter(s => s.selected)
-      if (selectedStudents.length == 0) { this.error = 'Select at least one student to remove'; return }
+      let studentsToRemove = this.studentsInClass.filter(s => s.selected).map(s => s.id)
+      if (studentsToRemove.length == 0) {
+        this.error = 'Select at least one student to remove';
+        return
+      }
       this.error = ''
 
-      let removePromises = selectedStudents.map(s => {
-        let updatedListOfClasses = s.programming_classes.filter(p => p != this.selectedClass.id)
-        return this.$student_backend.$editItem({id: s.id, programming_classes: updatedListOfClasses})
-      })
-
-      Promise.all(removePromises).then(() => {
+      this.$enrollment_backend.$removeStudentsFromProgrammingClass(this.selectedClass.id, studentsToRemove).then( () => {
         this.loadAll()
       })
     },
 
     removeSelectedAssignments () {
       if (!this.selectedClass) { this.error = 'select a class'; return }
-      let selectedAssignments = this.assignmentsInClass.filter(a => a.selected)
-      if (selectedAssignments.length == 0) { this.error = 'Select at least one assignment to remove'; return }
+      let assignmentsToRemove = this.assignmentsInClass.filter(a => a.selected).map(a => a.id)
+      if (assignmentsToRemove.length == 0) {
+        this.error = 'Select at least one assignment to remove'
+        return
+      }
       this.error = ''
-
-      let removePromises = selectedAssignments.map(a => {
-        let updatedListOfClasses = a.programming_classes.filter(p => p != this.selectedClass.id)
-        return this.$assignment_backend.$editItem({id: a.id, programming_classes: updatedListOfClasses})
-      })
-
-      Promise.all(removePromises).then(() => {
+      this.$enrollment_backend.$removeAssignmentsFromProgrammingClass(this.selectedClass.id, assignmentsToRemove).then( () => {
         this.loadAll()
       })
     }
@@ -208,10 +206,7 @@ export default {
 li {
   word-wrap: break-word;
 }
-.error {
-  color: darkred;
-  font-weight: bold;
-}
+
 
 button {
   border-radius: 5px;
