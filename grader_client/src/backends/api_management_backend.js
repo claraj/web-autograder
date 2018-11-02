@@ -44,7 +44,7 @@ Backend.prototype.$deleteItem = function (id) {
 
 Backend.prototype.$addItem = function(data)  {
   return this.$crud.post(`/${this.base}/`, data)
-  .then(response => response.data)
+  .then(response => {console.log(response); return response.data})
 }
 
 Backend.prototype.$fetchOne = function(id) {

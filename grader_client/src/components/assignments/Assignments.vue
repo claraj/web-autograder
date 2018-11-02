@@ -27,7 +27,6 @@ export default {
         { attr: 'github_org', display: 'GitHub Organization', required:true },
         { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
         { attr: 'd2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
-        // { attr: 'programming_classes', display: 'Class Sessions', omitFromForms: true, default: [] }
       ],
       backend: this.$assignment_backend
 

@@ -19,6 +19,18 @@
     <p><span class="title">Instructor repo:</span> <a :href="assignment.instructor_repo">{{assignment.instructor_repo}}</a></p>
     <p><span class="title">D2L gradebook:</span> <a :href="assignment.d2l_gradebook_url">{{assignment.d2l_gradebook_url}}</a></p>
 
+    <button class="neutral-button" v-on:click="edit">Edit</button>
+
+    <AddEditItem
+    v-bind:item="assignment"
+    v-bind:attributes="attributes"
+    v-bind:visible="editVisible"
+    v-bind:action="action"
+    v-bind:name="name"
+    v-on:onCancelAddEdit="onCancelEdit"
+    v-on:onConfirmAddEditSubmit="onConfirmEdit"
+    ></AddEditItem>
+
   </div>
   <div v-else>
     {{status}}
@@ -33,7 +45,18 @@ export default {
   data() {
     return {
       assignment: {},
-      status: 'Loading assignment information...'
+      status: 'Loading assignment information...',
+      attributes: [
+          { attr: 'id', display: 'id', noEdit: true, omitFromForms: true, linkToDetails: true},
+          { attr :'week', display: 'Week', regex: /^.+$/, required:true, message: 'Name is required' },
+          { attr: 'github_base', display: 'GitHub Base', regex: /^[a-zA-Z_\d-]+$/, required: true, message: 'GitHub base can only contain letters, numbers _ and -' },
+          { attr: 'github_org', display: 'GitHub Organization', required:true },
+          { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
+          { attr: 'd2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
+        ],
+      name: 'Assignment',
+      action: 'Edit',
+      editVisible: false
     }
   },
   mounted() {
@@ -59,6 +82,22 @@ export default {
     }
 
     getAssignment()
+  },
+  methods:  {
+    edit() {
+      this.editVisible = true
+    },
+    onCancelEdit() {
+      this.editVisible = false
+    },
+    onConfirmEdit(editedClass) {
+      console.log('edit', editedClass)
+      this.editVisible = false
+      this.$assignments_backend.$editItem(editedClass).then(response => {
+        console.log(response.data)
+        this.programmingClass = response.data
+      })
+    }
   }
 }
 

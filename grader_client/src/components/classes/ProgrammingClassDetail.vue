@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       programmingClass: {},
-      status: 'Loading programmingClass information...',
+      status: 'Loading Programming Class information...',
       assignments: [],
       students: [],
       attributes: [
