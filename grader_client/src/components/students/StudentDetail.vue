@@ -3,30 +3,30 @@
 
   <div>
 
-     <h2>{{student.name}}</h2>
+    <h2>{{student.name}}</h2>
 
-     <p>Name: {{ student.name}} </p>
-     <p>GitHub: {{ student.github_id}} </p>
-     <p>Star ID: {{ student.star_id}} </p>
-     <p>Org ID: {{ student.org_id}} </p>
+    <p>Name: {{ student.name}} </p>
+    <p>GitHub: {{ student.github_id}} </p>
+    <p>Star ID: {{ student.star_id}} </p>
+    <p>Org ID: {{ student.org_id}} </p>
 
-     <P>Programming classes: <span v-for="pc in programmingClasses">{{pc.name}}, {{pc.semester_human_string}}; </span> </p>
+    <P>Programming classes: <span v-for="pc in programmingClasses">{{pc.name}}, {{pc.semester_human_string}}; </span> </p>
 
-     <h2>Grades</h2>
+      <h2>Grades</h2>
 
-<div v-if="latestGrades.length > 0" v-for="gradeSet in latestGrades">
+      <div v-if="latestGrades.length > 0" v-for="gradeSet in latestGrades">
 
-<h4>Grade set for {{gradeSet.programmingClass.name}}, {{gradeSet.programmingClass.semester_human_string}}</h4>
+        <h4>Grade set for {{gradeSet.programmingClass.name}}, {{gradeSet.programmingClass.semester_human_string}}</h4>
 
-<button v-on:click="onRegradeAll(gradeSet.programmingClass.id)">Regrade all for {{gradeSet.programmingClass.name}}</button>
+        <button v-on:click="onRegradeAll(gradeSet.programmingClass.id)">Regrade all for {{gradeSet.programmingClass.name}}</button>
 
-<GradeSummarySetHolder
-  v-bind:grades="gradeSet.grades"
-  v-bind:programmingClass="gradeSet.programmingClass"
-  v-on:onRegrade="onRegrade"
-  v-on:onUpdateInstructorComments="onUpdateInstructorComments">
-</GradeSummarySetHolder>
-</div>
+        <GradeSummarySetHolder
+        v-bind:grades="gradeSet.grades"
+        v-bind:programmingClass="gradeSet.programmingClass"
+        v-on:onRegrade="onRegrade"
+        v-on:onUpdateInstructorComments="onUpdateInstructorComments">
+      </GradeSummarySetHolder>
+    </div>
 
   </div>
 
@@ -62,7 +62,7 @@ export default {
         vue.student = student
 
         // TODO how does this work within await, arrow functions?
-        let gradeProms = student.programming_classes.map(pc => vue.$student_backend.$temp_latest_asgt_for_student(student.id, pc))
+        let gradeProms = student.programming_classes.map(pc => vue.$util_backend.$getMostRecentAssignmentForStudent(student.id, pc))
         let latestGrades = await Promise.all(gradeProms) //.then( vals => vue.latestGrades = vals)  // aparently I don't understand await.
 
         let classesProms = student.programming_classes.map(pc => vue.$classes_backend.$fetchOne(pc))
@@ -93,42 +93,41 @@ export default {
         grades.forEach( (g, index) => {
           console.log(g, index)
           g.grades = gradesArray[index]}
-         )
+        )
 
-         console.log('fin grades', grades)
+        console.log('fin grades', grades)
 
         this.latestGrades = grades
 
       })
-  },
+    },
 
-  onRegrade(id) {
-    // fire grader and redirect to expected results page
-    this.$autograder_backend.$regrade(id)
-    .then(response => {
-      this.$router.push({name: 'grader-results', query: {id: response.batch, expectedResults: 1}})
-    })
-    .catch(err => console.log(err))
-  },
-
-  onRegradeAll(classId) {
-    // Grade all of the assignments for this class, regardless if they are already graded or not.
-    let assignments = this.$classes_backend.$itemsInCollection(classId, 'assignments').then(assignments => {
-      let data = { students: [this.student.id], assignments: assignments.map(a => a.id), programming_class: classId}
-      console.log('data', data)
-      this.$autograder_backend.$invoke(data)
+    onRegrade(id) {
+      // fire grader and redirect to expected results page
+      this.$autograder_backend.$regrade(id)
       .then(response => {
-        this.$router.push({name: 'grader-results', query: {id: response.batch, expectedResults: assignments.length}})
+        this.$router.push({name: 'grader-results', query: {id: response.batch, expectedResults: 1}})
       })
-    })
+      .catch(err => console.log(err))
+    },
 
-  },
-  onUpdateInstructorComments(id, report) {
-    // console.log('DETAIL update', id, report)
-    this.$grade_backend.$editItem({id: id, generated_report: report } )
-     .then( d => console.log(d))
-     .catch(err => console.log(err))
-  }
+    onRegradeAll(classId) {
+      // Grade all of the assignments for this class, regardless if they are already graded or not.
+      let assignments = this.$enrollment_backend.$fetchProgrammingClassAssignments(classId).then(assignments => {
+        let data = { students: [this.student.id], assignments: assignments.map(a => a.id), programming_class: classId}
+        console.log('data', data)
+        this.$autograder_backend.$invoke(data)
+        .then(response => {
+          this.$router.push({name: 'grader-results', query: {id: response.batch, expectedResults: assignments.length}})
+        })
+      })
+    },
+    onUpdateInstructorComments(id, report) {
+      // console.log('DETAIL update', id, report)
+      this.$grade_backend.$editItem({id: id, generated_report: report } )
+      .then( d => console.log(d))
+      .catch(err => console.log(err))
+    }
   }
 }
 

@@ -78,5 +78,8 @@ button {
   background-color: lightblue;
 }
 
+.title {
+  font-weight: bold;
+}
 
 </style>
