@@ -44,13 +44,12 @@ class ProgrammingClass(models.Model):
 
 
 class Assignment(models.Model):
-    programming_classes = models.ManyToManyField(ProgrammingClass)
+    programming_classes = models.ManyToManyField(ProgrammingClass, blank=True)
     week = models.IntegerField()
     github_base = models.CharField(max_length=200)      # e.g. week-0-variables
     github_org = models.CharField(max_length=200)
-    instructor_repo = models.CharField(max_length=200)  # eg. https://github.com/minneapolis-edu/JAG_0
+    instructor_repo = models.CharField(max_length=200)  # e.g. https://github.com/minneapolis-edu/JAG_0
     d2l_gradebook_url = models.CharField(max_length=200, blank=True, null=False)
-
 
     def __str__(self):
         return 'Week: [%d] GitHub Base: [%s] Intructor Repo: [%s] D2L URL [%s] ' % (self.week, self.github_base, self.instructor_repo, self.d2l_gradebook_url)
