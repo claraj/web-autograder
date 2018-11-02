@@ -40,8 +40,12 @@
 
 <script>
 
+import AddEditItem from '@/components/parts/AddEditItem'
+
+
 export default {
   name: 'AssignmentDetail',
+  components: { AddEditItem },
   data() {
     return {
       assignment: {},
@@ -90,12 +94,10 @@ export default {
     onCancelEdit() {
       this.editVisible = false
     },
-    onConfirmEdit(editedClass) {
-      console.log('edit', editedClass)
+    onConfirmEdit(edited) {
       this.editVisible = false
-      this.$assignments_backend.$editItem(editedClass).then(response => {
-        console.log(response.data)
-        this.programmingClass = response.data
+      this.$assignment_backend.$editItem(edited).then(response => {
+        this.assignment = response.data
       })
     }
   }

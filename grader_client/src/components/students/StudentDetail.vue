@@ -10,7 +10,20 @@
     <p>Star ID: {{ student.star_id}} </p>
     <p>Org ID: {{ student.org_id}} </p>
 
+    <button class="neutral-button" v-on:click="edit">Edit</button>
+
+    <AddEditItem
+    v-bind:item="student"
+    v-bind:attributes="attributes"
+    v-bind:visible="editVisible"
+    v-bind:action="action"
+    v-bind:name="name"
+    v-on:onCancelAddEdit="onCancelEdit"
+    v-on:onConfirmAddEditSubmit="onConfirmEdit"
+    ></AddEditItem>
+
     <P>Programming classes: <span v-for="pc in programmingClasses">{{pc.name}}, {{pc.semester_human_string}}; </span> </p>
+
 
       <h2>Grades</h2>
 
@@ -36,16 +49,28 @@
 
 import GradeResultSummary from '@/components/grades/GradeResultSummary.vue'
 import GradeSummarySetHolder from '@/components/grades/GradeSummarySetHolder.vue'
+import AddEditItem from '@/components/parts/AddEditItem'
 
 export default {
   name: 'StudentDetail',
-  components: {GradeResultSummary, GradeSummarySetHolder },
+  components: {GradeResultSummary, GradeSummarySetHolder, AddEditItem },
   data() {
     return {
       student: {},
       id: Number,
       latestGrades: [],
-      programmingClasses: []
+      programmingClasses: [],
+      attributes: [
+        { attr: 'id', display: 'id', noEdit: true, omitFromForms: true, linkToDetails: true},
+        { attr :'name', display: 'Name', regex: /^.+$/, required:true, message: 'Name is required',  },
+        { attr: 'github_id', display: 'Github ID', regex: /^[a-zA-Z_\d-]+$/, message: 'GitHub username can only contain letters, numbers _ and -' },
+        { attr: 'org_id', display: 'MCTC ID', regex: /^\d{8}$/, message: 'MCTC id should be 8 numbers' },
+        { attr: 'star_id', display:'Star ID', regex: /^[a-z]{2}\d{4}[a-z]{2}$/, message: 'Star ID must be in the form ab1234cd' },
+        { attr: 'active', display: 'Active?', boolean: true, },
+      ],
+      name: 'Programming Class',
+      action: 'Edit',
+      editVisible: false
     }
   },
   mounted() {
@@ -128,7 +153,20 @@ export default {
       .then( d => console.log(d))
       .catch(err => console.log(err))
     }
+  ,
+  edit() {
+    this.editVisible = true
+  },
+  onCancelEdit() {
+    this.editVisible = false
+  },
+  onConfirmEdit(edited) {
+    this.editVisible = false
+    this.$student_backend.$editItem(edited).then(response => {
+      this.student = response.data
+    })
   }
+}
 }
 
 
