@@ -19,6 +19,7 @@ class ProgrammingClass(models.Model):
 
 
     def save(self, *args, **kwargs):
+        print("SAVING CLASS")
         self.semester_human_string = self.humanCode()
         super().save(*args, **kwargs)
 
@@ -35,8 +36,8 @@ class ProgrammingClass(models.Model):
             if semester_code_str in ['03', '05']:
                 numerical_year += 1
             human_string = f'{semester_text}, {numerical_year}'
-            self.semester_human_string = human_string
-            
+            return human_string
+
         except Exception as e:
             log.warning(f'Can\'s create human-readable string for semester code {self.semester_code} because {e}')
 
