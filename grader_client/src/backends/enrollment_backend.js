@@ -54,11 +54,4 @@ Backend.prototype.$removeAssignmentsFromProgrammingClass = function(classId, ass
     .then( response => response.data)
 }
 
-
-
-Backend.prototype.$temp_latest_asgt_for_student = function (student, programming_class) {
-  return this.$crud.get('/grade/latestGrades/', { params: {student, programming_class}} )
-    .then(response => response.data)
-}
-
 export default Backend

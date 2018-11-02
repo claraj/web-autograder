@@ -1,73 +1,115 @@
-<!--
-
-
-
-TODO
-
-
-MAKE INTO PROGRAMMING CLASS
-
- details about one programmingClass, possibly students who have completed it?  -->
-
 <template>
 
   <div v-if="programmingClass">
-    <h2>ProgrammingClass Details</h2>
+    <h2>Programming Class Details</h2>
 
     <p><span class="title">ID:</span> {{programmingClass.id}}</p>
+    <p><span class="title">Name:</span> {{programmingClass.name}}</p>
+    <p><span class="title">Semester Code:</span> {{programmingClass.semester_code}}</p>
+    <p><span class="title">Human Semester Code:</span> {{programmingClass.semester_human_string}}</p>
 
-    <p v-if="programmingClass.programming_classes">
-      <span class="title">Programming classes:</span>
-        <li v-for="pc in programmingClass.programming_classes">
-          <router-link :to="{ name: 'programmingclass', params: {id: pc.id} }">{{pc.name}}</router-link></router-link>, {{pc.semester_human_string}}</li>
-    </p>
+    <button class="neutral-button" v-on:click="edit">Edit</button>
 
-    <p><span class="title">Week:</span> {{programmingClass.week}}</p>
-    <p><span class="title">GitHub organization:</span> {{programmingClass.github_org}}</p>
-    <p><span class="title">Github programmingClass base:</span> {{programmingClass.github_base}}</p>
-    <p><span class="title">Instructor repo:</span> <a :href="programmingClass.instructor_repo">{{programmingClass.instructor_repo}}</a></p>
-    <p><span class="title">D2L gradebook:</span> <a :href="programmingClass.d2l_gradebook_url">{{programmingClass.d2l_gradebook_url}}</a></p>
+    <AddEditItem
+    v-bind:item="programmingClass"
+    v-bind:attributes="attributes"
+    v-bind:visible="editVisible"
+    v-bind:action="action"
+    v-bind:name="name"
+    v-on:onCancelAddEdit="onCancelEdit"
+    v-on:onConfirmAddEditSubmit="onConfirmEdit"
+    ></AddEditItem>
 
+
+    <div>
+      <div>
+        <h3>Assignments in this class</h3>
+        <ul><li v-for="assignment in assignments">
+          <router-link :to="{ name: 'assignment', params: {id: assignment.id} }">id {{assignment.id}}</router-link>,
+          Week {{assignment.week}}, <a :href="assignment.instructor_repo">{{assignment.instructor_repo}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Students in this class</h3>
+      <ul>
+        <li v-for="student in students">
+          <router-link :to="{ name: 'student', params: {id: student.id} }">id {{student.id}}</router-link>,
+          {{student.name}}, GitHub <a :href=" 'https://github.com/' + student.github_id">{{student.github_id}}</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div v-else>
-    {{status}}
-  </div>
+
+</div>
+<div v-else>
+  {{status}}
+</div>
 
 </template>
 
 <script>
 
+import AddEditItem from '@/components/parts/AddEditItem'
+
 export default {
   name: 'ProgrammingClassDetail',
+  components: { AddEditItem },
   data() {
     return {
       programmingClass: {},
-      status: 'Loading programmingClass information...'
+      status: 'Loading programmingClass information...',
+      assignments: [],
+      students: [],
+      attributes: [
+              { attr: 'id', display: 'ID', noEdit: true, omitFromForms: true, linkToDetails: true },
+              { attr: 'name', display: 'Name' },
+              { attr: 'semester_code', display: 'Semester' },
+              { attr: 'semester_human_string', display: 'Semester Name', noEdit: true },
+            ],
+      name: 'Programming Class',
+      action: 'Edit',
+      editVisible: false
     }
   },
   mounted() {
-    let programmingClass_id = this.$route.params.id
+    let programmingClassId = this.$route.params.id
 
     let vue = this
 
     async function getProgrammingClass() {
 
-      let programmingClass = await vue.$programmingClass_backend.$fetchOne(programmingClass_id)
+      let programmingClass = await vue.$classes_backend.$fetchOne(programmingClassId)
       vue.programmingClass = programmingClass
 
       console.log(programmingClass)
 
-      let prog_classes = []
+      // Get students enrolled in this class
+      // Get assignments assigned in this class
+      vue.students = await vue.$enrollment_backend.$fetchProgrammingClassStudents(programmingClassId)
+      vue.assignments = await vue.$enrollment_backend.$fetchProgrammingClassAssignments(programmingClassId)
 
-      for (const pc of programmingClass.programming_classes) {
-        let res = await vue.$classes_backend.$fetchOne(pc)
-        prog_classes.push(res)
-      }
+      vue.status = ''
 
-      vue.programmingClass.programming_classes = prog_classes
     }
-
     getProgrammingClass()
+  },
+  methods:  {
+    edit() {
+      this.editVisible = true
+    },
+    onCancelEdit() {
+      this.editVisible = false
+    },
+    onConfirmEdit(editedClass) {
+      console.log('edit', editedClass)
+      this.editVisible = false
+      this.$classes_backend.$editItem(editedClass).then(response => {
+        console.log(response.data)
+        this.programmingClass = response.data
+      })
+    }
   }
 }
 
@@ -75,10 +117,8 @@ export default {
 
 <style>
 
-div {
-  text-align: left;
-}
-.title {
-  font-weight: bold;
-}
+  div {
+    text-align: left;
+  }
+
 </style>
