@@ -1,6 +1,6 @@
 <template>
 
-  <div id="navigation-links">  
+  <div id="navigation-links">
       <p class="nav">
       <router-link to="/students">Student Management</router-link>
       </p>
@@ -31,7 +31,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 
   .nav {
     display: inline;
@@ -53,10 +53,6 @@ export default {
   font-size: 10px;
 }
 
-#content {
-    text-align: center;
-    padding: 15px;
-}
 
 header {
   position: relative;

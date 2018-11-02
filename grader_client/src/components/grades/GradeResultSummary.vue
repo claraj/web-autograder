@@ -20,7 +20,7 @@
     <textarea v-model="report.overall_instructor_comments" v-on:change="updateInstructorComments"></textarea>
     <P><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
   </div>
-  
+
   <div v-else>
     <p>No report</p>
   </div>
@@ -33,6 +33,7 @@ export default {
   name: "GradeResultSummary",
   props: {
     result: Object,
+    programmingClass: Object
   },
   data() {
     return {

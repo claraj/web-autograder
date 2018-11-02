@@ -1,10 +1,12 @@
 <template>
 
-  <div>
+  <div id="summary">
+
     <div v-if="grades.length > 0">
     <p v-for="grade in grades">
       <GradeResultSummary
         v-bind:result="grade"
+        v-bind:programmingClass="programmingClass"
         v-on:onUpdateInstructorComments="onUpdateInstructorComments">
       </GradeResultSummary>
 
@@ -24,7 +26,8 @@ export default {
     name: 'GradeSummarySetHolder',
     components: { GradeResultSummary },
     props: {
-      grades: Array
+      grades: Array,
+      programmingClass: Object
     },
     methods: {
       onRegrade (id) {
@@ -38,6 +41,11 @@ export default {
 </script>
 
 <style>
+
+  #summary {
+    text-align: left;
+  }
+
   button {
     background-color:purple;
     color: white;
