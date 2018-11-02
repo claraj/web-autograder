@@ -164,7 +164,7 @@ export default {
       console.log('delete item ', id)
       const item = this.items.filter(item => item.id === id)[0]
       if (item)
-      if (confirm(`Delete item for week ${item.week}?`)){
+      if (confirm(`Delete ${this.name} with id ${item.id}?`)){
         this.backend.$deleteItem(id).then( () => {
           this.fetchItems()
         })
