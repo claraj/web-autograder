@@ -20,6 +20,7 @@ import sys
 import traceback
 import os
 import json
+import logging
 from tempfile import TemporaryDirectory
 
 from . import settings
@@ -74,6 +75,19 @@ def example():
 
 def grade(assignment, student):
 
+    """
+    Provide a student object and assignment object.
+
+    Downloads code, uses Docker to execute tests as
+    described in the assignment's configuration and Dockerfile, uses the test reports + grade scheme to
+    generate a score.
+
+    If programatic errors are encountered, returns {'success': False, 'error': the_error_message }
+    If errors in the student's code or unable to run tests or generate grade, returns { success: True, report: 'error message', score: 0, sha: the_sha }
+    If can't get code from GitHub, returns { success: True, report: 'error message', score: 0, sha: None }
+    The grader returns { success: True, report: 'bunch of reports', score: 99, sha: the_sha}
+
+    """
     try:
 
         instructor_code = fetch_instructor_code(assignment.instructor_repo)
@@ -81,20 +95,25 @@ def grade(assignment, student):
         try:
             student_code, err, sha = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
         except Exception as e:
-            return { 'success': True, 'result': f'Error fetching student code, {e}', score: 0 }
+            logging.warning(f'Error fetching student code because {e}')
+            return { 'success': True, 'result': f'Error fetching student code, {e}', 'score': 0, 'sha': None }
 
         project_config = get_config(instructor_code)
         grade_scheme = get_grade_scheme(instructor_code)
 
         with TemporaryDirectory(dir=settings.COMBINED_CODE_LOCATION) as temp_student_code_dir:
-            combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
+            try:
+                combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
+            except Exception as e:
+                t, e, tb = sys.exc_info()
+                logging.exception(f'Error combining instructor and student code, check student project structure. Reason {e}')
+                return { 'success': True, 'report': f'Error combining instructor and student code, check student project structure. Reason {e}', 'score': 0, 'sha': sha }
             try:
                 run_code_in_container(combined, project_config)
             except Exception as e:
                 # Could be compile errors, code crashed etc.
                 t, e, tb = sys.exc_info()
-                print(traceback.print_tb(tb))
-
+                logging.exception('Error running tests on student code')
                 return { 'success': True, 'report': f'Error running tests on student code, {e}', 'score': 0, 'sha': sha }
 
             try:
@@ -102,20 +121,17 @@ def grade(assignment, student):
             except Exception as e:
                 t, e, tb = sys.exc_info()
                 print(t, e, traceback.print_tb(tb))
-
                 return { 'success': True, 'report': f'Error reading test report files from student code, {e}', 'score': 0, 'sha': sha }
 
-            # input('done. press a key')
-
         json_report = json.dumps(report, cls=TestItemEncoder)
+        logging.info(f'Grading success for {student}, {assignent}, score {report.totalAdjustedPoints}, report {json_report[:50]}')
         return { 'success': True, 'report': json_report, 'score' : report.total_points_earned, 'sha': sha  }
 
     except Exception as e:
-
         # These are most likely errors that I have caused, or from modifications of the project structure between student and instructor.
         t, e, tb = sys.exc_info()
-        print(traceback.print_tb(tb))
-        return { 'success': False, 'error': e, 'score': 0 }
+        logging.exception('Unexpected error running grader')
+        return { 'success': False, 'error': e }
 
 
 def fetch_student_code(base, org, student_id):
@@ -137,15 +153,15 @@ def fetch_instructor_code(repo_url):
 
 
 def get_config(path):
-    config_dir = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.CONFIG_FILENAME)
-    config = parser.parse(config_dir)
+    config_path = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.CONFIG_FILENAME)
+    config = parser.parse(config_path)
     return config
 
 
 def get_grade_scheme(path):
-    config_dir = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.GRADE_SCHEME_FILENAME)
-    config = parser.parse(config_dir)
-    return config
+    grade_path = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.GRADE_SCHEME_FILENAME)
+    grade_scheme = parser.parse(grade_path)
+    return grade_scheme
 
 
 def combine_code(instructor_code, student_code, config, combined_location):
@@ -163,22 +179,11 @@ def run_code_in_container(path, config):
 def generate_grade_report(location, config, scheme):
     reports_dir = config['report_location']
     test_report_location = os.path.join(location, reports_dir)
-    print(test_report_location)
 
     assignment_report = report.grade(test_report_location, scheme)
     return assignment_report
 
-    # grade_report_list, score = report.grade(test_report_location, scheme)  # report could be CSV (probably) or some other organized text format.
-    # for r in grade_report_list:
-    #     print('REPORT IS', r)
-    #
-    # strr = [str(r) for r in grade_report_list]
-    # print('STRR', strr)
-    #
-    # return '\n'.join( [str(r) for r in grade_report_list] ), score
 
-
-
-
+# Only used for testing
 if __name__ == '__main__':
     example()

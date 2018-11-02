@@ -26,6 +26,9 @@ def grader_start(request):
     assignments = body.get('assignments')
     programming_class = body.get('programming_class')
 
+    if not students or not assignments or not programming_class:
+        return HttpResponseBadRequest('Provide at least one assignment, one student, one programing class.')
+
     batch_uuid = uuid.uuid4()
 
     no_students = len(students)

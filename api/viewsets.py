@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.db.models.functions import Lower
 from django.db.models import Max
 from .raw import process_raw
+from django.shortcuts import get_object_or_404
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
@@ -29,23 +30,62 @@ class StudentViewSet(viewsets.ModelViewSet):
             return HttpResponseBadRequest('Error processing raw data ' + e.message)
 
 
+
 class ProgrammingClassViewSet(viewsets.ModelViewSet):
     queryset = ProgrammingClass.objects.all().order_by('-semester_code')
     serializer_class = ProgrammingClassSerializer
 
-    @action(methods=['get'], detail=True, url_path='students')
+    @action(methods=['get', 'post', 'patch'], detail=True, url_path='students')
     def students_for_class(self, request, pk=None):
-        students = Student.objects.filter(programming_classes__id=pk).order_by('name')
-        serializer = StudentSerializer(students, many=True)
-        return Response(serializer.data)
+
+        if request.method == 'GET':
+            students = Student.objects.filter(programming_classes__id=pk).order_by('name')
+            serializer = StudentSerializer(students, many=True)
+            return Response(serializer.data)
+
+        # add students to class
+        if request.method == 'POST':
+            students = request.data.get('studentIds')
+            programming_class = get_object_or_404(ProgrammingClass, pk=pk)
+            for student in students:
+                programming_class.student_set.add(student)
+            programming_class.save()
+            return Response(ProgrammingClassViewSet.serializer_class(programming_class).data)
+
+        # Remove students from class, modify student_set
+        if request.method == 'PATCH':
+            students = request.data.get('studentIds')
+            programming_class = get_object_or_404(ProgrammingClass, pk=pk)
+            for student in students:
+                programming_class.student_set.remove(student)
+            programming_class.save()
+            return Response(ProgrammingClassViewSet.serializer_class(programming_class).data)
 
 
-    @action(methods=['get'], detail=True, url_path='assignments')
+
+    @action(methods=['get', 'post', 'patch'], detail=True, url_path='assignments')
     def assignments_for_class(self, request, pk=None):
-        assignments = Assignment.objects.filter(programming_classes__id=pk).order_by('week')
-        serializer = AssignmentSerializer(assignments, many=True)
-        return Response(serializer.data)
+        if request.method == 'GET':
+            assignments = Assignment.objects.filter(programming_classes__id=pk).order_by('week')
+            serializer = AssignmentSerializer(assignments, many=True)
+            return Response(serializer.data)
 
+        if request.method == 'POST':
+            assignments = request.data.get('assignmentIds')
+            programming_class = get_object_or_404(ProgrammingClass, pk=pk)
+            for assignment in assignments:
+                programming_class.assignment_set.add(assignment)
+            programming_class.save()
+            return Response(ProgrammingClassViewSet.serializer_class(programming_class).data)
+
+        # Remove assignments
+        if request.method == 'PATCH':
+            assignments = request.data.get('assignmentIds')
+            programming_class = get_object_or_404(ProgrammingClass, pk=pk)
+            for assignment in assignments:
+                programming_class.assignment_set.remove(assignment)
+            programming_class.save()
+            return Response(ProgrammingClassViewSet.serializer_class(programming_class).data)
 
 
 class GradeViewSet(viewsets.ModelViewSet):

@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 class ProgrammingClass(models.Model):
     name = models.CharField(max_length=100)  # e.g. Java Programming, Programming Logic...
-    semester_code = models.CharField(max_length=6, null=False, blank=False, validators=[RegexValidator('^\d{6}$', message='Must be 6 numbers, year+semester code e.g. Fall 2019 is 201901')])  # summer = 201801, fall = 201803, spring 2019 = 201805
+    semester_code = models.CharField(max_length=6, null=False, blank=False, validators=[RegexValidator('^20\d{2}0[135]$', message='Must be 6 numbers, year+semester code e.g. Fall 2019 is 201901')])  # summer = 201801, fall = 201803, spring 2019 = 201805
     semester_human_string = models.CharField(max_length=200, null=True, blank=True)
 
     semester_codes = { '01': 'Fall', '03': 'Spring', '05': 'Summer' }
@@ -19,24 +19,26 @@ class ProgrammingClass(models.Model):
 
 
     def save(self, *args, **kwargs):
-        class_instance.semester_human_string = humanCode(class_instance.semester_code)
-        super(*args, **kwargs)
+        self.semester_human_string = self.humanCode()
+        super().save(*args, **kwargs)
 
 
     def humanCode(self):
         """ Create human-readable versions (e.g. "Summer 2019") from semester codes like 201805 """
 
         try :
-            yearStr = self.semester_code[0:4]
-            code = self.semester_code[4:6]
-            numYear = int(yearStr)
-            semText = ProgrammingClass.semester_codes[semester]
-            if semester_code in ['03', '05']:
-                numYear += 1
-            human_string = '%s %s' % (semText, numYear)
+            year_str = self.semester_code[0:4]  # e.g. '2018'
+            semester_code_str = self.semester_code[4:6]
+            semester_text = ProgrammingClass.semester_codes[semester_code_str]  # 'Fall', 'Spring', 'Summer'
+
+            numerical_year = int(year_str)   # 01, 03, 05
+            if semester_code_str in ['03', '05']:
+                numerical_year += 1
+            human_string = f'{semester_text}, {numerical_year}'
             self.semester_human_string = human_string
+            
         except Exception as e:
-            log.warning('Semester code %s could not be converted to human readable because %s' % (numberCode, e))
+            log.warning(f'Can\'s create human-readable string for semester code {self.semester_code} because {e}')
 
 
 
