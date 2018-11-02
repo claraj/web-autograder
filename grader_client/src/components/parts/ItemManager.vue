@@ -75,7 +75,7 @@ export default {
     },
     bulkCSVOrder: function() {
       return this.attributes
-        .filter(a => a.attr != 'id')   // ignore ID
+        .filter(a => a.attr != 'id' && !a.attr.omitFromForms )   // ignore ID
         .map(a => a.attr)              // get the attribute code names
         .reduce( (a, b) => a + "," + b) }  // stick together into a string
   },
@@ -109,7 +109,7 @@ export default {
     onRequestEdit(id) {
       // populate the AddEditItem component with the selected item
       console.log('recived request to edit ', id)
-      this.focusItem = this.items.filter( item => item.id === id)[0]
+      this.focusItem = this.items.find( item => item.id === id)
       console.log('to edit:', this.focusItem)
       if (this.focusItem) {
         // todo remove ID, should not be edited
@@ -126,6 +126,9 @@ export default {
           this.showAddEditModal = false;
           this.fetchItems()
         })
+        .catch( error => {
+          this.error = error
+        })
     },
 
     onCancelAddEdit() {
@@ -140,11 +143,13 @@ export default {
     },
 
     addItem() {
-      const data = this.focusItem; // { id: this.id, name: this.name, star_id: this.star_id, org_id: this.org_id, github_id:this.github_id }
+      const data = this.focusItem;
+      console.log('item to add..', data)
       this.backend.$addItem(data).then( () => {
         this.focusItem = {}
         this.fetchItems()
-      })
+        this.showAddEditModal = false;
+      }).catch(error => { console.log(error)})
     },
 
     onSubmitBulk(rawData) {
@@ -167,7 +172,7 @@ export default {
       if (confirm(`Delete ${this.name} with id ${item.id}?`)){
         this.backend.$deleteItem(id).then( () => {
           this.fetchItems()
-        })
+        }).catch(error => { console.log(error)})
       }
     }
 
