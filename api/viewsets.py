@@ -6,6 +6,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models.functions import Lower
 from django.db.models import Max
+from .raw import process_raw
 
 
 class AssignmentViewSet(viewsets.ModelViewSet):
@@ -20,6 +21,12 @@ class StudentViewSet(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
     filter_fields = ('name', 'active')
 
+    @action(methods=['post'], detail=False, url_path='raw')
+    def raw_upload(request):
+        try:
+            process_raw(request.data)
+        except Exception as e:
+            return HttpResponseBadRequest('Error processing raw data ' + e.message)
 
 
 class ProgrammingClassViewSet(viewsets.ModelViewSet):
@@ -51,13 +58,8 @@ class GradeViewSet(viewsets.ModelViewSet):
         """ Get latest grade objects for a student, for each individual assignment on record.
         http://127.0.0.1:8000/api/grade/latestGrades/?student=10&programming_class=3
          """
-        print('request', request.data, request.query_params)
         student = request.query_params['student']
         programmingClass = request.query_params['programming_class']
-
-        print(student, programmingClass)
-
-        # latest_by_assignment = Grade.objects.filter(programming_class=programmingClass).filter(student__id=student).values('id').values('assignment_id').annotate(max=Max('date'))
 
         latest_by_assignment = Grade.objects.raw("""select *
         from api_grade g1
@@ -68,8 +70,6 @@ class GradeViewSet(viewsets.ModelViewSet):
             and programming_class_id = %s
             and g1.assignment_id = g2.assignment_id
             )""", [student, programmingClass])
-
-        print(latest_by_assignment)
 
         serializer = GradeSerializer(latest_by_assignment, many=True)
         return Response(serializer.data)
