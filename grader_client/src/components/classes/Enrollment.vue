@@ -12,7 +12,7 @@
 
     <p v-if="error" class="error-message">{{error}}</p>
 
-    <div class="grid-container">
+    <div v-if="selectedClass" class="grid-container">
       <div class="row">
         <h3>Assignments <span v-if="selectedClass.name"> in {{selectedClass.name}}</span></h3>
         <button class="danger-button" v-on:click="removeSelectedAssignments">Remove selected assignments</button>
@@ -26,6 +26,8 @@
         <SelectionList v-bind:items="studentsInClass"></SelectionList>
       </div>
     </div>
+
+    <p v-else>Select a class</p>
 
     <hr>
     <p v-if="error" class="error-message">{{error}}</p>
@@ -67,7 +69,9 @@ export default {
       allAssignments: [],
       studentFilter: '',
       assignmentFilter: '',
-      error: ''
+      error: '',
+      loaded: false,
+      initialClass: {}
     }
   },
   computed: {
@@ -82,12 +86,20 @@ export default {
     }
   },
   mounted () {
+    this.initialClass = this.$route.query.selectedClass
     this.loadAll()
   },
   methods: {
     loadAll () {
       this.$classes_backend.$fetchItems().then(data => {
         this.programmingClasses = data
+        if (!this.loaded && this.initialClass) {
+          console.log(this.initialClass, this.prog)
+          let selection = this.programmingClasses.find( pc => pc.id==this.initialClass)
+          console.log(selection)
+          if (selection) { this.selectedClass = selection }
+        }
+        this.loaded = true
         this.loadItemsForClass()
       })
 

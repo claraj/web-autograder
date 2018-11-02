@@ -73,7 +73,7 @@ export default {
     classSelectionChanged () {
       if (!this.selectedClass) { return }
 
-      this.$util_backend.$fetchProgrammingClassStudents(this.selectedClass)
+      this.$enrollment_backend.$fetchProgrammingClassStudents(this.selectedClass)
         .then(data => {
           this.students = data
           if (this.students) {
@@ -81,7 +81,7 @@ export default {
           }
         })
 
-      this.$util_backend.$fetchProgrammingClassAssignments(this.selectedClass)
+      this.$enrollment_backend.$fetchProgrammingClassAssignments(this.selectedClass)
         .then(data => {
           this.assignments = data
           if (this.assignments) {

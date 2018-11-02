@@ -24,21 +24,24 @@
     <div>
       <div>
         <h3>Assignments in this class</h3>
-        <ul><li v-for="assignment in assignments">
+        <ul v-if="assignments.length > 0"><li v-for="assignment in assignments">
           <router-link :to="{ name: 'assignment', params: {id: assignment.id} }">id {{assignment.id}}</router-link>,
           Week {{assignment.week}}, <a :href="assignment.instructor_repo">{{assignment.instructor_repo}}</a>
         </li>
       </ul>
+      <p v-else>No assignments. <router-link :to="{ name: 'enrollment', query: {selectedClass:programmingClass.id}}">Add some?</router-link></p>
     </div>
 
     <div>
       <h3>Students in this class</h3>
-      <ul>
+      <ul v-if="students.length > 0">
         <li v-for="student in students">
           <router-link :to="{ name: 'student', params: {id: student.id} }">id {{student.id}}</router-link>,
           {{student.name}}, GitHub <a :href=" 'https://github.com/' + student.github_id">{{student.github_id}}</a>
         </li>
       </ul>
+      <p v-else>No students. <router-link :to="{ name: 'enrollment', query: {selectedClass:programmingClass.id}}">Add some?</router-link></p>
+
     </div>
   </div>
 
