@@ -43,10 +43,21 @@ export default {
       console.log('mod sa')
       this.items.forEach(item => item.selected = this.selectAll)
     },
-    items: function() {
-      if (this.items.length == 0) {
-        this.selectAll = false
-      }
+    items: {
+      handler: function() {
+        console.log('mod i')
+        if (this.items.length == 0) {
+          this.selectAll = false
+          return
+        }
+        if (this.items.filter(item => item.selected).length == 0) {
+          this.selectAll = false
+        }
+        if (this.items.filter(item => !item.selected).length == 0) {
+          this.selectAll = true
+        }
+      },
+      deep: true
     }
   },
   methods: {
