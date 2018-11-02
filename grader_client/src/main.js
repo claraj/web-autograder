@@ -11,6 +11,7 @@ import VueMoment from 'vue-moment'
 import APIBackend from '@/backends/api_management_backend'
 import AutograderBackend from '@/backends/autograder_backend'
 import EnrollmentBackend from '@/backends/enrollment_backend'
+import UtilBackend from '@/backends/util_backend'
 
 Vue.use(VueAxios, axios)
 Vue.use(VueMoment);
@@ -26,6 +27,9 @@ Vue.prototype.$gradertask_backend = new APIBackend('gradingbatch')
 Vue.prototype.$autograder_backend = new AutograderBackend()
 
 Vue.prototype.$enrollment_backend = new EnrollmentBackend()
+
+Vue.prototype.$util_backend = new UtilBackend()
+
 
 let VueCookie = require('vue-cookie')
 Vue.use(VueCookie)
