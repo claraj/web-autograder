@@ -40,13 +40,18 @@ export default {
   },
   watch: {
     selectAll: function() {
-        this.items.forEach(item => item.selected = this.selectAll) }
-
+      console.log('mod sa')
+      this.items.forEach(item => item.selected = this.selectAll)
+    },
+    items: function() {
+      if (this.items.length == 0) {
+        this.selectAll = false
+      }
+    }
   },
   methods: {
     itemSelected(id, selected) {
       this.$nextTick().then(() => {
-      console.log('hello, item id', id, selected)
       this.$emit('itemsSelected', this.items.filter(i => i.selected))
       })
     }
