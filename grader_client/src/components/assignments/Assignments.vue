@@ -24,9 +24,10 @@ export default {
         { attr: 'id', display: 'id', noEdit: true, omitFromForms: true, linkToDetails: true},
         { attr :'week', display: 'Week', regex: /^.+$/, required:true, message: 'Name is required' },
         { attr: 'github_base', display: 'GitHub Base', regex: /^[a-zA-Z_\d-]+$/, required: true, message: 'GitHub base can only contain letters, numbers _ and -' },
+        { attr: 'github_org', display: 'GitHub Organization', required:true },
         { attr: 'instructor_repo', display: 'Instructor Repo', required:true, hyperlink: true },
         { attr: 'd2l_gradebook_url', display: 'D2L Gradebook URL', hyperlink: true },
-        // { attr: 'programming_class', display: 'Class Session', dropdown: true, dropdownSource: this.$classes_backend}
+        // { attr: 'programming_classes', display: 'Class Sessions', omitFromForms: true, default: [] }
       ],
       backend: this.$assignment_backend
 
