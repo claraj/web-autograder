@@ -185,6 +185,8 @@ export default {
       textHolder.select()
       document.execCommand('copy')
       this.copied = true
+      let vue = this
+      setTimeout( function() {vue.copied = false}, 2000)
     },
     updateQuestionComments (comment) {
       this.save();

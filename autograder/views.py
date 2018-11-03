@@ -92,12 +92,12 @@ def textReport(request, pk):
     # return JsonResponse({'text': 'HELLO!'})
     grade = get_object_or_404(Grade, pk=pk)
     report = json.loads(grade.generated_report)
-    score = grade.score
+    score = '{:.2f}'.format(grade.score)
 
     # Errored?
     if 'error' in report:
         error_str = report['error']
-        report = f'Could not run code, {error_str}. \n Grade is {score}'
+        report = f'Could not run code, {error_str}. \nGrade is {score}'
         return JsonResponse({'text': report})
 
     question_str = ''
@@ -110,9 +110,20 @@ def textReport(request, pk):
         tests = q['tests']
         passes = q['passes']
 
+        for testsuite in q['testsuites']:
+            tsname = testsuite['name']
+            for testcase in testsuite:
+                if testcase['passed']:
+                    continue
+
+
         q_report = f'Question {q_number}, {sourcefile}. {passes} passed out of {tests}. Points earned: {points_earned}.\n'
+
         question_str += q_report
 
+
+
+    # Reports: A TestSuites element contains TestSuites, which contain TestCases.
 
 
     overall = report['overall_instructor_comments']
