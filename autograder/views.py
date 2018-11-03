@@ -110,20 +110,33 @@ def textReport(request, pk):
         tests = q['tests']
         passes = q['passes']
 
+        q_message = f'Question {q_number}, from file {sourcefile}'
+
         for testsuite in q['testsuites']:
             tsname = testsuite['name']
-            for testcase in testsuite:
-                if testcase['passed']:
-                    continue
+            ts_f = testsuite['errors']
+            ts_t = testsuite['tests']
+            ts_s = testsuite['skipped']
+            ts_e = testsuite['errors']
 
+            if ( ts_f + ts_e + ts_s) == 0: # all passed
+                q_message += f'{tsname}: all {ts_f} tests passed\n'
+                continue
 
-        q_report = f'Question {q_number}, {sourcefile}. {passes} passed out of {tests}. Points earned: {points_earned}.\n'
+            print('testsuite', testsuite)
 
-        question_str += q_report
+            for testcase in testsuite['testcases']:
+                passed = testcase['passed']
+                if passed:
+                    q_message += f' * {tcname} passed\n'
 
+                tcname = testcase['name']
+                if testcase['error']:
+                    q_message += f' * {tcname} errored because {testcase["failure"]["message"]}\n'
+                if testcase['failure']:
+                    q_message += f' * {tcname} failed because {testcase["failure"]["message"]}\n'
 
-
-    # Reports: A TestSuites element contains TestSuites, which contain TestCases.
+        q_message += f'Points available {points_avail}, points earned {points_earned}\n\n'
 
 
     overall = report['overall_instructor_comments']
