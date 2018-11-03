@@ -16,6 +16,9 @@ individual questions, and for the whole assignment  -->
       <p><span class="title">Date graded:</span> {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
       <p><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
 
+      <button class="action-button "@click="regrade">Re-run grader</button>
+      <button class="neutral-button "@click="generateTextReport">Generate text report</button>
+
       <div v-if="report.error">
 
         <p><span class="section-title">Errors</span></P>
@@ -90,7 +93,14 @@ individual questions, and for the whole assignment  -->
           <div id="buttons">
             <button id="save" class="important-button" v-on:click="save">Save</button>
             <br>
-            <button id="d2l-report" class="neutral-button">Generate D2L Report</button>
+            <button @click="generateTextReport" id="d2l-report" class="neutral-button">Generate text Report</button>
+          </div>
+
+
+          <div v-show="showTextReport" id="text-report">
+            <p><pre>{{textReport}}</pre></p>
+            <button @click="hideTextReport">Close</button>
+            <button @click="copyText">Copy</button>
           </div>
 
 
@@ -108,7 +118,9 @@ export default {
       report: {},
       lgtm: false,
       backupOverall: '',
-      totalAdjustedPoints: 0
+      totalAdjustedPoints: 0,
+      textReport: '',
+      showTextReport: false
     }
   },
   filters: {
@@ -147,6 +159,26 @@ export default {
       .then( () => {
 
       })
+    },
+    regrade () {
+      console.log('regrade')
+      this.$autograder_backend.$regrade(this.result.id).then(data => {
+        // redirect to results page to await result
+        console.log('queued')
+        this.$router.push({name: 'grader-results', query: {id: data.batch, expectedResults: data.items_to_grade}})
+      })
+    },
+    generateTextReport() {
+      this.$autograder_backend.$textReport(this.result.id).then(data => {
+        this.textReport = data.text
+        this.showTextReport = true
+      })
+    },
+    hideTextReport() {
+      this.showTextReport = false
+    },
+    copyText() {
+      alert('implement me!')
     },
     updateQuestionComments (comment) {
       this.save();
@@ -271,5 +303,33 @@ export default {
     padding-top: 10px;
     font-size: 20px;
   }
+
+  #text-report {
+    position: absolute;
+    width: 80%;
+    height: 500px;
+    z-index: 10;
+    top: 50%;
+    margin: auto;
+    left: 50%;
+    /* margin: -100px 0 0 -150px; */
+    border: 1px darkgray solid;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    box-shadow: 3px 6px 14px darkgray;
+  }
+
+  #text-report p {
+    border: 1px darkgray solid;
+    overflow: scroll;
+    margin: 10px;
+    padding: 5px;
+    height: 430px;
+  }
+
+  button {
+    margin-left: 10px;
+  }
+
 
 </style>

@@ -1,9 +1,10 @@
 # from django.urls import path
-from django.conf.urls import url, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    url('^grader/', views.grader_start),
-    url('^progress/', views.grader_get_progress),
-    url('^regrade/', views.regrade)
+    path('grader/', views.grader_start),
+    path('progress/', views.grader_get_progress),
+    path('regrade/', views.regrade),
+    path('text/<pk>/', views.textReport)
 ]

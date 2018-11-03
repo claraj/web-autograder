@@ -50,7 +50,7 @@ def grader_start(request):
     batch = GradingBatch(id = batch_uuid, things_to_grade=things_to_grade)
     batch.save()
 
-    return JsonResponse( { 'batch': str(batch_uuid), 'students': no_students, 'assignments': no_assignments, 'programming_class': programming_class } )
+    return JsonResponse( { 'batch': str(batch_uuid), 'items_to_grade': things_to_grade, 'students': no_students, 'assignments': no_assignments, 'programming_class': programming_class } )
 
 
 def grader_get_progress(request):
@@ -82,4 +82,41 @@ def regrade(request):
     batch = GradingBatch(batch_uuid, things_to_grade=1)
     batch.save()
     queue_grading_task(batch_uuid, grade.assignment.id, grade.student.id, grade.programming_class.id)
-    return JsonResponse( {'batch': str(batch_uuid), 'no_students': 1, 'no_assignments': 1, 'programming_class': grade.programming_class.id})
+    return JsonResponse( {'batch': str(batch_uuid), 'items_to_grade': 1, 'no_students': 1, 'no_assignments': 1, 'programming_class': grade.programming_class.id})
+
+
+@require_http_methods('GET')
+def textReport(request, pk):
+    """ Generate a report formated as a single block of text, intended for copying into D2L """
+
+    # return JsonResponse({'text': 'HELLO!'})
+    grade = get_object_or_404(Grade, pk=pk)
+    report = json.loads(grade.generated_report)
+    score = grade.score
+
+    # Errored?
+    if 'error' in report:
+        error_str = report['error']
+        report = f'Could not run code, {error_str}. \n Grade is {score}'
+        return JsonResponse({'text': report})
+
+    question_str = ''
+
+    for q in report['question_reports']:
+        q_number = q['question']['question']
+        points_avail = q['question']['points']
+        points_earned = q['points_earned']
+        sourcefile = q['question']['source_file']
+        tests = q['tests']
+        passes = q['passes']
+
+        q_report = f'Question {q_number}, {sourcefile}. {passes} passed out of {tests}. Points earned: {points_earned}.\n'
+        question_str += q_report
+
+
+
+    overall = report['overall_instructor_comments']
+    outline = f'{question_str} \n{overall}\nAutograded score {score}'
+
+
+    return JsonResponse({'text': outline})

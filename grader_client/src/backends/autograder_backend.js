@@ -26,4 +26,9 @@ Autograder.prototype.$regrade = function (id) {
     .then(response => response.data)
 }
 
+Autograder.prototype.$textReport = function (id) {
+  return this.$api.get(`/text/${id}`)
+    .then(response => response.data)
+}
+
 export default Autograder

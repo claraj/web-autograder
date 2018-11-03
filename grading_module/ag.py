@@ -89,14 +89,13 @@ def grade(assignment, student):
 
     """
     try:
-
         instructor_code = fetch_instructor_code(assignment.instructor_repo)
 
         try:
             student_code, err, sha = fetch_student_code(assignment.github_base, assignment.github_org, student.github_id)
         except Exception as e:
             logging.warning(f'Error fetching student code because {e}')
-            return { 'success': True, 'result': f'Error fetching student code, {e}', 'score': 0, 'sha': None }
+            return { 'success': True, 'report': {'error': f'Error fetching student code from GitHub.', 'reason': str(e) }, 'score': 0, 'sha': None }
 
         project_config = get_config(instructor_code)
         grade_scheme = get_grade_scheme(instructor_code)
@@ -106,22 +105,22 @@ def grade(assignment, student):
                 combined = combine_code(instructor_code, student_code, project_config, temp_student_code_dir)
             except Exception as e:
                 t, e, tb = sys.exc_info()
-                logging.exception(f'Error combining instructor and student code, check student project structure. Reason {e}')
-                return { 'success': True, 'report': f'Error combining instructor and student code, check student project structure. Reason {e}', 'score': 0, 'sha': sha }
+                logging.warning(f'Error combining instructor and student code, check student project structure. Reason: {e}')
+                return { 'success': True, 'report': {'error': 'Error combining instructor and student code, check student project structure', 'reason': str(e)}, 'score': 0, 'sha': sha }
             try:
                 run_code_in_container(combined, project_config)
             except Exception as e:
                 # Could be compile errors, code crashed etc.
                 t, e, tb = sys.exc_info()
-                logging.exception('Error running tests on student code')
-                return { 'success': True, 'report': f'Error running tests on student code, {e}', 'score': 0, 'sha': sha }
+                logging.exception(f'Error running tests on student code, {e}')
+                return { 'success': True, 'report': {'error': 'Error running tests on student code.', 'reason': str(e)}, 'score': 0, 'sha': sha }
 
             try:
                 report = generate_grade_report(combined, project_config, grade_scheme)
             except Exception as e:
                 t, e, tb = sys.exc_info()
-                print(t, e, traceback.print_tb(tb))
-                return { 'success': True, 'report': f'Error reading test report files from student code, {e}', 'score': 0, 'sha': sha }
+                logging.warning(f'Error generating grade report because {e}')
+                return { 'success': True, 'report': { 'error': 'Error reading test report files from student code', 'reason': str(e)}, 'score': 0, 'sha': sha }
 
         json_report = json.dumps(report, cls=TestItemEncoder)
         logging.info(f'Grading success for {student}, {assignent}, score {report.totalAdjustedPoints}, report {json_report[:50]}')
@@ -131,7 +130,7 @@ def grade(assignment, student):
         # These are most likely errors that I have caused, or from modifications of the project structure between student and instructor.
         t, e, tb = sys.exc_info()
         logging.exception('Unexpected error running grader')
-        return { 'success': False, 'error': e }
+        return { 'success': False, 'error': f'Unexpected error running grader. Reason: {e}'}
 
 
 def fetch_student_code(base, org, student_id):
@@ -140,27 +139,28 @@ def fetch_student_code(base, org, student_id):
     repo_name = f'{base}-{student_id}'
 
     student_code_location, mode, sha = clone.clone_or_pull_latest(url, os.path.join(settings.CODE_STORE, settings.STUDENT_CODE_LOCATION), repo_name)
-    print('got student code by: ', mode)
+    logging.info(f'got student code from {url} by {mode}')
     return student_code_location, None, sha
-
 
 
 def fetch_instructor_code(repo_url):
     repo_name = repo_url.split('/').pop()
     instructor_code_location, mode, sha = clone.clone_or_pull_latest(repo_url, os.path.join(settings.CODE_STORE, settings.INSTRUCTOR_CODE_LOCATION), repo_name)
-    print('got instructor code by: ', mode)
+    logging.info(f'got instructor code {repo_url} by {mode}')
     return instructor_code_location
 
 
 def get_config(path):
     config_path = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.CONFIG_FILENAME)
     config = parser.parse(config_path)
+    logging.info(f'Found and read config file located at {config_path}')
     return config
 
 
 def get_grade_scheme(path):
     grade_path = os.path.join(path, settings.GRADE_CONFIG_LOCATION, settings.GRADE_SCHEME_FILENAME)
     grade_scheme = parser.parse(grade_path)
+    logging.info(f'Found and read grade scheme file located at {grade_path}')
     return grade_scheme
 
 
@@ -169,18 +169,21 @@ def combine_code(instructor_code, student_code, config, combined_location):
     # paths to overwrite are in config.student_code_locations
     code = os.path.join(combined_location, 'code')
     combine.combine(instructor_code, student_code, config['student_code_locations'], code)
+    logging.info('Combined instructor and student code')
     return code
 
 
 def run_code_in_container(path, config):
+    logging.info('About to launch container...')
     runner.run_in_container(path, config)
+    logging.info('Container finished.')
 
 
 def generate_grade_report(location, config, scheme):
     reports_dir = config['report_location']
     test_report_location = os.path.join(location, reports_dir)
-
     assignment_report = report.grade(test_report_location, scheme)
+    logging.info(f'created assignment report starting with {json.dumps(assignment_report)[:80]}')
     return assignment_report
 
 

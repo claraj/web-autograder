@@ -21,7 +21,7 @@ def run_in_container(dockerfile_location, config):
         print(container_output)
         return container_output
     except Exception as e:
-        input('error ' +  str(e) + ' press a key')
+        logging.exception('error ' + str(e))
         raise
 
 def from_config_file(config_json, pwd):
