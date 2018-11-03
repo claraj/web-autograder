@@ -100,7 +100,7 @@ def textReport(request, pk):
         report = f'Could not run code, {error_str}. \nGrade is {score}'
         return JsonResponse({'text': report})
 
-    question_str = ''
+    q_message = ''
 
     for q in report['question_reports']:
         q_number = q['question']['question']
@@ -110,37 +110,39 @@ def textReport(request, pk):
         tests = q['tests']
         passes = q['passes']
 
-        q_message = f'Question {q_number}, from file {sourcefile}'
+        q_message += f'Question {q_number}, from file {sourcefile}\n'
 
-        for testsuite in q['testsuites']:
-            tsname = testsuite['name']
-            ts_f = testsuite['errors']
-            ts_t = testsuite['tests']
-            ts_s = testsuite['skipped']
-            ts_e = testsuite['errors']
+        for testsuites in q['testsuites']:
+            tsname = testsuites['name']
+            ts_f = testsuites['failures']
+            ts_t = testsuites['tests']
+            ts_s = testsuites['skipped']
+            ts_e = testsuites['errors']
 
             if ( ts_f + ts_e + ts_s) == 0: # all passed
                 q_message += f'{tsname}: all {ts_f} tests passed\n'
                 continue
 
-            print('testsuite', testsuite)
+            for testsuite in testsuites['testsuites']:
 
-            for testcase in testsuite['testcases']:
-                passed = testcase['passed']
-                if passed:
-                    q_message += f' * {tcname} passed\n'
+                q_message += f'Testsuite {testsuite["name"]}\n'
 
-                tcname = testcase['name']
-                if testcase['error']:
-                    q_message += f' * {tcname} errored because {testcase["failure"]["message"]}\n'
-                if testcase['failure']:
-                    q_message += f' * {tcname} failed because {testcase["failure"]["message"]}\n'
+                for testcase in testsuite['testcases']:
+                    passed = testcase['passed']
+                    tcname = testcase['name']
+                    if passed:
+                        q_message += f' * {tcname} passed\n'
+
+                    if testcase['error']:
+                        q_message += f' * {tcname} errored because {testcase["error"]["message"]}\n'
+                    if testcase['failure']:
+                        q_message += f' * {tcname} failed because {testcase["failure"]["message"]}\n'
 
         q_message += f'Points available {points_avail}, points earned {points_earned}\n\n'
 
 
-    overall = report['overall_instructor_comments']
-    outline = f'{question_str} \n{overall}\nAutograded score {score}'
+    overall = report.get('overall_instructor_comments\n', '')
+    outline = f'{q_message}{overall}Autograded score {score}'
 
 
     return JsonResponse({'text': outline})

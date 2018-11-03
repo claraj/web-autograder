@@ -184,7 +184,7 @@ export default {
       let textHolder = document.querySelector('#mirror-text-report')
       textHolder.select()
       document.execCommand('copy')
-      this.copied = true
+        this.copied = true
       let vue = this
       setTimeout( function() {vue.copied = false}, 2000)
     },
