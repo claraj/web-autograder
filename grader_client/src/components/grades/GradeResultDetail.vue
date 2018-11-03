@@ -98,9 +98,11 @@ individual questions, and for the whole assignment  -->
 
 
           <div v-show="showTextReport" id="text-report">
-            <p><pre>{{textReport}}</pre></p>
+            <p><pre ref="fullReportText" id="full-report-text">{{textReport}}</pre></p>
+            <input id="mirror-text-report" :value="textReport"></input>
             <button @click="hideTextReport">Close</button>
-            <button @click="copyText">Copy</button>
+            <button @click.stop.prevent="copyText">Copy</button>
+            <span v-show="copied">Copied to clipboard</span>
           </div>
 
 
@@ -120,7 +122,8 @@ export default {
       backupOverall: '',
       totalAdjustedPoints: 0,
       textReport: '',
-      showTextReport: false
+      showTextReport: false,
+      copied: false
     }
   },
   filters: {
@@ -178,7 +181,10 @@ export default {
       this.showTextReport = false
     },
     copyText() {
-      alert('implement me!')
+      let textHolder = document.querySelector('#mirror-text-report')
+      textHolder.select()
+      document.execCommand('copy')
+      this.copied = true
     },
     updateQuestionComments (comment) {
       this.save();
@@ -327,9 +333,18 @@ export default {
     height: 430px;
   }
 
+  #text-report pre {
+    white-space: pre-wrap;
+  }
+
   button {
     margin-left: 10px;
   }
 
+  /* Hide input with copy of report in. Can't set visibility = none or size to 0px */
+  #mirror-text-report {
+    opacity: 0;
+    width: 10px;
+  }
 
 </style>
