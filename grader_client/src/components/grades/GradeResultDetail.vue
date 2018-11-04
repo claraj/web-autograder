@@ -22,7 +22,7 @@ individual questions, and for the whole assignment  -->
       <div v-if="report.error">
 
         <p><span class="section-title">Errors</span></P>
-          <p><span><span class="title not-passed">Error fetching or running code:</span> {{report.error }}</span></p>
+          <p><span><span class="title not-passed">Error fetching or running code:</span> {{report.error }}</span> Reason: {{report.reason}}</p>
         </div>
 
         <div v-else>

@@ -88,7 +88,7 @@ def save_result(task):
             logging.error('HOOK task was not succesful')
 
     except Exception as e:
-        logging.exception('HOOK Error saving grader result')
+        logging.exception('HOOK Error saving grader result because {e}')
 
     # Whatever the outcome, increment number of things processed in this batch
     batch = GradingBatch.objects.get(id=result['batch'])

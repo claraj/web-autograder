@@ -89,15 +89,22 @@ def regrade(request):
 def textReport(request, pk):
     """ Generate a report formated as a single block of text, intended for copying into D2L """
 
-    # return JsonResponse({'text': 'HELLO!'})
     grade = get_object_or_404(Grade, pk=pk)
     report = json.loads(grade.generated_report)
-    score = '{:.2f}'.format(grade.score)
+    score = grade.score
+
+    return text_report(report, score)
+
+def text_report(report, score):
+    score = '{:.2f}'.format(score)
+    if score == '0.00':
+        score = 0
 
     # Errored?
     if 'error' in report:
         error_str = report['error']
-        report = f'Could not run code, {error_str}. \nGrade is {score}'
+        reason = report['reason']
+        report = f'Could not run code, error: {error_str}\nReason: {reason} \n\nGrade is {score}'
         return JsonResponse({'text': report})
 
     q_message = ''

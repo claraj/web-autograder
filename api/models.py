@@ -160,6 +160,11 @@ class Grade(models.Model):
         prev_rep = json.loads(previous.generated_report)
         new_rep = json.loads(self.generated_report)
 
+        # If the previous run errored, there will be no question reports
+
+        if not 'question_reports' in prev_rep:
+            return 
+
         prev_questions = prev_rep['question_reports']
         new_questions = new_rep['question_reports']
 

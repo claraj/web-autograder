@@ -1,5 +1,6 @@
 import docker
 from docker.types import Mount
+import logging
 
 # TODO error handling
 

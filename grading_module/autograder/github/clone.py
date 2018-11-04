@@ -1,6 +1,7 @@
 from git import Repo, GitCommandError
 import os
 from .exceptions import CloneError
+import logging
 
 # token = os.environ['GITHUB_AUTOGRADER_ACCESS_TOKEN']
 
@@ -14,7 +15,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
     Error if directory already exists and it's remote origin is not the same URL as repo_url
     Error if repo not found. """
 
-    print(target_dir, repo_dir)
+    logging.info(f'Cloning {repo_url} to {target_dir}/{repo_dir}')
 
     repo_target_dir = os.path.join(target_dir, repo_dir)
 
@@ -25,7 +26,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
     except GitCommandError as e:
         if 'remote: Repository not found.' in e.stderr:
             # The URL isn't a repo
-            raise CloneError(f'The URL {repo_url} was not found or not a git repository.')
+            raise CloneError(f'The URL "{repo_url}" was not found or is not a git repository.')
 
         elif 'already exists and is not an empty directory' in e.stderr:
             # repo already exists. Is it the one we wanted to download? If so, pull latest
@@ -56,7 +57,7 @@ def clone_or_pull_latest(repo_url, target_dir, repo_dir):
                     # may have crashed in this repository earlier: "
 
                     # TODO warn instead of crash.
-                    print(f'error pulling code because {e.stderr}, continuing anyway')
+                    logging.warning(f'error pulling code because {e.stderr}, continuing anyway')
                     return repo_target_dir, 'pull', get_latest_commit_sha(repo)
 
             else:
