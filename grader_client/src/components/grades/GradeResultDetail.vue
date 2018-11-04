@@ -211,9 +211,10 @@ export default {
 
     updateTotalAdjustedPoints () {
 
-      console.log('adjusting total for ', this.report)
+       //console.log('adjusting total for ', this.report)
 
       if (!this.report.question_reports) {
+        this.totalAdjustedPoints = 0
         return
       }
 
@@ -224,10 +225,11 @@ export default {
       })
 
       let sum = this.report.question_reports.reduce( (s, q) => {
-        console.log(s, q.adjusted_points)
-        return Number(s.adjusted_points) + Number(q.adjusted_points)
-      })
+        console.log('summing', s, q.adjusted_points)
+        return Number(s) + Number(q.adjusted_points)
+      }, 0)
 
+      console.log(sum)
       this.totalAdjustedPoints = sum
     },
 
