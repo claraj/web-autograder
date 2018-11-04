@@ -50,7 +50,7 @@ def start_grader(batch, assignment, student, programming_class):
         github_commit_hash = result['sha']
 
         return {
-            'error': None,
+            'ag_error': None,
             'batch': batch,
             'assignment_id': assignment.id,
             'student_id': student.id,
@@ -64,7 +64,7 @@ def start_grader(batch, assignment, student, programming_class):
         # These are programatic errors - like the docker config is wrong or some other coding error
         # Probably my problem
         return {
-            'error': result['error'],
+            'ag_error': result['error'],
             'batch': batch,
             'assignment_id': assignment.id,
             'student_id': student.id,

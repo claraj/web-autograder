@@ -4,6 +4,7 @@ import logging
 from datetime import datetime
 import json
 import re
+from . import grade_util
 log = logging.getLogger(__name__)
 
 
@@ -63,7 +64,6 @@ class Student(models.Model):
     star_id = models.CharField(max_length=8, validators=[RegexValidator('^[a-z]{2}\d{4}[a-z]{2}$', message='Star ID must be in the pattern ab1234cd')], null=False, blank=True)
     active = models.BooleanField(default=True)   # becomes False if student drops, withdraws, is abducted by aliens etc.
 
-
     def __str__(self):
         return 'Name: %s, GitHub ID: %s ' % (self.name, self.github_id)
 
@@ -91,8 +91,7 @@ class Grade(models.Model):
     batch = models.UUIDField()
     github_commit_hash = models.CharField(max_length=40, blank=False, null=True)
     date = models.DateTimeField(auto_now_add=True)
-    error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
-    reviewed = models.BooleanField(default=False, blank=True, null=False)
+    ag_error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
 
     objects = GradeManager()
 
@@ -102,7 +101,7 @@ class Grade(models.Model):
 
     def save(self, *args, **kwargs):
 
-        self.generate_github_url()
+        self.github_url = grade_util.generate_github_url(self)
 
         updating = self.id  # If no primary key, this Grade hasn't been saved before.
 
@@ -120,77 +119,30 @@ class Grade(models.Model):
             super().save(*args, **kwargs)
             return
 
-        # If there is a previous version, check if same commit, look for previous comments
 
-        # Is same commit? No code changes. Update batch of previous version to this batch and save. Do not save new Grade.
-        if self.is_same_commit(previous_version):
+        # If there is a previous version, check if same commit, and same error. look for previous comments
+
+        same_commit = grade_util.is_same_commit(self, previous_version)
+        same_ag_error = grade_util.is_same_ag_error(self, previous_version)
+        # Is same commit AND same error? No code changes. Update batch of previous version to this batch and save. Do not save new Grade.
+        if same_commit and same_ag_error:
             self.update_previous_grade_to_this_batch(previous_version)
             return
 
-        # Different commit? Copy any previously saved comments from the last grade report to this report. Save.
-        self.bring_comments_forward(previous_version)
+            # Same commit but different error. Save as new Grade
+        elif is_same_commit and not is_same_ag_error:
+                super().save(*args, **kwargs)
+                return
 
+        # Different commit? Copy any previously saved comments and student errors from the last grade report to this report. Save.
+        self.generated_report = grade_util.bring_comments_forward(self, previous_version)
+        # self.error = grade_util.bring_student_errors_forward(self, previous_version)
         super().save(*args, **kwargs)
-
-
-    def generate_github_url(self):
-        if not self.assignment or not self.student:
-            return
-        url = 'https://github.com/%s/%s-%s' % ( self.assignment.github_org , self.assignment.github_base , self.student.github_id)
-        self.student_github_url = url
-
-
-    def is_same_commit(self, previous):
-        return previous.github_commit_hash == self.github_commit_hash
 
 
     def update_previous_grade_to_this_batch(self, previous):
         previous.batch = self.batch
         previous.save()
-
-
-    def get_timestring_prefix(self, date):
-        return date.strftime('%m/%d/%y %H:%M ')   # 12/31/18 16:30
-
-
-    def bring_comments_forward(self, previous):
-
-        timestamp = self.get_timestring_prefix(previous.date)
-
-        prev_rep = json.loads(previous.generated_report)
-        new_rep = json.loads(self.generated_report)
-
-        # If the previous run errored, there will be no question reports
-
-        if not 'question_reports' in prev_rep:
-            return 
-
-        prev_questions = prev_rep['question_reports']
-        new_questions = new_rep['question_reports']
-
-        for (pq, nq) in zip(prev_questions, new_questions):
-            if 'adjusted_points' in pq:
-                nq['adjusted_points'] = pq['adjusted_points']
-            if 'instructor_comments' in pq:
-                comments = pq['instructor_comments']
-                already_date = re.match(r'^\d\d/\d\d/\d\d', comments)
-                if already_date:
-                    nq['instructor_comments'] = pq['instructor_comments']
-                else:
-                    nq['instructor_comments'] = timestamp + pq['instructor_comments']
-
-        if 'overall_instructor_comments' in prev_rep:
-
-            comments = prev_rep['overall_instructor_comments']
-            # does this start with a date?
-            already_date = re.match(r'^\d\d/\d\d/\d\d', comments)
-            if already_date:
-                new_rep['overall_instructor_comments'] = prev_rep['overall_instructor_comments']
-            else:
-                new_rep['overall_instructor_comments'] = timestamp + prev_rep['overall_instructor_comments']
-
-        self.generated_report = json.dumps(new_rep)
-
 
 
 class GradingBatch(models.Model):

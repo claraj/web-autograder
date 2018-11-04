@@ -19,91 +19,94 @@ individual questions, and for the whole assignment  -->
       <button class="action-button "@click="regrade">Re-run grader</button>
       <button class="neutral-button "@click="generateTextReport">Generate text report</button>
 
-      <div v-if="report.error">
+      <div v-if="result.ag_error">
+        <p><span class="section-title">Errors</span></p>
+        <p><span><span class="title not-passed">Error when grader tried to fetch or run code</span> {{result.ag_error }}</span></p>
+      </div>
 
-        <p><span class="section-title">Errors</span></P>
-          <p><span><span class="title not-passed">Error fetching or running code:</span> {{report.error }}</span> Reason: {{report.reason}}</p>
+      <div v-else>
+
+        <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
+
+        <div v-if="report.error">
+          {{report.error}}
         </div>
 
-        <div v-else>
-
-          <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
-
-          <p v-for="qr in report.question_reports">
-            <ul id="why">
-              <p class="question-header"><span class="title">Question:</span> {{qr.question.question}}</p>
-              <p><span class="title">Points available:</span>  {{qr.points_available}}</p>
-              <p><span class="title">Source file:</span>  {{qr.source_file}}</p>
-              <p><span class="title">Test files:</span>
-                <ul><li v-for="f in qr.question.test_files"> {{f}} </li></ul>
-              </p>
-
-              <P><span class="title">Total tests:</span>  {{qr.tests}} </p>
-                <P><span class="title">Total test passes:</span> {{qr.passes}}
-                  <span class="passed" v-if="qr.tests === qr.passes">All passed</span>
-                  <span class="not-passed" v-else>Fails and/or Errors</span>
-                </p>
-
-                <p><span class="title">Test Suites:</span></p>
-                <ul><li v-for="tss in qr.testsuites">
-                  <span class="testsuite-name">{{tss.name}}:</span> {{tss.tests}} Tests, {{tss.failures}} Fails, {{tss.errors}} Errors, {{tss.passes}} Passes.
-
-                  <ul><li v-for="ts in tss.testsuites">
-                    <span class="testsuite-name">{{ts.name}}:</span> {{ts.tests}} Tests, {{ts.failures}} Fails, {{ts.errors}} Errors, {{ts.passes}} Passes.
-
-                    <ul><li v-for="tc in ts.testcases">
-                      <span class="testcase-name">{{tc.name}}</span> <span v-if="tc.passed" class="passed">Passed</span>
-                      <p v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> {{tc.error.fulltext}}</p>
-                      <p v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> {{tc.failure.fulltext}}</p>
-                    </li></ul>
-                  </li></ul>
-                </li></ul>
-
-                <p><span class="title">Points earned for question:</span> {{qr.points_earned | toFixed(2) }}</p>
-
-                <p><span class="title">Instructor comments for question <span>{{qr.question.question}}</span>: </span> <textarea class="question-comments" v-model="qr.instructor_comments" v-on:change="updateQuestionComments()"></textarea></p>
-                <p><span class="title">Adjusted points: </span> <input v-on:change="updateAdjustedPoints(qr.adjusted_points)" v-model="qr.adjusted_points" />
-                  <span class="warning-message" v-if="qr.adjusted_points < 0 || qr.adjusted_points > report.total_points_available">
-                    Adjusted points not valid
-                  </span>
-                </p>
-              </ul>
+        <div v-if="report.question_reports">
+        <p v-for="qr in report.question_reports">
+          <ul id="why">
+            <p class="question-header"><span class="title">Question:</span> {{qr.question.question}}</p>
+            <p><span class="title">Points available:</span>  {{qr.points_available}}</p>
+            <p><span class="title">Source file:</span>  {{qr.source_file}}</p>
+            <p><span class="title">Test files:</span>
+              <ul><li v-for="f in qr.question.test_files"> {{f}} </li></ul>
             </p>
-          </div>
 
-          <div>
-            <p class="section-title">Summary</p>
+            <P><span class="title">Total tests:</span>  {{qr.tests}} </p>
+            <P><span class="title">Total test passes:</span> {{qr.passes}}
+              <span class="passed" v-if="qr.tests === qr.passes">All passed</span>
+              <span class="not-passed" v-else>Fails and/or Errors</span>
+            </p>
 
-            <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
-            <p><span class="title">Total adjusted points: </span>{{totalAdjustedPoints | toFixed(2) }} out of {{ report.total_points_available }}
-              <span class="warning-message" v-if="totalAdjustedPoints < 0 || totalAdjustedPoints > report.total_points_available">
-                Adjusted points not valid
+            <p><span class="title">Test Suites:</span></p>
+            <ul><li v-for="tss in qr.testsuites">
+              <span class="testsuite-name">{{tss.name}}:</span> {{tss.tests}} Tests, {{tss.failures}} Fails, {{tss.errors}} Errors, {{tss.passes}} Passes.
+
+              <ul><li v-for="ts in tss.testsuites">
+                <span class="testsuite-name">{{ts.name}}:</span> {{ts.tests}} Tests, {{ts.failures}} Fails, {{ts.errors}} Errors, {{ts.passes}} Passes.
+                <ul><li v-for="tc in ts.testcases">
+                  <span class="testcase-name">{{tc.name}}</span> <span v-if="tc.passed" class="passed">Passed</span>
+                  <p v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> {{tc.error.fulltext}}</p>
+                  <p v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> {{tc.failure.fulltext}}</p>
+                </li></ul>
+              </li></ul>
+            </li></ul>
+
+            <p><span class="title">Points earned for question:</span> {{qr.points_earned | toFixed(2) }}</p>
+
+            <p><span class="title">Instructor comments for question <span>{{qr.question.question}}</span>: </span> <textarea class="question-comments" v-model="qr.instructor_comments" v-on:change="updateQuestionComments()"></textarea></p>
+            <p>
+              <span class="title">Adjusted points: </span> <input v-on:change="updateAdjustedPoints(qr.adjusted_points)" v-model="qr.adjusted_points" />
+              <span class="warning-message" v-if="qr.adjusted_points < 0 || qr.adjusted_points > report.total_points_available">
+              Adjusted points not valid
               </span>
             </p>
+          </ul>
+        </p>
+      </div>
+    </div>
 
-            <P><span class="title">Overall Instructor Comments:</span>
-              <textarea id="overall-comments" v-model="report.overall_instructor_comments" v-on:change="updateOverallInstructorComments">
-              </textarea></P>
+      <div>
+        <p class="section-title">Summary</p>
 
-              <p>All looks good? <input type="checkbox" v-model="lgtm"/></p>
+        <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
+        <p><span class="title">Total adjusted points: </span>{{totalAdjustedPoints | toFixed(2) }} out of {{ report.total_points_available }}
+          <span class="warning-message" v-if="totalAdjustedPoints < 0 || totalAdjustedPoints > report.total_points_available">
+            Adjusted points not valid
+          </span>
+        </p>
 
-            </div>
-          </div>
+        <P><span class="title">Overall Instructor Comments:</span>
+          <textarea id="overall-comments" v-model="report.overall_instructor_comments" v-on:change="updateOverallInstructorComments">
+          </textarea></P>
 
-          <div id="buttons">
-            <button id="save" class="important-button" v-on:click="save">Save</button>
-            <br>
-            <button @click="generateTextReport" id="d2l-report" class="neutral-button">Generate text Report</button>
-          </div>
+          <p>All looks good? <input type="checkbox" v-model="lgtm"/></p>
 
+      </div>
+    </div>
 
-          <GradeTextReport
-          v-show="showTextReport" v-bind:text="textReport"
-          v-on:hideTextReport="hideTextReport"></GradeTextReport>
+    <div id="buttons">
+      <button id="save" class="important-button" v-on:click="save">Save</button>
+      <br>
+      <button @click="generateTextReport" id="d2l-report" class="neutral-button">Generate text Report</button>
+    </div>
 
+    <GradeTextReport
+    v-show="showTextReport" v-bind:text="textReport"
+    v-on:hideTextReport="hideTextReport"></GradeTextReport>
 
-        </div>
-      </template>
+  </div>
+</template>
 
 <script>
 

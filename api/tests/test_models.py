@@ -3,12 +3,13 @@ from unittest.mock import Mock
 from api.models import Grade, Student, Assignment
 import json
 from datetime import datetime, timezone, timedelta
+from api import grade_util
+from dataclasses import dataclass
 
 
 TestCase.maxDiff = None
 
 class TestGradeModel(TestCase):
-
 
     def setUp(self):
         self.asgt = Assignment.objects.create(week="1", github_base="base", github_org="org", instructor_repo="///")
@@ -180,3 +181,31 @@ class TestGradeModel(TestCase):
             print('IN DB', second_grade.generated_report)
 
             self.assertDictEqual(expected_second_dated_report, json.loads(second_grade.generated_report))  # Not modified
+
+
+
+@dataclass
+class MockAssignment:
+    github_org: str
+    github_base: str
+
+@dataclass
+class MockStudent:
+    github_id: str
+
+@dataclass
+class MockGrade:
+    student: MockStudent
+    assignment: MockAssignment
+
+class TestGradeUtil(TestCase):
+
+
+
+
+    def test_generate_github_url(self):
+
+        grade = MockGrade(MockStudent('handle'), MockAssignment('org', 'base'))
+        student_github_url = grade_util.generate_github_url(grade)
+        expected = 'https://github.com/org/base-handle'
+        self.assertEqual(expected, student_github_url)
