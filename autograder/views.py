@@ -6,6 +6,7 @@ from api.models import Grade, GradingBatch
 import uuid
 import json
 import logging
+from . import github_utils
 from django.shortcuts import get_object_or_404
 
 from .grading_queue import queue_grading_task
@@ -94,6 +95,15 @@ def textReport(request, pk):
     score = grade.score
 
     return text_report(report, score)
+
+
+@require_http_methods('GET')
+def guess_github_file_url(request, grade_pk, filename):
+    grade = get_object_or_404(Grade, pk=grade_pk)
+    repo = grade.student_github_url
+    file_url = github_utils.findFile(repo, filename)
+    return JsonResponse({'url': file_url})
+
 
 def text_report(report, score):
     score = '{:.2f}'.format(score)

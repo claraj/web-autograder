@@ -14,7 +14,6 @@ def is_same_commit(one, another):
 
 
 def is_same_ag_error(one, another):
-
     return (one.ag_error == another.ag_error)
 
 
@@ -26,9 +25,10 @@ def bring_comments_forward(new_grade, previous):
     new_rep = json.loads(new_grade.generated_report)
 
     # If the previous run errored, there will be no question reports
-
     if not 'question_reports' in prev_rep:
         return
+
+    # If the previous run worked but this one failed, then 
 
     prev_questions = prev_rep['question_reports']
     new_questions = new_rep['question_reports']

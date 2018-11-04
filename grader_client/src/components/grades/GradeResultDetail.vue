@@ -37,7 +37,7 @@ individual questions, and for the whole assignment  -->
           <ul id="why">
             <p class="question-header"><span class="title">Question:</span> {{qr.question.question}}</p>
             <p><span class="title">Points available:</span>  {{qr.points_available}}</p>
-            <p><span class="title">Source file:</span>  {{qr.source_file}}</p>
+            <p><span class="title">Source file:</span>  {{qr.source_file}} <GuessyGitHubFile v-bind:filename="qr.source_file" v-bind:grade="result.id"></GuessyGitHubFile></p>
             <p><span class="title">Test files:</span>
               <ul><li v-for="f in qr.question.test_files"> {{f}} </li></ul>
             </p>
@@ -111,10 +111,11 @@ individual questions, and for the whole assignment  -->
 <script>
 
 import GradeTextReport from '@/components/grades/GradeTextReport'
+import GuessyGitHubFile from '@/components/parts/GuessyGitHubFile'
 
 export default {
   name: "GradeResultDetail",
-  components: { GradeTextReport },
+  components: { GradeTextReport, GuessyGitHubFile },
   data() {
     return {
       result: {},

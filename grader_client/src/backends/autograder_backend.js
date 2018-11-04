@@ -31,4 +31,9 @@ Autograder.prototype.$textReport = function (id) {
     .then(response => response.data)
 }
 
+Autograder.prototype.$guessGithubFileLink = function (gradeId, filename) {
+  return this.$api.get(`/file_url/${gradeId}/${filename}`)
+    .then(response => response.data)
+}
+
 export default Autograder
