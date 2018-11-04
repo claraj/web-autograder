@@ -2,7 +2,7 @@
 individual questions, and for the whole assignment  -->
 
 <template>
-  <div id="content">
+  <div id="content" @click="hideTextReport">
 
     <div id="header" v-if="result.assignment && result.student">
       Grade for

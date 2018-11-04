@@ -127,7 +127,7 @@ def text_report(report, score):
             ts_e = testsuites['errors']
 
             if ( ts_f + ts_e + ts_s) == 0: # all passed
-                q_message += f'{tsname}: all {ts_f} tests passed\n'
+                q_message += f'{tsname}: all {ts_t} test(s) passed\n'
                 continue
 
             for testsuite in testsuites['testsuites']:
