@@ -4,6 +4,7 @@ import json
 
 def generate_github_url(grade):
     if not grade.assignment or not grade.student:
+        print('no asg/std')
         return
     url = 'https://github.com/%s/%s-%s' % ( grade.assignment.github_org , grade.assignment.github_base , grade.student.github_id)
     return url
@@ -28,7 +29,7 @@ def bring_comments_forward(new_grade, previous):
     if not 'question_reports' in prev_rep:
         return
 
-    # If the previous run worked but this one failed, then 
+    # If the previous run worked but this one failed, then
 
     prev_questions = prev_rep['question_reports']
     new_questions = new_rep['question_reports']

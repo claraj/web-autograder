@@ -6,16 +6,19 @@ logger = logging.getLogger(__name__)
 
 def findFile(repo_url, file):
 
+    if not repo_url or not file:
+        return None
+
     TOKEN = os.environ.get('GITHUB_TOKEN', None)
     if TOKEN == None:
         logger.warning('No Github token, can\'t guess Github URLs')
         return None
 
     headers = {'Authorization': f'token {TOKEN}'}
-
+    print('repo_url', repo_url)
     repo_parts = repo_url.split('/')[-2:]
-    print(repo_parts)
     repo = '/'.join(repo_parts)
+    print('repo name', repo)
 
     params = {'q': f'{file}+repo:{repo}'}
     print(params)

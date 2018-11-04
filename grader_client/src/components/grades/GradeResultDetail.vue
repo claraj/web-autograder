@@ -18,6 +18,8 @@ individual questions, and for the whole assignment  -->
 
       <button class="action-button "@click="regrade">Re-run grader</button>
       <button class="neutral-button "@click="generateTextReport">Generate text report</button>
+      <button class="important-button "@click="toggleStackTraces">{{stackTraceAction}} stack traces</button>
+
 
       <div v-if="result.ag_error">
         <p><span class="section-title">Errors</span></p>
@@ -56,8 +58,8 @@ individual questions, and for the whole assignment  -->
                 <span class="testsuite-name">{{ts.name}}:</span> {{ts.tests}} Tests, {{ts.failures}} Fails, {{ts.errors}} Errors, {{ts.passes}} Passes.
                 <ul><li v-for="tc in ts.testcases">
                   <span class="testcase-name">{{tc.name}}</span> <span v-if="tc.passed" class="passed">Passed</span>
-                  <p v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> {{tc.error.fulltext}}</p>
-                  <p v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> {{tc.failure.fulltext}}</p>
+                  <p v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.error.fulltext}}</span> </p>
+                  <p v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.failure.fulltext}}</span> </p>
                 </li></ul>
               </li></ul>
             </li></ul>
@@ -125,6 +127,7 @@ export default {
       totalAdjustedPoints: 0,
       textReport: '',
       showTextReport: false,
+      stackTraceAction: 'Hide'
     }
   },
   filters: {
@@ -180,6 +183,13 @@ export default {
     },
     hideTextReport() {
       this.showTextReport = false
+    },
+    toggleStackTraces() {
+      if (this.stackTraceAction == 'Show') {
+        this.stackTraceAction = 'Hide'
+      } else {
+        this.stackTraceAction = 'Show'
+      }
     },
     updateQuestionComments (comment) {
       this.save();
@@ -307,6 +317,13 @@ export default {
     font-size: 20px;
   }
 
+  .stack-trace {
+
+  }
+
+  .stack-trace.hidden {
+    display: none;
+  }
 
 
 </style>

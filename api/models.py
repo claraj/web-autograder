@@ -101,7 +101,9 @@ class Grade(models.Model):
 
     def save(self, *args, **kwargs):
 
-        self.github_url = grade_util.generate_github_url(self)
+        print('SAVING')
+        self.student_github_url = grade_util.generate_github_url(self)
+        print('github', self.student_github_url)
 
         updating = self.id  # If no primary key, this Grade hasn't been saved before.
 
@@ -130,7 +132,7 @@ class Grade(models.Model):
             return
 
             # Same commit but different error. Save as new Grade
-        elif is_same_commit and not is_same_ag_error:
+        elif same_commit and not same_ag_error:
                 super().save(*args, **kwargs)
                 return
 

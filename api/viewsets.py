@@ -15,7 +15,6 @@ class AssignmentViewSet(viewsets.ModelViewSet):
     serializer_class = AssignmentSerializer
     filter_fields = ('week',)
 
-    print(repr(AssignmentSerializer()))
 
 
 class StudentViewSet(viewsets.ModelViewSet):
