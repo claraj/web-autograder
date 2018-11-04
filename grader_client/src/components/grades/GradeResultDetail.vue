@@ -41,7 +41,7 @@ individual questions, and for the whole assignment  -->
             <p><span class="title">Points available:</span>  {{qr.points_available}}</p>
             <p><span class="title">Source file:</span>  {{qr.source_file}} <GuessyGitHubFile v-bind:filename="qr.source_file" v-bind:grade="result.id"></GuessyGitHubFile></p>
             <p><span class="title">Test files:</span>
-              <ul><li v-for="f in qr.question.test_files"> {{f}} </li></ul>
+              <ul><li v-for="f in qr.question.test_files"> {{f}}  <GuessyGitHubFile v-bind:filename="f" v-bind:grade="result.id"></GuessyGitHubFile> </li></ul>
             </p>
 
             <P><span class="title">Total tests:</span>  {{qr.tests}} </p>
@@ -58,8 +58,8 @@ individual questions, and for the whole assignment  -->
                 <span class="testsuite-name">{{ts.name}}:</span> {{ts.tests}} Tests, {{ts.failures}} Fails, {{ts.errors}} Errors, {{ts.passes}} Passes.
                 <ul><li v-for="tc in ts.testcases">
                   <span class="testcase-name">{{tc.name}}</span> <span v-if="tc.passed" class="passed">Passed</span>
-                  <p v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.error.fulltext}}</span> </p>
-                  <p v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.failure.fulltext}}</span> </p>
+                  <span v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.error.fulltext}}</span> </span>
+                  <span v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.failure.fulltext}}</span> </span>
                 </li></ul>
               </li></ul>
             </li></ul>
@@ -318,7 +318,7 @@ export default {
   }
 
   .stack-trace {
-
+    white-space: pre;
   }
 
   .stack-trace.hidden {

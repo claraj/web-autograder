@@ -6,7 +6,10 @@ logger = logging.getLogger(__name__)
 
 def findFile(repo_url, file):
 
+    """ file might be a regular filename 'code.java' or a package+file 'package.code.java' or just the name without extension 'code' """
+
     if not repo_url or not file:
+        logger.info('Provide file and repository URL. Can\'t search')
         return None
 
     TOKEN = os.environ.get('GITHUB_TOKEN', None)
@@ -20,7 +23,9 @@ def findFile(repo_url, file):
     repo = '/'.join(repo_parts)
     print('repo name', repo)
 
+    # params = {'q': f'repo:{repo}+filename:{file}'}   # Nope
     params = {'q': f'{file}+repo:{repo}'}
+
     print(params)
 
     # for some reason, the filename:hello query does not work. Search by name and filter out unlikely results.
@@ -31,7 +36,7 @@ def findFile(repo_url, file):
     if 'items' in response:
         name_path = { item['path']: item['name'] for item in response['items']}
         print(name_path)
-        name_path = { item['path']: item['name'] for item in response['items'] if is_likely(item)}
+        name_path = { item['path']: item['name'] for item in response['items'] if is_likely(item, file)}
         print('names and paths', name_path)
 
         if name_path:
@@ -45,14 +50,16 @@ def findFile(repo_url, file):
         return None
 
 
-def is_likely(item):
-    name = item['name']
-    path = item['path']
+def is_likely(item, search_name):
+    name = item['name'].lower()
+    path = item['path'].lower()
+    search_name = search_name.lower()
 
-    if 'test' in name or 'test' in path:
+    print(name, path, search_name)
+
+    if 'test' not in search_name and ('test' in path or 'test' in name):
         return False
 
-    # Nope
     not_student_code = ['pom.xml', 'workspace.xml', 'grade_scheme.json', 'readme.md']
     if name in not_student_code:
         return False
