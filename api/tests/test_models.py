@@ -1,10 +1,11 @@
 from django.test import TestCase
 from unittest.mock import Mock
-from api.models import Grade, Student, Assignment
+from api.models import Grade, Student, Assignment, ProgrammingClass
 import json
 from datetime import datetime, timezone, timedelta
 from api import grade_util
 from dataclasses import dataclass
+import re
 
 
 TestCase.maxDiff = None
@@ -14,10 +15,12 @@ class TestGradeModel(TestCase):
     def setUp(self):
         self.asgt = Assignment.objects.create(week="1", github_base="base", github_org="org", instructor_repo="///")
         self.std = Student.objects.create(name="test", github_id="handle")
+        self.pc = ProgrammingClass.objects.create(name="Reading the Manual", semester_code="202005")
 
 
     def test_generate_github_url(self):
-        grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch="123e4567-e89b-12d3-a456-426655440000", score=0, github_commit_hash='abc123')
+        print(self.asgt, self.std)
+        grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch="123e4567-e89b-12d3-a456-426655440000", score=0, github_commit_hash='abc123', programming_class=self.pc)
         expected = 'https://github.com/org/base-handle'
         grade.refresh_from_db()
         self.assertEqual(expected, grade.student_github_url)
@@ -27,10 +30,10 @@ class TestGradeModel(TestCase):
         old_batch = '11111111-aaaa-1111-aaaa-111111111111'
         new_batch = '55555555-eeee-5555-eeee-999999999999'
 
-        old_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=old_batch, score=0, github_commit_hash='abc123')
+        old_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=old_batch, score=0, github_commit_hash='abc123', programming_class=self.pc)
         self.assertEqual(1, Grade.objects.count())
 
-        new_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=new_batch, score=0, github_commit_hash='abc123')
+        new_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=new_batch, score=0, github_commit_hash='abc123', programming_class=self.pc)
         self.assertEqual(1, Grade.objects.count())
 
         old_grade.refresh_from_db()
@@ -59,14 +62,14 @@ class TestGradeModel(TestCase):
             {'something': 'stuff', 'adjusted_points': 10, 'instructor_comments': datestr + 'meh'} ]}
 
         # Existing grade has comments and adjusted points. Comments should be timestamped and bought forward, adjusted points bought forward
-        old_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_1, score=12, github_commit_hash='something', generated_report=json.dumps(old_comments))
+        old_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_1, score=12, github_commit_hash='something', generated_report=json.dumps(old_comments), programming_class=self.pc)
         old_grade.date = date
         old_grade.save()
 
         old_grade.refresh_from_db()
         print('DATE', old_grade.date)
 
-        new_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_2, score=12, github_commit_hash='different', generated_report=json.dumps(new_generated_comments))
+        new_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_2, score=12, github_commit_hash='different', generated_report=json.dumps(new_generated_comments), programming_class=self.pc)
 
         new_grade.refresh_from_db()
 
@@ -82,10 +85,10 @@ class TestGradeModel(TestCase):
         old_gen_report = { 'question_reports': [ {'adjusted_points': 2, 'instructor_comments': 'woweeee'}, {'adjusted_points': 10, 'instructor_comments': 'meh'} ]}
         new_gen_report = {}
 
-        old_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=old_batch, generated_report=json.dumps(old_gen_report), score=0, github_commit_hash='abc123')
+        old_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=old_batch, generated_report=json.dumps(old_gen_report), score=0, github_commit_hash='abc123', programming_class=self.pc)
 
         # same commit
-        new_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=new_batch, generated_report=json.dumps(new_gen_report), score=0, github_commit_hash='abc123')
+        new_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=new_batch, generated_report=json.dumps(new_gen_report), score=0, github_commit_hash='abc123', programming_class=self.pc)
         self.assertEqual(1, Grade.objects.count())
 
         old_grade.refresh_from_db()
@@ -98,39 +101,39 @@ class TestGradeModel(TestCase):
     def test_unmodified_brought_forward_comments_new_grading_batch_different_commit_preserves_in_new_grade(self):
         # no new date added to a comment like '12/31/2018 4.30 some comments when brought forward'
 
-            # datestr_1 = '11/04/18 11.30am '
-            # date_1= datetime(2018, 11, 4, hour=11, minute=30)
+        # datestr_1 = '11/04/18 11.30am '
+        # date_1= datetime(2018, 11, 4, hour=11, minute=30)
 
-            datestr = '12/31/18 16:30 '
-            date = datetime(2018, 12, 31, hour=16, minute=30)
+        datestr = '12/31/18 16:30 '
+        date = datetime(2018, 12, 31, hour=16, minute=30)
 
-            # mock_timestring = Mock(return_value=datestr)  # but should not be used.
-            # Grade.get_timestring_prefix = mock_timestring
+        # mock_timestring = Mock(return_value=datestr)  # but should not be used.
+        # Grade.get_timestring_prefix = mock_timestring
 
-            batch_1 = 'b1111111-0000-0000-0000-000000000000'
-            batch_2 = 'b2222222-0000-0000-0000-000000000000'
-            batch_3 = 'b3333333-0000-0000-0000-000000000000'
+        batch_1 = 'b1111111-0000-0000-0000-000000000000'
+        batch_2 = 'b2222222-0000-0000-0000-000000000000'
+        batch_3 = 'b3333333-0000-0000-0000-000000000000'
 
-            # Assumes a previous batch ran, and the report is as follows.
-            dated_generated_report = { 'question_reports': [
-                {'question': '1', 'adjusted_points': 2, 'instructor_comments': datestr + 'woweeee'},
-                {'question': '2', 'adjusted_points': 10, 'instructor_comments': datestr + 'meh'}
-            ]}
+        # Assumes a previous batch ran, and the report is as follows.
+        dated_generated_report = { 'question_reports': [
+            {'question': '1', 'adjusted_points': 2, 'instructor_comments': datestr + 'woweeee'},
+            {'question': '2', 'adjusted_points': 10, 'instructor_comments': datestr + 'meh'}
+        ]}
 
-            first_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_1, score=12, github_commit_hash='something', generated_report=json.dumps(dated_generated_report), date=date)
+        first_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_1, score=12, github_commit_hash='something', generated_report=json.dumps(dated_generated_report), date=date, programming_class=self.pc)
 
-            # Run another batch. Comments should be brought forward into new Grade with no modifications.
-            before_comments_report = { 'question_reports':
-            [
-                {'question': '1'},
-                {'question': '2'}
-            ]}
+        # Run another batch. Comments should be brought forward into new Grade with no modifications.
+        before_comments_report = { 'question_reports':
+        [
+            {'question': '1'},
+            {'question': '2'}
+        ]}
 
-            second_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_2, score=12, github_commit_hash='different', generated_report=json.dumps(before_comments_report))
+        second_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_2, score=12, github_commit_hash='different', generated_report=json.dumps(before_comments_report), programming_class=self.pc)
 
-            second_grade.refresh_from_db()
+        second_grade.refresh_from_db()
 
-            self.assertDictEqual(dated_generated_report, json.loads(second_grade.generated_report))  # Not modified
+        self.assertDictEqual(dated_generated_report, json.loads(second_grade.generated_report))  # Not modified
 
 
 
@@ -138,74 +141,46 @@ class TestGradeModel(TestCase):
         # comments like 'and another thing.... 12/31/2018 4.30 some comments' are bought forward with new timestring from last batch
         # as "1/03/2019 11.40am and another thing.... 12/31/2018 4.30 some comments"
 
-            datestr_1 = '11/04/18 11:30 '
-            date_1= datetime(2018, 11, 4, hour=11, minute=30)
+        datestr_1 = '11/04/18 11:30 '
+        date_1= datetime(2018, 11, 4, hour=11, minute=30)
 
-            datestr_2 = '12/31/18 16:13 '
-            date_2 = datetime(2018, 12, 31, hour=16, minute=13, tzinfo=timezone(timedelta(0)))
+        datestr_2 = '12/31/18 16:13 '
+        date_2 = datetime(2018, 12, 31, hour=16, minute=13, tzinfo=timezone(timedelta(0)))
 
-            # mock_timestring = Mock(side_effect=[datestr_1, datestr_2])
-            # Grade.get_timestring_prefix = mock_timestring
+        # mock_timestring = Mock(side_effect=[datestr_1, datestr_2])
+        # Grade.get_timestring_prefix = mock_timestring
 
-            batch_1 = 'b1111111-0000-0000-0000-000000000000'
-            batch_2 = 'b2222222-0000-0000-0000-000000000000'
+        batch_1 = 'b1111111-0000-0000-0000-000000000000'
+        batch_2 = 'b2222222-0000-0000-0000-000000000000'
 
-            # Assumes a previous batch ran, and the report is as follows, and the user has made some edits.
-            dated_generated_report = { 'question_reports': [
-                {'question': '1', 'adjusted_points': 2, 'instructor_comments': 'And another thing! ' + datestr_1 + 'woweeee'},
-                {'question': '2', 'adjusted_points': 10, 'instructor_comments': 'Something else...' + datestr_1 + 'meh'} ]
-            }
+        # Assumes a previous batch ran, and the report is as follows, and the user has made some edits.
+        dated_generated_report = { 'question_reports': [
+            {'question': '1', 'adjusted_points': 2, 'instructor_comments': 'And another thing! ' + datestr_1 + 'woweeee'},
+            {'question': '2', 'adjusted_points': 10, 'instructor_comments': 'Something else...' + datestr_1 + 'meh'} ]
+        }
 
-            first_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_1, score=12, github_commit_hash='something', generated_report=json.dumps(dated_generated_report))
-            first_grade.date = date_2
-            first_grade.save()
-            first_grade.refresh_from_db()
-
-
-            # Run another batch. Comments should be brought forward into new Grade, prefixed by timestamp.
-            before_comments_report = { 'question_reports':     [
-                    {'question': '1'},
-                    {'question': '2'}
-                ]}
-
-            second_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_2, score=12, github_commit_hash='different', generated_report=json.dumps(before_comments_report))
-
-            second_grade.refresh_from_db()
-
-            expected_second_dated_report = { 'question_reports': [
-                {'question': '1', 'adjusted_points': 2, 'instructor_comments': datestr_2 + 'And another thing! ' + datestr_1 + 'woweeee'},
-                {'question': '2', 'adjusted_points': 10, 'instructor_comments': datestr_2 + 'Something else...' + datestr_1 + 'meh'} ]
-            }
-
-            print('SECOND REP', expected_second_dated_report)
-            print('IN DB', second_grade.generated_report)
-
-            self.assertDictEqual(expected_second_dated_report, json.loads(second_grade.generated_report))  # Not modified
+        first_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_1, score=12, github_commit_hash='something', generated_report=json.dumps(dated_generated_report), programming_class=self.pc)
+        first_grade.date = date_2
+        first_grade.save()
+        first_grade.refresh_from_db()
 
 
+        # Run another batch. Comments should be brought forward into new Grade, prefixed by timestamp.
+        before_comments_report = { 'question_reports':     [
+                {'question': '1'},
+                {'question': '2'}
+            ]}
 
-@dataclass
-class MockAssignment:
-    github_org: str
-    github_base: str
+        second_grade = Grade.objects.create(assignment=self.asgt, student=self.std, batch=batch_2, score=12, github_commit_hash='different', generated_report=json.dumps(before_comments_report), programming_class=self.pc)
 
-@dataclass
-class MockStudent:
-    github_id: str
+        second_grade.refresh_from_db()
 
-@dataclass
-class MockGrade:
-    student: MockStudent
-    assignment: MockAssignment
+        expected_second_dated_report = { 'question_reports': [
+            {'question': '1', 'adjusted_points': 2, 'instructor_comments': datestr_2 + 'And another thing! ' + datestr_1 + 'woweeee'},
+            {'question': '2', 'adjusted_points': 10, 'instructor_comments': datestr_2 + 'Something else...' + datestr_1 + 'meh'} ]
+        }
 
-class TestGradeUtil(TestCase):
+        print('SECOND REP', expected_second_dated_report)
+        print('IN DB', second_grade.generated_report)
 
-
-
-
-    def test_generate_github_url(self):
-
-        grade = MockGrade(MockStudent('handle'), MockAssignment('org', 'base'))
-        student_github_url = grade_util.generate_github_url(grade)
-        expected = 'https://github.com/org/base-handle'
-        self.assertEqual(expected, student_github_url)
+        self.assertDictEqual(expected_second_dated_report, json.loads(second_grade.generated_report))  # Not modified

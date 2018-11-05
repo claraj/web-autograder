@@ -17,7 +17,7 @@ class ProgrammingClass(models.Model):
     semester_codes = { '01': 'Fall', '03': 'Spring', '05': 'Summer' }
 
     def __str__(self):
-        return '%s, %s, %s' % (self.name, self.semester_human_string, self.semester_code)
+        return f'{self.name}, {self.semester_human_string}, {self.semester_code}'
 
 
     def save(self, *args, **kwargs):
@@ -53,7 +53,7 @@ class Assignment(models.Model):
     d2l_gradebook_url = models.CharField(max_length=200, blank=True, null=False)
 
     def __str__(self):
-        return 'Week: [%d] GitHub Base: [%s] Intructor Repo: [%s] D2L URL [%s] ' % (self.week, self.github_base, self.instructor_repo, self.d2l_gradebook_url)
+        return f'Week: {self.week} GitHub Base: {self.github_base}, org: {self.github_org}, Intructor Repo: {self.instructor_repo} D2L URL {self.d2l_gradebook_url}'
 
 
 class Student(models.Model):
@@ -65,7 +65,7 @@ class Student(models.Model):
     active = models.BooleanField(default=True)   # becomes False if student drops, withdraws, is abducted by aliens etc.
 
     def __str__(self):
-        return 'Name: %s, GitHub ID: %s ' % (self.name, self.github_id)
+        return f'Name: {self.name}, GitHub ID: {self.github_id}, StarID {self.star_id}'
 
 
 class GradeManager(models.Manager):
