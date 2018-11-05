@@ -1,11 +1,12 @@
 from django.db import models
 from django.core.validators import RegexValidator
-import logging
 from datetime import datetime
 import json
 import re
+import logging
+logger = logging.getLogger(__name__)
+
 from . import grade_util
-log = logging.getLogger(__name__)
 
 
 class ProgrammingClass(models.Model):
@@ -20,7 +21,6 @@ class ProgrammingClass(models.Model):
 
 
     def save(self, *args, **kwargs):
-        print("SAVING CLASS")
         self.semester_human_string = self.humanCode()
         super().save(*args, **kwargs)
 
@@ -40,7 +40,7 @@ class ProgrammingClass(models.Model):
             return human_string
 
         except Exception as e:
-            log.warning(f'Can\'s create human-readable string for semester code {self.semester_code} because {e}')
+            logger.warning(f'Can\'s create human-readable string for semester code {self.semester_code} because {e}')
 
 
 
@@ -86,7 +86,7 @@ class Grade(models.Model):
     programming_class = models.ForeignKey(ProgrammingClass, blank=False, null=False, on_delete=models.PROTECT)
     generated_report = models.TextField(blank=True, null=True)
     instructor_comments = models.TextField(blank=True, null=True)
-    score = models.DecimalField(max_digits=6, decimal_places=3)
+    score = models.DecimalField(max_digits=6, decimal_places=3, default=0)
     student_github_url = models.CharField(max_length=400, blank=True)
     batch = models.UUIDField()
     github_commit_hash = models.CharField(max_length=40, blank=False, null=True)
@@ -121,8 +121,43 @@ class Grade(models.Model):
             super().save(*args, **kwargs)
             return
 
-
         # If there is a previous version, check if same commit, and same error. look for previous comments
+
+        """ Three scenarios:
+            1. Grader runs, produces test reports and score. commit_hash set.
+                 -- This run may be different or same commit hash.
+            2. student error: Grader attempts to run, student's code crashes or errors. commit_hash may (code didn't compile) or may not be set (not found). generated_report has error attribute. e.g. "{"error": "no code", "reason": "not found"}". Grade does not have ag_error attribute set.
+                 -- May have same or different commit hash.
+            3. my error: My code crashes, the instructor repo has vanished... my problem. generated_report is empty and ag_error is set.
+
+            So there are many combinations of previous and new.
+
+            1. PREVIOUS: Grader Runs
+                  NEW: Grader Runs. Same commit hash
+                  NEW: Grader Runs. Different commit hash
+                  NEW: Student Error. commit hash is different
+                  NEW: Student Error. commit is the same as before
+                  NEW: My Error.
+
+            2. PREVIOUS: Student Error
+                  NEW: Grader Runs. Same commit hash
+                  NEW: Grader Runs. Different commit hash
+                  NEW: Student Error. commit hash is different
+                  NEW: Student Error. commit is the same as before
+                  NEW: My Error.
+
+            3. PREVIOUS: Student Error
+                  NEW: Grader Runs. Same commit hash
+                  NEW: Grader Runs. Different commit hash
+                  NEW: Student Error. commit hash is different
+                  NEW: Student Error. commit is the same as before
+                  NEW: My Error.
+
+
+
+
+
+        """
 
         same_commit = grade_util.is_same_commit(self, previous_version)
         same_ag_error = grade_util.is_same_ag_error(self, previous_version)
