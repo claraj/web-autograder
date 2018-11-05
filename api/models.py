@@ -81,6 +81,16 @@ class GradeManager(models.Manager):
 class Grade(models.Model):
     # for an assignment and student and programming class. The assignment knows what programming class it belongs to.
 
+    GRADED = 'GR'
+    STUDENT_ERROR = "SE"
+    AUTOGRADER_ERROR = "AE"
+
+    STATUS_CHOICES = (
+        (GRADED, 'Succesfully graded'),
+        (STUDENT_ERROR, 'Error in student code or code not found'),
+        (AUTOGRADER_ERROR, 'Autograder errored')
+    )
+
     assignment = models.ForeignKey(Assignment, on_delete=models.PROTECT, blank=False, null=False)
     student = models.ForeignKey(Student, on_delete=models.PROTECT, blank=False, null=False)
     programming_class = models.ForeignKey(ProgrammingClass, blank=False, null=False, on_delete=models.PROTECT)
@@ -92,6 +102,8 @@ class Grade(models.Model):
     github_commit_hash = models.CharField(max_length=40, blank=False, null=True)
     date = models.DateTimeField(auto_now_add=True)
     ag_error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=GRADED)
+    last_success = models.IntegerField(default=-1)   # If this Grade represents an error, this field contains the last grade for this student/assignment/class combo that did run correctly, if there was one.
 
     objects = GradeManager()
 
@@ -130,51 +142,91 @@ class Grade(models.Model):
                  -- May have same or different commit hash.
             3. my error: My code crashes, the instructor repo has vanished... my problem. generated_report is empty and ag_error is set.
 
-            So there are many combinations of previous and new.
-
-            1. PREVIOUS: Grader Runs
-                  NEW: Grader Runs. Same commit hash
-                  NEW: Grader Runs. Different commit hash
-                  NEW: Student Error. commit hash is different
-                  NEW: Student Error. commit is the same as before
-                  NEW: My Error.
-
-            2. PREVIOUS: Student Error
-                  NEW: Grader Runs. Same commit hash
-                  NEW: Grader Runs. Different commit hash
-                  NEW: Student Error. commit hash is different
-                  NEW: Student Error. commit is the same as before
-                  NEW: My Error.
-
-            3. PREVIOUS: Student Error
-                  NEW: Grader Runs. Same commit hash
-                  NEW: Grader Runs. Different commit hash
-                  NEW: Student Error. commit hash is different
-                  NEW: Student Error. commit is the same as before
-                  NEW: My Error.
+            Before the new grade was creatd, the previous grade could be in one of four states. So there are many combinations of previous and new.
 
 
+            1. PREVIOUS: Grader Runs. May Have Instructor Comments
+                  NEW: Grader Runs. Same commit hash                --> Change date and batch of previous to new, don't save new
+                  NEW: Grader Runs. Different commit hash           --> Save new Grade and bring instructor comments forward
+                  NEW: Student Error. commit hash is different      --> Save new Grade, set last_success to previous.id
+                  NEW: Student Error. commit is the same as before  --> Save new Grade, set last_success to previous.id
+                  NEW: My Error                                     --> Save new Grade, set last_success to previous.id
 
+            2. PREVIOUS: Student Error with commit hash (code exists, errors running)
+                  NEW: Grader Runs. Same commit hash                --> Save new Grade
+                  NEW: Grader Runs. Different commit hash           --> Save new Grade
+                  NEW: Student Error. commit hash is different      --> Save new Grade, set last_success to previous.last_success if present
+                  NEW: Student Error. commit is the same as before  --> Save new Grade, set last_success to previous.last_success if present
+                  NEW: My Error                                     --> Save new Grade, set last_success to previous.last_success if present
 
+            3. PREVIOUS: Student Error with no commit hash (e.g code not found)
+                  NEW: Grader Runs. New commit hash                 --> Save new Grade
+                  NEW: Student Error with commit hash               --> Save new Grade, set last_success to previous.id if present
+                  NEW: Student Error with no commit hash            --> Change date and batch of previous to new, don't save
+                  NEW: My Error                                     --> Save new Grade, set last_success to previous.id if present
+
+            4. PREVIOUS: My Error (no commit hash will be saved)
+                  NEW: Grader Runs                                  --> Save new Grade
+                  NEW: Student Error. commit hash or no commit hash --> Save new Grade, set last_success to previous.last_success if present
+                  NEW: My Error - same                              --> Change date and batch of previous to new, don't save
+                  NEW: My Error - different error                   --> Save new Grade, set last_success to previous.last_success if present
 
         """
 
-        same_commit = grade_util.is_same_commit(self, previous_version)
-        same_ag_error = grade_util.is_same_ag_error(self, previous_version)
-        # Is same commit AND same error? No code changes. Update batch of previous version to this batch and save. Do not save new Grade.
-        if same_commit and same_ag_error:
-            self.update_previous_grade_to_this_batch(previous_version)
-            return
 
-            # Same commit but different error. Save as new Grade
-        elif same_commit and not same_ag_error:
+        if previous_version.status == Grade.GRADED:
+            if self.status == Grade.GRADED:
+                if grade_util.is_same_commit(self, previous_version):
+                    previous_version.batch = self.batch
+                    previous_version.save()
+                    return
+                else:
+                    self.generated_report = grade_util.bring_comments_forward(self, previous_version)
+                    super().save(*args, **kwargs)
+                    return
+
+            if self.status == Grade.STUDENT_ERROR or self.status == Grade.AUTOGRADER_ERROR:
+                self.last_success = previous_version.id
                 super().save(*args, **kwargs)
                 return
 
-        # Different commit? Copy any previously saved comments and student errors from the last grade report to this report. Save.
-        self.generated_report = grade_util.bring_comments_forward(self, previous_version)
-        # self.error = grade_util.bring_student_errors_forward(self, previous_version)
-        super().save(*args, **kwargs)
+
+        if previous_version.status == Grade.STUDENT_ERROR:
+            if self.status == Grade.GRADED:
+                super().save(*args, **kwargs)
+                return
+
+            if self.status == Grade.STUDENT_ERROR:
+                if self.generated_report == previous_version.generated_report:
+                    self.update_previous_grade_to_this_batch(previous_version)
+                    return
+                else:
+                    self.last_success = previous_version.last_success
+                    super().save(*args, **kwargs)
+                    return
+
+            if self.status == Grade.AUTOGRADER_ERROR:
+                self.last_success = previous_version.last_success
+                super().save(*args, **kwargs)
+                return
+
+
+        if previous_version.status == Grade.AUTOGRADER_ERROR:
+            if self.status == Grade.GRADED:
+                super().save(*args, **kwargs)
+                return
+            if self.status == Grade.STUDENT_ERROR:
+                self.last_success = previous_version.last_success
+                super().save(*args, **kwargs)
+                return
+            if self.status == Grade.AUTOGRADER_ERROR:
+                if self.ag_error == previous_version.ag_error:
+                    self.update_previous_grade_to_this_batch(previous_version)
+                    return
+                else:
+                    self.last_success = previous_version.last_success
+                    super().save(*args, **kwargs)
+                    return
 
 
     def update_previous_grade_to_this_batch(self, previous):

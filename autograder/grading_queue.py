@@ -46,6 +46,12 @@ def start_grader(batch, assignment, student, programming_class):
 
         print('RESULT',result)
         if result['success']:
+
+            # student error, or ran correctly?
+            status = Grade.GRADED 
+            if 'error' in json.loads(result['report']):
+                status = Grade.STUDENT_ERROR
+
             return {
                 'ag_error': None,
                 'batch': batch,
@@ -54,7 +60,8 @@ def start_grader(batch, assignment, student, programming_class):
                 'programming_class_id': programming_class.id,
                 'score': result['score'],
                 'generated_report': result['report'],
-                'github_commit_hash': result['sha']
+                'github_commit_hash': result['sha'],
+                'status': status
                 }
 
         else:
@@ -65,6 +72,7 @@ def start_grader(batch, assignment, student, programming_class):
                 'student_id': student.id,
                 'programming_class_id': programming_class.id,
                 'score': 0,
+                'status': Grade.AUTOGRADER_ERROR
             }
 
     except Exception as e:
