@@ -99,7 +99,7 @@ class Grade(models.Model):
     score = models.DecimalField(max_digits=6, decimal_places=3, default=0)
     student_github_url = models.CharField(max_length=400, blank=True)
     batch = models.UUIDField()
-    github_commit_hash = models.CharField(max_length=40, blank=False, null=True)
+    github_commit_hash = models.CharField(max_length=40, blank=False, null=False)
     date = models.DateTimeField(auto_now_add=True)
     ag_error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
     status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=GRADED)

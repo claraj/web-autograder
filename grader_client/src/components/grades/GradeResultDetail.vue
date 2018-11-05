@@ -23,7 +23,12 @@ individual questions, and for the whole assignment  -->
 
       <div v-if="result.ag_error">
         <p><span class="section-title">Errors</span></p>
-        <p><span><span class="title not-passed">Error when grader tried to fetch or run code</span> {{result.ag_error }}</span></p>
+        <p><span><span class="title not-passed">
+          Error when grader tried to fetch or run code:</span>
+          {{result.ag_error}}
+          <span v-if="result.last_success"><router-link :to="{ name: 'grade-detail', query: {id: result.last_success} }">view here</router-link></span>
+          <span v-else>No previous succesful grading runs</span>
+        </span></p>
       </div>
 
       <div v-else>
@@ -31,7 +36,9 @@ individual questions, and for the whole assignment  -->
         <p><span class="title">Calculated grade:</span> {{ report.total_points_earned | toFixed(2) }} out of {{ report.total_points_available }}</p>
 
         <div v-if="report.error">
-          {{report.error}}
+          Error in student code: {{report.error}}
+          <span v-if="result.last_success"><router-link :to="{ name: 'grade-detail', query: {id: result.last_success} }">view here</router-link></span>
+          <span v-else>No previous succesful grading runs</span>
         </div>
 
         <div v-if="report.question_reports">
@@ -138,26 +145,35 @@ export default {
       return value
     }
   },
+  created() {
+
+  },
   mounted() {
-    let id = this.$route.query.id
-    console.log(this.$route.query.id)
-    this.$grade_backend.$fetchOne(id)
-      .then(data => {
-        this.result = data
-        console.log('all data fetched', this.result)
-        this.report = JSON.parse(this.result.generated_report)
-        console.log('The grade report is ', this.report)
-        this.updateTotalAdjustedPoints()
-      }).catch( err => {
-        console.log('Error loading initial data', err)
-    })
+    this.fetchData()
   },
   watch: {
     lgtm: function() {
       this.allGood()
+    },
+    $route: function() {
+      this.fetchData()
     }
   },
   methods: {
+    fetchData() {
+      let id = this.$route.query.id
+      console.log(this.$route.query.id)
+      this.$grade_backend.$fetchOne(id)
+        .then(data => {
+          this.result = data
+          console.log('all data fetched', this.result)
+          this.report = JSON.parse(this.result.generated_report)
+          console.log('The grade report is ', this.report)
+          this.updateTotalAdjustedPoints()
+        }).catch( err => {
+          console.log('Error loading initial data', err)
+      })
+    },
     save() {
       console.log('save', this.result.id)
       let stringReport = JSON.stringify(this.report)
