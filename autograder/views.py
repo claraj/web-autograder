@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse, StreamingHttpResponse, HttpResponse, HttpResponseBadRequest
 from django_eventstream import send_event
-from api.models import Grade, GradingBatch
+from api.models import Grade, GradingBatch, Student, Assignment
 import uuid
 import json
 import logging
@@ -103,6 +103,7 @@ def guess_github_file_url(request, grade_pk, filename):
     repo = grade.student_github_url
     file_url = github_utils.findFile(repo, filename)
     return JsonResponse({'url': file_url})
+
 
 
 def text_report(report, score):

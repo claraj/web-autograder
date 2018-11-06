@@ -36,7 +36,7 @@ class ProgrammingClass(models.Model):
             numerical_year = int(year_str)   # 01, 03, 05
             if semester_code_str in ['03', '05']:
                 numerical_year += 1
-            human_string = f'{semester_text}, {numerical_year}'
+            human_string = f'{semester_text} {numerical_year}'
             return human_string
 
         except Exception as e:
@@ -99,7 +99,7 @@ class Grade(models.Model):
     score = models.DecimalField(max_digits=6, decimal_places=3, default=0)
     student_github_url = models.CharField(max_length=400, blank=True)
     batch = models.UUIDField()
-    github_commit_hash = models.CharField(max_length=40, blank=False, null=False)
+    github_commit_hash = models.CharField(max_length=40, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     ag_error = models.TextField(blank=True, null=True)  # errors from grading process, could be programatic errors
     status = models.CharField(max_length=2, choices=STATUS_CHOICES, default=GRADED)
@@ -239,3 +239,4 @@ class GradingBatch(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     things_to_grade = models.IntegerField()
     processed = models.IntegerField(default=0)  # this includes things that are graded, that errored during grading...
+    programmingClass = models.ForeignKey(ProgrammingClass, on_delete=models.CASCADE)

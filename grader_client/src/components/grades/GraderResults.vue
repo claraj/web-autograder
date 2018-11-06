@@ -5,8 +5,8 @@
 <div id="content">
 <div>
   <h2>Grader Results for batch {{ id }}</span> <br>
-    <span><span class="title">Started at</span> {{ batch.date | moment('ddd MMMM YYYY, HH:ss a')}}</span></h2>
-
+    <span><span class="title">Started on</span> {{ batch.date | moment('ddd MMMM YYYY, HH:ss a')}}</span></h2>
+    <span v-if="programmingClass"><span class="title">{{programmingClass.name}}, {{programmingClass.semester_human_string}}</span></span>
 <div>
 
 </div>
@@ -54,6 +54,7 @@ export default {
     return {
       id: "",   // the batch id, passed in with a param from router
       batch: {},   // query server to get full batch info
+      programmingClass: {},
       gradedResults: {},       // { 1: results1, 2: results2 ....}
       expectedResults: 0,
       receivedResults: 0,   // Received by the client, not processed on the back end
@@ -78,6 +79,10 @@ export default {
     this.id = this.$route.query.id
     this.$gradertask_backend.$fetchOne(this.id).then( data => {
       this.batch = data
+      console.log(this.batch)
+
+      this.$classes_backend.$fetchOne(this.batch.programmingClass).then(data => this.programmingClass = data)
+
       this.expectedResults = this.batch.things_to_grade
       if (this.expectedResults == this.batch.processed) {
         this.getLatestResults()   // this batch is completed

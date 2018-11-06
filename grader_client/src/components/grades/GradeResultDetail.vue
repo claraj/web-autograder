@@ -65,8 +65,8 @@ individual questions, and for the whole assignment  -->
                 <span class="testsuite-name">{{ts.name}}:</span> {{ts.tests}} Tests, {{ts.failures}} Fails, {{ts.errors}} Errors, {{ts.passes}} Passes.
                 <ul><li v-for="tc in ts.testcases">
                   <span class="testcase-name">{{tc.name}}</span> <span v-if="tc.passed" class="passed">Passed</span>
-                  <span v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.error.fulltext}}</span> </span>
-                  <span v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.failure.fulltext}}</span> </span>
+                  <span v-if="tc.error"><span class="not-passed">Errored</span> {{tc.error.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.error.fulltext.trim()}}</span> </span>
+                  <span v-if="tc.failure"><span class="not-passed">Failed</span> {{tc.failure.message}} <br> <span class="stack-trace" v-bind:class="{ hidden: stackTraceAction=='Show'}">{{tc.failure.fulltext.trim()}}</span> </span>
                 </li></ul>
               </li></ul>
             </li></ul>

@@ -1,14 +1,11 @@
 <template>
   <div>
-    <p>
+      <span v-if="programmingClass"><span class="title">Programming class: </span>{{programmingClass.name}}, {{programmingClass.semester_human_string}}<br></span>
       <span class="title">Students graded: </span>
       <span>{{studentNames}}</span>
-    </p>
-
-    <p>
+      <br>
       <span class="title">Assignments graded: </span>
       <span>{{assignmentNames}}</span>
-    </p>
   </div>
 
 </template>
@@ -19,7 +16,8 @@ export default {
   name: 'ThingsGradedList',
   props: {
     students: Array,
-    assignments: Array
+    assignments: Array,
+    programmingClass: Object
   },
   computed: {
     studentNames: function() {
@@ -42,6 +40,10 @@ export default {
 
 .title {
   font-weight: bold;
+}
+
+div {
+  text-align: left;
 }
 
 </style>

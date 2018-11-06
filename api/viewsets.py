@@ -127,3 +127,22 @@ class GradingBatchViewSet(viewsets.ModelViewSet):
         for id in request.data['ids']:
             GradingBatch.objects.get(id=id).delete()
         return Response('ok')  # ok,
+
+
+    @action(methods=['GET'], detail=True)
+    def students(self, request, pk=None):
+        # grades = Grade.objects.filter(batch=batch_pk).distinct('student')  # But not in SQLite!
+        grades = Grade.objects.filter(batch=pk)
+        all_student_ids = [ grade.student.id for grade in grades ]
+        unique_student_ids = set(all_student_ids)
+        students = list(Student.objects.filter(id__in=unique_student_ids))
+        return Response(StudentSerializer(students, many=True).data)
+
+
+    @action(methods=['GET'], detail=True)
+    def assignments(self, request, pk=None):
+        grades = Grade.objects.filter(batch=pk)
+        all_assignment_ids = [ grade.assignment.id for grade in grades ]
+        unique_assignment_ids = set(all_assignment_ids)
+        assignments = list(Assignment.objects.filter(id__in=unique_assignment_ids))
+        return Response(AssignmentSerializer(assignments, many=True).data)

@@ -7,5 +7,6 @@ urlpatterns = [
     path('progress/', views.grader_get_progress),
     path('regrade/', views.regrade),
     path('text/<pk>/', views.textReport),
-    path('file_url/<grade_pk>/<filename>', views.guess_github_file_url)
+    path('file_url/<grade_pk>/<filename>', views.guess_github_file_url),
+    
 ]

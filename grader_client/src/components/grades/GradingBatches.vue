@@ -7,10 +7,6 @@ Can view results in a GraderResults component, and delete old grading batches.  
 
     <h2>Grading Batches</h2>
 
-    <!-- <SelectionList
-    v-bind:items="batches"
-    /> -->
-
     <div v-if="batches">
       <span>All</span>
       <input type="checkbox" v-model="selectAll" v-on:click="all()">
@@ -23,20 +19,24 @@ Can view results in a GraderResults component, and delete old grading batches.  
         {{ batch.id }}
       </router-link>
 
-      started at {{ batch.date | moment("dddd, MMMM Do YYYY hh:mm")}}.
+      started on {{ batch.date | moment("dddd, MMMM Do YYYY hh:mm")}}.
 
+      <ThingsGradedHolder v-bind:batch="batch"></ThingsGradedHolder>
 
     </p>
 
-    <button v-on:click="delete_selected">delete selected</button>
+    <button class="important-button" v-on:click="delete_selected">Delete selected</button>
 
   </div>
 </template>
 
 <script>
 
+import ThingsGradedHolder from '@/components/grades/ThingsGradedHolder'
+
 export default {
   name: 'GraderModules',
+  components: { ThingsGradedHolder },
   data () {
     return {
       batches: [],
