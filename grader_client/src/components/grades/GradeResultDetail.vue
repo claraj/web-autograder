@@ -14,7 +14,7 @@ individual questions, and for the whole assignment  -->
     <div id="report">
 
       <p><span class="title">Date graded:</span> {{ result.date | moment('ddd MMM YYYY hh:mm a')}}</p>
-      <p><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url">{{ result.student_github_url}}</a></p>
+      <p><span class="title">Student GitHub:</span> <a v-bind:href="result.student_github_url" target="_blank">{{ result.student_github_url}}</a></p>
 
       <button class="action-button "@click="regrade">Re-run grader</button>
       <button class="neutral-button "@click="generateTextReport">Generate text report</button>
