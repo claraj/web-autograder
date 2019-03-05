@@ -12,7 +12,7 @@ node
 Python
 - use pyenv
 - https://github.com/pyenv/pyenv 
-- install a bunch of other dependencies first
+- install a bunch of other dependencies first https://bugs.python.org/issue31652 
 
 Clone repo
 - git clone https://github.com/claraj/web-autograder 
@@ -41,4 +41,6 @@ Run server, from root
 Run client from grader_client
 - npm start 
 
-Site at 127.0.0.0:3000
+(or run go_grader script. Copy it to /usr/local/bin to avoid ./go_grader)
+
+Site at 127.0.0.0:3000/spa
