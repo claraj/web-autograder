@@ -25,7 +25,7 @@ django-grip==2.0.0
 django-picklefield==1.1.0
 django-q==1.0.1
 django-webpack-loader==0.6.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 docker==3.5.0
 docker-pycreds==0.3.0
 gitdb2==2.0.5
