@@ -4,7 +4,7 @@ asgiref==2.3.2
 asn1crypto==0.24.0
 async-timeout==3.0.0
 attrs==18.2.0
-autobahn==18.9.2
+autobahn==20.12.3
 Automat==0.7.0
 billiard==3.5.0.4
 blessed==1.15.0
