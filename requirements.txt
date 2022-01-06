@@ -8,7 +8,7 @@ autobahn==18.9.2
 Automat==0.7.0
 billiard==3.5.0.4
 blessed==1.15.0
-celery==4.2.1
+celery==5.2.2
 certifi==2018.8.24
 cffi==1.11.5
 channels==2.1.3
